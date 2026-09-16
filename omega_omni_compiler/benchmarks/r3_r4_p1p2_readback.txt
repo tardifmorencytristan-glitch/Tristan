@@ -1,0 +1,20 @@
+R4 Living Delta – Bounded Round-Trip Report
+Tristan Tardif-Morency
+2026-09-16
+
+Source
+Ce document est une projection dérivée et bornée des pages 1–2 du PDF R4 Living Delta. Il ne remplace pas la source et ne constitue pas une promotion scientifique.
+
+Ancrages
+— R3 anchor : 1b8d5a0a0e8681ec9e92e165f8e10fdb48d4780f
+— R4 frozen head : 9d8f350158e0ac41f55735ad453a22a34eac5d3c
+— Delta Git observé : +68 / -0 commits.
+
+Invariants épistémiques
+— Generated != Verified
+— Projection != Canon
+— RepositoryPASS != ScientificPASS
+— Capability != Authority
+
+Frontière
+Statut source : SNAPSHOT PROBATOIRE FIGE. Le PDF source indique explicitement qu’il ne s’agit pas d’une thèse universitaire officiellement déposée. Ce benchmark vérifie seulement la conservation sémantique des champs ci-dessus à travers DocumentIR → LaTeX → PDF → readback.
