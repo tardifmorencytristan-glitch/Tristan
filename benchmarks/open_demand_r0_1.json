@@ -1,0 +1,36 @@
+{
+  "schema": "tristan-open-demand-r0_1/v1",
+  "observed_on": "2026-09-16",
+  "status": "DISCOVERY_ONLY_REQUIREMENTS_NOT_RETRIEVED",
+  "source": "CanadaBuys public tender listing",
+  "opportunities": [
+    {
+      "title": "Model Validation Automation Technologies",
+      "issuer": "Export Development Canada (EDC)",
+      "opportunity_type": "Services",
+      "open_date": "2026-09-01",
+      "deadline": "2026-09-25",
+      "source_listing": "https://canadabuys.canada.ca/en/tender-opportunities",
+      "capability_hypothesis": ["model_validation", "traceability", "automation"],
+      "requirements_status": "UNKNOWN_DETAIL_PAGE_403",
+      "economic_status": "OPEN_DEMAND_NOT_REVENUE"
+    },
+    {
+      "title": "Invitation to Qualify to Artificial Intelligence Source List",
+      "issuer": "Department of Public Works and Government Services",
+      "opportunity_type": "Invitation to Qualify",
+      "open_date": "2026-08-06",
+      "deadline": "2026-09-30",
+      "source_listing": "https://canadabuys.canada.ca/en/tender-opportunities",
+      "capability_hypothesis": ["ai_services", "supplier_qualification"],
+      "requirements_status": "UNKNOWN_DETAIL_PAGE_403",
+      "economic_status": "MARKET_ACCESS_NOT_REVENUE"
+    }
+  ],
+  "boundaries": [
+    "titles are not sufficient to infer mandatory requirements",
+    "no eligibility claim is made",
+    "no budget claim is made",
+    "open opportunity does not imply award probability or revenue"
+  ]
+}
