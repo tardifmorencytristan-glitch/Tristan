@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import re
-
 _LATEX_ESCAPES = {
     "\\": r"\textbackslash{}",
     "&": r"\&",
@@ -36,7 +34,7 @@ def render_battery_manuscript(packet: dict) -> str:
     """
     title = escape_latex(_require(packet, "title"))
     scope = escape_latex(_require(packet, "scope"))
-    source = escape_latex(_require(packet, "source_anchor"))
+    source = str(_require(packet, "source_anchor"))
     results = _require(packet, "results")
     limitations = _require(packet, "limitations")
 
@@ -62,6 +60,7 @@ def render_battery_manuscript(packet: dict) -> str:
 \usepackage{{microtype}}
 \usepackage{{geometry}}
 \usepackage{{booktabs}}
+\usepackage{{xurl}}
 \usepackage{{hyperref}}
 \geometry{{margin=1in}}
 \title{{{title}}}
@@ -75,7 +74,10 @@ Within {scope}, three public CALCE first-cycle discharge slices were compared ag
 \end{{abstract}}
 
 \section{{Evidence anchor}}
-The manuscript projection is tied to the exact source receipt: \texttt{{{source}}}. Generated text is not an independent evidence source.
+The manuscript projection is tied to the exact source receipt:\\
+\url{{{source}}}
+
+Generated text is not an independent evidence source.
 
 \section{{Methods}}
 The court uses the public CALCE cells CS2\_33, CS2\_34, and CS2\_35 and the PyBaMM 26.8.0.0 Ramadass2004 parameter set without cell-specific parameter calibration. Comparison is performed on normalized discharged-capacity coordinates for the stated first-cycle slices.
