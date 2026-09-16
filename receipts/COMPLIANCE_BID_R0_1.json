@@ -1,0 +1,16 @@
+{
+  "schema": "tristan-compliance-bid-r0_1/v1",
+  "pr": 22,
+  "head_sha": "860a081c7e6e1eb5c20a5cded8e28b87190f8790",
+  "ci": "PASS",
+  "mergeable": true,
+  "review_threads": 0,
+  "reviews": 0,
+  "status": "READY_TO_MERGE",
+  "boundaries": [
+    "draft is not submission",
+    "unknown requirements force HOLD",
+    "partial capability evidence forces HOLD",
+    "open demand is not revenue or award probability"
+  ]
+}
