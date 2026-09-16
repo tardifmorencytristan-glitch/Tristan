@@ -1,8 +1,11 @@
 import unittest
+from pathlib import Path
 from omega_scientific_writing.src.report_ir import (
     ReportMeta, ObjectiveIR, MethodIR, ResultIR, ConclusionIR, ReportGraphIR,
 )
-from omega_scientific_writing.src.report_court import evaluate_report
+from omega_scientific_writing.src.report_court import evaluate_report, load_report_packet
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 class R5AReportCourtTests(unittest.TestCase):
@@ -51,6 +54,19 @@ class R5AReportCourtTests(unittest.TestCase):
         out = evaluate_report({}, ReportGraphIR(project_id="P1"))
         self.assertNotEqual(out.get("scientific_status"), "ScientificPASS")
         self.assertIn("CompilationPASS != ScientificPASS", out["invariants"])
+
+    def test_real_fixtures_pass_and_hold_with_declared_defects(self):
+        valid_doc, valid_graph = load_report_packet(ROOT / "examples" / "report_r5a_valid.json")
+        invalid_doc, invalid_graph = load_report_packet(ROOT / "examples" / "report_r5a_invalid.json")
+        self.assertEqual(evaluate_report(valid_doc, valid_graph)["verdict"], "PASS")
+        invalid = evaluate_report(invalid_doc, invalid_graph)
+        self.assertEqual(invalid["verdict"], "HOLD")
+        codes = {f["code"] for f in invalid["findings"]}
+        expected = {
+            "OBJECTIVE_UNANSWERED", "METHOD_VALIDATION_MISSING", "CONCLUSION_UNSUPPORTED",
+            "TERM_AMBIGUOUS", "CONTRADICTION_UNRESOLVED",
+        }
+        self.assertTrue(expected.issubset(codes))
 
 
 if __name__ == "__main__":
