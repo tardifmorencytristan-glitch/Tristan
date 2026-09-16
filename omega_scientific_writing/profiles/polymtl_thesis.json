@@ -1,0 +1,18 @@
+{
+  "profile_id": "polymtl-thesis-r0",
+  "authority": "Polytechnique Montreal",
+  "status": "PROVISIONAL_PROFILE_REQUIRES_GUIDE_PARITY_CHECK",
+  "hard_gates": [
+    "official_template_required",
+    "current_presentation_guide_required",
+    "submission_checklist_required"
+  ],
+  "supported_modes": ["masters_thesis", "doctoral_thesis", "article_based_thesis"],
+  "source_urls": [
+    "https://etudiant.polymtl.ca/etudes/programmes/etudes-superieures/programmes-etudes/memoires-et-theses/1000"
+  ],
+  "notes": [
+    "Institutional rules override local style preferences.",
+    "This R0 profile records verified public requirements but does not yet encode every typography/layout rule from the official guide."
+  ]
+}
