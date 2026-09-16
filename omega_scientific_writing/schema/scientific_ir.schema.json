@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tristan.local/schemas/scientific_ir.schema.json",
+  "title": "Tristan ScientificIR R0",
+  "type": "object",
+  "required": ["project", "claims", "evidence", "equations", "figures", "citations", "results"],
+  "properties": {
+    "project": {
+      "type": "object",
+      "required": ["id", "title", "document_type"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "title": {"type": "string", "minLength": 1},
+        "document_type": {"enum": ["article", "masters_thesis", "doctoral_thesis", "report", "preprint"]},
+        "language": {"type": "string", "default": "fr"}
+      },
+      "additionalProperties": true
+    },
+    "claims": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/claim"}
+    },
+    "evidence": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/evidence"}
+    },
+    "equations": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/equation"}
+    },
+    "figures": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/figure"}
+    },
+    "citations": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/citation"}
+    },
+    "results": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/result"}
+    }
+  },
+  "$defs": {
+    "epistemicStatus": {
+      "enum": ["IDEA", "HYPOTHESIS", "DERIVATION", "SIMULATION", "OBSERVATION", "MEASUREMENT", "REPLICATION", "FORMAL_PROOF", "INDEPENDENT_VERIFICATION", "UNKNOWN"]
+    },
+    "claim": {
+      "type": "object",
+      "required": ["id", "statement", "status", "evidence_ids", "scope", "uncertainty"],
+      "properties": {
+        "id": {"type": "string"},
+        "statement": {"type": "string", "minLength": 1},
+        "status": {"$ref": "#/$defs/epistemicStatus"},
+        "evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "citation_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true, "default": []},
+        "assumptions": {"type": "array", "items": {"type": "string"}, "default": []},
+        "scope": {"type": "string", "minLength": 1},
+        "uncertainty": {"type": "string", "minLength": 1},
+        "falsifier": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["id", "kind", "provenance"],
+      "properties": {
+        "id": {"type": "string"},
+        "kind": {"enum": ["experiment", "simulation", "dataset", "formal_proof", "literature", "measurement", "derivation", "other"]},
+        "provenance": {"type": "string", "minLength": 1},
+        "artifact_hash": {"type": "string"},
+        "reproducibility": {"enum": ["unknown", "partial", "reproducible", "independently_reproduced"]}
+      },
+      "additionalProperties": true
+    },
+    "equation": {
+      "type": "object",
+      "required": ["id", "latex", "symbols"],
+      "properties": {
+        "id": {"type": "string"},
+        "latex": {"type": "string"},
+        "symbols": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["symbol", "meaning"],
+            "properties": {
+              "symbol": {"type": "string"},
+              "meaning": {"type": "string"},
+              "dimension": {"type": "string"},
+              "unit": {"type": "string"}
+            }
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "figure": {
+      "type": "object",
+      "required": ["id", "caption", "source", "claim_ids"],
+      "properties": {
+        "id": {"type": "string"},
+        "caption": {"type": "string", "minLength": 1},
+        "source": {"type": "string", "minLength": 1},
+        "claim_ids": {"type": "array", "items": {"type": "string"}},
+        "units_declared": {"type": "boolean", "default": false},
+        "uncertainty_declared": {"type": "boolean", "default": false},
+        "script": {"type": "string"},
+        "artifact_hash": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "citation": {
+      "type": "object",
+      "required": ["id", "source", "source_type"],
+      "properties": {
+        "id": {"type": "string"},
+        "source": {"type": "string", "minLength": 1},
+        "source_type": {"enum": ["primary", "secondary", "review", "standard", "institutional", "software_documentation", "other"]},
+        "doi": {"type": "string"},
+        "url": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "result": {
+      "type": "object",
+      "required": ["id", "summary", "evidence_ids"],
+      "properties": {
+        "id": {"type": "string"},
+        "summary": {"type": "string", "minLength": 1},
+        "evidence_ids": {"type": "array", "items": {"type": "string"}},
+        "claim_ids": {"type": "array", "items": {"type": "string"}, "default": []}
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}
