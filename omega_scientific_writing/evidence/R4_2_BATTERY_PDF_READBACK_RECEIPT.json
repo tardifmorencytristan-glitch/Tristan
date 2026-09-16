@@ -1,0 +1,51 @@
+{
+  "schema_version": "r4.2-pdf-readback-0.1",
+  "status": "LOCAL_PDF_BUILD_AND_VISUAL_READBACK_PASS",
+  "source_main": "ae23ac487157c80227cf9159e987a90b86a05a21",
+  "source_evidence": {
+    "repository": "tardifmorencytristan-glitch/Tristan-Tardif-Morency",
+    "commit": "d759105682704f037f21fef8f6d396b4d0408f3a",
+    "path": "battery/evidence/CALCE_ZERO_FIT_TRANSFER_R0_4.json"
+  },
+  "build": {
+    "engine": "pdfTeX-1.40.26",
+    "passes": 2,
+    "pages": 2,
+    "tex_sha256": "6f024984f9b1dac291f1c64243f2758783917712e2bbfd04abea76651d1a03f8",
+    "pdf_sha256": "13ba4d4e78fe2d4e6b2736459c99100f9f182e009c59b156b1443c25331f4635"
+  },
+  "visual_readback": {
+    "renderer": "PDF skill render_pdf.py at 180 dpi",
+    "pages_inspected": [1, 2],
+    "clipped_text": false,
+    "overlap": false,
+    "broken_glyphs": false,
+    "status": "PASS_AFTER_ONE_FIX"
+  },
+  "failure_genome": {
+    "first_render_status": "FAIL_VISUAL_PROVENANCE_OVERFLOW",
+    "symptom": "long exact evidence anchor exceeded the right page margin when rendered inside texttt",
+    "fix": "use xurl plus breakable url rendering and rerender",
+    "regression_requirement": "exact source anchor must remain present while fitting within page bounds"
+  },
+  "text_readback": {
+    "required_tokens_present": [
+      "CALCE",
+      "DFN",
+      "SPM",
+      "SPMe",
+      "ScientificPASS",
+      "universal model superiority",
+      "capacity mismatch"
+    ],
+    "exact_source_sha_recoverable_after_linebreak_normalization": true
+  },
+  "boundaries": [
+    "GeneratedPDF != IndependentEvidence",
+    "PDFArtifactPASS != ScientificPASS",
+    "ReadbackPASS != CitationCourtPASS",
+    "LocalBuildPASS != CrossPlatformBuildPASS",
+    "R4.2 does not establish writing superiority"
+  ],
+  "next_gate": "exact-head CI on renderer/tests, then preserve PDF as derived sidecar artifact and proceed to independent/multi-generator writing review"
+}
