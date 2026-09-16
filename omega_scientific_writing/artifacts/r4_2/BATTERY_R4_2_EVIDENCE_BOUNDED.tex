@@ -1,0 +1,59 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{xurl}
+\usepackage{hyperref}
+\geometry{margin=1in}
+\title{Evidence-bounded comparison of zero-fit PyBaMM models on three public CALCE cells}
+\author{Tristan Tardif-Morency}
+\date{Evidence-bounded draft}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Within the frozen three-cell first-cycle CALCE comparison, three public CALCE first-cycle discharge slices were compared against zero-fit PyBaMM SPM, SPMe, and DFN simulations. Mean voltage-shape RMSE was 0.07225~V for DFN, 0.17085~V for SPM, and 0.25499~V for SPMe. The same court recorded approximately 38--45\% absolute-capacity overprediction. These observations are bounded to the stated protocol and do not establish universal model superiority or ScientificPASS.
+\end{abstract}
+
+\section{Evidence anchor}
+The manuscript projection is tied to the exact source receipt:\\
+\url{tardifmorencytristan-glitch/Tristan-Tardif-Morency@d759105682704f037f21fef8f6d396b4d0408f3a:battery/evidence/CALCE_ZERO_FIT_TRANSFER_R0_4.json}
+
+Generated text is not an independent evidence source.
+
+\section{Methods}
+The court uses the public CALCE cells CS2\_33, CS2\_34, and CS2\_35 and the PyBaMM 26.8.0.0 Ramadass2004 parameter set without cell-specific parameter calibration. Comparison is performed on normalized discharged-capacity coordinates for the stated first-cycle slices.
+
+\section{Results}
+\begin{table}[ht]
+\centering
+\caption{Mean voltage-shape RMSE over the frozen three-cell court.}
+\begin{tabular}{lr}
+\toprule
+Model & Mean RMSE (V) \\
+\midrule
+DFN & 0.07225 \\
+SPM & 0.17085 \\
+SPMe & 0.25499 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Within the frozen three-cell first-cycle CALCE comparison, DFN has the lowest observed mean voltage-shape RMSE among the three evaluated models. This comparison is descriptive for the frozen court; it is not a claim of universal superiority.
+
+\section{Limitations}
+\begin{itemize}
+\item Only three first-cycle public CALCE slices are included in this frozen court.
+\item The Ramadass2004 parameter set is not calibrated to these cells.
+\item All three models substantially overpredict absolute capacity in the source receipt.
+\item The observed ordering is protocol- and dataset-bounded and is not evidence of universal model superiority.
+\item This document is a generated projection of existing evidence, not an independent replication or ScientificPASS.
+\end{itemize}
+
+\section{Conclusion}
+The frozen Battery-T court supports a bounded comparative statement about voltage-shape error under the stated protocol while simultaneously revealing a substantial capacity mismatch. The appropriate next step is independent replication and identifiable recalibration under a preregistered protocol, not stronger wording.
+
+\end{document}
