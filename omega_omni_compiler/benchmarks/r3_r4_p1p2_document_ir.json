@@ -18,5 +18,6 @@
     "delta_commits_behind": 0
   },
   "status": "SNAPSHOT_PROBATOIRE_FIGE",
+  "status_label": "SNAPSHOT PROBATOIRE FIGE",
   "boundary": "Not an officially deposited university thesis; bounded two-page semantic round-trip benchmark only."
 }
