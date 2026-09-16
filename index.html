@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Scientific Consistency Canary</title>
+<style>body{font-family:system-ui;max-width:850px;margin:40px auto;padding:0 18px;line-height:1.5}input,button{font:inherit;padding:10px;margin:5px 0;width:100%;box-sizing:border-box}button{cursor:pointer}.card{border:1px solid #ccc;border-radius:12px;padding:18px;margin:16px 0}code{background:#eee;padding:2px 5px;border-radius:4px}.ok{font-weight:700}.muted{opacity:.72}</style>
+</head>
+<body>
+<h1>Scientific Consistency Canary</h1>
+<p>Check whether two mathematical expressions agree on bounded numerical tests. Runs entirely in your browser.</p>
+<div class="card">
+<label>Equation expression</label><input id="a" value="x*(y+1)">
+<label>Implementation expression</label><input id="b" value="x*y+x">
+<label>Variables (comma separated)</label><input id="vars" value="x,y">
+<button id="run">Run free consistency scan</button>
+<div id="out"></div>
+</div>
+<div class="card"><strong>Boundary:</strong> numerical agreement on sampled points is not a mathematical proof. This canary does not execute arbitrary source code.</div>
+<div class="card"><h2>Need a deeper scientific consistency / reproducibility report?</h2><p>Current paid experiment:</p><p><a href="https://buy.stripe.com/5kQ3cvfda08yfEH6He83C04">Open Stripe checkout</a></p></div>
+<p class="muted">Generated ≠ Verified · Simulation ≠ Measurement · Capability ≠ Authority</p>
+<script>
+const funcs={sin:Math.sin,cos:Math.cos,tan:Math.tan,exp:Math.exp,log:Math.log,sqrt:Math.sqrt,abs:Math.abs};
+function tokenize(s){const re=/\s*([A-Za-z_][A-Za-z0-9_]*|(?:\d+\.\d*|\.\d+|\d+)(?:[eE][+-]?\d+)?|[()+\-*/^,])\s*/gy;let t=[],m,p=0;while(p<s.length){re.lastIndex=p;m=re.exec(s);if(!m)throw Error('Unsupported token near: '+s.slice(p,p+12));t.push(m[1]);p=re.lastIndex;}return t;}
+function parse(s,env){const t=tokenize(s);let i=0;const peek=()=>t[i],take=()=>t[i++];function primary(){let q=take();if(q==='('){let v=expr();if(take()!==')')throw Error('Missing )');return v;}if(q==='-')return-primary();if(q==='+' )return primary();if(/^\d|^\./.test(q))return Number(q);if(/^[A-Za-z_]/.test(q)){if(peek()==='('){take();let v=expr();if(take()!==')')throw Error('Missing )');if(!(q in funcs))throw Error('Unsupported function: '+q);return funcs[q](v);}if(q==='pi')return Math.PI;if(q==='e')return Math.E;if(!(q in env))throw Error('Unknown variable: '+q);return env[q];}throw Error('Unexpected token: '+q);}function power(){let v=primary();if(peek()==='^'){take();v=Math.pow(v,power());}return v;}function term(){let v=power();while(peek()==='*'||peek()==='/'){let o=take(),r=power();v=o==='*'?v*r:v/r;}return v;}function expr(){let v=term();while(peek()==='+'||peek()==='-'){let o=take(),r=term();v=o==='+'?v+r:v-r;}return v;}let v=expr();if(i!==t.length)throw Error('Trailing tokens');return v;}
+function rnd(k,j){return Math.sin((k+1)*12.9898+(j+1)*78.233)*4.5;}
+document.getElementById('run').onclick=()=>{const out=document.getElementById('out');try{const va=document.getElementById('a').value,vb=document.getElementById('b').value,names=document.getElementById('vars').value.split(',').map(x=>x.trim()).filter(Boolean);let max=0,bad=0;for(let k=0;k<64;k++){let env={};names.forEach((n,j)=>env[n]=rnd(k,j));let x=parse(va,env),y=parse(vb,env),r=Math.abs(x-y);if(!Number.isFinite(r))bad++;else max=Math.max(max,r);}const pass=bad===0&&max<=1e-10;out.innerHTML=`<p class="ok">${pass?'NO MISMATCH OBSERVED':'HOLD — MISMATCH OBSERVED'}</p><p>max |residual| = <code>${max}</code> over 64 bounded samples${bad?`, ${bad} invalid`:''}.</p><p class="muted">This is evidence under tested conditions, not proof.</p>`;}catch(e){out.textContent='Error: '+e.message;}};
+</script>
+</body></html>
