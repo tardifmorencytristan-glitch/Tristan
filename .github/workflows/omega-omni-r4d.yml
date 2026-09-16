@@ -1,0 +1,44 @@
+name: Omega Omni R4D Parser Court
+
+on:
+  push:
+    paths:
+      - 'omega_omni_compiler/src/parser_adapters.py'
+      - 'omega_omni_compiler/tests/test_parser_adapters_r4d.py'
+      - 'omega_omni_compiler/fixtures/r4d_parser_fixture.pdf'
+      - 'omega_omni_compiler/evidence/R4D_REAL_PARSER_COURT.json'
+      - '.github/workflows/omega-omni-r4d.yml'
+  pull_request:
+    paths:
+      - 'omega_omni_compiler/src/parser_adapters.py'
+      - 'omega_omni_compiler/tests/test_parser_adapters_r4d.py'
+      - 'omega_omni_compiler/fixtures/r4d_parser_fixture.pdf'
+      - 'omega_omni_compiler/evidence/R4D_REAL_PARSER_COURT.json'
+      - '.github/workflows/omega-omni-r4d.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  parser-court:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install bounded parser dependencies
+        run: |
+          python -m pip install --disable-pip-version-check pypdf==5.9.0
+          sudo apt-get update -qq
+          sudo apt-get install -y poppler-utils
+      - name: Record parser versions
+        run: |
+          python -c "import pypdf; print('pypdf', pypdf.__version__)"
+          pdftotext -v
+      - name: Verify frozen PDF fixture hash
+        run: echo 'cc45d6d9511f68640442c736d05ccd625f34b634cd64115d34c3cf514d4890a4  omega_omni_compiler/fixtures/r4d_parser_fixture.pdf' | sha256sum -c -
+      - name: Compile R4D parser adapter
+        run: python -m compileall -q omega_omni_compiler/src/parser_adapters.py
+      - name: Execute two-parser PDF court
+        run: python -m unittest discover -s omega_omni_compiler/tests -p 'test_parser_adapters_r4d.py' -v
