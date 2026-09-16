@@ -1,0 +1,127 @@
+name: Omega Omni R4G PDF Render Readback
+
+on:
+  push:
+    paths:
+      - 'omega_omni_compiler/src/scientific_renderer_adapter.py'
+      - 'omega_omni_compiler/tests/test_scientific_renderer_adapter_r4g.py'
+      - 'omega_scientific_writing/src/latex_renderer.py'
+      - 'omega_scientific_writing/fixtures/battery_r4_2_packet.json'
+      - 'omega_scientific_writing/artifacts/r4_2/BATTERY_R4_2_EVIDENCE_BOUNDED.tex'
+      - '.github/workflows/omega-omni-r4g-render.yml'
+  pull_request:
+    paths:
+      - 'omega_omni_compiler/src/scientific_renderer_adapter.py'
+      - 'omega_omni_compiler/tests/test_scientific_renderer_adapter_r4g.py'
+      - 'omega_scientific_writing/src/latex_renderer.py'
+      - 'omega_scientific_writing/fixtures/battery_r4_2_packet.json'
+      - 'omega_scientific_writing/artifacts/r4_2/BATTERY_R4_2_EVIDENCE_BOUNDED.tex'
+      - '.github/workflows/omega-omni-r4g-render.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  render-readback:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install PDF build and readback dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y texlive-latex-base texlive-latex-recommended texlive-latex-extra lmodern poppler-utils
+      - name: Test reused renderer and Omni adapter
+        run: |
+          python -m unittest discover -s omega_scientific_writing/tests -p 'test_r4_2_latex_renderer.py' -v
+          python -m unittest discover -s omega_omni_compiler/tests -p 'test_scientific_renderer_adapter_r4g.py' -v
+      - name: Generate LaTeX through Omni adapter
+        run: |
+          mkdir -p build/r4g
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from omega_omni_compiler.src.scientific_renderer_adapter import render_battery_packet
+          packet = json.loads(Path('omega_scientific_writing/fixtures/battery_r4_2_packet.json').read_text(encoding='utf-8'))
+          tex, artifact = render_battery_packet(packet)
+          Path('build/r4g/generated.tex').write_text(tex, encoding='utf-8')
+          Path('build/r4g/renderer_artifact.json').write_text(json.dumps(artifact.to_dict(), indent=2, sort_keys=True), encoding='utf-8')
+          PY
+          echo '6f024984f9b1dac291f1c64243f2758783917712e2bbfd04abea76651d1a03f8  build/r4g/generated.tex' | sha256sum -c -
+          cmp build/r4g/generated.tex omega_scientific_writing/artifacts/r4_2/BATTERY_R4_2_EVIDENCE_BOUNDED.tex
+      - name: Compile real PDF twice
+        run: |
+          pdflatex -interaction=nonstopmode -halt-on-error -output-directory build/r4g build/r4g/generated.tex
+          pdflatex -interaction=nonstopmode -halt-on-error -output-directory build/r4g build/r4g/generated.tex
+          test -s build/r4g/generated.pdf
+          if grep -Fq 'Overfull \\hbox' build/r4g/generated.log; then
+            echo 'FAIL: overfull hbox detected in generated PDF build'
+            grep -F 'Overfull \\hbox' build/r4g/generated.log
+            exit 1
+          fi
+      - name: PDF structural and text readback
+        run: |
+          pdfinfo build/r4g/generated.pdf > build/r4g/pdfinfo.txt
+          test "$(awk '/^Pages:/ {print $2}' build/r4g/pdfinfo.txt)" = '2'
+          pdftotext build/r4g/generated.pdf build/r4g/readback.txt
+          grep -Fq 'CALCE' build/r4g/readback.txt
+          grep -Fq 'DFN' build/r4g/readback.txt
+          grep -Fq 'SPM' build/r4g/readback.txt
+          grep -Fq 'SPMe' build/r4g/readback.txt
+          grep -Fq 'ScientificPASS' build/r4g/readback.txt
+          grep -Fq 'universal model superiority' build/r4g/readback.txt
+          grep -Fq 'capacity mismatch' build/r4g/readback.txt
+      - name: Render PDF pages to images
+        run: |
+          pdftoppm -png -r 120 -f 1 -l 2 build/r4g/generated.pdf build/r4g/page
+          test -s build/r4g/page-1.png
+          test -s build/r4g/page-2.png
+      - name: Emit exact-head runtime receipt
+        run: |
+          python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          root = Path('build/r4g')
+          def digest(path):
+              return hashlib.sha256(path.read_bytes()).hexdigest()
+          receipt = {
+              'schema_version': 'omni-r4g-ci-render-readback-v1',
+              'head_sha': os.environ['GITHUB_SHA'],
+              'tex_sha256': digest(root / 'generated.tex'),
+              'pdf_sha256': digest(root / 'generated.pdf'),
+              'readback_sha256': digest(root / 'readback.txt'),
+              'pages': 2,
+              'rendered_pngs': [
+                  {'file': 'page-1.png', 'bytes': (root / 'page-1.png').stat().st_size},
+                  {'file': 'page-2.png', 'bytes': (root / 'page-2.png').stat().st_size},
+              ],
+              'checks': {
+                  'renderer_parity': True,
+                  'two_pass_pdftex': True,
+                  'no_overfull_hbox': True,
+                  'text_readback_tokens': True,
+                  'two_png_pages_nonempty': True,
+              },
+              'boundaries': [
+                  'CIRenderReadbackPASS != ScientificPASS',
+                  'PNGRenderNonempty != HumanVisualInspectionPASS',
+                  'TextReadbackPASS != CitationCourtPASS',
+              ],
+          }
+          (root / 'ci_receipt.json').write_text(json.dumps(receipt, indent=2, sort_keys=True), encoding='utf-8')
+          print(json.dumps(receipt, indent=2, sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: omega-r4g-pdf-${{ github.sha }}
+          path: |
+            build/r4g/generated.tex
+            build/r4g/generated.pdf
+            build/r4g/readback.txt
+            build/r4g/pdfinfo.txt
+            build/r4g/page-1.png
+            build/r4g/page-2.png
+            build/r4g/renderer_artifact.json
+            build/r4g/ci_receipt.json
