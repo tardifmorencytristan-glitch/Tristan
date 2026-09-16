@@ -27,36 +27,50 @@ The stale PR is therefore a capability/evidence source, not a branch to merge.
 
 The adapter verifies exact source-anchor presence and the inherited semantic token contract before any PDF build.
 
-## Renderer parity
+## Fresh identity correction discovered by R4G
 
-The Omni adapter output must be byte-identical to the persisted R4.2 `.tex` artifact and retain SHA-256:
+The first R4G exact-head test found a provenance inconsistency in the historical R4.2 receipt.
 
-`6f024984f9b1dac291f1c64243f2758783917712e2bbfd04abea76651d1a03f8`
+Fresh execution established simultaneously that:
 
-This tests capability absorption without silently changing the scientific projection.
+1. current output from the exact reused renderer is byte-identical to the exact committed R4.2 `.tex` blob; and
+2. their SHA-256 is `a39c0ea9c7faa617854083f7f56735003cd63554e27dc81b759e5f57f4298d40`.
+
+The historical receipt instead records `.tex` SHA-256
+`6f024984f9b1dac291f1c64243f2758783917712e2bbfd04abea76651d1a03f8`.
+
+The historical receipt is retained unchanged as historical evidence; its stale/mismatching `.tex` identity is **not** silently promoted into the current qualification. `R4G_FAILURE_GENOMES.json` records this negative evidence.
+
+Thus:
+
+- `ReceiptClaim != ArtifactBytes`;
+- current qualification is bound to the freshly observed exact renderer/output/blob identity;
+- the historical local PDF hash remains historical evidence only.
 
 ## CI-native PDF gate
 
-A dedicated GitHub Actions lane now performs on the exact PR head:
+A dedicated GitHub Actions lane performs on the exact PR head:
 
 1. install pdfTeX/LaTeX packages + Poppler;
 2. execute the original R4.2 renderer tests and the Omni adapter tests;
 3. render the packet through the Omni adapter;
-4. verify exact `.tex` SHA-256 and byte parity with the historical artifact;
+4. verify fresh `.tex` SHA-256 `a39c0ea9...` and byte parity with the committed exact artifact;
 5. run pdfTeX twice;
 6. reject any `Overfull \\hbox` regression;
 7. require a real non-empty two-page PDF;
 8. run `pdfinfo` structural readback;
 9. run `pdftotext` and require bounded semantic tokens;
 10. render both PDF pages to non-empty PNG images with `pdftoppm`;
-11. emit an exact-head runtime receipt with output hashes;
+11. emit an exact-head runtime receipt with output hashes and the historical identity mismatch explicitly recorded;
 12. upload `.tex`, `.pdf`, text readback, PDF metadata, PNG renders and receipts as a CI artifact.
 
 ## FailureGenome inheritance
 
-The historical R4.2 provenance-overflow failure remains part of the lineage. CI now operationalizes one regression condition by failing on an `Overfull \\hbox`, while preserving the `xurl`/breakable URL correction.
+The historical R4.2 provenance-overflow failure remains part of the lineage. CI operationalizes one regression condition by failing on an `Overfull \\hbox`, while preserving the `xurl`/breakable URL correction.
 
-This automated check is not equivalent to human visual inspection.
+R4G additionally preserves the newly observed stale `.tex` identity in the historical receipt.
+
+Automated no-overflow and non-empty PNG checks are not equivalent to human visual inspection.
 
 ## Hard boundaries
 
@@ -66,6 +80,7 @@ This automated check is not equivalent to human visual inspection.
 - `TextReadbackPASS != CitationCourtPASS`.
 - `RendererParity != WritingSuperiority`.
 - `HistoricalLocalPDFPASS != CurrentExactHeadCIPASS`.
+- `HistoricalReceipt != FreshIdentity`.
 - Runtime PDF SHA may differ from the historical local PDF due to build-environment metadata; semantic/structural/readback gates remain separately measured.
 
 ## Next gates

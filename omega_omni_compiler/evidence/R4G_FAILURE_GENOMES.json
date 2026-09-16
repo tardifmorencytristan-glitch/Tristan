@@ -1,0 +1,25 @@
+{
+  "schema_version": "omni-r4g-failure-genomes-v1",
+  "failures": [
+    {
+      "id": "R4G-HISTORICAL-TEX-IDENTITY-MISMATCH-001",
+      "first_head": "76e26aa3fa4b20425a55b55d3edd7c5a3202e4fe",
+      "failed_workflow": "Omega Multidirectional Omni R0",
+      "failed_test": "test_exact_r4_2_renderer_is_reused_through_omni_adapter",
+      "observed": {
+        "fresh_renderer_output_equals_committed_tex_blob": true,
+        "fresh_tex_sha256": "a39c0ea9c7faa617854083f7f56735003cd63554e27dc81b759e5f57f4298d40",
+        "historical_receipt_tex_sha256": "6f024984f9b1dac291f1c64243f2758783917712e2bbfd04abea76651d1a03f8",
+        "historical_receipt_matches_fresh_exact_blob": false
+      },
+      "classification": "HISTORICAL_RECEIPT_IDENTITY_MISMATCH",
+      "action": "Preserve the historical receipt unchanged as historical evidence, bind current qualification to the freshly observed exact blob/output SHA-256, and explicitly carry the mismatch forward as provenance debt.",
+      "regression_gate": "Current renderer output must remain byte-identical to the committed exact R4.2 tex blob and hash to a39c0ea9c7faa617854083f7f56735003cd63554e27dc81b759e5f57f4298d40 unless a deliberate versioned renderer change occurs.",
+      "boundaries": [
+        "HistoricalReceipt != FreshIdentity",
+        "ReceiptClaim != ArtifactBytes",
+        "MatchingRendererAndCommittedArtifact != HistoricalLocalBuildIdentity"
+      ]
+    }
+  ]
+}

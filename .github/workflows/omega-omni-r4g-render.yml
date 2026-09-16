@@ -5,6 +5,7 @@ on:
     paths:
       - 'omega_omni_compiler/src/scientific_renderer_adapter.py'
       - 'omega_omni_compiler/tests/test_scientific_renderer_adapter_r4g.py'
+      - 'omega_omni_compiler/evidence/R4G_FAILURE_GENOMES.json'
       - 'omega_scientific_writing/src/latex_renderer.py'
       - 'omega_scientific_writing/fixtures/battery_r4_2_packet.json'
       - 'omega_scientific_writing/artifacts/r4_2/BATTERY_R4_2_EVIDENCE_BOUNDED.tex'
@@ -13,6 +14,7 @@ on:
     paths:
       - 'omega_omni_compiler/src/scientific_renderer_adapter.py'
       - 'omega_omni_compiler/tests/test_scientific_renderer_adapter_r4g.py'
+      - 'omega_omni_compiler/evidence/R4G_FAILURE_GENOMES.json'
       - 'omega_scientific_writing/src/latex_renderer.py'
       - 'omega_scientific_writing/fixtures/battery_r4_2_packet.json'
       - 'omega_scientific_writing/artifacts/r4_2/BATTERY_R4_2_EVIDENCE_BOUNDED.tex'
@@ -49,7 +51,7 @@ jobs:
           Path('build/r4g/generated.tex').write_text(tex, encoding='utf-8')
           Path('build/r4g/renderer_artifact.json').write_text(json.dumps(artifact.to_dict(), indent=2, sort_keys=True), encoding='utf-8')
           PY
-          echo '6f024984f9b1dac291f1c64243f2758783917712e2bbfd04abea76651d1a03f8  build/r4g/generated.tex' | sha256sum -c -
+          echo 'a39c0ea9c7faa617854083f7f56735003cd63554e27dc81b759e5f57f4298d40  build/r4g/generated.tex' | sha256sum -c -
           cmp build/r4g/generated.tex omega_scientific_writing/artifacts/r4_2/BATTERY_R4_2_EVIDENCE_BOUNDED.tex
       - name: Compile real PDF twice
         run: |
@@ -90,6 +92,8 @@ jobs:
               'schema_version': 'omni-r4g-ci-render-readback-v1',
               'head_sha': os.environ['GITHUB_SHA'],
               'tex_sha256': digest(root / 'generated.tex'),
+              'historical_receipt_tex_sha256': '6f024984f9b1dac291f1c64243f2758783917712e2bbfd04abea76651d1a03f8',
+              'historical_tex_identity_matches_fresh_blob': False,
               'pdf_sha256': digest(root / 'generated.pdf'),
               'readback_sha256': digest(root / 'readback.txt'),
               'pages': 2,
@@ -98,7 +102,8 @@ jobs:
                   {'file': 'page-2.png', 'bytes': (root / 'page-2.png').stat().st_size},
               ],
               'checks': {
-                  'renderer_parity': True,
+                  'renderer_parity_with_committed_tex': True,
+                  'fresh_tex_identity_bound': True,
                   'two_pass_pdftex': True,
                   'no_overfull_hbox': True,
                   'text_readback_tokens': True,
@@ -108,6 +113,7 @@ jobs:
                   'CIRenderReadbackPASS != ScientificPASS',
                   'PNGRenderNonempty != HumanVisualInspectionPASS',
                   'TextReadbackPASS != CitationCourtPASS',
+                  'HistoricalReceipt != FreshIdentity',
               ],
           }
           (root / 'ci_receipt.json').write_text(json.dumps(receipt, indent=2, sort_keys=True), encoding='utf-8')
