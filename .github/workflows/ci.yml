@@ -28,3 +28,5 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Kernel verify
         run: python -m tristan verify
+      - name: Retrieval court R0.2
+        run: python -m tristan.retrieval_court
