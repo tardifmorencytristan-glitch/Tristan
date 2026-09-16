@@ -3,7 +3,9 @@ import unittest
 from pathlib import Path
 
 from omega_scientific_writing.src.thesis_state import compile_r4_manifest
+from omega_scientific_writing.src.thesis_state_adapter import to_scientific_ir
 from omega_scientific_writing.src.r5_candidate import build_r5_candidate, validate_no_epistemic_upgrade
+from omega_scientific_writing.src.scientific_lint import lint
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -36,6 +38,13 @@ class ThesisStateR2Tests(unittest.TestCase):
         candidate = build_r5_candidate(self.state)
         self.assertEqual(validate_no_epistemic_upgrade(self.state, candidate), [])
         self.assertTrue(candidate["epistemic_policy"]["no_status_upgrade"])
+
+    def test_thesis_state_projects_to_lintable_scientific_ir(self):
+        ir = to_scientific_ir(self.state)
+        errors = [f for f in lint(ir) if f["severity"] == "ERROR"]
+        self.assertEqual(errors, [])
+        self.assertEqual({c["status"] for c in ir["claims"]}, {"OBSERVATION"})
+        self.assertEqual({e["kind"] for e in ir["evidence"]}, {"other"})
 
 
 if __name__ == "__main__":
