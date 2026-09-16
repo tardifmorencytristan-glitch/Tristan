@@ -52,6 +52,7 @@ class KernelTests(unittest.TestCase):
     def test_repo_verifier_passes(self):
         result = verify_repository(ROOT)
         self.assertEqual(result["status"], "PASS")
+        self.assertTrue(result["context_debt_clean"])
         self.assertFalse(result["scientific_pass"])
 
 
