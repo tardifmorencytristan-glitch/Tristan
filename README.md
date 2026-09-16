@@ -1,0 +1,58 @@
+# Tristan
+
+**Status: BOOTSTRAP / PROVISIONAL ENGINEERING KERNEL**
+
+`Tristan` is a small public, regenerable kernel for routing intentions into the minimum sufficient set of sources, capabilities, evidence, failures, tests, and frontiers.
+
+It does **not** claim to contain the entire Tristan corpus, nor to make scientific claims true by compilation.
+
+## Core invariants
+
+- Generated != Verified
+- Simulation != Measurement
+- Prototype != Production
+- Capability != Authority
+- OriginBonus = 0
+- LocalWinner != UniversalWinner
+- EveryComponentHasRightToLose
+- NO_ACTION is admissible
+
+## Architecture
+
+`INTENT -> CONTEXT* -> RESIDUAL -> SEARCH -> REPRESENT -> GENERATE -> TEST -> ATTACK -> COMPETE -> REALITY -> CRYSTALLIZE -> REGENERATE`
+
+The initial public kernel deliberately federates existing sources instead of copying them blindly.
+
+## Quick start
+
+```bash
+python -m pip install -e .
+tristan verify
+tristan status
+tristan query "context regeneration evidence"
+tristan run "Build a minimum sufficient context compiler"
+```
+
+## Current canonical source federation
+
+The bootstrap registry points to:
+
+- the historical Git repository `tardifmorencytristan-glitch/Tristan-Tardif-Morency`;
+- the machine-readable `context/TRISTAN_MEMORY_REGISTRY.json`;
+- the Google Drive `TRISTAN Ω-CONTEXT BOOTSTRAP`.
+
+Pointers are not proof that their contents were loaded or verified. Every operation must preserve provenance and evidence scope.
+
+## Maturity
+
+This first kernel is intentionally dependency-light and deterministic. It provides:
+
+1. a typed `TristanObject`;
+2. a JSONL registry;
+3. bounded `Context*(Q)` compilation;
+4. a deterministic `run` receipt;
+5. regeneration/status commands;
+6. schema and repository invariant checks;
+7. a CI workflow.
+
+Future modules must earn their complexity through measured, scoped gains.
