@@ -5,6 +5,7 @@ from .context import compile_context
 from .registry import Registry
 
 MEMORY_STATES = {"M+", "M-", "M?", "MΔ", "M⊥", "M∅"}
+FAILURE_REF_PREFIX = "id:"
 
 
 @dataclass(frozen=True)
@@ -37,6 +38,7 @@ class RehydratedContext:
     seed_ids: tuple[str, ...]
     selected_ids: tuple[str, ...]
     memory_ids: tuple[str, ...]
+    inline_negative_memory: tuple[str, ...]
     debt: ContextDebt
     invariant: str = "rehydrated_context_is_projection_not_current_truth"
 
@@ -45,10 +47,15 @@ def resolve_concepts(text: str, identities: tuple[ConceptIdentity, ...]) -> tupl
     return tuple(i.concept_id for i in identities if i.matches(text))
 
 
-def _closure(seed_ids: tuple[str, ...], registry: Registry) -> tuple[tuple[str, ...], tuple[str, ...], tuple[str, ...]]:
+def _failure_ref(value: str) -> str | None:
+    return value[len(FAILURE_REF_PREFIX):] if value.startswith(FAILURE_REF_PREFIX) else None
+
+
+def _closure(seed_ids: tuple[str, ...], registry: Registry) -> tuple[tuple[str, ...], tuple[str, ...], tuple[str, ...], tuple[str, ...]]:
     selected = set(seed_ids)
     missing_deps: set[str] = set()
     missing_failures: set[str] = set()
+    inline_failures: set[str] = set()
     queue = list(seed_ids)
     while queue:
         oid = queue.pop(0)
@@ -61,11 +68,14 @@ def _closure(seed_ids: tuple[str, ...], registry: Registry) -> tuple[tuple[str, 
             elif dep not in selected:
                 selected.add(dep); queue.append(dep)
         for failure in obj.failures:
-            if registry.get(failure) is None:
-                missing_failures.add(failure)
-            elif failure not in selected:
-                selected.add(failure); queue.append(failure)
-    return tuple(sorted(selected)), tuple(sorted(missing_deps)), tuple(sorted(missing_failures))
+            ref = _failure_ref(failure)
+            if ref is None:
+                inline_failures.add(failure)
+            elif registry.get(ref) is None:
+                missing_failures.add(ref)
+            elif ref not in selected:
+                selected.add(ref); queue.append(ref)
+    return tuple(sorted(selected)), tuple(sorted(missing_deps)), tuple(sorted(missing_failures)), tuple(sorted(inline_failures))
 
 
 def audit_registry_context(registry: Registry) -> ContextDebt:
@@ -74,7 +84,10 @@ def audit_registry_context(registry: Registry) -> ContextDebt:
     stale: set[str] = set()
     for obj in registry.all():
         missing_deps.update(dep for dep in obj.dependencies if registry.get(dep) is None)
-        missing_failures.update(f for f in obj.failures if registry.get(f) is None)
+        for failure in obj.failures:
+            ref = _failure_ref(failure)
+            if ref is not None and registry.get(ref) is None:
+                missing_failures.add(ref)
         if bool(obj.metadata.get("stale", False)):
             stale.add(obj.id)
     return ContextDebt(tuple(sorted(missing_deps)), tuple(sorted(missing_failures)), tuple(sorted(stale)), ())
@@ -82,7 +95,7 @@ def audit_registry_context(registry: Registry) -> ContextDebt:
 
 def rehydrate_context(query: str, registry: Registry, limit: int = 8) -> RehydratedContext:
     receipt = compile_context(query, registry, limit=limit)
-    selected, missing_deps, missing_failures = _closure(receipt.selected_ids, registry)
+    selected, missing_deps, missing_failures, inline_failures = _closure(receipt.selected_ids, registry)
     memory_ids = tuple(sorted(
         oid for oid in selected
         if str(registry.require(oid).metadata.get("memory_state", "")) in MEMORY_STATES
@@ -92,7 +105,7 @@ def rehydrate_context(query: str, registry: Registry, limit: int = 8) -> Rehydra
         if bool(registry.require(oid).metadata.get("stale", False))
     ))
     debt = ContextDebt(missing_deps, missing_failures, stale, ())
-    return RehydratedContext(query, receipt.selected_ids, selected, memory_ids, debt)
+    return RehydratedContext(query, receipt.selected_ids, selected, memory_ids, inline_failures, debt)
 
 
 def context_ci(ctx: RehydratedContext) -> tuple[str, ...]:
