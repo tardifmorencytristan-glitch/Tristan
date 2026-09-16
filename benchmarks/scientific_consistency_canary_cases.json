@@ -1,0 +1,16 @@
+{
+  "schema": "tristan-scientific-consistency-benchmark/v1",
+  "purpose": "Small public falsification court for the browser canary; not a proof benchmark.",
+  "tolerance": 1e-10,
+  "cases": [
+    {"id":"algebra_equal","equation":"x*(y+1)","implementation":"x*y+x","variables":["x","y"],"expected":"NO_MISMATCH_OBSERVED"},
+    {"id":"sign_error","equation":"x+y","implementation":"x-y","variables":["x","y"],"expected":"MISMATCH"},
+    {"id":"missing_factor","equation":"2*x*y","implementation":"x*y","variables":["x","y"],"expected":"MISMATCH"},
+    {"id":"trig_identity","equation":"sin(x)^2+cos(x)^2","implementation":"1","variables":["x"],"expected":"NO_MISMATCH_OBSERVED"},
+    {"id":"square_even","equation":"x^2","implementation":"(-x)^2","variables":["x"],"expected":"NO_MISMATCH_OBSERVED"},
+    {"id":"wrong_power","equation":"x^2","implementation":"x^3","variables":["x"],"expected":"MISMATCH"},
+    {"id":"exp_identity","equation":"exp(x+y)","implementation":"exp(x)*exp(y)","variables":["x","y"],"expected":"NO_MISMATCH_OBSERVED"},
+    {"id":"coefficient_shift","equation":"3*x+2","implementation":"3*x+1","variables":["x"],"expected":"MISMATCH"}
+  ],
+  "boundary": "Passing bounded numerical samples does not establish mathematical equivalence."
+}
