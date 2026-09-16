@@ -1,0 +1,27 @@
+name: Omega Multidirectional Omni R0
+
+on:
+  push:
+    paths:
+      - 'omega_omni_compiler/**'
+      - '.github/workflows/omega-omni-r0.yml'
+  pull_request:
+    paths:
+      - 'omega_omni_compiler/**'
+      - '.github/workflows/omega-omni-r0.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile omni core
+        run: python -m compileall -q omega_omni_compiler
+      - name: Omni unit tests
+        run: python -m unittest discover -s omega_omni_compiler/tests -v
