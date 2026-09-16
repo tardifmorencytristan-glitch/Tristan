@@ -1,0 +1,23 @@
+{
+  "profile_id": "ieee-article-r0",
+  "authority": "IEEE Author Center",
+  "status": "VERIFIED_PUBLIC_PROFILE_R0",
+  "abstract": {
+    "max_words": 250,
+    "single_paragraph": true,
+    "self_contained": true,
+    "references_allowed": false,
+    "footnotes_allowed": false,
+    "equations_allowed": false
+  },
+  "methodology": {
+    "replication_detail_required": true
+  },
+  "results_discussion": {
+    "limitations_required": true,
+    "avoid_exaggeration": true
+  },
+  "source_urls": [
+    "https://journals.ieeeauthorcenter.ieee.org/create-your-ieee-journal-article/create-the-text-of-your-article/structure-your-article/"
+  ]
+}

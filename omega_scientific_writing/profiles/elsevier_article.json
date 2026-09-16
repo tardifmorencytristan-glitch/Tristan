@@ -1,0 +1,14 @@
+{
+  "profile_id": "elsevier-article-r0",
+  "authority": "Elsevier author instructions",
+  "status": "VERIFIED_PUBLIC_PROFILE_R0",
+  "latex_class": "elsarticle",
+  "rules": [
+    "journal_specific_reference_style_must_be_checked",
+    "submission_packaging_may_differ_from_local_source_tree",
+    "publisher_instructions_override_local_preferences"
+  ],
+  "source_urls": [
+    "https://www.elsevier.com/researcher/author/policies-and-guidelines/latex-instructions"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "project": {"id": "demo", "title": "Minimal verified structure", "document_type": "article", "language": "fr"},
+  "claims": [
+    {
+      "id": "C1",
+      "statement": "Le résultat R1 est soutenu par la mesure E1 dans le domaine déclaré.",
+      "status": "MEASUREMENT",
+      "evidence_ids": ["E1"],
+      "citation_ids": ["REF1"],
+      "assumptions": ["instrument calibré"],
+      "scope": "configuration de démonstration",
+      "uncertainty": "incertitude à quantifier dans un cas réel",
+      "falsifier": "réplication incompatible hors incertitude"
+    }
+  ],
+  "evidence": [
+    {"id": "E1", "kind": "measurement", "provenance": "demo://measurement/E1", "reproducibility": "partial"}
+  ],
+  "equations": [
+    {"id": "EQ1", "latex": "v=d/t", "symbols": [
+      {"symbol": "v", "meaning": "vitesse", "dimension": "L T^-1", "unit": "m/s"},
+      {"symbol": "d", "meaning": "distance", "dimension": "L", "unit": "m"},
+      {"symbol": "t", "meaning": "temps", "dimension": "T", "unit": "s"}
+    ]}
+  ],
+  "figures": [
+    {"id": "F1", "caption": "Résultat de démonstration.", "source": "demo://figure/F1", "claim_ids": ["C1"], "units_declared": true, "uncertainty_declared": true, "script": "scripts/make_figure.py"}
+  ],
+  "citations": [
+    {"id": "REF1", "source": "Demonstration source", "source_type": "primary"}
+  ],
+  "results": [
+    {"id": "R1", "summary": "Résultat minimal de démonstration.", "evidence_ids": ["E1"], "claim_ids": ["C1"]}
+  ]
+}
