@@ -22,13 +22,13 @@ Properties:
 - reports a residual and PASS/HOLD-style result;
 - explicitly does **not** claim formal proof.
 
-A bounded synthetic benchmark currently reports **8/8 correct** across four equivalence cases and four controlled mismatch families. This is a small engineering check, not evidence of general scientific-paper/code performance. See `receipts/SCIENTIFIC_CONSISTENCY_BENCH_R0_1.json`.
+The bounded synthetic benchmark R0.2 reports **120/120 classified correctly** on 60 generated equivalence cases and 60 controlled mismatches across six simple scalar-expression families. This is a synthetic engineering court only; it is not evidence of real-world scientific-paper/code accuracy, and numerical sampling is not formal proof. See `receipts/SCIENTIFIC_CONSISTENCY_BENCH_R0_2.json`.
 
-If the canary creates real value, the current deeper-report experiment points to Stripe Checkout:
+Dedicated attributed paid experiment: **29 CAD one-time**
 
-https://buy.stripe.com/5kQ3cvfda08yfEH6He83C04
+https://buy.stripe.com/3cIfZhc0Y1cC78b0iQ83C06
 
-The economic experiment remains unvalidated until attributable external usage and payment evidence exist.
+Each future Checkout Session from this link carries Scientific Consistency-specific metadata so intent can be separated from legacy OAK audit traffic. The economic experiment remains unvalidated until attributable external usage and payment evidence exist.
 
 ## Core invariants
 
