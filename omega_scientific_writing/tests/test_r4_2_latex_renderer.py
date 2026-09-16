@@ -35,6 +35,11 @@ class R42LatexRendererTests(unittest.TestCase):
         tokens = extract_required_tokens(tex)
         self.assertEqual({"CALCE", "DFN", "SPM", "SPMe", "ScientificPASS", "universal superiority", "capacity mismatch"}, tokens)
 
+    def test_persisted_tex_is_exact_renderer_projection(self):
+        generated = render_battery_manuscript(self.packet)
+        persisted = (ROOT / "artifacts" / "r4_2" / "BATTERY_R4_2_EVIDENCE_BOUNDED.tex").read_text(encoding="utf-8")
+        self.assertEqual(generated, persisted)
+
     def test_fails_if_ordering_is_mutated(self):
         bad = json.loads(json.dumps(self.packet))
         bad["results"]["DFN_mean_shape_rmse_v"] = 0.5
