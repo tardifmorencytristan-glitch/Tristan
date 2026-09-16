@@ -30,11 +30,12 @@ class OmniR3PDFRoundTripTests(unittest.TestCase):
             self.docir["anchors"]["r3_anchor"],
             self.docir["anchors"]["r4_frozen_head"],
             *self.docir["claims"],
-            self.docir["status"],
+            self.docir["status_label"],
         ]
         checks = semantic_readback(expected, self.readback)
         self.assertTrue(all(checks.values()))
         self.assertIn("+68 / -0", self.readback)
+        self.assertEqual(self.docir["status"], "SNAPSHOT_PROBATOIRE_FIGE")
         self.assertEqual(self.docir["anchors"]["delta_commits_ahead"], 68)
         self.assertEqual(self.docir["anchors"]["delta_commits_behind"], 0)
 
@@ -48,7 +49,7 @@ class OmniR3PDFRoundTripTests(unittest.TestCase):
             self.docir["anchors"]["r3_anchor"],
             self.docir["anchors"]["r4_frozen_head"],
             *self.docir["claims"],
-            self.docir["status"],
+            self.docir["status_label"],
             "delta_+68_-0",
         ]
         evidence = PDFRoundTripEvidence(
