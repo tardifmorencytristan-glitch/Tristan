@@ -1,4 +1,4 @@
-from tristan.context_rehydration import ConceptIdentity, context_ci, rehydrate_context, resolve_concepts
+from tristan.context_rehydration import ConceptIdentity, audit_registry_context, context_ci, rehydrate_context, resolve_concepts
 from tristan.model import TristanObject
 from tristan.registry import Registry
 
@@ -16,9 +16,9 @@ def test_alias_resolution_does_not_create_new_concept():
     assert resolve_concepts("Improve the Equation-Code Verifier", ids) == ("scientific_consistency",)
 
 
-def test_rehydration_reuses_existing_context_and_closes_dependencies_and_failures():
+def test_rehydration_closes_dependencies_and_referenced_negative_memory():
     reg = Registry([
-        obj("core", "Scientific Consistency", deps=("semantic",), failures=("r05",)),
+        obj("core", "Scientific Consistency", deps=("semantic",), failures=("id:r05",)),
         obj("semantic", "Semantic IR"),
         obj("r05", "R0.5 holdout failure", memory="M-"),
     ])
@@ -29,8 +29,16 @@ def test_rehydration_reuses_existing_context_and_closes_dependencies_and_failure
     assert context_ci(ctx) == ()
 
 
-def test_missing_negative_memory_is_context_debt():
-    reg = Registry([obj("core", "Scientific Consistency", failures=("missing_r05",))])
+def test_inline_failure_is_retained_as_embedded_negative_memory():
+    reg = Registry([obj("core", "Scientific Consistency", failures=("Simulation!=Measurement",))])
+    ctx = rehydrate_context("scientific consistency", reg)
+    assert ctx.inline_negative_memory == ("Simulation!=Measurement",)
+    assert ctx.debt.missing_failures == ()
+    assert audit_registry_context(reg).clean
+
+
+def test_missing_referenced_negative_memory_is_context_debt():
+    reg = Registry([obj("core", "Scientific Consistency", failures=("id:missing_r05",))])
     ctx = rehydrate_context("scientific consistency", reg)
     assert ctx.debt.missing_failures == ("missing_r05",)
     assert "MISSING_NEGATIVE_MEMORY" in context_ci(ctx)
