@@ -6,6 +6,22 @@
 
 It does **not** claim to contain the entire Tristan corpus, nor to make scientific claims true by compilation.
 
+## Scientific Consistency demand canary
+
+A public browser-only canary is now included in `index.html` to test one concrete problem: **does scientific code remain consistent with the equations it is supposed to implement?**
+
+- runs locally in the browser;
+- accepts bounded mathematical expressions, not arbitrary source code;
+- compares two expressions on 64 deterministic numerical samples;
+- reports a residual and PASS/HOLD-style result;
+- explicitly does **not** claim formal proof.
+
+If the canary creates real value, a deeper paid report experiment currently points to Stripe Checkout:
+
+https://buy.stripe.com/5kQ3cvfda08yfEH6He83C04
+
+The economic experiment is considered unvalidated until real usage and payment evidence exist.
+
 ## Core invariants
 
 - Generated != Verified
