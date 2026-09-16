@@ -1,0 +1,19 @@
+{
+  "title": "Evidence-bounded comparison of zero-fit PyBaMM models on three public CALCE cells",
+  "scope": "the frozen three-cell first-cycle CALCE comparison",
+  "source_anchor": "tardifmorencytristan-glitch/Tristan-Tardif-Morency@d759105682704f037f21fef8f6d396b4d0408f3a:battery/evidence/CALCE_ZERO_FIT_TRANSFER_R0_4.json",
+  "results": {
+    "DFN_mean_shape_rmse_v": 0.0722476531252661,
+    "SPM_mean_shape_rmse_v": 0.1708528680035939,
+    "SPMe_mean_shape_rmse_v": 0.2549941901925843,
+    "capacity_overprediction_low_pct": 38.0,
+    "capacity_overprediction_high_pct": 45.0
+  },
+  "limitations": [
+    "Only three first-cycle public CALCE slices are included in this frozen court.",
+    "The Ramadass2004 parameter set is not calibrated to these cells.",
+    "All three models substantially overpredict absolute capacity in the source receipt.",
+    "The observed ordering is protocol- and dataset-bounded and is not evidence of universal model superiority.",
+    "This document is a generated projection of existing evidence, not an independent replication or ScientificPASS."
+  ]
+}
