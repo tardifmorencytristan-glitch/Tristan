@@ -1,0 +1,23 @@
+{
+  "schema": "tristan-scientific-consistency-realworld-r0_4/v1",
+  "sample": "20 frozen real SciCoQA cases",
+  "prediction_hash": "df82c017e62daeb499d846e37f7330b9e306c9d61e30712289a149e545bf7cd5",
+  "protocol": "paper sections + historical code first; ground truth revealed only after predictions sealed",
+  "binary_detected": 12,
+  "binary_missed": 8,
+  "binary_recall": 0.60,
+  "precision": null,
+  "precision_reason": "sample contains known discrepancy cases only; no negative controls",
+  "mechanism_assessment": {
+    "strong_or_useful_partial": 7,
+    "weak_or_wrong_mechanism": 5,
+    "missed": 8
+  },
+  "status": "REALWORLD_FROZEN_SAMPLE_PARTIAL_PASS",
+  "boundaries": [
+    "binary flag does not imply correct root cause",
+    "no false-positive estimate without negative controls",
+    "20 cases are not the full SciCoQA population",
+    "heuristic detector is not a formal verifier"
+  ]
+}
