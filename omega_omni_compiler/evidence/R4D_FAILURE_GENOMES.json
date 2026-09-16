@@ -1,0 +1,17 @@
+{
+  "schema_version": "omni-r4d-failure-genomes-v1",
+  "failures": [
+    {
+      "id": "R4D-FIXTURE-HASH-MISMATCH-001",
+      "first_head": "c05543a48ccec478129130b1e9ebc6c14e5248ae",
+      "workflow": "Omega Omni R4D Parser Court",
+      "failed_step": "Verify frozen PDF fixture hash",
+      "symptom": "The Git materialized binary fixture did not match the declared SHA-256, so parser execution was skipped.",
+      "root_cause": "The first manually supplied base64 payload was not byte-identical to the locally generated fixture used to calculate the expected SHA-256.",
+      "fix": "Rematerialize the exact local fixture bytes. Correct Git blob SHA is 37598254803cb48569ecb3c754277a4c2a0df748 and the intended byte SHA-256 remains cc45d6d9511f68640442c736d05ccd625f34b634cd64115d34c3cf514d4890a4.",
+      "regression_gate": "CI must verify SHA-256 before parser execution; parser tests remain unreachable on a hash mismatch.",
+      "classification": "MATERIALIZATION_FAILURE_CAUGHT_FAIL_CLOSED",
+      "boundary": "Failed fixture materialization is not a parser failure."
+    }
+  ]
+}
