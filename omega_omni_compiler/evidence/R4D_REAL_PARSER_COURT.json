@@ -1,0 +1,57 @@
+{
+  "schema_version": "omni-r4d-real-parser-court-v1",
+  "status": "BOUNDED_LOCAL_REAL_PDF_TWO_PARSER_PASS_WITH_DISAGREEMENT",
+  "source": {
+    "drive_file_id": "162Qbdlx-eRV6AEkcE-4EXiUOYJRBaAwm",
+    "file_name": "These_Tristan_R4_Living_Integrale_2026-09-15.pdf",
+    "bytes": 1811904,
+    "sha256": "ac4c774094bbecc7f52bf5fb9d1e035595e7a79e483685ed0bea29db7aaee68a",
+    "total_pages": 466,
+    "pages_compared": [1, 2]
+  },
+  "executed_parsers": {
+    "pypdf": {
+      "version": "5.9.0",
+      "text_chars": 3026,
+      "geometry": "page envelope only in R4D adapter"
+    },
+    "poppler_pdftotext_bbox_layout": {
+      "version": "25.06.0",
+      "text_chars": 3004,
+      "page_blocks": {"1": 9, "2": 33},
+      "page_words": {"1": 81, "2": 348},
+      "geometry": "Poppler-reported block bounding boxes"
+    }
+  },
+  "comparison": {
+    "normalized_exact_text_equal": false,
+    "sequence_similarity": 0.9737017310252996,
+    "token_set_jaccard": 1.0,
+    "interpretation": "The parsers preserved the same token set on the bounded slice but differed in sequence/repetition/structure. This is disagreement evidence, not proof that either parse is correct."
+  },
+  "selected_invariants": {
+    "1b8d5a0a0e8681ec9e92e165f8e10fdb48d4780f": {"pypdf": true, "poppler": true},
+    "9d8f350158e0ac41f55735ad453a22a34eac5d3c": {"pypdf": true, "poppler": true},
+    "Generated != Verified": {"pypdf": true, "poppler": true},
+    "Projection != Canon": {"pypdf": true, "poppler": true},
+    "RepositoryPASS != ScientificPASS": {"pypdf": true, "poppler": true},
+    "Capability != Authority": {"pypdf": true, "poppler": true},
+    "SNAPSHOT PROBATOIRE FIGE": {"pypdf": true, "poppler": true},
+    "+68 / -0": {"pypdf": true, "poppler": true}
+  },
+  "environment": {
+    "execution": "current ChatGPT container local court",
+    "pypdf": "5.9.0",
+    "pdftotext": "25.06.0"
+  },
+  "boundaries": [
+    "LocalParserCourtPASS != ExactHeadCIPASS",
+    "ParserAgreement != Truth",
+    "ParserDisagreement != EitherParserWrong",
+    "TokenSetEquality != ReadingOrderEquality",
+    "Pages1To2 != Full466PageBenchmark",
+    "PopplerBBox != GroundTruthBBox",
+    "PyPDFPageEnvelope != TextBBox"
+  ],
+  "next_gate": "CI-native two-parser court on a frozen exact-byte PDF fixture, then wider real-document and external parser tournament."
+}
