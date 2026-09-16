@@ -1,0 +1,62 @@
+{
+  "schema_version": "0.1",
+  "receipt_id": "tristan-context-retrieval-court-r0-2",
+  "status": "READBACK_VERIFIED_BOUNDED_ENGINEERING_COURT",
+  "artifact": {
+    "repository": "tardifmorencytristan-glitch/Tristan",
+    "pr": 3,
+    "qualified_implementation_head": "95652f95b61d711a65879af9080d721863ab60b0",
+    "workflow_run": 35132036019
+  },
+  "source": {
+    "registry_sha256": "70bfb09f195662b70c80c31ff6d36b14f10bdada06b8e94fcfc8f190909ce4f3",
+    "benchmark_sha256": "53276c03e8ecf90f679ec92fd57a3aafbc85f475ff17f28bd7632e032554afb4",
+    "objects": 7,
+    "queries": 16,
+    "dev_queries": 8,
+    "holdout_queries": 8
+  },
+  "verification": {
+    "github_actions": {
+      "python": ["3.11", "3.12", "3.13", "3.14"],
+      "jobs_observed": "4/4 SUCCESS",
+      "focused_and_existing_tests": "11/11 PASS on observed Python 3.11 job",
+      "checks": ["compileall", "unittest", "kernel_verify", "retrieval_court"]
+    }
+  },
+  "holdout_results": {
+    "CURRENT_R0_1": {"hit_at_1": 0.875, "mrr": 0.875, "recall_at_3": 0.791667},
+    "BM25_CORE": {"hit_at_1": 0.875, "mrr": 0.875, "recall_at_3": 0.791667},
+    "BM25_FULL": {"hit_at_1": 1.0, "mrr": 1.0, "recall_at_3": 0.958333},
+    "TFIDF_FULL_NORMALIZED": {"hit_at_1": 1.0, "mrr": 1.0, "recall_at_3": 0.958333},
+    "SQLITE_FTS5_FULL": {"hit_at_1": 1.0, "mrr": 1.0, "recall_at_3": 0.958333}
+  },
+  "bounded_result": {
+    "best_holdout_mrr": 1.0,
+    "mrr_gain_vs_current": 0.125,
+    "best_by_holdout_mrr": ["BM25_FULL", "SQLITE_FTS5_FULL", "TFIDF_FULL_NORMALIZED"],
+    "decision": "TIE_KEEP_RUNTIME_UNCHANGED_SHADOW_CHALLENGERS",
+    "runtime_mutation_authorized": false
+  },
+  "mechanism_observation": {
+    "observed": "BM25_CORE exactly matched CURRENT_R0_1 on holdout while all three full-public-field challengers improved the frozen fixture.",
+    "bounded_interpretation": "On this fixture, expanding searchable declared fields and structured-token normalization appears more important than choosing among the three tested full-field ranking implementations.",
+    "not_claimed": "This does not establish a causal mechanism outside the seven-object fixture or semantic retrieval superiority."
+  },
+  "prior_art": {
+    "historical_bm25_adapter_blob": "3dc0f2cc769ca3fa75a175493fe58249e8847e73",
+    "historical_context_r2_doc_blob": "e7b4193d2af681819ec5859c347c1c5dc7156b9b"
+  },
+  "boundaries": [
+    "SelfAuthoredLabels!=SemanticTruth",
+    "SevenObjects!=RepresentativeCorpus",
+    "DevelopmentSplit!=IndependentExternalEvidence",
+    "Tie!=Winner",
+    "BM25PriorArtReused!=NewTristanInvention",
+    "SQLiteFTSAvailableHere!=AvailableEverywhere",
+    "BenchmarkVictory!=UniversalRetrievalSuperiority",
+    "NoRuntimeMutationWithoutLargerIndependentCourt",
+    "RepositoryEngineeringPASS!=ScientificPASS"
+  ],
+  "next_gate": "Freeze a materially larger independently labeled authorized Tristan corpus/query court; compare current lexical, BM25/FTS5, TF-IDF, semantic/embedding, graph/hybrid and NO_ACTION under matched budgets before changing runtime retrieval."
+}

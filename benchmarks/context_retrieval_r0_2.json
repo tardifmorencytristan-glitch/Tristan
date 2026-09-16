@@ -1,0 +1,30 @@
+{
+  "schema_version": "0.1",
+  "benchmark_id": "context-retrieval-r0-2",
+  "status": "FROZEN_SMALL_REPOSITORY_FIXTURE",
+  "source_registry": "registry/objects.jsonl",
+  "boundaries": [
+    "SelfAuthoredLabels!=SemanticTruth",
+    "SevenObjects!=RepresentativeCorpus",
+    "DevelopmentSplit!=HeldOutEvidence",
+    "WinnerOnFixture!=RuntimePromotion"
+  ],
+  "queries": [
+    {"split":"dev","query":"historical provenance source old git repository","relevant":["historical-git-root"]},
+    {"split":"dev","query":"minimum sufficient memory context routing index","relevant":["context-registry-v0-4"]},
+    {"split":"dev","query":"human readable drive bootstrap memory migration protocol","relevant":["bootstrap-drive-doc"]},
+    {"split":"dev","query":"extreme improvement generation automation regeneration anti ego","relevant":["omega-one-skill-tristan-r1"]},
+    {"split":"dev","query":"bounded mission closure authorized exact head verification","relevant":["master-execution-tristan-r1"]},
+    {"split":"dev","query":"external independent measurement evidence reality simulation","relevant":["reality-anchor"]},
+    {"split":"dev","query":"public regenerable kernel typed objects deterministic receipt","relevant":["public-kstar-kernel-r0-1"]},
+    {"split":"dev","query":"right to lose origin bonus no action","relevant":["omega-one-skill-tristan-r1","public-kstar-kernel-r0-1","reality-anchor"]},
+    {"split":"holdout","query":"bind exact source snapshots not timeless repository head","relevant":["historical-git-root"]},
+    {"split":"holdout","query":"current context registry minimum sufficient non exhaustive routing","relevant":["context-registry-v0-4"]},
+    {"split":"holdout","query":"drive bootstrap revision provenance retrieval protocol","relevant":["bootstrap-drive-doc"]},
+    {"split":"holdout","query":"single entrypoint compiler extreme improvement anti ego selection","relevant":["omega-one-skill-tristan-r1"]},
+    {"split":"holdout","query":"mission closure observable authorized reversible verifiable capabilities","relevant":["master-execution-tristan-r1"]},
+    {"split":"holdout","query":"simulation is not measurement independent external evidence","relevant":["reality-anchor"]},
+    {"split":"holdout","query":"setuptools build meta failure negative memory qualification court","relevant":["public-kstar-kernel-r0-1"]},
+    {"split":"holdout","query":"right_to_lose origin bonus no action public kernel","relevant":["public-kstar-kernel-r0-1","omega-one-skill-tristan-r1","reality-anchor"]}
+  ]
+}
