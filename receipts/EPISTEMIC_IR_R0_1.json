@@ -1,0 +1,47 @@
+{
+  "schema": "tristan-epistemic-ir-receipt/v1",
+  "status": "LOCAL_KERNEL_CI_VERIFIED_NOT_REALWORLD_PROMOTED",
+  "code_head": "285783d0e329c63a70c4fc6f1c21c9e079640dcf",
+  "ci": {
+    "workflow": "kernel-ci",
+    "run_id": 35144894103,
+    "conclusion": "success"
+  },
+  "capabilities": [
+    "ScientificContract typed object",
+    "ImplementationFact typed object",
+    "bounded Python FormulaAST canonicalization",
+    "commutative Add/Mult normalization",
+    "implementation call/constant/assignment extraction",
+    "normalization extraction",
+    "nonlinearity extraction",
+    "clamp/bound extraction",
+    "loss-term extraction",
+    "dataset identity contract checking"
+  ],
+  "tests": {
+    "coefficient_difference": true,
+    "power_difference": true,
+    "commutative_addition": true,
+    "normalization_present": true,
+    "normalization_missing": true,
+    "relu_extraction": true,
+    "clamp_extraction": true,
+    "loss_extraction": true,
+    "dataset_identity": true
+  },
+  "realworld_context": {
+    "r0_4_recall": 0.60,
+    "r0_5_holdout_recall": 0.35,
+    "promotion_rule": "new IR must improve on a fresh frozen holdout and matched negative controls; R0.4/R0.5 may not be reused as final evaluation"
+  },
+  "boundaries": [
+    "structural FormulaAST equivalence is not symbolic mathematical equivalence",
+    "no LaTeX parser yet",
+    "no interprocedural dataflow yet",
+    "no control-flow path semantics yet",
+    "no matched real-world negative-control precision/FPR estimate yet",
+    "CI PASS does not imply real-world scientific consistency accuracy"
+  ],
+  "next_gate": "FRESH_BLIND_HOLDOUT_PLUS_NEGATIVE_CONTROLS"
+}
