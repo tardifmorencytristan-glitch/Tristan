@@ -25,10 +25,10 @@ class R42LatexRendererTests(unittest.TestCase):
         self.assertIn("not evidence of universal model superiority", tex)
         self.assertIn("not an independent replication or ScientificPASS", tex)
 
-    def test_exact_source_anchor_is_embedded(self):
+    def test_exact_source_anchor_is_embedded_as_breakable_url(self):
         tex = render_battery_manuscript(self.packet)
-        self.assertIn("d759105682704f037f21fef8f6d396b4d0408f3a", tex)
-        self.assertIn("CALCE\\_ZERO\\_FIT\\_TRANSFER\\_R0\\_4.json", tex)
+        self.assertIn("\\usepackage{xurl}", tex)
+        self.assertIn("\\url{tardifmorencytristan-glitch/Tristan-Tardif-Morency@d759105682704f037f21fef8f6d396b4d0408f3a:battery/evidence/CALCE_ZERO_FIT_TRANSFER_R0_4.json}", tex)
 
     def test_readback_contract_tokens_present(self):
         tex = render_battery_manuscript(self.packet)
