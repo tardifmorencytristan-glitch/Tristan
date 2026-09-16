@@ -1,5 +1,5 @@
 {
-  "schema_version": "omni-r4g-failure-genomes-v1",
+  "schema_version": "omni-r4g-failure-genomes-v2",
   "failures": [
     {
       "id": "R4G-HISTORICAL-TEX-IDENTITY-MISMATCH-001",
@@ -19,6 +19,32 @@
         "HistoricalReceipt != FreshIdentity",
         "ReceiptClaim != ArtifactBytes",
         "MatchingRendererAndCommittedArtifact != HistoricalLocalBuildIdentity"
+      ]
+    },
+    {
+      "id": "R4G-PR-MERGE-REF-NOT-EXACT-SOURCE-HEAD-002",
+      "observed_run": 35153244301,
+      "event": "pull_request",
+      "candidate_source_head": "ae927f8547b2f0ee4c7057e33480248b32bd7f58",
+      "observed_checkout_sha": "185252ad8566d3464f971884a7dc97767449d602",
+      "observed_status": "MERGE_REF_RENDER_READBACK_PASS",
+      "classification": "CI_PROVENANCE_SCOPE_MISMATCH",
+      "evidence": {
+        "pdf_sha256": "4744e7739eef27148a31ee3692c1f07f5a5ce955cee69a92abac74cdeb1add48",
+        "readback_sha256": "5fe4738e7450eb93b24b7414171870a56acc9b633b82945e34313eb22f1edc7a",
+        "tex_sha256": "a39c0ea9c7faa617854083f7f56735003cd63554e27dc81b759e5f57f4298d40",
+        "pages": 2,
+        "page_1_png_bytes": 178230,
+        "page_2_png_bytes": 82336,
+        "artifact_id": 10469951789,
+        "artifact_digest": "sha256:813a2150c73989b42c146fc18e7e936cc44cf7ad97c191c612bc4eab6cc8241e"
+      },
+      "action": "Do not call the successful merge-ref run exact-head. Change checkout to the pull request source head explicitly, assert git rev-parse HEAD equals the intended source SHA, bind the runtime receipt to the actual checkout, and rerun all applicable gates on the new head.",
+      "regression_gate": "Every dedicated R4G qualification must assert exact source checkout before dependency installation/build and record both event_github_sha and qualified_source_sha.",
+      "boundaries": [
+        "MergeRefPASS != ExactSourceHeadPASS",
+        "AssociatedCheck != ExactCheckoutEvidence",
+        "SuccessfulArtifact != CorrectProvenanceScope"
       ]
     }
   ]
