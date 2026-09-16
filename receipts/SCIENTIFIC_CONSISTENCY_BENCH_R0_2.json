@@ -1,0 +1,28 @@
+{
+  "schema": "tristan-scientific-consistency-benchmark/v2",
+  "scope": "SYNTHETIC_CONTROLLED_NOT_REAL_WORLD",
+  "observed_on": "2026-09-16",
+  "total_cases": 120,
+  "equivalent_cases": 60,
+  "mismatch_cases": 60,
+  "tp": 60,
+  "tn": 60,
+  "fp": 0,
+  "fn": 0,
+  "accuracy": 1.0,
+  "precision_equivalence": 1.0,
+  "recall_equivalence": 1.0,
+  "false_positive_rate": 0.0,
+  "samples_per_case": 96,
+  "tolerance": 1e-9,
+  "families": ["algebraic_expansion","coefficient_mutation","even_symmetry","linear_reorder","offset_mutation","power_mutation"],
+  "translation_residual": "browser canary uses ^ for exponent while Python verifier uses **",
+  "limitations": [
+    "Synthetic generated cases only",
+    "Limited scalar expression grammar",
+    "No units, arrays, control flow, state, floating-point stability analysis, or real repositories",
+    "Numerical sampling is not formal proof",
+    "Perfect score on this bounded court must not be generalized to real scientific software"
+  ],
+  "status": "BOUNDED_SYNTHETIC_PASS"
+}
