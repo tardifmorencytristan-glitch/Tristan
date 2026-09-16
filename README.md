@@ -8,19 +8,27 @@ It does **not** claim to contain the entire Tristan corpus, nor to make scientif
 
 ## Scientific Consistency demand canary
 
-A public browser-only canary is now included in `index.html` to test one concrete problem: **does scientific code remain consistent with the equations it is supposed to implement?**
+A public browser-only canary tests one concrete problem: **does scientific code remain consistent with the equations it is supposed to implement?**
+
+Live canary:
+
+https://raw.githack.com/tardifmorencytristan-glitch/Tristan/main/index.html
+
+Properties:
 
 - runs locally in the browser;
 - accepts bounded mathematical expressions, not arbitrary source code;
-- compares two expressions on 64 deterministic numerical samples;
+- compares two expressions on deterministic numerical samples;
 - reports a residual and PASS/HOLD-style result;
 - explicitly does **not** claim formal proof.
 
-If the canary creates real value, a deeper paid report experiment currently points to Stripe Checkout:
+A bounded synthetic benchmark currently reports **8/8 correct** across four equivalence cases and four controlled mismatch families. This is a small engineering check, not evidence of general scientific-paper/code performance. See `receipts/SCIENTIFIC_CONSISTENCY_BENCH_R0_1.json`.
+
+If the canary creates real value, the current deeper-report experiment points to Stripe Checkout:
 
 https://buy.stripe.com/5kQ3cvfda08yfEH6He83C04
 
-The economic experiment is considered unvalidated until real usage and payment evidence exist.
+The economic experiment remains unvalidated until attributable external usage and payment evidence exist.
 
 ## Core invariants
 
