@@ -1,0 +1,15 @@
+{
+  "schema": "tristan-scientific-failure-genomes/v1",
+  "source": "R0.4 frozen-20 adjudication",
+  "genomes": [
+    {"family":"ARCHITECTURE_IDENTITY","examples":["d586de2b"],"residual":"paper names backbone/architecture but code differs or omits mapping","next_checker":"extract named model/backbone identifiers and compare constructors/config"},
+    {"family":"CONTEXT_DOMAIN_RESTRICTION","examples":["ecdd2970"],"residual":"paper quantifies over all contexts but code excludes a subset","next_checker":"compile quantifier/domain contracts and inspect guards/range limits"},
+    {"family":"RANDOMNESS_SEMANTICS","examples":["84acd23b"],"residual":"paper requires random sampling but code reseeds/reset state inside repeated operation","next_checker":"seed-scope and stochastic-call dataflow checker"},
+    {"family":"OUTPUT_DEPENDENCY","examples":["51a0c305"],"residual":"code prediction depends on additional hidden state absent from paper formula","next_checker":"output-expression dependency graph comparison"},
+    {"family":"UNDOCUMENTED_LOSS_TERM","examples":["881beca2"],"residual":"code adds loss component not present in paper total-loss equation","next_checker":"loss-term set differencer"},
+    {"family":"UNDOCUMENTED_LAYER","examples":["77ce66a1"],"residual":"code inserts normalization/layer not described by paper architecture","next_checker":"ordered module/layer sequence differencer"},
+    {"family":"DATASET_IDENTITY","examples":["55432721"],"residual":"declared dataset and instantiated dataset class differ","next_checker":"dataset-name to constructor checker"},
+    {"family":"SCHEDULE_MISMATCH","examples":["96d7973b"],"residual":"paper schedule/breakpoints differ from code schedule","next_checker":"ordered schedule constant/vector comparison"}
+  ],
+  "anti_overfit_rule":"implement families, not discrepancy IDs; evaluate on new frozen holdout"
+}
