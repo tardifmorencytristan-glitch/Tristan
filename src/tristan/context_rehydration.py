@@ -68,6 +68,18 @@ def _closure(seed_ids: tuple[str, ...], registry: Registry) -> tuple[tuple[str, 
     return tuple(sorted(selected)), tuple(sorted(missing_deps)), tuple(sorted(missing_failures))
 
 
+def audit_registry_context(registry: Registry) -> ContextDebt:
+    missing_deps: set[str] = set()
+    missing_failures: set[str] = set()
+    stale: set[str] = set()
+    for obj in registry.all():
+        missing_deps.update(dep for dep in obj.dependencies if registry.get(dep) is None)
+        missing_failures.update(f for f in obj.failures if registry.get(f) is None)
+        if bool(obj.metadata.get("stale", False)):
+            stale.add(obj.id)
+    return ContextDebt(tuple(sorted(missing_deps)), tuple(sorted(missing_failures)), tuple(sorted(stale)), ())
+
+
 def rehydrate_context(query: str, registry: Registry, limit: int = 8) -> RehydratedContext:
     receipt = compile_context(query, registry, limit=limit)
     selected, missing_deps, missing_failures = _closure(receipt.selected_ids, registry)
