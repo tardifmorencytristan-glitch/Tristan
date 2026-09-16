@@ -76,6 +76,7 @@ class ResultIR:
     statement: str
     evidence_ids: tuple[str, ...] = ()
     quantity_ids: tuple[str, ...] = ()
+    objective_ids: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -111,6 +112,7 @@ class ConclusionIR:
     claim_ids: tuple[str, ...] = ()
     result_ids: tuple[str, ...] = ()
     requirement_ids: tuple[str, ...] = ()
+    objective_ids: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
