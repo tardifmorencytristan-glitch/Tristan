@@ -1,0 +1,21 @@
+{
+  "schema": "tristan-scientific-consistency-realworld-r0_5/v1",
+  "sample": "20 newly frozen holdout cases from remaining SciCoQA real split",
+  "manifest_hash": "14eec0cc892fc6e57d3c1346d882d11222c709ebe661c73bcefacecced0a5fc4",
+  "prediction_hash": "7c63455e8020982cb63a5c1a8b273aab93cdf1cfb5b5e554cb1a9f51bc77a5ea",
+  "ground_truth_revealed_after_seal": true,
+  "binary_detected": 7,
+  "binary_missed": 13,
+  "binary_recall": 0.35,
+  "precision": null,
+  "precision_reason": "holdout contains known discrepancy cases only; no negative controls",
+  "transfer_delta_vs_r0_4": -0.25,
+  "interpretation": "R0.4-derived surface heuristics did not transfer reliably; semantic contract/dataflow/AST checkers are required",
+  "status": "REALWORLD_HOLDOUT_FAIL_LEARN",
+  "boundaries": [
+    "no claim of general real-world accuracy",
+    "binary flag can still have wrong mechanism",
+    "negative controls are required before precision/FPR claims",
+    "failure is retained as evidence and drives next checker families"
+  ]
+}
