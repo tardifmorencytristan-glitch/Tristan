@@ -1,0 +1,18 @@
+{
+  "schema": "tristan-scientific-failure-genomes/v2",
+  "source": "R0.5 frozen holdout adjudication",
+  "genomes": [
+    {"family":"FORMULA_AST_MISMATCH","examples":["9069a833","7cd4b3d7","29a1eeb5","106ad0b9","743a1998"],"need":"parse symbolic expressions and compare coefficients, powers, norms and operator structure"},
+    {"family":"TRAINING_DATA_COMPOSITION","examples":["aa357802"],"need":"compare declared mixture/composition of training sources with actual dataloader pipeline"},
+    {"family":"TASK_CONDITIONAL_OBJECTIVE","examples":["073fb272","644c25cf"],"need":"map task/mode branches to active loss terms"},
+    {"family":"ARCHITECTURE_CAPACITY_SEQUENCE","examples":["66841ab0","ecc908bc"],"need":"ordered layer/module graph with dimensions and pooling operators"},
+    {"family":"DATA_WRITE_INDEXING","examples":["b1b5cc6e"],"need":"dataflow/index-lifetime analysis for overwrite and reset bugs"},
+    {"family":"ENCODING_ORDER","examples":["80872023"],"need":"compare positional/interleaving layout semantics, not token presence"},
+    {"family":"UNDOCUMENTED_NONLINEARITY","examples":["b019c5d8"],"need":"detect extra activation/clamp on scientific quantity"},
+    {"family":"CLAMP_OR_BOUND_INJECTION","examples":["02922e82"],"need":"compare formula with min/max/clamp bounds inserted in code"},
+    {"family":"CONTROL_POLICY_TIEBREAK","examples":["a1e977d5"],"need":"compare decision policy including fallback and zero-count branches"},
+    {"family":"PROMPT_TEMPLATE_DRIFT","examples":["fec5862c"],"need":"treat prompts/config strings as executable experimental protocol"}
+  ],
+  "do_not_do":"add ID-specific regex; next implementation must operate on IR/dataflow/contracts",
+  "next_gate":"AST_AND_DATAFLOW_VERIFIER + matched negative controls"
+}
