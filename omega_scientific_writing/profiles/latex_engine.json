@@ -1,0 +1,15 @@
+{
+  "profile_id": "latex-engine-r0",
+  "preferred_engine": "lualatex",
+  "preferred_reason": "Current LaTeX Tagged PDF guidance prefers LuaLaTeX for new documents while supporting current pdfLaTeX and LuaLaTeX releases.",
+  "required_principles": [
+    "current_latex_release",
+    "semantic_document_metadata_when_supported",
+    "accessibility_checked_separately",
+    "publisher_or_institution_template_overrides_engine_preference"
+  ],
+  "source_urls": [
+    "https://www.latex-project.org/help/documentation/",
+    "https://tagging-project.latex-project.org/documentation/usage-instructions"
+  ]
+}
