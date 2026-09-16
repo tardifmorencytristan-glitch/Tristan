@@ -1,15 +1,17 @@
 {
   "schema_version": "0.1",
   "receipt_id": "tristan-context-retrieval-court-r0-2",
-  "status": "READBACK_VERIFIED_BOUNDED_ENGINEERING_COURT",
+  "status": "READBACK_VERIFIED_MERGED_BOUNDED_ENGINEERING_COURT",
   "artifact": {
     "repository": "tardifmorencytristan-glitch/Tristan",
     "pr": 3,
     "qualified_implementation_head": "95652f95b61d711a65879af9080d721863ab60b0",
-    "workflow_run": 35132036019
+    "qualified_registration_head": "93f7f0867fa487203d793e55a22688da65ae9f2e",
+    "merge_sha": "4f7b0c8cbc8148d351bbde70ab855b76b8ca605f",
+    "merge_method": "squash"
   },
   "source": {
-    "registry_sha256": "70bfb09f195662b70c80c31ff6d36b14f10bdada06b8e94fcfc8f190909ce4f3",
+    "registry_sha256_at_benchmark_execution": "70bfb09f195662b70c80c31ff6d36b14f10bdada06b8e94fcfc8f190909ce4f3",
     "benchmark_sha256": "53276c03e8ecf90f679ec92fd57a3aafbc85f475ff17f28bd7632e032554afb4",
     "objects": 7,
     "queries": 16,
@@ -17,10 +19,25 @@
     "holdout_queries": 8
   },
   "verification": {
-    "github_actions": {
+    "pre_merge_implementation": {
+      "workflow_run": 35132036019,
       "python": ["3.11", "3.12", "3.13", "3.14"],
       "jobs_observed": "4/4 SUCCESS",
       "focused_and_existing_tests": "11/11 PASS on observed Python 3.11 job",
+      "checks": ["compileall", "unittest", "kernel_verify", "retrieval_court"]
+    },
+    "exact_registration_head": {
+      "workflow_run": 35132162477,
+      "head_sha": "93f7f0867fa487203d793e55a22688da65ae9f2e",
+      "python": ["3.11", "3.12", "3.13", "3.14"],
+      "jobs_observed": "4/4 SUCCESS",
+      "checks": ["compileall", "unittest", "kernel_verify", "retrieval_court"]
+    },
+    "post_merge": {
+      "workflow_run": 35132243301,
+      "head_sha": "4f7b0c8cbc8148d351bbde70ab855b76b8ca605f",
+      "python": ["3.11", "3.12", "3.13", "3.14"],
+      "jobs_observed": "4/4 SUCCESS",
       "checks": ["compileall", "unittest", "kernel_verify", "retrieval_court"]
     }
   },
