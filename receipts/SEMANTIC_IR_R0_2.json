@@ -1,0 +1,32 @@
+{
+  "schema": "tristan-semantic-ir-receipt/v1",
+  "version": "R0.2",
+  "exact_head_before_receipt": "e9dcd1e7b967cd674c1912317f5db9890391c035",
+  "modules": ["ScientificContractIR", "FormulaAST", "DataflowIR", "ArchitectureIR", "ProtocolIR"],
+  "tests_added": {
+    "epistemic_ir": 9,
+    "semantic_ir": 7
+  },
+  "ci": {
+    "workflow": "kernel-ci",
+    "run_id": 35145644558,
+    "head_sha": "e9dcd1e7b967cd674c1912317f5db9890391c035",
+    "conclusion": "success"
+  },
+  "negative_controls": "unit/synthetic only",
+  "real_world_precision": null,
+  "real_world_fpr": null,
+  "prior_realworld": {
+    "r0_4_recall": 0.60,
+    "r0_5_holdout_recall": 0.35
+  },
+  "status": "LOCAL_SEMANTIC_KERNEL_CI_VERIFIED_NOT_REALWORLD_PROMOTED",
+  "next_gate": "FRESH_BLIND_MIXED_POSITIVE_NEGATIVE_REALWORLD_COURT",
+  "boundaries": [
+    "structural AST is not general symbolic equivalence",
+    "dataflow is intra-file and shallow",
+    "architecture extraction is pattern-based",
+    "protocol extraction is partial",
+    "synthetic negative controls do not establish real-world false-positive rate"
+  ]
+}
