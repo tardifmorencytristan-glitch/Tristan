@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, fields
 from typing import Any
 
 REPORT_STATUSES = {
@@ -185,3 +185,60 @@ def validate_report_graph(graph: ReportGraphIR) -> list[dict]:
 
 def report_graph_to_dict(graph: ReportGraphIR) -> dict:
     return asdict(graph)
+
+
+def _strict_keys(data: dict, allowed: set[str], object_name: str) -> None:
+    unknown = set(data) - allowed
+    if unknown:
+        raise ValueError(f"unknown {object_name} fields: {sorted(unknown)}")
+
+
+def _meta(data: dict) -> ReportMeta:
+    allowed = {f.name for f in fields(ReportMeta)}
+    _strict_keys(data, allowed, "ReportMeta")
+    cooked = dict(data)
+    cooked["provenance_ids"] = tuple(cooked.get("provenance_ids", ()))
+    return ReportMeta(**cooked)
+
+
+def _obj(cls, data: dict):
+    allowed = {f.name for f in fields(cls)}
+    _strict_keys(data, allowed, cls.__name__)
+    cooked = dict(data)
+    cooked["meta"] = _meta(cooked["meta"])
+    tuple_fields = {
+        "aliases", "ambiguous_terms", "forbidden_substitutions", "source_ids",
+        "input_ids", "assumption_ids", "constraint_ids", "steps", "tool_ids", "output_ids",
+        "validation_methods", "limitations", "evidence_ids", "quantity_ids", "objective_ids",
+        "claim_ids", "result_ids", "requirement_ids", "subject_ids",
+    }
+    for name in tuple_fields & set(cooked):
+        cooked[name] = tuple(cooked[name])
+    if cls is ConceptTermIR and "canonical_terms" in cooked:
+        cooked["canonical_terms"] = tuple(tuple(pair) for pair in cooked["canonical_terms"])
+    if cls is FigureIR and "axes" in cooked:
+        cooked["axes"] = tuple(FigureAxisIR(**axis) for axis in cooked["axes"])
+    return cls(**cooked)
+
+
+def report_graph_from_dict(data: dict) -> ReportGraphIR:
+    allowed = {f.name for f in fields(ReportGraphIR)}
+    _strict_keys(data, allowed, "ReportGraphIR")
+    classes = {
+        "objectives": ObjectiveIR,
+        "requirements": RequirementIR,
+        "constraints": ConstraintIR,
+        "assumptions": AssumptionIR,
+        "concepts": ConceptTermIR,
+        "methods": MethodIR,
+        "results": ResultIR,
+        "figures": FigureIR,
+        "interpretations": InterpretationIR,
+        "conclusions": ConclusionIR,
+        "residuals": ResidualIR,
+        "contradictions": ContradictionIR,
+    }
+    cooked: dict[str, Any] = {"project_id": data.get("project_id", "")}
+    for name, cls in classes.items():
+        cooked[name] = tuple(_obj(cls, item) for item in data.get(name, ()))
+    return ReportGraphIR(**cooked)
