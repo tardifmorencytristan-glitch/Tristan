@@ -1,0 +1,42 @@
+{
+  "schema_version": "r3-exact-evidence-pilot",
+  "records": [
+    {
+      "object_id": "D2",
+      "repository": "tardifmorencytristan-glitch/Tristan-Tardif-Morency",
+      "commit_sha": "f24ac034a5a2f40512e4f4d332947ab50b23b4a2",
+      "evidence_class": "software",
+      "commit_message": "Ω Context Registry v0.4 — restore minimum sufficient canonical path",
+      "reproducibility": "partial",
+      "observed_boundaries": [
+        "registry is a minimum-sufficient routing index, not exhaustive corpus coverage",
+        "RepositoryPASS is not claimed"
+      ],
+      "receipt_paths": ["context/TRISTAN_MEMORY_REGISTRY.json"],
+      "exact_commit_read": true,
+      "independent_receipt_read": false,
+      "promotion_authorized": false
+    },
+    {
+      "object_id": "D5",
+      "repository": "tardifmorencytristan-glitch/Tristan-Tardif-Morency",
+      "commit_sha": "3443b6211538cf62aae9f6a1b5b6b1226fa449a0",
+      "evidence_class": "software",
+      "commit_message": "Ω Eigen-Bécherel R0.2 — benchmark, FFWT bridge and semantic receipts",
+      "reproducibility": "reproducible",
+      "observed_boundaries": [
+        "scientific novelty remains unverified",
+        "FFWT novelty remains unverified",
+        "universal optimality remains unverified",
+        "production readiness remains unverified"
+      ],
+      "receipt_paths": [
+        "systems/omega_eigen_becherel/OAK_REPORT_R0_2.md",
+        "systems/omega_eigen_becherel/R0_2_BENCHMARK_RECEIPT.json"
+      ],
+      "exact_commit_read": true,
+      "independent_receipt_read": true,
+      "promotion_authorized": false
+    }
+  ]
+}
