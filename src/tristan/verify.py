@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from .context_rehydration import audit_registry_context
 from .registry import Registry
 
 REQUIRED_PATHS = (
@@ -12,6 +13,7 @@ REQUIRED_PATHS = (
     "src/tristan/model.py",
     "src/tristan/registry.py",
     "src/tristan/context.py",
+    "src/tristan/context_rehydration.py",
     "src/tristan/pipeline.py",
 )
 
@@ -32,10 +34,18 @@ def verify_repository(root: str | Path) -> dict:
 
     registry_path = root / "registry/objects.jsonl"
     registry_count = 0
+    context_debt = None
     if registry_path.exists():
         try:
             registry = Registry.load(registry_path)
             registry_count = len(registry.all())
+            context_debt = audit_registry_context(registry)
+            if context_debt.missing_dependencies:
+                errors.append("context debt missing dependencies: " + ", ".join(context_debt.missing_dependencies))
+            if context_debt.missing_failures:
+                errors.append("context debt missing negative-memory refs: " + ", ".join(context_debt.missing_failures))
+            if context_debt.stale_objects:
+                errors.append("context debt stale objects: " + ", ".join(context_debt.stale_objects))
         except Exception as exc:
             errors.append(f"registry invalid: {exc}")
 
@@ -55,6 +65,7 @@ def verify_repository(root: str | Path) -> dict:
         "status": "PASS" if not errors else "FAIL",
         "errors": errors,
         "registry_count": registry_count,
-        "scope": "repository_structure_and_registry_contract_only",
+        "context_debt_clean": bool(context_debt.clean) if context_debt is not None else False,
+        "scope": "repository_structure_registry_and_context_debt_only",
         "scientific_pass": False,
     }
