@@ -1,0 +1,20 @@
+{
+  "project": {"id": "bad-demo", "title": "Invalid fixture", "document_type": "article"},
+  "claims": [
+    {"id": "C_BAD", "statement": "Claim without valid support.", "status": "MEASUREMENT", "evidence_ids": ["E_MISSING"], "citation_ids": ["REF_MISSING"], "scope": "", "uncertainty": ""}
+  ],
+  "evidence": [],
+  "equations": [
+    {"id": "EQ_BAD", "latex": "x=y", "symbols": [
+      {"symbol": "x", "meaning": "position"},
+      {"symbol": "x", "meaning": "fraction molaire"}
+    ]}
+  ],
+  "figures": [
+    {"id": "F_BAD", "caption": "Bad figure", "source": "demo://bad", "claim_ids": ["UNKNOWN_CLAIM"]}
+  ],
+  "citations": [],
+  "results": [
+    {"id": "R_BAD", "summary": "Unsupported result", "evidence_ids": ["E_MISSING"]}
+  ]
+}
