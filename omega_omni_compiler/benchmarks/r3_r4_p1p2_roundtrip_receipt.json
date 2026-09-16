@@ -1,0 +1,38 @@
+{
+  "schema_version": "omni-r3-real-pdf-roundtrip-v1",
+  "source": {
+    "drive_file_id": "162Qbdlx-eRV6AEkcE-4EXiUOYJRBaAwm",
+    "pages": [1, 2],
+    "sha256": "ac4c774094bbecc7f52bf5fb9d1e035595e7a79e483685ed0bea29db7aaee68a",
+    "bytes": 1811904
+  },
+  "rendered_source_pages_inspected": [1, 2],
+  "document_ir": "R4-P1P2-DOCIR-R3",
+  "latex_engine": "lualatex",
+  "output": {
+    "file": "roundtrip.pdf",
+    "sha256": "bf907eeb403b2e9af3562da515646da7faffd52a3e687039eab705e64cbe17e2",
+    "pages": 1
+  },
+  "readback_checks": {
+    "1b8d5a0a0e8681ec9e92e165f8e10fdb48d4780f": true,
+    "9d8f350158e0ac41f55735ad453a22a34eac5d3c": true,
+    "Generated != Verified": true,
+    "Projection != Canon": true,
+    "RepositoryPASS != ScientificPASS": true,
+    "Capability != Authority": true,
+    "SNAPSHOT PROBATOIRE FIGE": true,
+    "delta_+68_-0": true
+  },
+  "semantic_roundtrip_pass": true,
+  "losses": [
+    "full 466-page source not round-tripped",
+    "original layout/style not preserved",
+    "only selected semantic invariants from pages 1-2 preserved"
+  ],
+  "boundaries": [
+    "RoundTripPASS != ScientificPASS",
+    "Bounded pages 1-2 benchmark != full thesis reproduction",
+    "RenderedPDF != official Polytechnique compliance"
+  ]
+}
