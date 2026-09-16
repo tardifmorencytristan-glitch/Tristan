@@ -1,0 +1,19 @@
+{
+  "schema": "tristan-scientific-consistency-benchmark/v1",
+  "engine": "equation-code-verifier-r0-1",
+  "observed_on": "2026-09-16",
+  "cases": 8,
+  "correct": 8,
+  "accuracy": 1.0,
+  "mutation_families": ["sign_error","missing_factor","wrong_power","offset_error"],
+  "equivalence_families": ["algebraic_equivalence","trig_identity","even_symmetry","exp_identity"],
+  "samples_per_case": 128,
+  "tolerance": 1e-10,
+  "status": "BOUNDED_SYNTHETIC_PASS",
+  "boundaries": [
+    "8 synthetic cases are not representative of all scientific code",
+    "numerical sampling is not mathematical proof",
+    "no paper-code semantic alignment is tested here",
+    "no claim of superiority over external baselines"
+  ]
+}
