@@ -1,0 +1,43 @@
+{
+  "schema_version": "r1",
+  "benchmark_id": "tristan-r4-living-delta-2026-09-15",
+  "source": {
+    "title": "These_Tristan_R4_Living_Integrale_2026-09-15.pdf",
+    "drive_file_id": "162Qbdlx-eRV6AEkcE-4EXiUOYJRBaAwm",
+    "snapshot_time": "2026-09-15T23:25:52-04:00",
+    "r3_anchor": "1b8d5a0a0e8681ec9e92e165f8e10fdb48d4780f",
+    "r4_frozen_head": "9d8f350158e0ac41f55735ad453a22a34eac5d3c",
+    "epistemic_status": "SNAPSHOT_PROBATOIRE_FIGE_NOT_OFFICIAL_THESIS"
+  },
+  "invariants": [
+    "Generated != Verified",
+    "Projection != Canon",
+    "RepositoryPASS != ScientificPASS",
+    "Capability != Authority"
+  ],
+  "crystallizations": [
+    {"id":"D1","title":"Knowledge Capability Convergence R1","commit":"87e79171b2554ca609fbbff1a67a0511d768cfdc","status":"MERGED_ENGINEERING_BOUNDARY"},
+    {"id":"D2","title":"Context Registry v0.4","commit":"f24ac034a5a2f40512e4f4d332947ab50b23b4a2","status":"MERGED_CANONICAL_PATH_RESTORED"},
+    {"id":"D3","title":"Context Reconstruction R1","commit":"c5d2180da64ccdb8287ce834d4bb0eff70350f0f","status":"MERGED_ENGINEERING_RETRIEVAL_ADAPTER"},
+    {"id":"D4","title":"Notebook Capsule R0.2","commit":"fef472f0d6d936369de921483133ec0285674b81","status":"MERGED_PROTOTYPE_ENGINEERING_ADAPTER"},
+    {"id":"D5","title":"Eigen-Becherel R0.2","commit":"3443b6211538cf62aae9f6a1b5b6b1226fa449a0","status":"MERGED_VALIDATED_SOFTWARE_SCAFFOLD"},
+    {"id":"D6","title":"HGFM NTPV R0.2","commit":"5f58c8ebb572ae26fed6d205b78727ac843365df","status":"MERGED_BOUNDED_ENGINEERING_CONTRACT"},
+    {"id":"D7","title":"Chat Continuity R1","commit":"1fbcbfc2ca2dbbe9db761c2ee96eab9226f0612a","status":"MERGED_BOUNDED_ENGINEERING_ADAPTER"},
+    {"id":"D8","title":"Tristan State/Context Compiler R2","commit":"9d8f350158e0ac41f55735ad453a22a34eac5d3c","status":"CURRENT_MAIN_PROOF_SCOPED_TYPED_PRECONTEXT"}
+  ],
+  "open_frontiers": [
+    "GitHub-hosted runner admission evidence remained incomplete for cited lanes in R4",
+    "TimeLedger absent",
+    "ScientificPASS not implied by software merges",
+    "FFWT general superiority not established",
+    "Conversation corpus coverage not exhaustive"
+  ],
+  "r5_requested_capabilities": [
+    "ThesisState_to_ClaimEvidenceSupersession_diff",
+    "TimeLedger",
+    "external_frozen_matched_budget_benchmarks",
+    "high_information_gain_physics_claims",
+    "authorized_retrieval_continuity_measurement",
+    "reproducible_manifest_with_parent_head_sources_hashes_readback"
+  ]
+}
