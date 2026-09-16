@@ -1,0 +1,19 @@
+{
+  "profile_id": "latex-package-core-r0",
+  "packages": [
+    {"name": "amsmath", "role": ["mathematics"]},
+    {"name": "mathtools", "role": ["mathematics_extensions"]},
+    {"name": "siunitx", "role": ["numbers", "units", "quantities"]},
+    {"name": "hyperref", "role": ["pdf_links", "metadata"]},
+    {"name": "cleveref", "role": ["semantic_cross_references"]},
+    {"name": "booktabs", "role": ["publication_tables"]},
+    {"name": "graphicx", "role": ["figures"]},
+    {"name": "subcaption", "role": ["subfigures"]},
+    {"name": "pgfplots", "role": ["scientific_plots"]},
+    {"name": "tikz", "role": ["diagrams"]},
+    {"name": "microtype", "role": ["typography"]},
+    {"name": "babel", "role": ["language"]},
+    {"name": "glossaries-extra", "role": ["glossary", "acronyms"]}
+  ],
+  "policy": "Use the smallest package set that satisfies the target template and document needs; target-authority compatibility overrides this preferred core."
+}
