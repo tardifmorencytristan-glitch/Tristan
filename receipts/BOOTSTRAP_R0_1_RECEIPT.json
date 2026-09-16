@@ -1,0 +1,65 @@
+{
+  "schema_version": "0.1",
+  "receipt_id": "tristan-public-kstar-bootstrap-r0-1",
+  "status": "READBACK_VERIFIED_ENGINEERING_BOOTSTRAP",
+  "artifact": {
+    "repository": "tardifmorencytristan-glitch/Tristan",
+    "pr": 1,
+    "qualified_feature_head": "477a3c3584f1432a46d939a2dfe9f7bd371ea4b8",
+    "merge_sha": "8ba97e87d8849e9e26526154b28659fb6a8bb29d",
+    "merge_method": "squash"
+  },
+  "verification": {
+    "local": {
+      "compileall": "PASS",
+      "unit_tests": "7/7 PASS",
+      "kernel_verify": "PASS",
+      "query_probe": "PASS",
+      "run_probe": "PASS"
+    },
+    "pre_merge_github_actions": {
+      "run_id": 35130601682,
+      "conclusion": "SUCCESS",
+      "python": ["3.11", "3.12", "3.13", "3.14"],
+      "checks": ["compileall", "unittest", "kernel_verify"]
+    },
+    "post_merge_github_actions": {
+      "run_id": 35130670964,
+      "python": ["3.11", "3.12", "3.13", "3.14"],
+      "jobs_observed": "4/4 SUCCESS",
+      "checks": ["compileall", "unittest", "kernel_verify"]
+    }
+  },
+  "negative_memory": [
+    {
+      "id": "M-KSTAR-R0-1-UNNECESSARY-SETUPTOOLS-DEPENDENCY",
+      "observation": "Initial PR CI attempted editable installation with --no-build-isolation and failed because setuptools.build_meta was unavailable in the selected runner environment.",
+      "repair": "The repository qualification court was simplified to dependency-free PYTHONPATH execution; exact repaired head then passed all four Python versions.",
+      "lesson": "Do not add packaging/build-backend dependency to the core verification court when the kernel itself can be verified with the standard library."
+    }
+  ],
+  "scope": {
+    "proves": [
+      "The merged R0.1 repository bytes compile under the observed GitHub Actions Python matrix.",
+      "The seven bounded unit tests pass on the observed feature-head court.",
+      "The repository structural/registry verifier passes on the observed GitHub Actions court.",
+      "The public kernel can represent a small federated registry and produce deterministic bounded context/run semantics under its tests."
+    ],
+    "does_not_prove": [
+      "Scientific validity of Tristan theories",
+      "Completeness of the historical Tristan corpus",
+      "Retrieval superiority over external baselines",
+      "Production readiness",
+      "Autonomous authority",
+      "Installability in every Python environment",
+      "A license grant"
+    ]
+  },
+  "invariants": [
+    "Generated!=Verified",
+    "RepositoryEngineeringPASS!=ScientificPASS",
+    "Capability!=Authority",
+    "OriginBonus=0",
+    "NO_ACTION admissible"
+  ]
+}
