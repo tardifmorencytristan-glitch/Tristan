@@ -1,0 +1,22 @@
+{
+  "id": "R4-P1P2-DOCIR-R3",
+  "title": "Thèse de Tristan - R4 Living Delta",
+  "document_type": "bounded_roundtrip_report",
+  "source_pdf_sha256": "ac4c774094bbecc7f52bf5fb9d1e035595e7a79e483685ed0bea29db7aaee68a",
+  "source_drive_file_id": "162Qbdlx-eRV6AEkcE-4EXiUOYJRBaAwm",
+  "source_pages": [1, 2],
+  "claims": [
+    "Generated != Verified",
+    "Projection != Canon",
+    "RepositoryPASS != ScientificPASS",
+    "Capability != Authority"
+  ],
+  "anchors": {
+    "r3_anchor": "1b8d5a0a0e8681ec9e92e165f8e10fdb48d4780f",
+    "r4_frozen_head": "9d8f350158e0ac41f55735ad453a22a34eac5d3c",
+    "delta_commits_ahead": 68,
+    "delta_commits_behind": 0
+  },
+  "status": "SNAPSHOT_PROBATOIRE_FIGE",
+  "boundary": "Not an officially deposited university thesis; bounded two-page semantic round-trip benchmark only."
+}
