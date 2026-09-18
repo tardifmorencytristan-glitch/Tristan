@@ -11,6 +11,7 @@ from .pipeline import run_intent
 from .r3 import compile_r3_status
 from .r4 import compile_r4_status
 from .registry import Registry
+from .tesla_omega.runner import compile_tesla_omega_r02
 from .verify import verify_repository
 
 
@@ -51,6 +52,12 @@ def main(argv: list[str] | None = None) -> int:
 
     sub.add_parser("r3")
     sub.add_parser("r4")
+
+    tesla = sub.add_parser("tesla-omega")
+    tesla.add_argument("--nodes", type=int, default=6)
+    tesla.add_argument("--inductance", type=float, default=10e-6)
+    tesla.add_argument("--capacitance", type=float, default=100e-9)
+    tesla.add_argument("--coupling", type=float, default=0.08)
 
     regen = sub.add_parser("regenerate")
     regen.add_argument("--check", action="store_true", default=True)
@@ -93,6 +100,15 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "r4":
         _print(compile_r4_status().to_dict())
+        return 0
+
+    if args.command == "tesla-omega":
+        _print(compile_tesla_omega_r02(
+            n=args.nodes,
+            inductance_h=args.inductance,
+            capacitance_f=args.capacitance,
+            k=args.coupling,
+        ))
         return 0
 
     if args.command == "regenerate":
