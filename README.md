@@ -23,6 +23,14 @@ For users who want increased service limits, priority analysis, advanced project
 
 AI-worker capabilities are available only when actually provisioned and verified server-side. Payment does not alter scientific, evidence, or GitHub authority gates. See [`PRO.md`](PRO.md).
 
+## Professional technical services
+
+Bounded technical audits and performance work are available through the live services page:
+
+https://tristan-tardif-morency-tfug.vercel.app/services
+
+Current public offers include self-service technical audits at **99/149 CAD** and scoped pilot engagements for infrastructure/CI security and Python-to-native performance. Every mandate preserves explicit scope, limits, evidence boundaries, and authorization requirements.
+
 ## Scientific Consistency demand canary
 
 A public browser-only canary tests one concrete problem: **does scientific code remain consistent with the equations it is supposed to implement?**
