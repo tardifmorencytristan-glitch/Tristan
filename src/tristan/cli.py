@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+from .closure import compile_closure_plan
 from .context import compile_context
 from .jarvis import compile_jarvis_plan
 from .pipeline import run_intent
@@ -41,6 +42,10 @@ def main(argv: list[str] | None = None) -> int:
     jarvis.add_argument("intent")
     jarvis.add_argument("--limit", type=int, default=8)
 
+    close = sub.add_parser("close")
+    close.add_argument("intent")
+    close.add_argument("--limit", type=int, default=8)
+
     regen = sub.add_parser("regenerate")
     regen.add_argument("--check", action="store_true", default=True)
 
@@ -70,6 +75,10 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "jarvis":
         _print(compile_jarvis_plan(args.intent, _registry(root), args.limit).to_dict())
+        return 0
+
+    if args.command == "close":
+        _print(compile_closure_plan(args.intent, _registry(root), args.limit).to_dict())
         return 0
 
     if args.command == "regenerate":
