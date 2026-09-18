@@ -9,6 +9,12 @@ description = "Minimum public regenerable kernel for the Tristan ecosystem"
 requires-python = ">=3.11"
 dependencies = []
 
+[project.urls]
+Homepage = "https://github.com/tardifmorencytristan-glitch/Tristan"
+Services = "https://tristan-tardif-morency-tfug.vercel.app/services"
+Support = "https://github.com/tardifmorencytristan-glitch/Tristan/blob/main/SUPPORT.md"
+"TRISTAN Pro" = "https://github.com/tardifmorencytristan-glitch/Tristan/blob/main/PRO.md"
+
 [project.scripts]
 tristan = "tristan.cli:main"
 
