@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass
 
+from .atlas_federation import compile_atlas_federation
 from .closure import compile_closure_plan
 from .domain_cases_r4 import compile_r4_cases
 from .evidence_foundry import blank_evidence_receipt, compile_evidence_contract
@@ -31,6 +32,7 @@ class JarvisRuntimeReceipt:
     domain_cases: dict[str, dict]
     scientific_source_plan: dict
     evidence_contract: dict | None
+    atlas_federation: dict
     domino_engine: dict
     next_mission_id: str
     epistemic_status: str
@@ -79,13 +81,14 @@ def compile_jarvis_runtime(
     selected_domains = select_domains(intent)
     selected_cases = {name: all_cases[name] for name in selected_domains}
     scientific_source_plan, evidence_contract = _compile_evidence_layer(intent)
+    atlas_federation = compile_atlas_federation(intent, registry)
 
     status = "PROVISIONAL_JARVIS_RUNTIME"
     if r3.status == "HOLD" or any(case["errors"] for case in selected_cases.values()):
         status = "HOLD"
 
     return JarvisRuntimeReceipt(
-        schema_version="jarvis-tristan-unified-runtime-r6",
+        schema_version="jarvis-tristan-unified-runtime-r7",
         intent=intent,
         selected_context=core.selected_context,
         selected_domains=selected_domains,
@@ -95,6 +98,7 @@ def compile_jarvis_runtime(
         domain_cases=selected_cases,
         scientific_source_plan=scientific_source_plan,
         evidence_contract=evidence_contract,
+        atlas_federation=atlas_federation.to_dict(),
         domino_engine={
             "status": "AVAILABLE_NOT_EXECUTED",
             "protocol": "JARVIS-DOMINO-ENGINE-R1",
@@ -127,6 +131,8 @@ def compile_jarvis_runtime(
             "EngineeringCrystal != ScientificPASS",
             "SourceSelection != DataRetrieved",
             "DataRetrieved != CorrectAnalysis",
+            "AtlasProjection != ScientificRanking",
+            "PrivateSource != PublicPayload",
             "Propagation != NewEvidence",
             "LocalEvidence != GlobalTheoryValidation",
             "NO_ACTION is admissible",
