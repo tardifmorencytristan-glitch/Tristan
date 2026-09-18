@@ -8,6 +8,7 @@ from .closure import compile_closure_plan
 from .context import compile_context
 from .jarvis_runtime import compile_jarvis_runtime
 from .pipeline import run_intent
+from .problem_foundry import ProblemGenome, compile_problem_plan
 from .r3 import compile_r3_status
 from .r4 import compile_r4_status
 from .registry import Registry
@@ -45,6 +46,15 @@ def main(argv: list[str] | None = None) -> int:
     jarvis.add_argument("intent")
     jarvis.add_argument("--limit", type=int, default=8)
 
+    foundry = sub.add_parser("foundry")
+    foundry.add_argument("title")
+    foundry.add_argument("--problem-id", default="manual-problem")
+    foundry.add_argument("--source", choices=("stackoverflow", "mathoverflow", "physics-stackexchange", "github"), default="github")
+    foundry.add_argument("--domain", choices=("code", "math", "physics", "engineering", "data"), default="code")
+    foundry.add_argument("--body", default="")
+    foundry.add_argument("--tag", action="append", default=[])
+    foundry.add_argument("--language", action="append", default=[])
+
     close = sub.add_parser("close")
     close.add_argument("intent")
     close.add_argument("--limit", type=int, default=8)
@@ -81,6 +91,19 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "jarvis":
         _print(compile_jarvis_runtime(args.intent, _registry(root), args.limit).to_dict())
+        return 0
+
+    if args.command == "foundry":
+        problem = ProblemGenome(
+            problem_id=args.problem_id,
+            source=args.source,
+            title=args.title,
+            domain=args.domain,
+            body=args.body,
+            tags=tuple(args.tag),
+            languages=tuple(args.language),
+        )
+        _print(compile_problem_plan(problem).to_dict())
         return 0
 
     if args.command == "close":
