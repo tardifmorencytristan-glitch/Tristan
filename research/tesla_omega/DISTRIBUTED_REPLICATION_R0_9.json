@@ -1,0 +1,72 @@
+{
+  "schema_version": "tesla-omega-distributed-r0.9",
+  "status": "PAIRED_STRESS_REPLICATION_ONLY",
+  "authority_granted": false,
+  "physical_validation_claimed": false,
+  "novelty_claimed": false,
+  "r08": {
+    "sha256": "C3D4603D5B6498A16D9B9DE949004F3AE678DD8440C7627655455BA6D042BA1A",
+    "machines_identical": true,
+    "samples": 24,
+    "candidate_win_fraction": 1,
+    "paired_ratio_mean": 10.241608721251746,
+    "paired_ratio_p10": 10.216634352514106,
+    "paired_ratio_min": 10.172860294565982,
+    "paired_ratio_max": 10.290658980908704
+  },
+  "r09": {
+    "sha256": "5135A6EC851A01430F4981A9433110B71940CF4D66689A91C95F5B8B9599F400",
+    "machines_identical": true,
+    "scenarios": [
+      {
+        "name": "S1_mild",
+        "win_fraction": 1,
+        "ratio_mean": 10.24032014475221,
+        "ratio_min": 10.209151406650898,
+        "ratio_p10": 10.226574183224049
+      },
+      {
+        "name": "S2_nominal",
+        "win_fraction": 1,
+        "ratio_mean": 10.229817955678449,
+        "ratio_min": 10.167741900521085,
+        "ratio_p10": 10.199934358332268
+      },
+      {
+        "name": "S3_strong",
+        "win_fraction": 1,
+        "ratio_mean": 10.241120789752028,
+        "ratio_min": 10.09750298245877,
+        "ratio_p10": 10.155293932011794
+      },
+      {
+        "name": "S4_extreme",
+        "win_fraction": 1,
+        "ratio_mean": 10.240166983137062,
+        "ratio_min": 9.874183317696572,
+        "ratio_p10": 10.013197959564376
+      }
+    ],
+    "first_failure_scenario": null,
+    "survives_all_sampled_scenarios": true
+  },
+  "oak_interpretation": [
+    "Paired geometric perturbations did not remove the modeled relative advantage inside the sampled envelope.",
+    "The absence of failure is not a proof of worst-case robustness.",
+    "Further stress escalation requires explicit non-overlap and mechanical-feasibility gates before interpretation."
+  ],
+  "next_gates": [
+    "coil collision and overlap rejection",
+    "minimum clearance and fixture envelope",
+    "finite conductor cross-section mutual coupling",
+    "proximity-effect resistance",
+    "external circuit simulator",
+    "FEM/Maxwell only for candidates surviving the above"
+  ],
+  "boundaries": [
+    "StressSurvival != ManufacturingQualification",
+    "NoObservedFailure != RobustnessProof",
+    "FilamentNeumann != FiniteWireFieldSolution",
+    "Simulation != Measurement"
+  ]
+}
