@@ -141,3 +141,28 @@ Hard boundaries:
 - NO_ACTION is admissible
 
 Closure R2 does not replace the existing Omega Omni `UniversalIRObject`, `ArtifactGraph`, adapters, or historical FailureGenome receipts. It provides a thin kernel-level normalization and orchestration layer over them.
+
+
+## Jarvis R3 — Differential Regeneration + Domain Adapters
+
+R3 extends the closure kernel with four bounded capabilities:
+
+- `dependency_rebuild`: computes the affected dependency subgraph after a change and derives a topological rebuild order instead of defaulting to full reconstruction.
+- `failure_causal`: represents competing causes of a failure and chooses a bounded discriminating test from explicit predicted outcomes. A selected test is not proof that a cause is true.
+- `regenerable_crystal`: requires both engineering-crystal readiness and a matching BOOK0 semantic reconstruction digest before using `REGENERABLE_ENGINEERING_CRYSTAL`.
+- `domain_adapters`: first kernel-level adapters for TFUGA, Prime, LC-Fractal, and Gaia. They define serializers, generators, evaluators, constraints, and witnesses while explicitly refusing to promote the underlying domain theories.
+
+Run:
+
+```bash
+tristan r3
+```
+
+R3 boundaries:
+
+- DifferentialRebuild != ScientificValidation
+- CausalFailureGraph != ProvenCause
+- RegenerableEngineeringCrystal != ScientificPASS
+- DomainAdapter != DomainTheoryValidation
+
+R3 intentionally remains a thin orchestration layer. The existing Omega Omni UniversalIR, ArtifactGraph, transformation registry, scientific adapters, and evidence receipts remain their current owners.
