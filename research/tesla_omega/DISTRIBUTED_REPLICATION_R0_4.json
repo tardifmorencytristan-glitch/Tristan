@@ -1,0 +1,112 @@
+{
+  "schema_version": "tesla-omega-distributed-r0.4",
+  "status": "GEOMETRY_MATCHED_COMPUTATIONAL_REPLICATION_ONLY",
+  "authority_granted": false,
+  "physical_validation_claimed": false,
+  "novelty_claimed": false,
+  "commit": "50856d657e594e67b4060e41d158ff98fd2cef8a",
+  "exact_replication": {
+    "sha256_machine_a": "55633825ADF4B3694A95F43E7721184CF8DEED4CC507A7DD3519FC169967B866",
+    "sha256_machine_b": "55633825ADF4B3694A95F43E7721184CF8DEED4CC507A7DD3519FC169967B866",
+    "identical": true
+  },
+  "geometry": {
+    "source_node": 0,
+    "receiver_node": 5,
+    "source_receiver_separation_m": 0.5,
+    "fixed_positions": true,
+    "coupling_model": "k = 0.08 * (0.10m/r)^3, capped at 0.35",
+    "same_L_C_R_for_all": true
+  },
+  "ranking": [
+    {
+      "degree_sequence": [
+        2,
+        2,
+        2,
+        2,
+        1,
+        1
+      ],
+      "peak_efficiency": 0.00043897641182715836,
+      "conductor_length_proxy_m": 1.0539525709592377
+    },
+    {
+      "degree_sequence": [
+        3,
+        2,
+        2,
+        1,
+        1,
+        1
+      ],
+      "peak_efficiency": 0.0003080653297880336,
+      "conductor_length_proxy_m": 1.1220150557078945
+    },
+    {
+      "degree_sequence": [
+        3,
+        2,
+        2,
+        1,
+        1,
+        1
+      ],
+      "peak_efficiency": 0.000057993055327983574,
+      "conductor_length_proxy_m": 1.2505537546877925
+    },
+    {
+      "degree_sequence": [
+        3,
+        3,
+        1,
+        1,
+        1,
+        1
+      ],
+      "peak_efficiency": 0.000056240112000442785,
+      "conductor_length_proxy_m": 1.4018741320466606
+    },
+    {
+      "degree_sequence": [
+        4,
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      "peak_efficiency": 0.000033127240262243006,
+      "conductor_length_proxy_m": 1.4697956931340834
+    },
+    {
+      "degree_sequence": [
+        5,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "peak_efficiency": 0.000007331437147632371,
+      "conductor_length_proxy_m": 1.5618741320466605
+    }
+  ],
+  "key_finding": "The R0.3 star-class lead does not survive fixed physical geometry. Under the R0.4 distance-derived coupling surrogate, the chain class ranks first and the star class ranks last.",
+  "oak_interpretation": "The R0.3 winner was materially dependent on an unfair graph-distance abstraction. Geometry matching changes the ranking and therefore blocks any topology-performance claim from R0.3.",
+  "next_gates": [
+    "match conductor budget instead of only recording it",
+    "add explicit coil radius/orientation and mutual-inductance approximation",
+    "include all-pairs parasitic coupling instead of edge-only coupling",
+    "add skin/proximity resistance model",
+    "independent SPICE-equivalent cross-check",
+    "only then escalate survivors to FEM/Maxwell"
+  ],
+  "boundaries": [
+    "FixedGeometry != RealCoilGeometry",
+    "DistanceDerivedK != MutualInductanceMeasurement",
+    "EdgeOnlyCoupling != FullParasiticCoupling",
+    "NetworkSurrogate != MaxwellFieldSolution",
+    "Simulation != Measurement"
+  ]
+}
