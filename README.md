@@ -6,6 +6,14 @@
 
 It does **not** claim to contain the entire Tristan corpus, nor to make scientific claims true by compilation.
 
+## Support the public work
+
+Voluntary support for Tristan's public tools, documentation, experiments, and research infrastructure:
+
+https://donate.stripe.com/4gM7sL5CAg7wdwz3v283C07
+
+Contributions do not purchase a specific service, promise financial returns, guarantee scientific results, or alter evidence/authority gates. See [`SUPPORT.md`](SUPPORT.md).
+
 ## Scientific Consistency demand canary
 
 A public browser-only canary tests one concrete problem: **does scientific code remain consistent with the equations it is supposed to implement?**
