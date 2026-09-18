@@ -1,0 +1,82 @@
+{
+  "schema_version": "frontier-loop-r0.1",
+  "observed_at": "2026-09-18",
+  "parent_pr": 46,
+  "decision_context": {
+    "current": "scientific source planner with CERN/JWST/Gaia/Planck/Earthdata/Copernicus",
+    "shadow": [
+      {
+        "node": "DESKTOP-2G1SSMT",
+        "scope": "ultra-r2-crossmachine-final",
+        "exact_science_matches": 0,
+        "status": "PASS_NO_DUPLICATE_FOUND"
+      },
+      {
+        "node": "DESKTOP-SHA9IHL",
+        "scope": "C:\\Users\\Admin\\Tristan",
+        "exact_science_matches": 0,
+        "status": "PASS_NO_DUPLICATE_FOUND"
+      }
+    ],
+    "external": [
+      {
+        "source": "DESI DR1",
+        "url": "https://data.desi.lbl.gov/doc/releases/dr1/",
+        "observation": "current public DR1 data and documentation available"
+      },
+      {
+        "source": "GWOSC API v2",
+        "url": "https://gwosc.org/api/",
+        "observation": "public read-only v2 API recommended"
+      }
+    ],
+    "no_action": [
+      "NO_MERGE",
+      "NO_RENDER_DEPLOY",
+      "NO_PERMISSION_EXPANSION",
+      "NO_BULK_DOWNLOAD",
+      "NO_NEW_ARCHITECTURE"
+    ]
+  },
+  "selected_action": {
+    "action": "EXTEND_SCIENTIFIC_SOURCE_PLANNER",
+    "rationale": "high evidence gain, low implementation risk, no explicit local duplicate found",
+    "additions": [
+      "desi_data",
+      "gwosc"
+    ],
+    "mast_delta": "mark current documented retrieval path via astroquery/generated curl rather than stale endpoint assumptions",
+    "authority_granted": false,
+    "scientific_pass": false
+  },
+  "evidence": {
+    "source_connector_commit": "aa09d05d1b29cd6954cba810056793c1e626d6f3",
+    "test_commit": "d9cb92d8cf0b97b67f1be928bcc39cc1c8eb4dc7",
+    "previous_exact_head": "d9cb92d8cf0b97b67f1be928bcc39cc1c8eb4dc7"
+  },
+  "epistemic_memory": [
+    {
+      "kind": "M+",
+      "mechanism": "origin-blind frontier scan before implementation",
+      "outcome": "no explicit DESI/GWOSC duplicate found in two inspected local roots"
+    },
+    {
+      "kind": "M-",
+      "mechanism": "broad regex shadow scan",
+      "outcome": "false positives from DESI substring inside design; replaced by word-boundary query"
+    },
+    {
+      "kind": "M-delta",
+      "mechanism": "scientific source catalog",
+      "outcome": "catalog expanded with DESI DR1 and GWOSC v2-capable entries"
+    }
+  ],
+  "boundaries": [
+    "NoLocalMatch != GlobalNovelty",
+    "SourceSelected != DataRetrieved",
+    "DataRetrieved != CorrectAnalysis",
+    "RepositoryPASS != ScientificPASS",
+    "ExternalOfficialSource != TheoryValidation",
+    "NO_ACTION remains admissible"
+  ]
+}
