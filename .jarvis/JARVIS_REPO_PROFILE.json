@@ -1,0 +1,18 @@
+{
+  "schema": "ultimate-jarvis-tristan-repository-profile-r1",
+  "local_repository": "tardifmorencytristan-glitch/Tristan",
+  "root_repository": "tardifmorencytristan-glitch/Tristan-Tardif-Morency",
+  "root_commit": "4de8c57aee65f17988b48dc2612a8826fdc66316",
+  "target_visibility": "PUBLIC_SAFE",
+  "root_access_mode": "PUBLIC_SAFE_PROJECTION_ONLY",
+  "allowed_source_repositories": [
+    "tardifmorencytristan-glitch/Tristan-Tardif-Morency",
+    "tardifmorencytristan-glitch/Tristan"
+  ],
+  "grounding_policy": {
+    "required_weighted_coverage": 1.0,
+    "unsourced_substantive_claim": "HOLD",
+    "private_source_to_public_output": "FORBIDDEN"
+  },
+  "authority_granted": false
+}
