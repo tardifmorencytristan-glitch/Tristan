@@ -31,6 +31,9 @@ REQUIRED_PATHS = (
     "src/tristan/regenerable_crystal.py",
     "src/tristan/domain_adapters.py",
     "src/tristan/r3.py",
+    "src/tristan/domain_case.py",
+    "src/tristan/domain_cases_r4.py",
+    "src/tristan/r4.py",
 )
 
 HARD_INVARIANTS = (
@@ -83,6 +86,6 @@ def verify_repository(root: str | Path) -> dict:
         "errors": errors,
         "registry_count": registry_count,
         "context_debt_clean": bool(context_debt.clean) if context_debt is not None else False,
-        "scope": "repository_structure_registry_context_debt_jarvis_core_closure_and_r3_only",
+        "scope": "repository_structure_registry_context_debt_jarvis_r1_to_r4_only",
         "scientific_pass": False,
     }
