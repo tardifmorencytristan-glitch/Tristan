@@ -57,10 +57,28 @@ SOURCES: dict[str, ScientificSource] = {
         "jwst_mast",
         "MAST / JWST",
         "astronomy imaging and spectroscopy",
-        "MAST service/API metadata",
+        "MAST service/API metadata; prefer documented astroquery or generated curl retrieval",
         "https://mast.stsci.edu",
-        ("observation-search", "products", "spectroscopy", "calibrated-products"),
-        ("CalibratedProduct != TheoryValidation", "SelectionFunctionRequired"),
+        ("observation-search", "products", "spectroscopy", "calibrated-products", "astroquery", "curl-retrieval"),
+        ("CalibratedProduct != TheoryValidation", "SelectionFunctionRequired", "RetrievalMethodMustBeCurrent"),
+    ),
+    "desi_data": ScientificSource(
+        "desi_data",
+        "DESI Data",
+        "large-scale structure redshifts dark energy and cosmology",
+        "public data portal and documented machine-readable products",
+        "https://data.desi.lbl.gov",
+        ("spectra", "redshifts", "bao", "lyman-alpha", "cosmology-results", "catalogs"),
+        ("CosmologyResult != FundamentalLaw", "SelectionFunctionRequired", "CovarianceRequired"),
+    ),
+    "gwosc": ScientificSource(
+        "gwosc",
+        "Gravitational Wave Open Science Center",
+        "gravitational-wave strain events and catalogs",
+        "read-only REST API v2 and downloadable strain products",
+        "https://gwosc.org/api/v2/",
+        ("strain-data", "event-catalogs", "detector-data", "parameter-estimation", "provenance"),
+        ("EventCandidate != TheoryValidation", "DetectorSystematicsRequired", "SelectionFunctionRequired"),
     ),
     "gaia_archive": ScientificSource(
         "gaia_archive",
@@ -113,6 +131,10 @@ def select_scientific_sources(intent: str) -> tuple[str, ...]:
         selected.update(("hepdata", "cern_open_data"))
     if any(token in text for token in ("jwst", "james webb", "webb telescope", "mast", "spectroscopy", "spectre", "spectral")):
         selected.add("jwst_mast")
+    if any(token in text for token in ("desi", "dark energy", "bao", "baryon acoustic", "lyman-alpha", "lyman alpha", "large-scale structure", "large scale structure")):
+        selected.add("desi_data")
+    if any(token in text for token in ("ligo", "virgo", "kagra", "gwosc", "gravitational wave", "gravitational-wave", "strain data", "gwtc")):
+        selected.add("gwosc")
     if any(token in text for token in ("gaia dr", "gaia archive", "astrometry", "astrometr", "parallax", "proper motion")):
         selected.add("gaia_archive")
     if any(token in text for token in ("planck", "cmb", "cosmic microwave", "microwave background")):
@@ -131,7 +153,7 @@ def select_scientific_sources(intent: str) -> tuple[str, ...]:
 def build_source_plan(intent: str) -> dict:
     source_ids = select_scientific_sources(intent)
     return {
-        "schema_version": "jarvis-scientific-source-plan-r1",
+        "schema_version": "jarvis-scientific-source-plan-r2",
         "selected_sources": source_ids,
         "sources": [SOURCES[source_id].to_dict() for source_id in source_ids],
         "network_executed": False,
@@ -141,5 +163,6 @@ def build_source_plan(intent: str) -> dict:
             "DataRetrieved != CorrectAnalysis",
             "CorrectAnalysis != ScientificTruth",
             "QueryFirst != BulkDownload",
+            "RetrievalMethodMustBeCurrent",
         ),
     }

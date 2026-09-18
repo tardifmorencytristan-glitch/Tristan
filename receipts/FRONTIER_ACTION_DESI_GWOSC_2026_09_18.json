@@ -1,0 +1,104 @@
+{
+  "schema_version": "tristan-frontier-action-r1",
+  "observed_at": "2026-09-18",
+  "mission": "expand scientific falsification coverage with low-cost read-only public sources",
+  "comparison": {
+    "CURRENT": {
+      "state": "PARTIAL",
+      "evidence": [
+        "scientific_connectors.py contained CERN/HEPData/JWST/Gaia/Planck/NASA/Copernicus",
+        "no DESI or GWOSC source ids were present before this action"
+      ]
+    },
+    "SHADOW": {
+      "state": "NO_LOCAL_EXPLICIT_OWNER_FOUND",
+      "nodes": [
+        {
+          "node": "DESKTOP-2G1SSMT",
+          "scope": "C:/Users/trist/ultra-r2-crossmachine-final",
+          "exact_patterns": ["DESI", "GWOSC", "LIGO", "gravitational-wave", "BAO", "dark energy"],
+          "matching_owner_found": false,
+          "network_canary": {
+            "url": "https://gwosc.org/api/v2/runs?format=json",
+            "success": true,
+            "observed_runs": ["O4a", "O4b", "O4c1DiscC00"]
+          }
+        },
+        {
+          "node": "DESKTOP-SHA9IHL",
+          "scope": "C:/Users/Admin/Tristan",
+          "exact_patterns": ["DESI", "GWOSC", "LIGO", "gravitational-wave", "BAO", "dark energy"],
+          "matching_owner_found": false,
+          "network_canary": {
+            "url": "https://data.desi.lbl.gov/doc/releases/",
+            "success": true
+          }
+        }
+      ],
+      "note": "An initial loose DESI scan was rejected because it matched substrings such as design; only word-boundary reruns were admitted."
+    },
+    "EXTERNAL": {
+      "state": "OFFICIAL_SOURCES_VERIFIED",
+      "observations": [
+        {
+          "source": "DESI",
+          "url": "https://data.desi.lbl.gov/doc/releases/",
+          "observation": "DR1 is the latest public spectroscopic data release; DR2 cosmology result products exist but the underlying DR2 spectra/redshifts are not yet public."
+        },
+        {
+          "source": "GWOSC",
+          "url": "https://gwosc.org/api/",
+          "observation": "API v2 is current and recommended; it is read-only, paginated and exposes runs, catalogs, events, parameter estimates and strain data."
+        },
+        {
+          "source": "MAST",
+          "url": "https://archive.stsci.edu/contents/newsletters/september-2026/ftps-batch-staging-discontinuing-from-mast",
+          "observation": "FTPS batch staging is being discontinued on 2026-10-01; MAST recommends curl download scripts or astroquery.mast."
+        }
+      ]
+    },
+    "NO_ACTION": {
+      "state": "REJECTED_FOR_THIS_RESIDUAL",
+      "reason": "Leaving DESI and GWOSC absent preserves a measurable scientific-source coverage gap at negligible implementation cost."
+    }
+  },
+  "executed_actions": [
+    "added desi_data scientific source",
+    "added gwosc scientific source using API v2 base URL",
+    "updated JWST/MAST retrieval guidance to prefer current astroquery or curl mechanisms",
+    "added source-selection tests",
+    "performed read-only canaries on two independent machines"
+  ],
+  "not_executed": [
+    "no bulk scientific data download",
+    "no deployment",
+    "no merge",
+    "no spending",
+    "no publication",
+    "no permission expansion"
+  ],
+  "epistemic_memory": [
+    {
+      "kind": "M+",
+      "mechanism": "independent read-only network canary before deeper adapter work",
+      "outcome": "GWOSC and DESI endpoints reachable from separate nodes"
+    },
+    {
+      "kind": "M-",
+      "mechanism": "loose substring corpus search",
+      "outcome": "DESI produced false positives through words such as design; exact token boundaries required"
+    },
+    {
+      "kind": "M?",
+      "mechanism": "full data-level Tristan theory validation",
+      "outcome": "not executed in this action"
+    }
+  ],
+  "boundaries": [
+    "EndpointReachable != DatasetValidated",
+    "DatasetAvailable != ClaimSupport",
+    "DR2CosmologyProducts != PublicDR2Spectra",
+    "SourceCoverage != ScientificTruth",
+    "RepositoryPASS != ScientificPASS"
+  ]
+}
