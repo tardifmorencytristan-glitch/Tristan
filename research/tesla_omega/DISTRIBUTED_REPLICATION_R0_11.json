@@ -1,0 +1,50 @@
+{
+  "schema_version": "tesla-omega-distributed-r0.11",
+  "status": "MECHANICAL_AND_FINITE_WIRE_REPLICATION_ONLY",
+  "authority_granted": false,
+  "physical_validation_claimed": false,
+  "novelty_claimed": false,
+  "r10": {
+    "sha256": "116B961B1945B1F74EC30A35C067DA496E67151D702B81850940FCE595695A88",
+    "machines_identical": true,
+    "samples": 48,
+    "accepted": 48,
+    "rejected_mechanical": 0,
+    "wins": 48,
+    "losses": 0,
+    "candidate_win_fraction_on_valid": 1,
+    "paired_ratio_mean": 10.165971170559446,
+    "paired_ratio_min": 9.895972391945335,
+    "paired_ratio_p10": 9.960213802955014,
+    "nominal_candidate_clearance_margin_m": 0.04806248474865693,
+    "worst_sampled_candidate_clearance_margin_m": 0.021827073786641144
+  },
+  "r11": {
+    "sha256": "AB9CF7B0ED8EBDB464F67C9450D59EC847B13BFDFA960158419C42484107291B",
+    "machines_identical": true,
+    "cross_section_model": "4-filament equal-weight quadrature",
+    "segments_per_filament": 48,
+    "baseline_efficiency": 1.2781312451026355e-11,
+    "candidate_efficiency": 1.3092172287594609e-10,
+    "relative_ratio": 10.243214331673185,
+    "candidate_solver_delta_a": 2.2887833992611187e-16,
+    "candidate_power_closure_error_w": 2.220446049250313e-16
+  },
+  "oak_interpretation": [
+    "R0.9 stress samples remain mechanically admissible under the conservative R0.10 bounding-sphere gate.",
+    "Replacing the center filament with a small finite-cross-section quadrature does not materially change the modeled relative ratio.",
+    "Proximity-effect loss remains unmodeled and is now the leading missing circuit-level physics."
+  ],
+  "next_gates": [
+    "proximity-effect AC resistance with explicit documented approximation",
+    "finite-wire self-inductance refinement",
+    "external circuit simulator or independent MNA package",
+    "3D FEM/Maxwell only for survivors"
+  ],
+  "boundaries": [
+    "BoundingSpherePass != DetailedCADClearance",
+    "FourFilamentQuadrature != ExactFiniteConductorField",
+    "FiniteWireMutual != ProximityEffectLoss",
+    "Simulation != Measurement"
+  ]
+}
