@@ -7,6 +7,11 @@ https://donate.stripe.com/4gM7sL5CAg7wdwz3v283C07
 
 The amount is chosen by the contributor. The current Stripe page accepts contributions starting at **5 CAD**, with **25 CAD** prefilled.
 
+**Monthly voluntary support — 10 CAD/month:**
+https://buy.stripe.com/7sY00j8OMg7wgIL3v283C08
+
+The monthly supporter option does not include premium services or benefits. No charitable tax deductibility is claimed.
+
 ## What support means
 
 Contributions help fund development, maintenance, testing, documentation, compute, and public experimentation around Tristan tools and research infrastructure.
