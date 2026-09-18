@@ -12,6 +12,9 @@ Voluntary support for Tristan's public tools, documentation, experiments, and re
 
 https://donate.stripe.com/4gM7sL5CAg7wdwz3v283C07
 
+Monthly voluntary support: **10 CAD/month**  
+https://buy.stripe.com/7sY00j8OMg7wgIL3v283C08
+
 Contributions do not purchase a specific service, promise financial returns, guarantee scientific results, or alter evidence/authority gates. See [`SUPPORT.md`](SUPPORT.md).
 
 ## TRISTAN Pro pilot
