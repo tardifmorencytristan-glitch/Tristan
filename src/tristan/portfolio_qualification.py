@@ -4,6 +4,11 @@ from dataclasses import asdict, dataclass
 from typing import Iterable
 
 
+def _is_sha40(value: str) -> bool:
+    value = value.strip().lower()
+    return len(value) == 40 and all(ch in "0123456789abcdef" for ch in value)
+
+
 R11_BOUNDARIES = (
     "WorkflowSuccess != ScientificPASS",
     "Mergeable != MergeAuthority",
@@ -49,9 +54,9 @@ class PullRequestObservation:
             errors.append("number must be >= 1")
         if not self.title.strip():
             errors.append("title required")
-        if len(self.base_sha) != 40:
+        if not _is_sha40(self.base_sha):
             errors.append("base_sha must be sha40")
-        if len(self.head_sha) != 40:
+        if not _is_sha40(self.head_sha):
             errors.append("head_sha must be sha40")
         if self.blocking_review_threads < 0:
             errors.append("blocking_review_threads must be non-negative")
@@ -89,7 +94,7 @@ def qualify_pr(
     current_main_sha: str,
 ) -> QualificationReceipt:
     errors = observation.validate()
-    if len(current_main_sha) != 40:
+    if not _is_sha40(current_main_sha):
         errors.append("current_main_sha must be sha40")
     if errors:
         raise ValueError("; ".join(errors))
