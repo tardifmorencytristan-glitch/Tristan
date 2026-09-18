@@ -18,25 +18,14 @@ jobs:
   r5a:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout PR source head
-        if: github.event_name == 'pull_request'
+      - name: Checkout integration ref
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-      - name: Checkout push source head
-        if: github.event_name != 'pull_request'
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.sha }}
-      - name: Assert exact source head
+      - name: Assert exact integration checkout
         shell: bash
         run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            expected='${{ github.event.pull_request.head.sha }}'
-          else
-            expected='${{ github.sha }}'
-          fi
+          expected='${{ github.sha }}'
           actual="$(git rev-parse HEAD)"
+          echo "event=${{ github.event_name }}"
           echo "expected=$expected"
           echo "actual=$actual"
           test "$actual" = "$expected"
