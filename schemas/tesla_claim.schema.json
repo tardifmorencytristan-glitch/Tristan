@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/tesla_claim.schema.json",
+  "title": "Tesla Omega Claim",
+  "type": "object",
+  "required": ["id", "category", "statement", "source_ids"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^T[0-9]{3,}$"},
+    "category": {"type": "string"},
+    "statement": {"type": "string", "minLength": 1},
+    "source_ids": {"type": "array", "items": {"type": "string"}},
+    "prediction": {"type": "string"},
+    "observable": {"type": "string"},
+    "falsifier": {"type": "string"}
+  },
+  "additionalProperties": true
+}
