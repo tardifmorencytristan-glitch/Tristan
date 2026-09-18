@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import cmath
 import math
 
 from .physics import resonant_frequency_hz
@@ -47,6 +46,7 @@ def graph_distances(topology: Topology, start: int) -> dict[int, int]:
 
 def terminal_pair(topology: Topology) -> tuple[int, int]:
     best: tuple[int, int, int] | None = None
+    pair = (topology.nodes[0], topology.nodes[-1])
     for a in topology.nodes:
         dist = graph_distances(topology, a)
         for b in topology.nodes:
@@ -110,10 +110,17 @@ def transfer_at_frequency(
     source_resistance_ohm: float = 0.5,
     load_resistance_ohm: float = 10.0,
     source_voltage_rms: float = 1.0,
+    source_node: int | None = None,
+    receiver_node: int | None = None,
 ) -> dict[str, float]:
     if frequency_hz <= 0 or source_resistance_ohm < 0 or load_resistance_ohm <= 0:
         raise ValueError("invalid transfer parameters")
-    source_node, receiver_node = terminal_pair(topology)
+    if (source_node is None) != (receiver_node is None):
+        raise ValueError("source_node and receiver_node must be provided together")
+    if source_node is None:
+        source_node, receiver_node = terminal_pair(topology)
+    if source_node not in topology.nodes or receiver_node not in topology.nodes:
+        raise ValueError("source/receiver must be topology nodes")
     omega = 2.0 * math.pi * frequency_hz
     z = impedance_matrix(
         topology, omega, inductances_h, capacitances_f, coil_resistances_ohm,
@@ -157,6 +164,8 @@ def frequency_sweep(
     load_resistance_ohm: float = 10.0,
     points: int = 81,
     span: tuple[float, float] = (0.70, 1.30),
+    source_node: int | None = None,
+    receiver_node: int | None = None,
 ) -> dict[str, object]:
     if points < 3:
         raise ValueError("points must be >= 3")
@@ -173,11 +182,17 @@ def frequency_sweep(
         rows.append(transfer_at_frequency(
             topology, f, ls, cs, rs, couplings,
             source_resistance_ohm, load_resistance_ohm,
+            source_node=source_node, receiver_node=receiver_node,
         ))
     best = max(rows, key=lambda row: row["efficiency"])
+    terminals = (
+        (source_node, receiver_node)
+        if source_node is not None
+        else terminal_pair(topology)
+    )
     return {
         "f0_hz": f0,
-        "source_receiver": terminal_pair(topology),
+        "source_receiver": terminals,
         "best": best,
         "rows": tuple(rows),
     }
