@@ -27,23 +27,24 @@ jobs:
   render-readback:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Checkout integration ref
+        uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Assert checkout is the intended exact source head
+      - name: Assert checkout is the intended integration ref
         run: |
           python - <<'PY'
           import json, os, subprocess
           event = json.load(open(os.environ['GITHUB_EVENT_PATH'], encoding='utf-8'))
-          expected = event.get('pull_request', {}).get('head', {}).get('sha') or os.environ['GITHUB_SHA']
+          source_head = event.get('pull_request', {}).get('head', {}).get('sha') or os.environ['GITHUB_SHA']
+          expected_integration = os.environ['GITHUB_SHA']
           actual = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
-          print('expected_source_sha=', expected)
+          print('source_head_sha=', source_head)
+          print('expected_integration_sha=', expected_integration)
           print('actual_checkout_sha=', actual)
-          if actual != expected:
-              raise SystemExit(f'exact-source checkout mismatch: {actual} != {expected}')
+          if actual != expected_integration:
+              raise SystemExit(f'integration checkout mismatch: {actual} != {expected_integration}')
           PY
       - name: Install PDF build and readback dependencies
         run: |
@@ -103,15 +104,17 @@ jobs:
           def digest(path):
               return hashlib.sha256(path.read_bytes()).hexdigest()
           event = json.load(open(os.environ['GITHUB_EVENT_PATH'], encoding='utf-8'))
-          expected = event.get('pull_request', {}).get('head', {}).get('sha') or os.environ['GITHUB_SHA']
+          source_head = event.get('pull_request', {}).get('head', {}).get('sha') or os.environ['GITHUB_SHA']
+          expected_integration = os.environ['GITHUB_SHA']
           actual = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
-          if actual != expected:
-              raise SystemExit(f'exact-source receipt mismatch: {actual} != {expected}')
+          if actual != expected_integration:
+              raise SystemExit(f'integration receipt mismatch: {actual} != {expected_integration}')
           receipt = {
-              'schema_version': 'omni-r4g-ci-render-readback-v2',
+              'schema_version': 'omni-r4g-ci-render-readback-v3',
               'event_github_sha': os.environ['GITHUB_SHA'],
-              'qualified_source_sha': actual,
-              'expected_source_sha': expected,
+              'qualified_integration_sha': actual,
+              'source_head_sha': source_head,
+              'expected_integration_sha': expected_integration,
               'tex_sha256': digest(root / 'generated.tex'),
               'historical_receipt_tex_sha256': '6f024984f9b1dac291f1c64243f2758783917712e2bbfd04abea76651d1a03f8',
               'historical_tex_identity_matches_fresh_blob': False,
@@ -123,7 +126,7 @@ jobs:
                   {'file': 'page-2.png', 'bytes': (root / 'page-2.png').stat().st_size},
               ],
               'checks': {
-                  'exact_source_checkout': True,
+                  'exact_integration_checkout': True,
                   'renderer_parity_with_committed_tex': True,
                   'fresh_tex_identity_bound': True,
                   'two_pass_pdftex': True,
@@ -136,7 +139,7 @@ jobs:
                   'PNGRenderNonempty != HumanVisualInspectionPASS',
                   'TextReadbackPASS != CitationCourtPASS',
                   'HistoricalReceipt != FreshIdentity',
-                  'PullRequestMergeRefPASS != ExactSourceHeadPASS',
+                  'IntegrationRefPASS != SourceHeadStandalonePASS',
               ],
           }
           (root / 'ci_receipt.json').write_text(json.dumps(receipt, indent=2, sort_keys=True), encoding='utf-8')
