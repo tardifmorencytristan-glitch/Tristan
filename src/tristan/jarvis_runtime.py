@@ -12,7 +12,17 @@ from .registry import Registry
 DOMAIN_KEYWORDS = {
     "tfuga": ("tfuga", "transformation", "formalize", "formalisation", "axiom"),
     "prime": ("prime", "primal", "factor", "factorization", "factorisation", "pnfm", "pdm"),
-    "lc_fractal": ("lc", "circuit", "fractal", "impedance", "resonance"),
+    "lc_fractal": (
+        "lc",
+        "circuit",
+        "fractal",
+        "impedance",
+        "resonance",
+        "tesla",
+        "coil",
+        "wireless power",
+        "wpt",
+    ),
     "gaia": ("gaia", "climate", "climat", "energy", "energie", "water", "eau", "carbon", "co2"),
 }
 
