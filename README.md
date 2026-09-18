@@ -14,6 +14,15 @@ https://donate.stripe.com/4gM7sL5CAg7wdwz3v283C07
 
 Contributions do not purchase a specific service, promise financial returns, guarantee scientific results, or alter evidence/authority gates. See [`SUPPORT.md`](SUPPORT.md).
 
+## TRISTAN Pro pilot
+
+For users who want increased service limits, priority analysis, advanced project intake, and verified subscription management:
+
+- **49 CAD/month**: https://buy.stripe.com/00wcN57KIbRgfEHaXu83C02
+- **490 CAD/year**: https://buy.stripe.com/14AeVdfda6wW2RV9Tq83C03
+
+AI-worker capabilities are available only when actually provisioned and verified server-side. Payment does not alter scientific, evidence, or GitHub authority gates. See [`PRO.md`](PRO.md).
+
 ## Scientific Consistency demand canary
 
 A public browser-only canary tests one concrete problem: **does scientific code remain consistent with the equations it is supposed to implement?**
