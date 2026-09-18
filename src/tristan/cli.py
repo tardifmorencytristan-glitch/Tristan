@@ -9,6 +9,7 @@ from .context import compile_context
 from .jarvis import compile_jarvis_plan
 from .pipeline import run_intent
 from .r3 import compile_r3_status
+from .r4 import compile_r4_status
 from .registry import Registry
 from .verify import verify_repository
 
@@ -49,6 +50,7 @@ def main(argv: list[str] | None = None) -> int:
     close.add_argument("--limit", type=int, default=8)
 
     sub.add_parser("r3")
+    sub.add_parser("r4")
 
     regen = sub.add_parser("regenerate")
     regen.add_argument("--check", action="store_true", default=True)
@@ -87,6 +89,10 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "r3":
         _print(compile_r3_status(_registry(root)).to_dict())
+        return 0
+
+    if args.command == "r4":
+        _print(compile_r4_status().to_dict())
         return 0
 
     if args.command == "regenerate":

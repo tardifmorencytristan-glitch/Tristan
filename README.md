@@ -166,3 +166,34 @@ R3 boundaries:
 - DomainAdapter != DomainTheoryValidation
 
 R3 intentionally remains a thin orchestration layer. The existing Omega Omni UniversalIR, ArtifactGraph, transformation registry, scientific adapters, and evidence receipts remain their current owners.
+
+
+## Jarvis R4 — Public Domain Cases
+
+R4 begins feeding real Tristan domains through the Jarvis closure machine without importing unverified private scientific claims into the public kernel.
+
+The first four public domain cases are:
+
+- TFUGA: formalization obligations, typed operators, invariants, validity domain, counterexample search.
+- Prime: exact correctness before speed, matched baselines, runtime, memory, scaling, NO_ACTION baseline.
+- LC-Fractal: matched controls, declared tolerances, simulation receipts, explicit Simulation != Measurement boundary.
+- Gaia: baseline, assumptions, uncertainty, scenario accounting, Pareto evaluation, explicit SimulatedImpact != MeasuredImpact boundary.
+
+Each case compiles to:
+
+`ClaimTemplates + Witnesses + EvidenceRequirements + AntiCorpus + MissionQueue + Boundaries`
+
+Run:
+
+```bash
+tristan r4
+```
+
+R4 deliberately keeps every public claim template at or below `TESTABLE`. Evidence obligations are not treated as evidence obtained, and domain-case compilation is not scientific validation.
+
+Hard boundaries:
+
+- PublicDomainCase != PrivateCorpusImport
+- ClaimTemplate != ScientificTruth
+- EvidenceObligation != EvidenceObtained
+- MissionQueue != Authorization
