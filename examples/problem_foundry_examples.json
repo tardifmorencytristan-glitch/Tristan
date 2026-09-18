@@ -1,0 +1,53 @@
+{
+  "schema_version": "tristan-problem-foundry-r1-example",
+  "examples": [
+    {
+      "problem_id": "gh-numpy-shape-001",
+      "source": "github",
+      "title": "Array shape mismatch with a minimal reproducer",
+      "domain": "code",
+      "tags": ["numpy", "shape", "regression"],
+      "languages": ["python"],
+      "utility": 5,
+      "generalization": 4,
+      "verifiability": 5,
+      "diversity": 3,
+      "unanswered_signal": 2,
+      "reuse_potential": 5,
+      "effort": 2,
+      "risk": 1
+    },
+    {
+      "problem_id": "manual-math-identity-001",
+      "source": "mathoverflow",
+      "title": "Manually supplied mathematical identity requiring proof or counterexample",
+      "domain": "math",
+      "tags": ["identity", "proof"],
+      "languages": [],
+      "utility": 4,
+      "generalization": 5,
+      "verifiability": 5,
+      "diversity": 5,
+      "unanswered_signal": 1,
+      "reuse_potential": 4,
+      "effort": 3,
+      "risk": 1
+    },
+    {
+      "problem_id": "manual-physics-limit-001",
+      "source": "physics-stackexchange",
+      "title": "Manually supplied physics derivation requiring units and limiting-case checks",
+      "domain": "physics",
+      "tags": ["dimensional-analysis", "limits"],
+      "languages": [],
+      "utility": 4,
+      "generalization": 4,
+      "verifiability": 4,
+      "diversity": 5,
+      "unanswered_signal": 1,
+      "reuse_potential": 4,
+      "effort": 3,
+      "risk": 2
+    }
+  ]
+}
