@@ -1,0 +1,56 @@
+{
+  "schema_version": "intelligence-omega-live-missions-r0.6",
+  "observed_at": "2026-09-18",
+  "status": "FROZEN_CONNECTED_ACCESS_OBSERVATIONS",
+  "missions": [
+    {
+      "mission_id": "LIVE-DRIVE-REUSE-001",
+      "kind": "drive_reuse",
+      "matching_artifact_ids": [
+        "1oeqADaXHaY6gthLmATwb8ZfRqkK4HPzjIf8PiKMWP1U",
+        "18ur95awTtl9iPxKONAavAX2jfpRtJ7nv",
+        "1zApQxglzU2he-UojqFyznUtVnzdvyodf"
+      ],
+      "expected_decision": "REUSE_EXISTING",
+      "boundary": "DriveArtifact != GitCanonicalTruth"
+    },
+    {
+      "mission_id": "LIVE-GITHUB-EXACT-HEAD-001",
+      "kind": "github_exact_head",
+      "candidate_head": "0bfa493c28561370ab8d01645c46bdfd8b8eac06",
+      "observed_head": "0bfa493c28561370ab8d01645c46bdfd8b8eac06",
+      "required_workflows": [
+        ["kernel-ci", "success", "35356040845"],
+        ["jarvis-r6-evidence-domino", "success", "35356040871"]
+      ],
+      "expected_decision": "EXACT_HEAD_SOFTWARE_PASS",
+      "boundary": "RepositoryPASS != ScientificPASS"
+    },
+    {
+      "mission_id": "LIVE-RENDER-STAGING-001",
+      "kind": "render_staging",
+      "candidate_repo": "https://github.com/tardifmorencytristan-glitch/Tristan",
+      "candidate_branch": "feat/tristan-intelligence-omega-v1",
+      "service_repo": "https://github.com/Tristan-TM-Poly/Tristan_Tardif-Morency_TFUG",
+      "service_branch": "main",
+      "service_id": "srv-d7gps3favr4c73afhd1g",
+      "expected_decision": "NO_DEPLOY_REPO_MISMATCH",
+      "boundary": "ConnectedService != CorrectDeploymentTarget"
+    },
+    {
+      "mission_id": "LIVE-SCIENCE-SOURCES-001",
+      "kind": "scientific_source_plan",
+      "intent": "Use CERN and JWST multi-instrument data to test a physics claim",
+      "required_sources": ["cern_open_data", "hepdata", "jwst_mast"],
+      "expected_decision": "SOURCE_PLAN_ONLY",
+      "boundary": "SourceSelection != DataRetrieved"
+    }
+  ],
+  "global_boundaries": [
+    "ObservedAccess != UniversalAvailability",
+    "RepositoryPASS != ScientificPASS",
+    "SourceSelection != DataRetrieved",
+    "DeploymentEligibility != DeploymentAuthority",
+    "NO_ACTION is admissible"
+  ]
+}
