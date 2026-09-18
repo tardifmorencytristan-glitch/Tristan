@@ -1,0 +1,30 @@
+name: Ultimate Jarvis Repository Guard
+
+on:
+  pull_request:
+    paths:
+      - ".jarvis/**"
+      - ".github/workflows/ultimate-jarvis-repository-guard.yml"
+  push:
+    branches: ["main"]
+    paths:
+      - ".jarvis/**"
+      - ".github/workflows/ultimate-jarvis-repository-guard.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  jarvis-grounding-guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      JARVIS_REPO_PRIVATE: ${{ github.event.repository.private }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate repository Jarvis profile
+        run: python .jarvis/jarvis_repo_guard.py --repo-private "$JARVIS_REPO_PRIVATE"
