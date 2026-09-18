@@ -316,7 +316,7 @@ def mission_to_action_proposal(
         rollback="restore previous immutable Atlas snapshot",
         evidence_refs=(f"atlas-snapshot:{snapshot.digest}",),
         confidence=0.90,
-        expected_verified_gain=float(mission["value"]),
+        expected_verified_gain=float(\n            mission["expected_verified_gain"]\n            + mission["debt_reduction"]\n            + mission["reuse_potential"]\n            + mission["gaia_impact"]\n        ),
         cost=float(mission["cost"]),
         risk=float(mission["risk"]),
     )
