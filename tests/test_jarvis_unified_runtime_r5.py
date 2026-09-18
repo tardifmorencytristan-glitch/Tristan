@@ -22,12 +22,12 @@ class JarvisUnifiedRuntimeR5Tests(unittest.TestCase):
     def test_generic_intent_does_not_invent_domain_claims(self):
         self.assertEqual(select_domains("improve repository context routing"), ())
 
-    def test_unified_runtime_fuses_r1_to_r7_without_promotion(self):
+    def test_unified_runtime_fuses_r1_to_r8_without_promotion(self):
         reg = Registry.load(ROOT / "registry/objects.jsonl")
         receipt = compile_jarvis_runtime(
             "simulate LC fractal circuit with CERN and JWST evidence", reg
         )
-        self.assertEqual(receipt.schema_version, "jarvis-tristan-unified-runtime-r7")
+        self.assertEqual(receipt.schema_version, "jarvis-tristan-unified-runtime-r8")
         self.assertEqual(receipt.selected_domains, ("lc_fractal",))
         self.assertIn("lc_fractal", receipt.domain_cases)
         self.assertTrue(receipt.core_plan)
@@ -40,11 +40,14 @@ class JarvisUnifiedRuntimeR5Tests(unittest.TestCase):
             receipt.atlas_federation["schema_version"],
             "jarvis-atlas-federation-r7",
         )
+        self.assertEqual(receipt.final_fusion["schema_version"], "jarvis-final-fusion-r8")
+        self.assertTrue(receipt.final_fusion["top16"])
         self.assertEqual(receipt.domino_engine["status"], "AVAILABLE_NOT_EXECUTED")
         self.assertFalse(receipt.scientific_pass)
         self.assertFalse(receipt.authority_granted)
         self.assertIn("UnifiedRuntime != ScientificPASS", receipt.boundaries)
         self.assertIn("AtlasProjection != ScientificRanking", receipt.boundaries)
+        self.assertIn("AutonomyPreview != Execution", receipt.boundaries)
 
     def test_unified_runtime_uses_closure_next_mission(self):
         reg = Registry.load(ROOT / "registry/objects.jsonl")
