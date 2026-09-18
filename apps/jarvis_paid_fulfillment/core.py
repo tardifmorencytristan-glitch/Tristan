@@ -7,6 +7,7 @@ import hmac
 import html
 import json
 import re
+import sqlite3
 import time
 from typing import Mapping, Sequence
 from urllib.parse import quote, urlparse
@@ -320,3 +321,63 @@ def render_report_html(report: Mapping[str, object]) -> str:
         "".join("<li>" + esc(str(item)) + "</li>" for item in report.get("boundaries", ())) +
         "</ul><p class='muted'>Generated report is advisory and bounded to public read-only evidence.</p></body></html>"
     )
+
+def init_result_db(path: str) -> None:
+    db = sqlite3.connect(path)
+    try:
+        db.execute(
+            "CREATE TABLE IF NOT EXISTS fulfillment_results ("
+            "session_id TEXT PRIMARY KEY, payload TEXT NOT NULL, updated_at INTEGER NOT NULL)"
+        )
+        db.commit()
+    finally:
+        db.close()
+
+
+def claim_result_slot(path: str, session_id: str, payload: Mapping[str, object]) -> bool:
+    init_result_db(path)
+    db = sqlite3.connect(path)
+    try:
+        try:
+            db.execute(
+                "INSERT INTO fulfillment_results(session_id,payload,updated_at) VALUES(?,?,?)",
+                (session_id, json.dumps(dict(payload), sort_keys=True), int(time.time())),
+            )
+            db.commit()
+            return True
+        except sqlite3.IntegrityError:
+            return False
+    finally:
+        db.close()
+
+
+def store_result(path: str, session_id: str, payload: Mapping[str, object]) -> None:
+    init_result_db(path)
+    db = sqlite3.connect(path)
+    try:
+        db.execute(
+            "INSERT INTO fulfillment_results(session_id,payload,updated_at) VALUES(?,?,?) "
+            "ON CONFLICT(session_id) DO UPDATE SET payload=excluded.payload, updated_at=excluded.updated_at",
+            (session_id, json.dumps(dict(payload), sort_keys=True), int(time.time())),
+        )
+        db.commit()
+    finally:
+        db.close()
+
+
+def load_result(path: str, session_id: str) -> dict[str, object] | None:
+    init_result_db(path)
+    db = sqlite3.connect(path)
+    try:
+        row = db.execute(
+            "SELECT payload FROM fulfillment_results WHERE session_id=?",
+            (session_id,),
+        ).fetchone()
+    finally:
+        db.close()
+    if row is None:
+        return None
+    value = json.loads(row[0])
+    if not isinstance(value, dict):
+        raise ValueError("stored fulfillment result is malformed")
+    return value
