@@ -17,7 +17,7 @@ from .ultra_closure import DebtVector, compile_ultra_closure
 DOMAIN_KEYWORDS = {
     "tfuga": ("tfuga", "transformation", "formalize", "formalisation", "axiom"),
     "prime": ("prime", "primal", "factor", "factorization", "factorisation", "pnfm", "pdm"),
-    "lc_fractal": ("lc", "circuit", "fractal", "impedance", "resonance"),
+    "lc_fractal": ("lc", "circuit", "fractal", "impedance", "resonance", "resonator", "tesla"),
     "gaia": ("gaia", "climate", "climat", "energy", "energie", "water", "eau", "carbon", "co2"),
 }
 

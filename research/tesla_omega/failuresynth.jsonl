@@ -1,0 +1,1 @@
+{"id":"F000","hypothesis":"Fractal geometry is intrinsically better for WPT.","conditions":"unqualified global claim","prediction":"all fractal designs outperform controls","observed":"not tested","residual":"claim is under-specified","reusable_constraint":"Never promote geometry to performance without matched controls, observable metrics, and uncertainty."}
