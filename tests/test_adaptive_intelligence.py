@@ -8,6 +8,7 @@ from tristan.epistemic_memory import (
     MemoryKind,
     MemoryRecord,
     delta_record,
+    tombstone_record,
 )
 
 
@@ -41,6 +42,17 @@ class AdaptiveIntelligenceTests(unittest.TestCase):
         )
         self.assertEqual(record.kind, MemoryKind.DELTA)
         self.assertIn("+0.2", record.outcome)
+
+    def test_tombstone_memory_preserves_apoptosis(self):
+        record = tombstone_record(
+            record_id="dead-1",
+            context_tags=("portfolio", "pr"),
+            mechanism="supersession",
+            reason="absorbed into canonical owner",
+            provenance=("receipt:portfolio",),
+        )
+        self.assertEqual(record.kind, MemoryKind.TOMBSTONE)
+        self.assertIn("absorbed into canonical owner", record.outcome)
 
     def test_router_selects_smallest_covering_coalition(self):
         candidates = (
