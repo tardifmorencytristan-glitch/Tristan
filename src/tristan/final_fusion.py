@@ -406,7 +406,7 @@ def compile_final_fusion(
         top64=ids[:64],
         top256=ids[:256],
         next_atlas_mission_id=ids[0] if ids else "NO_ACTION",
-        next_action_proposal=proposal.to_dict() if proposal is not None else None,
+        next_action_proposal=asdict(proposal) if proposal is not None else None,
         autonomy_preview=preview,
         epistemic_status="PROVISIONAL_LIVE_ATLAS_PLAN",
         scientific_pass=False,
