@@ -1,0 +1,87 @@
+{
+  "schema_version": "tristan-portfolio-closure-r2",
+  "observed_at": "2026-09-18",
+  "repository": "tardifmorencytristan-glitch/Tristan",
+  "base_main": "a3559a9d451ac2c673c907e433b50accaa2e6c4f",
+  "families": [
+    {
+      "family_id": "problem-foundry",
+      "prs": [
+        47
+      ],
+      "before": "ABSORB_CONTRACTS_THEN_REQUALIFY",
+      "now": "ABSORBED_PENDING_R10_QUALIFICATION",
+      "absorbed_into": [
+        "src/tristan/intake_guard.py",
+        "tests/test_intake_guard_r10.py"
+      ],
+      "retained_mechanisms": [
+        "source policy profiles",
+        "domain verification contracts",
+        "fail-closed publication"
+      ],
+      "not_retained": [
+        "parallel ProblemGenome as universal work unit",
+        "parallel CLI/runtime owner"
+      ],
+      "post_merge_action": "CLOSE_SUPERSEDED_WITH_LINEAGE_COMMENT"
+    },
+    {
+      "family_id": "ultimate-jarvis-node",
+      "prs": [
+        44
+      ],
+      "before": "ABSORB_PROOF_CARRYING_MECHANISMS",
+      "now": "ABSORBED_PENDING_R10_QUALIFICATION",
+      "absorbed_into": [
+        "src/tristan/intake_guard.py",
+        "tests/test_intake_guard_r10.py"
+      ],
+      "retained_mechanisms": [
+        "exact repo/path/commit/locator grounding",
+        "visibility gate",
+        "role-scope gate",
+        "weighted grounding coverage"
+      ],
+      "not_retained": [
+        "parallel .jarvis orchestration runtime",
+        "duplicate coalition router"
+      ],
+      "post_merge_action": "CLOSE_SUPERSEDED_WITH_LINEAGE_COMMENT"
+    },
+    {
+      "family_id": "tesla-omega",
+      "prs": [
+        48
+      ],
+      "now": "HOLD_REBASE_AND_REQUALIFY",
+      "reason": "74 commits ahead and 7 behind current main; scientific/simulation content is substantive and should not be absorbed blindly."
+    },
+    {
+      "family_id": "scientific-report-r5",
+      "prs": [
+        37,
+        38
+      ],
+      "now": "HOLD_REPLAY_ON_CURRENT_MAIN",
+      "reason": "Implementation lineage is based on older design/base and should be replayed as a family."
+    },
+    {
+      "family_id": "scientific-writing-r4-2",
+      "prs": [
+        21
+      ],
+      "now": "HOLD_CURRENT_MAIN_COMPARISON",
+      "reason": "Previously fresh replay is stale relative to current main and needs owner comparison."
+    }
+  ],
+  "authority_granted": false,
+  "scientific_pass": false,
+  "boundaries": [
+    "Absorbed != Qualified",
+    "Qualified != ScientificPASS",
+    "PortfolioDecision != MergeAuthority",
+    "Closure occurs only after R10 exact-head CI and merge",
+    "Lineage is preserved in PR comments and M-bottom memory"
+  ]
+}
