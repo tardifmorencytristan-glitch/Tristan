@@ -1,0 +1,23 @@
+{
+  "authority_granted": false,
+  "candidate_topologies": [
+    {"name": "chain", "signature": [4, 3, [2, 2, 1, 1]]},
+    {"name": "star", "signature": [5, 4, [4, 1, 1, 1, 1]]},
+    {"name": "binary_tree", "signature": [7, 6, [3, 3, 2, 1, 1, 1, 1]]}
+  ],
+  "claims": 6,
+  "corpus_digest_sha256": "3de1d065fd4fbd9c8a22bc5bd22638724ee523fc47b82e15215d3726f01838a3",
+  "documentary_status": {"DOCUMENTED": 4, "UNKNOWN": 2},
+  "historical_truth_claimed": false,
+  "next_gates": [
+    "extract parameterized circuits from primary sources",
+    "cross-check historical claims against independent primary records",
+    "build analytic vs simulation closure tests",
+    "compare fractal/hierarchical topologies to cost-matched controls",
+    "record negative results in FailureSynth"
+  ],
+  "physical_validation_claimed": false,
+  "primary_sources": 5,
+  "sources": 7,
+  "status": "PROVISIONAL_RESEARCH_KERNEL"
+}
