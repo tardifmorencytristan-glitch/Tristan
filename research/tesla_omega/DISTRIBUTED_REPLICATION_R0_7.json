@@ -1,0 +1,120 @@
+{
+  "schema_version": "tesla-omega-distributed-r0.7",
+  "status": "MULTI_SOLVER_MULTI_MACHINE_COMPUTATIONAL_REPLICATION_ONLY",
+  "authority_granted": false,
+  "physical_validation_claimed": false,
+  "novelty_claimed": false,
+  "branch": "tesla-omega-r0-1-20260918",
+  "commit": "7307c1cb51f4dcc05beed152b66690933f885eb3",
+  "machines": [
+    {
+      "name": "DESKTOP-SHA9IHL",
+      "cpu": "Intel Core i7-12700KF",
+      "ram_gb": 63.8,
+      "gpu": "RTX 4070 Ti 12GB",
+      "python": "3.13.15"
+    },
+    {
+      "name": "DESKTOP-2G1SSMT",
+      "cpu": "Intel Core i7-13700H",
+      "ram_gb": 31.7,
+      "gpu": "RTX 4060 Laptop 8GB",
+      "python": "3.13.15"
+    }
+  ],
+  "r05": {
+    "exact_replication_sha256": "894AFEAD0A48E2C3A41F4B01ECCAC8B24C9613C0E92F819E69E0B1C179EE5447",
+    "baseline_efficiency": 1.259216859876499e-11,
+    "unconstrained_best_efficiency": 3.124979540223743e-10,
+    "unconstrained_relative_gain": 24.816849581653738,
+    "note": "relative gain only; absolute modeled efficiency remains extremely small"
+  },
+  "r06": {
+    "exact_replication_sha256": "F1F06D9FED1B5B44B9DF8215A898A068EFFB6395ECFB03B7A041EB8C10FFEC54",
+    "unconstrained_best_rejected": true,
+    "rejected_min_separation_ratio": 2.845832994414599,
+    "validity_threshold": 3,
+    "survivor_count": 29,
+    "candidate_count": 37,
+    "best_survivor_radii_m": [
+      0.04,
+      0.035,
+      0.015,
+      0.015,
+      0.035,
+      0.04
+    ],
+    "best_survivor_efficiency": 1.2586730792850174e-10,
+    "best_survivor_min_separation_ratio": 3.2015621187164234,
+    "independent_solver_delta_a": 3.511543213478341e-18
+  },
+  "r07": {
+    "exact_replication_sha256": "F9097D9EEF0793571C6A47171CA2126529BCD5C6BDE196EEC57D46CFC1C818ED",
+    "baseline_efficiency_neumann_64": 1.2841573025020853e-11,
+    "best_efficiency_neumann_64": 1.3158387591973408e-10,
+    "relative_gain_neumann_64": 10.246710092552732,
+    "best_radii_m": [
+      0.04,
+      0.035,
+      0.015,
+      0.015,
+      0.035,
+      0.04
+    ],
+    "adjacent_pair_neumann_relative_change_64_to_128": 0.0026741486201361485,
+    "efficiency_convergence": [
+      {
+        "segments": 32,
+        "efficiency": 1.2887605517494687e-10
+      },
+      {
+        "segments": 64,
+        "efficiency": 1.3158387591973408e-10
+      },
+      {
+        "segments": 128,
+        "efficiency": 1.322692115314024e-10
+      }
+    ],
+    "double_solver_delta_a": 6.980275126496363e-18,
+    "power_closure_error_w": 4.440892098500626e-16
+  },
+  "numpy_crosscheck": {
+    "version": "2.5.3",
+    "machine_a_efficiency": 1.3158387591973408e-10,
+    "machine_b_efficiency": 1.3158387591973408e-10,
+    "identical": true,
+    "max_linear_residual": 2.456772079652305e-17
+  },
+  "tests": {
+    "machine_a_full_suite": {
+      "passed": 82,
+      "failed": 0,
+      "runtime_s": 19.012
+    },
+    "machine_b_targeted_r05_r06_r07": "PASS",
+    "github_kernel_ci_212": "SUCCESS",
+    "github_jarvis_r6_evidence_domino_44": "SUCCESS"
+  },
+  "interpretation": [
+    "R0.5 apparent 24.8x gain is not promoted because its best candidate fails the R0.6 far-field screening gate.",
+    "R0.6 model-valid survivor retains roughly 10x relative modeled gain over baseline.",
+    "R0.7 Neumann filament mutual-inductance model preserves the same candidate ordering among escalated candidates.",
+    "Absolute modeled transfer efficiency remains extremely small; no practical WPT performance claim is supported."
+  ],
+  "next_gates": [
+    "finite-wire mutual inductance / conductor cross-section",
+    "proximity-effect AC resistance",
+    "orientation and placement sensitivity under equal copper",
+    "external SPICE or equivalent circuit simulator",
+    "3D FEM/Maxwell only for surviving candidates",
+    "measurement only after computational courts survive"
+  ],
+  "boundaries": [
+    "MultiSolverAgreement != PhysicsValidation",
+    "MultiMachineReplication != ExperimentalReplication",
+    "NeumannFilament != FiniteWireFieldSolution",
+    "RelativeGain != PracticalEfficiency",
+    "Simulation != Measurement"
+  ]
+}
