@@ -12,6 +12,7 @@ from .r3 import compile_r3_status
 from .r4 import compile_r4_status
 from .registry import Registry
 from .verify import verify_repository
+from .ultra_closure import DebtVector, compile_ultra_closure
 
 
 def _root() -> Path:
@@ -51,6 +52,9 @@ def main(argv: list[str] | None = None) -> int:
 
     sub.add_parser("r3")
     sub.add_parser("r4")
+
+    r9 = sub.add_parser("r9")
+    r9.add_argument("intent")
 
     regen = sub.add_parser("regenerate")
     regen.add_argument("--check", action="store_true", default=True)
@@ -93,6 +97,19 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "r4":
         _print(compile_r4_status().to_dict())
+        return 0
+
+    if args.command == "r9":
+        reg = _registry(root)
+        selected = compile_context(args.intent, reg, 8)
+        receipt = run_intent(args.intent, reg, 8)
+        _print(compile_ultra_closure(
+            intent=args.intent,
+            mission_id="CLI-R9",
+            residuals=receipt.residuals,
+            context_ids=tuple(selected.selected_ids),
+            debt=DebtVector(evidence=float(len(receipt.residuals))),
+        ).to_dict())
         return 0
 
     if args.command == "regenerate":
