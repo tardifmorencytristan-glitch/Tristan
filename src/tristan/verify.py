@@ -38,6 +38,8 @@ REQUIRED_PATHS = (
     "src/tristan/evidence_foundry.py",
     "src/tristan/domino_engine.py",
     "src/tristan/jarvis_runtime.py",
+    "src/tristan/autonomous_decision.py",
+    "src/tristan/frontier_loop.py",
 )
 
 HARD_INVARIANTS = (
@@ -90,6 +92,6 @@ def verify_repository(root: str | Path) -> dict:
         "errors": errors,
         "registry_count": registry_count,
         "context_debt_clean": bool(context_debt.clean) if context_debt is not None else False,
-        "scope": "repository_structure_registry_context_debt_and_jarvis_r6_evidence_domino",
+        "scope": "repository_structure_registry_context_debt_jarvis_r6_autonomy_r1_and_frontier_r2",
         "scientific_pass": False,
     }
