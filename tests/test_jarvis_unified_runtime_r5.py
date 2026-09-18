@@ -22,10 +22,12 @@ class JarvisUnifiedRuntimeR5Tests(unittest.TestCase):
     def test_generic_intent_does_not_invent_domain_claims(self):
         self.assertEqual(select_domains("improve repository context routing"), ())
 
-    def test_unified_runtime_fuses_r1_to_r6_without_promotion(self):
+    def test_unified_runtime_fuses_r1_to_r7_without_promotion(self):
         reg = Registry.load(ROOT / "registry/objects.jsonl")
-        receipt = compile_jarvis_runtime("simulate LC fractal circuit with CERN and JWST evidence", reg)
-        self.assertEqual(receipt.schema_version, "jarvis-tristan-unified-runtime-r6")
+        receipt = compile_jarvis_runtime(
+            "simulate LC fractal circuit with CERN and JWST evidence", reg
+        )
+        self.assertEqual(receipt.schema_version, "jarvis-tristan-unified-runtime-r7")
         self.assertEqual(receipt.selected_domains, ("lc_fractal",))
         self.assertIn("lc_fractal", receipt.domain_cases)
         self.assertTrue(receipt.core_plan)
@@ -34,15 +36,23 @@ class JarvisUnifiedRuntimeR5Tests(unittest.TestCase):
         self.assertIn("hepdata", receipt.scientific_source_plan["selected_sources"])
         self.assertIn("jwst_mast", receipt.scientific_source_plan["selected_sources"])
         self.assertIsNotNone(receipt.evidence_contract)
+        self.assertEqual(
+            receipt.atlas_federation["schema_version"],
+            "jarvis-atlas-federation-r7",
+        )
         self.assertEqual(receipt.domino_engine["status"], "AVAILABLE_NOT_EXECUTED")
         self.assertFalse(receipt.scientific_pass)
         self.assertFalse(receipt.authority_granted)
         self.assertIn("UnifiedRuntime != ScientificPASS", receipt.boundaries)
+        self.assertIn("AtlasProjection != ScientificRanking", receipt.boundaries)
 
     def test_unified_runtime_uses_closure_next_mission(self):
         reg = Registry.load(ROOT / "registry/objects.jsonl")
         receipt = compile_jarvis_runtime("context regeneration evidence", reg)
-        self.assertEqual(receipt.next_mission_id, receipt.closure_plan["next_mission_id"])
+        self.assertEqual(
+            receipt.next_mission_id,
+            receipt.closure_plan["next_mission_id"],
+        )
 
 
 if __name__ == "__main__":
