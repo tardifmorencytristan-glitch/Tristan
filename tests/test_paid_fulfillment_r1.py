@@ -15,6 +15,9 @@ from core import (
     parse_public_github_repo,
     render_report_html,
     verify_stripe_signature,
+    claim_result_slot,
+    load_result,
+    store_result,
 )
 
 def test_stripe_signature_valid_invalid_and_stale():
@@ -102,3 +105,10 @@ def test_report_html_escapes_untrusted_values():
     rendered = render_report_html(report)
     assert "<script>x</script>" not in rendered
     assert "&lt;script&gt;" in rendered
+
+def test_sqlite_result_store_is_idempotent(tmp_path):
+    path = str(tmp_path / "results.sqlite3")
+    assert claim_result_slot(path, "cs_test", {"status": "PROCESSING"})
+    assert not claim_result_slot(path, "cs_test", {"status": "PROCESSING"})
+    store_result(path, "cs_test", {"status": "READY", "value": 7})
+    assert load_result(path, "cs_test") == {"status": "READY", "value": 7}
