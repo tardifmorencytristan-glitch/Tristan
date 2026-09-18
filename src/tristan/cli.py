@@ -4,6 +4,7 @@ import argparse
 import json
 from pathlib import Path
 from .context import compile_context
+from .jarvis import compile_jarvis_plan
 from .pipeline import run_intent
 from .registry import Registry
 from .verify import verify_repository
@@ -36,6 +37,10 @@ def main(argv: list[str] | None = None) -> int:
     run.add_argument("intent")
     run.add_argument("--limit", type=int, default=8)
 
+    jarvis = sub.add_parser("jarvis")
+    jarvis.add_argument("intent")
+    jarvis.add_argument("--limit", type=int, default=8)
+
     regen = sub.add_parser("regenerate")
     regen.add_argument("--check", action="store_true", default=True)
 
@@ -61,6 +66,10 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "run":
         _print(run_intent(args.intent, _registry(root), args.limit).to_dict())
+        return 0
+
+    if args.command == "jarvis":
+        _print(compile_jarvis_plan(args.intent, _registry(root), args.limit).to_dict())
         return 0
 
     if args.command == "regenerate":
