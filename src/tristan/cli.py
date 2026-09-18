@@ -6,7 +6,7 @@ from pathlib import Path
 
 from .closure import compile_closure_plan
 from .context import compile_context
-from .jarvis import compile_jarvis_plan
+from .jarvis_runtime import compile_jarvis_runtime
 from .pipeline import run_intent
 from .r3 import compile_r3_status
 from .r4 import compile_r4_status
@@ -80,7 +80,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.command == "jarvis":
-        _print(compile_jarvis_plan(args.intent, _registry(root), args.limit).to_dict())
+        _print(compile_jarvis_runtime(args.intent, _registry(root), args.limit).to_dict())
         return 0
 
     if args.command == "close":
