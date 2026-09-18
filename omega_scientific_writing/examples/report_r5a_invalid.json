@@ -1,0 +1,66 @@
+{
+  "scientific_ir": {
+    "claims": [],
+    "evidence": [],
+    "equations": [],
+    "figures": [],
+    "citations": [],
+    "results": [],
+    "terminology_usages": [
+      {"object_id": "P_BAD", "language": "fr", "term": "flux"}
+    ]
+  },
+  "report_graph": {
+    "project_id": "P_BAD",
+    "objectives": [
+      {"meta": {"id": "O_BAD"}, "statement": "Determine an unresolved quantity"}
+    ],
+    "requirements": [],
+    "constraints": [],
+    "assumptions": [],
+    "concepts": [
+      {
+        "meta": {"id": "TERM_BAD"},
+        "canonical_terms": [["fr", "débit volumique"]],
+        "aliases": [],
+        "ambiguous_terms": ["flux"],
+        "forbidden_substitutions": [],
+        "definition": "Volume transported per unit time",
+        "source_ids": ["SRC1"]
+      }
+    ],
+    "methods": [
+      {
+        "meta": {"id": "M_BAD"},
+        "objective": "Measure X",
+        "input_ids": ["D1"],
+        "steps": ["measure X"],
+        "output_ids": ["R_BAD"],
+        "validation_methods": []
+      }
+    ],
+    "results": [],
+    "figures": [],
+    "interpretations": [],
+    "conclusions": [
+      {
+        "meta": {"id": "C_BAD"},
+        "statement": "unsupported conclusion",
+        "claim_ids": [],
+        "result_ids": [],
+        "requirement_ids": [],
+        "objective_ids": []
+      }
+    ],
+    "residuals": [],
+    "contradictions": [
+      {
+        "meta": {"id": "X_BAD"},
+        "subject_ids": ["CL_A", "CL_B"],
+        "conflict_type": "STATEMENT",
+        "description": "same scope conflict",
+        "adjudication_state": "UNRESOLVED"
+      }
+    ]
+  }
+}

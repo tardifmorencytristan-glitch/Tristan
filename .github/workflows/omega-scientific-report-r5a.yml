@@ -1,0 +1,57 @@
+name: Omega Scientific Report R5A
+
+on:
+  pull_request:
+    paths:
+      - 'omega_scientific_writing/**'
+      - '.github/workflows/omega-scientific-report-r5a.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'omega_scientific_writing/**'
+      - '.github/workflows/omega-scientific-report-r5a.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  r5a:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR source head
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Checkout push source head
+        if: github.event_name != 'pull_request'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - name: Assert exact source head
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            expected='${{ github.event.pull_request.head.sha }}'
+          else
+            expected='${{ github.sha }}'
+          fi
+          actual="$(git rev-parse HEAD)"
+          echo "expected=$expected"
+          echo "actual=$actual"
+          test "$actual" = "$expected"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Full scientific writing tests
+        run: python -m unittest discover -s omega_scientific_writing/tests -v
+      - name: Valid R5A packet must pass
+        run: python -m omega_scientific_writing.src.report_court omega_scientific_writing/examples/report_r5a_valid.json
+      - name: Invalid R5A packet must hold
+        shell: bash
+        run: |
+          set +e
+          python -m omega_scientific_writing.src.report_court omega_scientific_writing/examples/report_r5a_invalid.json
+          status=$?
+          set -e
+          test "$status" -eq 1

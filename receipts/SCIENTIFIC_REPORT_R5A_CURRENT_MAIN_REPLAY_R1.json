@@ -1,0 +1,16 @@
+{
+  "schema_version": "scientific-report-r5a-current-main-replay-r1",
+  "observed_at": "2026-09-18",
+  "source_pr": 38,
+  "previous_head": "ea82de9b6a13b5c9cc4e02aaee2300fe23b23bc2",
+  "current_base_main": "3b1cda99a389cb9556d3ccffc31716a027983d2b",
+  "purpose": "force exact-head qualification of the R5A family against current canonical main after retargeting",
+  "content_change": "none_to_scientific_logic",
+  "scientific_pass": false,
+  "authority_granted": false,
+  "boundaries": [
+    "ReplayReceipt != ScientificEvidence",
+    "CI_PASS != ScientificPASS",
+    "Retargeted != QualifiedUntilExactHeadCI"
+  ]
+}

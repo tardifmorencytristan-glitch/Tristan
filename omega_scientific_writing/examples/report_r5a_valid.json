@@ -1,0 +1,84 @@
+{
+  "scientific_ir": {
+    "claims": [
+      {
+        "id": "CL1",
+        "statement": "temperature remains below limit",
+        "claim_type": "EMPIRICAL",
+        "status": "MEASURED",
+        "scope": "test A",
+        "uncertainty": "+/-0.4 C",
+        "evidence_ids": ["E1"],
+        "obligations_satisfied": [
+          "measurement_or_experiment",
+          "uncertainty",
+          "sample_or_acquisition_protocol",
+          "controls_or_baseline",
+          "limitations"
+        ]
+      }
+    ],
+    "evidence": [{"id": "E1", "kind": "measurement"}],
+    "equations": [],
+    "figures": [],
+    "citations": [],
+    "results": [{"id": "R1", "evidence_ids": ["E1"]}],
+    "terminology_usages": [
+      {"object_id": "R1", "language": "fr", "term": "température maximale"}
+    ]
+  },
+  "report_graph": {
+    "project_id": "P1",
+    "objectives": [
+      {"meta": {"id": "O1"}, "statement": "Verify thermal limit"}
+    ],
+    "requirements": [
+      {"meta": {"id": "RQ1"}, "statement": "Tmax < 45 C", "success_criterion": "max_temperature_c < 45"}
+    ],
+    "constraints": [],
+    "assumptions": [],
+    "concepts": [
+      {
+        "meta": {"id": "TERM1"},
+        "canonical_terms": [["fr", "température maximale"], ["en", "maximum temperature"]],
+        "aliases": [],
+        "ambiguous_terms": [],
+        "forbidden_substitutions": [],
+        "definition": "Maximum temperature observed in the declared test scope",
+        "source_ids": ["SRC1"]
+      }
+    ],
+    "methods": [
+      {
+        "meta": {"id": "M1"},
+        "objective": "Measure maximum temperature",
+        "input_ids": ["D1"],
+        "steps": ["measure", "compute maximum"],
+        "output_ids": ["R1"],
+        "validation_methods": ["calibration check"]
+      }
+    ],
+    "results": [
+      {
+        "meta": {"id": "R1"},
+        "statement": "42.1 +/- 0.4 C",
+        "evidence_ids": ["E1"],
+        "objective_ids": ["O1"]
+      }
+    ],
+    "figures": [],
+    "interpretations": [],
+    "conclusions": [
+      {
+        "meta": {"id": "C1"},
+        "statement": "limit satisfied in test A",
+        "claim_ids": ["CL1"],
+        "result_ids": ["R1"],
+        "requirement_ids": ["RQ1"],
+        "objective_ids": ["O1"]
+      }
+    ],
+    "residuals": [],
+    "contradictions": []
+  }
+}
