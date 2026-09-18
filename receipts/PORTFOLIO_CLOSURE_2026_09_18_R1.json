@@ -1,0 +1,93 @@
+{
+  "schema_version": "tristan-portfolio-closure-r1",
+  "observed_at": "2026-09-18",
+  "repository": "tardifmorencytristan-glitch/Tristan",
+  "source": "GitHub connected repository open PR observation",
+  "open_pr_count": 6,
+  "families": [
+    {
+      "family_id": "tesla-omega",
+      "prs": [
+        48
+      ],
+      "provisional_decision": "HOLD_REBASE_AND_REQUALIFY",
+      "rationale": "Large 74-commit scientific/simulation branch is based on pre-R6/R9 main. Preserve evidence/falsifications, rebase or replay onto current main before any merge decision.",
+      "boundaries": [
+        "Simulation != Measurement",
+        "MultiMachineReplication != ExperimentalReplication",
+        "Mergeable != ShouldMerge"
+      ]
+    },
+    {
+      "family_id": "problem-foundry",
+      "prs": [
+        47
+      ],
+      "provisional_decision": "ABSORB_CONTRACTS_THEN_REQUALIFY",
+      "rationale": "ProblemGenome intent overlaps MissionGenome direction. Reuse domain verification/policy-gate mechanisms rather than creating a parallel universal work unit.",
+      "boundaries": [
+        "ProblemGenome may remain domain adapter",
+        "PublicationAuthority remains fail-closed"
+      ]
+    },
+    {
+      "family_id": "ultimate-jarvis-node",
+      "prs": [
+        44
+      ],
+      "provisional_decision": "ABSORB_PROOF_CARRYING_MECHANISMS",
+      "rationale": "Minimum-coalition and proof-carrying capability concepts already have canonical owners on current main. Extract any missing repository-node grounding mechanisms, then supersede redundant orchestration.",
+      "boundaries": [
+        "Capability != Authority",
+        "PrivateToPublicFlow -> HOLD"
+      ]
+    },
+    {
+      "family_id": "scientific-report-r5",
+      "prs": [
+        37,
+        38
+      ],
+      "provisional_decision": "REBASE_FAMILY_KEEP_DESIGN_AS_LINEAGE",
+      "rationale": "PR 38 implements PR 37 design on a non-main base. Treat design as lineage and implementation as candidate family head after replay on current main.",
+      "boundaries": [
+        "CompilationPASS != ScientificPASS",
+        "Design != Implementation"
+      ]
+    },
+    {
+      "family_id": "scientific-writing-r4-2",
+      "prs": [
+        21
+      ],
+      "provisional_decision": "REPLAY_OR_SUPERSEDE_AFTER_CURRENT_MAIN_COMPARISON",
+      "rationale": "Fresh replay was fresh relative to an older main, now stale again. Preserve renderer/readback/failure receipts and compare against current owners before merge.",
+      "boundaries": [
+        "GeneratedPDF != IndependentEvidence",
+        "ReadbackPASS != CitationCourtPASS"
+      ]
+    }
+  ],
+  "portfolio_policy": {
+    "allowed_decisions": [
+      "MERGE",
+      "ABSORB",
+      "REBASE",
+      "SUPERSEDE",
+      "HOLD",
+      "CLOSE"
+    ],
+    "current_regime": "CLOSE",
+    "generation_rule": "GenerationRate <= VerificationRate + ClosureRate + DebtAbsorptionRate",
+    "progress_definition": "VerifiedCapabilityDelta + RealityDelta + FutureWorkEliminated"
+  },
+  "authority_granted": false,
+  "scientific_pass": false,
+  "boundaries": [
+    "PortfolioDecision != MergeAuthority",
+    "OpenPR != IndependentProject",
+    "OldBase != InvalidWork",
+    "Mergeable != ShouldMerge",
+    "No PR is closed by this receipt"
+  ]
+}

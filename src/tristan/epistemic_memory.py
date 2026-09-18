@@ -9,6 +9,7 @@ class MemoryKind(str, Enum):
     NEGATIVE = "M-"
     UNKNOWN = "M?"
     DELTA = "M-delta"
+    TOMBSTONE = "M-bottom"
 
 
 @dataclass(frozen=True)
@@ -91,6 +92,26 @@ def delta_record(
         context_tags=context_tags,
         mechanism=mechanism,
         outcome=f"{metric}_delta={delta:+.12g}",
+        confidence=1.0,
+        provenance=provenance,
+    )
+
+
+def tombstone_record(
+    *,
+    record_id: str,
+    context_tags: tuple[str, ...],
+    mechanism: str,
+    reason: str,
+    provenance: tuple[str, ...],
+) -> MemoryRecord:
+    """Preserve an apoptosed/superseded object without keeping it active."""
+    return MemoryRecord(
+        record_id=record_id,
+        kind=MemoryKind.TOMBSTONE,
+        context_tags=context_tags,
+        mechanism=mechanism,
+        outcome=f"tombstone_reason={reason}",
         confidence=1.0,
         provenance=provenance,
     )
