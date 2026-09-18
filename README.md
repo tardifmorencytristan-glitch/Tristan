@@ -112,3 +112,32 @@ Jarvis constitutional boundaries additionally preserve:
 - Every promoted claim needs the evidence appropriate to its domain.
 - Every irreversible or externally consequential action requires authorization outside this planner.
 - Self-optimization may not weaken evidence integrity, provenance, rollback, or safety gates.
+
+
+## Jarvis Closure R2
+
+Closure R2 adds bounded closure mechanics on top of Jarvis Omega Core R1.
+
+New owners:
+
+- `FailureGenome`: normalizes legacy failure records into one typed negative-memory contract with explicit observed residual, action, regression gate, provenance source, and boundaries.
+- `AntiCorpus`: evaluates alternative candidates through a Pareto frontier. It never declares truth or universal superiority from internal scores.
+- `CrystalCompiler`: can mark an artifact `ENGINEERING_CRYSTAL_READY` only when specification, implementation, tests, evidence, BOOK0 digest, interfaces, and a sufficiently mature OAK status are present. It always keeps `scientific_pass=false`.
+- `MissionQueue`: ranks dependency-satisfied missions using bounded verified gain, debt reduction, reuse potential, optional Gaia impact, and burden.
+- `ClosurePlan`: turns a Jarvis plan into an evidence-bounded queue of research, evidence, validation, adversarial challenge, or crystal-readiness missions.
+
+Run:
+
+```bash
+tristan close "context regeneration evidence"
+```
+
+Hard boundaries:
+
+- MissionPriority != ScientificImportance
+- EngineeringCrystal != ScientificPASS
+- ParetoSurvival != Truth
+- FailureMemory != AutomaticRepairAuthority
+- NO_ACTION is admissible
+
+Closure R2 does not replace the existing Omega Omni `UniversalIRObject`, `ArtifactGraph`, adapters, or historical FailureGenome receipts. It provides a thin kernel-level normalization and orchestration layer over them.
