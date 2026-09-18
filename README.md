@@ -255,3 +255,36 @@ Hard boundaries:
 - StateTransitionRequiresEvidence
 - PrivateSource != PublicPayload
 - NO_ACTION is admissible
+
+
+## Jarvis R9 - Ultra Closure
+
+R9 makes closure the canonical control plane above the existing R1-R8 mechanisms. It adds a universal `MissionGenome`, a conservative `CapabilityCrystal`, a proof-carrying research-object contract, multidimensional debt, adaptive generation throttling, regime selection and a first machine-readable Portfolio Closure receipt.
+
+The canonical runtime is now `jarvis-tristan-unified-runtime-r9`.
+
+R9 deliberately reuses existing owners for minimal coalition selection, causal-credit ablations, prediction preregistration, epistemic memory, Live Atlas, Autonomy, Frontier, OAK and Evidence Foundry.
+
+Canonical work flow:
+
+`REALITY -> CONTEXT* -> RESIDUAL -> MISSIONGENOME -> CAPABILITY COVERAGE -> MINIMAL COALITION -> EXECUTION -> EVIDENCE -> GOVERN -> CAUSAL CREDIT -> DISTILL -> CAPABILITY CRYSTAL -> REGENERATE`
+
+Runtime control invariant:
+
+`GenerationRate <= VerificationRate + ClosureRate + DebtAbsorptionRate`
+
+Canonical progress:
+
+`VerifiedCapabilityDelta + RealityDelta + FutureWorkEliminated`
+
+The epistemic memory now also supports `M-bottom` tombstones for superseded or apoptosed objects so deletion does not erase lineage.
+
+Hard boundaries:
+
+- MissionGenome != Execution
+- CapabilityCrystal != ScientificPASS
+- PortfolioDecision != MergeAuthority
+- RegimeSelection != Permission
+- GenerationThrottle != Truth
+- Capability != Authority
+- NO_ACTION is admissible
