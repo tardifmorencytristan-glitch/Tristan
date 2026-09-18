@@ -197,3 +197,37 @@ Hard boundaries:
 - ClaimTemplate != ScientificTruth
 - EvidenceObligation != EvidenceObtained
 - MissionQueue != Authorization
+
+
+## Jarvis Tristan Unified Runtime R5
+
+R5 fuses the previously separate R1-R4 layers into the primary `tristan jarvis` runtime.
+
+```bash
+tristan jarvis "simulate LC fractal circuit"
+tristan jarvis "formalize TFUGA"
+tristan jarvis "benchmark prime factorization"
+tristan jarvis "Gaia water and energy"
+```
+
+One call now returns a single bounded receipt containing:
+
+- the R1 core intent/context/residual plan;
+- the R2 closure MissionQueue and next mission;
+- the R3 differential-regeneration and causal-failure capability status;
+- only the R4 public DomainCases relevant to the intent;
+- one shared set of epistemic and authorization boundaries.
+
+Domain selection is conservative. A generic repository intent does not automatically import TFUGA, Prime, LC-Fractal, or Gaia claim templates.
+
+The diagnostic commands `tristan close`, `tristan r3`, and `tristan r4` remain available, but `tristan jarvis` is now the canonical orchestration entrypoint.
+
+Hard boundaries:
+
+- UnifiedRuntime != ScientificPASS
+- Plan != Authorization
+- DomainCase != TheoryValidation
+- Simulation != Measurement
+- Consensus != Evidence
+- EngineeringCrystal != ScientificPASS
+- NO_ACTION is admissible
