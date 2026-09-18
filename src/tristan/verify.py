@@ -20,6 +20,11 @@ REQUIRED_PATHS = (
     "src/tristan/router.py",
     "src/tristan/book0.py",
     "src/tristan/jarvis.py",
+    "src/tristan/failure_genome.py",
+    "src/tristan/anti_corpus.py",
+    "src/tristan/crystal.py",
+    "src/tristan/mission_queue.py",
+    "src/tristan/closure.py",
 )
 
 HARD_INVARIANTS = (
@@ -72,6 +77,6 @@ def verify_repository(root: str | Path) -> dict:
         "errors": errors,
         "registry_count": registry_count,
         "context_debt_clean": bool(context_debt.clean) if context_debt is not None else False,
-        "scope": "repository_structure_registry_context_debt_and_jarvis_core_only",
+        "scope": "repository_structure_registry_context_debt_jarvis_core_and_closure_only",
         "scientific_pass": False,
     }
