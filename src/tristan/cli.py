@@ -3,10 +3,12 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+
 from .closure import compile_closure_plan
 from .context import compile_context
 from .jarvis import compile_jarvis_plan
 from .pipeline import run_intent
+from .r3 import compile_r3_status
 from .registry import Registry
 from .verify import verify_repository
 
@@ -46,6 +48,8 @@ def main(argv: list[str] | None = None) -> int:
     close.add_argument("intent")
     close.add_argument("--limit", type=int, default=8)
 
+    sub.add_parser("r3")
+
     regen = sub.add_parser("regenerate")
     regen.add_argument("--check", action="store_true", default=True)
 
@@ -79,6 +83,10 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "close":
         _print(compile_closure_plan(args.intent, _registry(root), args.limit).to_dict())
+        return 0
+
+    if args.command == "r3":
+        _print(compile_r3_status(_registry(root)).to_dict())
         return 0
 
     if args.command == "regenerate":
