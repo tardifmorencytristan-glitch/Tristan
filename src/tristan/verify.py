@@ -34,6 +34,9 @@ REQUIRED_PATHS = (
     "src/tristan/domain_case.py",
     "src/tristan/domain_cases_r4.py",
     "src/tristan/r4.py",
+    "src/tristan/scientific_connectors.py",
+    "src/tristan/evidence_foundry.py",
+    "src/tristan/domino_engine.py",
     "src/tristan/jarvis_runtime.py",
 )
 
@@ -87,6 +90,6 @@ def verify_repository(root: str | Path) -> dict:
         "errors": errors,
         "registry_count": registry_count,
         "context_debt_clean": bool(context_debt.clean) if context_debt is not None else False,
-        "scope": "repository_structure_registry_context_debt_and_unified_jarvis_runtime_r5",
+        "scope": "repository_structure_registry_context_debt_and_jarvis_r6_evidence_domino",
         "scientific_pass": False,
     }
