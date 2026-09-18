@@ -40,6 +40,7 @@ REQUIRED_PATHS = (
     "src/tristan/jarvis_runtime.py",
     "src/tristan/autonomous_decision.py",
     "src/tristan/frontier_loop.py",
+    "src/tristan/frontier_scheduler.py",
 )
 
 HARD_INVARIANTS = (
