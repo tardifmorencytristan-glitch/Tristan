@@ -38,9 +38,15 @@ REQUIRED_PATHS = (
     "src/tristan/evidence_foundry.py",
     "src/tristan/domino_engine.py",
     "src/tristan/jarvis_runtime.py",
+    "src/tristan/atlas_federation.py",
+    "src/tristan/final_fusion.py",
     "src/tristan/autonomous_decision.py",
     "src/tristan/frontier_loop.py",
     "src/tristan/frontier_scheduler.py",
+    "docs/JARVIS_R7_ATLAS_FEDERATION.md",
+    "docs/JARVIS_R8_FINAL_FUSION.md",
+    "tests/test_atlas_federation_r7.py",
+    "tests/test_final_fusion_r8.py",
 )
 
 HARD_INVARIANTS = (
@@ -93,6 +99,6 @@ def verify_repository(root: str | Path) -> dict:
         "errors": errors,
         "registry_count": registry_count,
         "context_debt_clean": bool(context_debt.clean) if context_debt is not None else False,
-        "scope": "repository_structure_registry_context_debt_jarvis_r6_autonomy_r1_and_frontier_r2",
+        "scope": "repository_structure_registry_context_debt_jarvis_r8_atlas_autonomy_and_frontier",
         "scientific_pass": False,
     }

@@ -231,3 +231,27 @@ Hard boundaries:
 - Consensus != Evidence
 - EngineeringCrystal != ScientificPASS
 - NO_ACTION is admissible
+
+
+## Jarvis R6-R8 - Evidence, Atlas and Final Fusion
+
+R6 adds the Evidence Foundry and bounded Domino planning. R7 adds fail-closed Atlas federation and Top16/Top64/Top256 attention projections. R8 closes the internal software bridge from refreshed source observations to intent-aware Atlas missions, bounded autonomy proposals and evidence-bearing Atlas state updates.
+
+The canonical runtime is now `jarvis-tristan-unified-runtime-r8`.
+
+R8 does not make the Python kernel a network crawler and does not treat a connector read as scientific evidence. Authorized callers may supply bounded `SourceObservation` records to refresh a content-addressed Live Atlas snapshot.
+
+Operational flow:
+
+`OBSERVATIONS -> LIVE ATLAS -> RESIDUAL MISSIONS -> INTENT-AWARE TOP -> ACTION PROPOSAL -> AUTONOMY GATE -> FRONTIER OUTCOME -> UPDATED ATLAS`
+
+Hard boundaries:
+
+- ObservationDescriptor != ConnectorExecution
+- ConnectorRead != ScientificEvidence
+- AtlasProjection != ScientificRanking
+- IntentRelevance != Truth
+- AutonomyPreview != Execution
+- StateTransitionRequiresEvidence
+- PrivateSource != PublicPayload
+- NO_ACTION is admissible
