@@ -22,15 +22,19 @@ class JarvisUnifiedRuntimeR5Tests(unittest.TestCase):
     def test_generic_intent_does_not_invent_domain_claims(self):
         self.assertEqual(select_domains("improve repository context routing"), ())
 
-    def test_unified_runtime_fuses_r1_to_r4_without_promotion(self):
+    def test_unified_runtime_fuses_r1_to_r6_without_promotion(self):
         reg = Registry.load(ROOT / "registry/objects.jsonl")
-        receipt = compile_jarvis_runtime("simulate LC fractal circuit", reg)
-        self.assertEqual(receipt.schema_version, "jarvis-tristan-unified-runtime-r5")
+        receipt = compile_jarvis_runtime("simulate LC fractal circuit with CERN and JWST evidence", reg)
+        self.assertEqual(receipt.schema_version, "jarvis-tristan-unified-runtime-r6")
         self.assertEqual(receipt.selected_domains, ("lc_fractal",))
         self.assertIn("lc_fractal", receipt.domain_cases)
         self.assertTrue(receipt.core_plan)
         self.assertTrue(receipt.closure_plan)
         self.assertTrue(receipt.r3_capabilities)
+        self.assertIn("hepdata", receipt.scientific_source_plan["selected_sources"])
+        self.assertIn("jwst_mast", receipt.scientific_source_plan["selected_sources"])
+        self.assertIsNotNone(receipt.evidence_contract)
+        self.assertEqual(receipt.domino_engine["status"], "AVAILABLE_NOT_EXECUTED")
         self.assertFalse(receipt.scientific_pass)
         self.assertFalse(receipt.authority_granted)
         self.assertIn("UnifiedRuntime != ScientificPASS", receipt.boundaries)
