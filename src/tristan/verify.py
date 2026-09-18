@@ -41,6 +41,7 @@ REQUIRED_PATHS = (
     "src/tristan/atlas_federation.py",
     "src/tristan/final_fusion.py",
     "src/tristan/ultra_closure.py",
+    "src/tristan/intake_guard.py",
     "src/tristan/autonomous_decision.py",
     "src/tristan/frontier_loop.py",
     "src/tristan/frontier_scheduler.py",
@@ -49,8 +50,11 @@ REQUIRED_PATHS = (
     "tests/test_atlas_federation_r7.py",
     "tests/test_final_fusion_r8.py",
     "tests/test_ultra_closure_r9.py",
+    "tests/test_intake_guard_r10.py",
+    "docs/JARVIS_R10_INTAKE_ABSORPTION.md",
     "docs/JARVIS_R9_ULTRA_CLOSURE.md",
     "receipts/PORTFOLIO_CLOSURE_2026_09_18_R1.json",
+    "receipts/PORTFOLIO_CLOSURE_2026_09_18_R2.json",
 )
 
 HARD_INVARIANTS = (
@@ -103,6 +107,6 @@ def verify_repository(root: str | Path) -> dict:
         "errors": errors,
         "registry_count": registry_count,
         "context_debt_clean": bool(context_debt.clean) if context_debt is not None else False,
-        "scope": "repository_structure_registry_context_debt_jarvis_r9_ultra_closure",
+        "scope": "repository_structure_registry_context_debt_jarvis_r10_intake_absorption",
         "scientific_pass": False,
     }

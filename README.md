@@ -288,3 +288,31 @@ Hard boundaries:
 - GenerationThrottle != Truth
 - Capability != Authority
 - NO_ACTION is admissible
+
+
+## Jarvis R10 - Intake Absorption
+
+R10 absorbs the reusable parts of the historical Problem Foundry and repository-local Ultimate Jarvis branches into one canonical owner, `src/tristan/intake_guard.py`.
+
+It adds:
+- source-policy and ingestion profiles;
+- domain verification contracts;
+- exact repo/path/commit/locator grounding;
+- visibility and role-scope gates;
+- weighted grounding coverage;
+- compilation from intake into the existing R9 `MissionGenome`.
+
+R10 intentionally does not keep parallel ProblemGenome or .jarvis orchestration runtimes when equivalent canonical owners already exist.
+
+Canonical intake flow:
+
+`INTAKE -> POLICY -> VERIFICATION CONTRACT -> GROUNDING -> MISSIONGENOME`
+
+Hard boundaries:
+
+- ProblemIntake != PublicationAuthority
+- GroundingPASS != ScientificTruth
+- RepositorySource != ScientificEvidence
+- PrivateSource -> PublicOutput = FORBIDDEN
+- PolicyProfile != TimelessExternalPolicy
+- MissionGenome != Execution
