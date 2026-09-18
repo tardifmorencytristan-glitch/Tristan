@@ -15,10 +15,16 @@ REQUIRED_PATHS = (
     "src/tristan/context.py",
     "src/tristan/context_rehydration.py",
     "src/tristan/pipeline.py",
+    "src/tristan/jarvis_ir.py",
+    "src/tristan/oak.py",
+    "src/tristan/router.py",
+    "src/tristan/book0.py",
+    "src/tristan/jarvis.py",
 )
 
 HARD_INVARIANTS = (
     "Generated != Verified",
+    "Simulation != Measurement",
     "Capability != Authority",
     "OriginBonus = 0",
     "NO_ACTION is admissible",
@@ -66,6 +72,6 @@ def verify_repository(root: str | Path) -> dict:
         "errors": errors,
         "registry_count": registry_count,
         "context_debt_clean": bool(context_debt.clean) if context_debt is not None else False,
-        "scope": "repository_structure_registry_and_context_debt_only",
+        "scope": "repository_structure_registry_context_debt_and_jarvis_core_only",
         "scientific_pass": False,
     }

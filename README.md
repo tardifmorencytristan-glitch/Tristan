@@ -80,3 +80,35 @@ This first kernel is intentionally dependency-light and deterministic. It provid
 7. a CI workflow.
 
 Future modules must earn their complexity through measured, scoped gains.
+
+
+## Jarvis Tristan Omega Core R1
+
+Jarvis is the evidence-bounded orchestration layer over the existing Tristan kernel. It does not self-promote scientific claims. It converts an intent into a deterministic engineering plan whose next action is chosen from explicit residuals and verified-gain/debt-reduction signals.
+
+Core contracts:
+
+- `CreationIR`: binds a registered object to claims, transformations, evidence, and BOOK0.
+- `ClaimIR`: carries assumptions, predicted observables, a witness, alternatives, evidence, counter-evidence, uncertainty, and status.
+- `EvidenceIR`: requires source, method, result, uncertainty, and provenance.
+- `TransformationIR`: requires source/target typing, bounded expected gain/cost/risk/debt, preserved invariants, and rollback.
+- `ExperimentIR`: requires observables plus explicit success/failure criteria.
+- `OAK`: fail-closed domain-specific promotion state machine. Simulation cannot jump to measurement; mathematical, software, and physical certification remain distinct.
+- `Router`: ranks bounded next actions by verified value per burden and explicitly permits `NO_ACTION`.
+- `BOOK0`: deterministic semantic seed digest for regeneration checks.
+- `JarvisPlan`: integrates the existing context compiler and run receipt with evidence-debt closure, adversarial challenge, research, and reuse actions.
+
+Run:
+
+```bash
+tristan jarvis "generalize and verify context"
+```
+
+The output status is deliberately `PROVISIONAL_ENGINEERING_PLAN`. A Jarvis plan is not scientific evidence, experimental validation, deployment authority, or permission for physical action.
+
+Jarvis constitutional boundaries additionally preserve:
+
+- Consensus != Evidence
+- Every promoted claim needs the evidence appropriate to its domain.
+- Every irreversible or externally consequential action requires authorization outside this planner.
+- Self-optimization may not weaken evidence integrity, provenance, rollback, or safety gates.
