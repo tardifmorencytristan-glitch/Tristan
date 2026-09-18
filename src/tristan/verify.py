@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+
 from .context_rehydration import audit_registry_context
 from .registry import Registry
 
@@ -25,6 +26,11 @@ REQUIRED_PATHS = (
     "src/tristan/crystal.py",
     "src/tristan/mission_queue.py",
     "src/tristan/closure.py",
+    "src/tristan/dependency_rebuild.py",
+    "src/tristan/failure_causal.py",
+    "src/tristan/regenerable_crystal.py",
+    "src/tristan/domain_adapters.py",
+    "src/tristan/r3.py",
 )
 
 HARD_INVARIANTS = (
@@ -77,6 +83,6 @@ def verify_repository(root: str | Path) -> dict:
         "errors": errors,
         "registry_count": registry_count,
         "context_debt_clean": bool(context_debt.clean) if context_debt is not None else False,
-        "scope": "repository_structure_registry_context_debt_jarvis_core_and_closure_only",
+        "scope": "repository_structure_registry_context_debt_jarvis_core_closure_and_r3_only",
         "scientific_pass": False,
     }
