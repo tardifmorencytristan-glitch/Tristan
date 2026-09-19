@@ -135,3 +135,12 @@ def test_optional_problem_and_scope_use_safe_defaults():
     assert intake.problem == "General bounded technical audit"
     assert "read-only" in intake.scope
     assert "no mutation" in intake.scope
+
+def test_after_purchase_page_is_zero_touch_and_non_authoritative():
+    html = (ROOT / "after-purchase.html").read_text(encoding="utf-8")
+    assert "Aucune action supplémentaire requise." in html
+    assert "Cette page ne prouve pas qu’un paiement a réussi." in html
+    assert "Stripe reste la source de vérité" in html
+    assert "Envoyer l’intake" not in html
+    assert "Audit ≠ certification" in html
+    assert "PublicRead ≠ autorité de mutation" in html

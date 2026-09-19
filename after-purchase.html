@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Jarvis Audit Express — Après achat</title>
+<meta name="description" content="Étape automatique après achat de Jarvis Audit Express.">
+<style>
+body{margin:0;background:#06101c;color:#eff7ff;font:16px/1.6 system-ui,sans-serif}
+main{width:min(860px,calc(100% - 32px));margin:auto;padding:56px 0}
+.card{border:1px solid #27405d;background:#0e1b2c;border-radius:18px;padding:22px;margin:16px 0}
+.eyebrow{color:#7dd3fc;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.ok{color:#86efac;font-weight:800}
+.muted{color:#aabbd0}
+code{color:#fde68a}
+</style>
+</head>
+<body>
+<main>
+<div class="eyebrow">Jarvis Audit Express · Fulfillment R1.2</div>
+<h1>Aucune action supplémentaire requise.</h1>
+<p class="ok">Votre intake a déjà été collecté par Stripe.</p>
+<p class="muted">Cette page ne prouve pas qu’un paiement a réussi. Stripe reste la source de vérité pour le paiement; Jarvis ne traite que les sessions que Stripe observe comme payées.</p>
+
+<section class="card">
+<h2>Ce qui se passe maintenant</h2>
+<ol>
+<li>Jarvis vérifie automatiquement les nouvelles commandes payées au plus tard lors du prochain cycle horaire.</li>
+<li>Le projet fourni est accepté uniquement s’il résout vers un dépôt GitHub public dans l’enveloppe R1.2.</li>
+<li>Le dépôt est analysé en lecture seule, sans exécuter le code client et sans mutation.</li>
+<li>Le rapport et son receipt digest sont envoyés à l’adresse courriel du Checkout Stripe.</li>
+</ol>
+</section>
+
+<section class="card">
+<h2>Intake R1.2</h2>
+<p>Le projet est requis. Le problème et le périmètre sont facultatifs.</p>
+<p>S’ils sont omis, Jarvis utilise des défauts conservateurs : audit technique borné général et dépôt GitHub public en lecture seule, sans mutation, utilisation de credentials ni test actif.</p>
+</section>
+
+<section class="card">
+<h2>Limites</h2>
+<ul>
+<li><strong>Audit ≠ certification</strong></li>
+<li><strong>StaticPattern ≠ exploitabilité</strong></li>
+<li><strong>NoFlag ≠ sécurité démontrée</strong></li>
+<li><strong>PublicRead ≠ autorité de mutation</strong></li>
+<li><strong>Payment ≠ validation scientifique ou sécurité</strong></li>
+</ul>
+<p class="muted">Un projet privé, non-GitHub, ambigu ou hors périmètre est mis en HOLD plutôt que d’inventer un résultat.</p>
+</section>
+
+<section class="card">
+<h2>Référence de session</h2>
+<p id="session">Le marqueur de session n’est pas disponible dans cette URL.</p>
+<p class="muted">L’identifiant affiché ci-dessous sert uniquement de repère de livraison. Il n’est jamais traité par cette page comme preuve de paiement.</p>
+</section>
+
+<p><a href="https://raw.githack.com/tardifmorencytristan-glitch/Tristan/main/index.html" style="color:#7dd3fc">Retour aux outils publics Tristan</a></p>
+</main>
+<script>
+const q=new URLSearchParams(location.search);
+const id=q.get('session_id')||'';
+const el=document.getElementById('session');
+if(/^cs_[A-Za-z0-9_\-]{6,200}$/.test(id)){
+  const suffix=id.slice(-8);
+  el.textContent='Session de livraison : …'+suffix;
+}
+</script>
+</body>
+</html>
