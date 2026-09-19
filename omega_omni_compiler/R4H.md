@@ -1,6 +1,6 @@
 # Ω Multidirectional Omni Compiler — R4H Communication Projection Adapter
 
-Status: **LOCAL_BOUNDED_ENGINEERING_PASS / REPOSITORY-GATE-PENDING**
+Status: **EXACT-HEAD EXTERNAL ENGINEERING PASS on code head `0e46402660480024aec3573e9b7fc949ea927414`**
 
 ## Mission
 
@@ -73,7 +73,10 @@ Exact construction base: public `main@eff0af246696b862bd871e6c2b761ce01e551233`.
 - Scientific Writing suite: **50/50 PASS**;
 - public root suite: **170/170 PASS**;
 - py_compile: PASS;
-- Battery-T benchmark: PASS_STRUCTURAL.
+- Battery-T benchmark: PASS_STRUCTURAL;
+- GitHub `Omega Multidirectional Omni R0`: **SUCCESS** on code head `0e464026...`;
+- GitHub `kernel-ci`: **SUCCESS** on code head `0e464026...`;
+- GitHub `jarvis-r6-evidence-domino`: **SUCCESS** on code head `0e464026...`.
 
 Omni candidate suite:
 - 71 tests total;

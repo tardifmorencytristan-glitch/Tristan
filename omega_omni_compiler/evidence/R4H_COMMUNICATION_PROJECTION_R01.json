@@ -1,7 +1,13 @@
 {
   "schema": "omega-omni-r4h-communication-projection-r0.1",
-  "status": "LOCAL_BOUNDED_ENGINEERING_PASS_REPOSITORY_GATE_PENDING",
+  "status": "EXACT_HEAD_EXTERNAL_ENGINEERING_PASS_CODE_HEAD",
   "construction_base": "eff0af246696b862bd871e6c2b761ce01e551233",
+  "qualified_code_head": "0e46402660480024aec3573e9b7fc949ea927414",
+  "github_exact_head": {
+    "omega_omni_workflow": "SUCCESS run 35458548462",
+    "kernel_ci": "SUCCESS run 35458548566",
+    "jarvis_r6_evidence_domino": "SUCCESS run 35458548486"
+  },
   "module_sha256": "c6e16c79b483c3a84154e4c8bd21fe646156ec929f547046cb712637f4ec91dc",
   "test_sha256": "42ea54fcf026e200727fa3254295eaf50e6415905b0104f62142d766fe43a7df",
   "bridge_test_sha256": "e1a2e7f17e74dd5aa08d7d11225a4d4f12580e3b836bff384c29cb5e9a103a20",
