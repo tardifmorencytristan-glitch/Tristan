@@ -134,12 +134,21 @@ class IntentRealityR12Tests(unittest.TestCase):
             (self._event("E-debt"),),
             evidence_debt=debt,
         )
+        self.assertTrue(receipt.evidence_debt_assessed)
         self.assertEqual(receipt.r9_debt["evidence"], 19.0)
         self.assertEqual(receipt.r9_debt["freshness"], 4.0)
         self.assertEqual(receipt.r9_debt["reality"], 6.0)
         self.assertEqual(receipt.r9_debt["authority"], 7.0)
         self.assertFalse(receipt.scientific_pass)
         self.assertFalse(receipt.authority_granted)
+
+    def test_missing_evidence_debt_is_unassessed_not_zero_claim(self):
+        receipt = compile_intent_reality((self._event("E-unassessed"),))
+        self.assertFalse(receipt.evidence_debt_assessed)
+        self.assertIn(
+            "UnassessedEvidenceDebt != ZeroDebt",
+            receipt.boundaries,
+        )
 
     def test_delta_detects_regression_and_closure(self):
         before = project_intent_state((
