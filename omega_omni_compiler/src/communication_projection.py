@@ -4,13 +4,25 @@ from dataclasses import asdict, dataclass, fields
 from hashlib import sha256
 import json
 import math
-from typing import Any, Mapping, Sequence
+from typing import Any, Mapping, Protocol, Sequence
 
-from tristan.jarvis_ir import ClaimIR, EvidenceIR
 from omega_omni_compiler.src.representation_ir import RepresentationGraph
 
 CHANNELS = {"TEXT", "VOICE", "VIDEO", "SLIDES", "WEB", "LIVE"}
 INTERACTION_MODES = {"NONE", "LINEAR", "INTERRUPTIBLE", "INTERACTIVE"}
+
+
+class ClaimLike(Protocol):
+    claim_id: str
+    evidence_ids: Sequence[str]
+
+    def validate(self) -> list[str]: ...
+
+
+class EvidenceLike(Protocol):
+    evidence_id: str
+
+    def validate(self) -> list[str]: ...
 
 
 def _unit(value: float, name: str) -> float:
@@ -145,8 +157,8 @@ def _accumulated_loss(values: Sequence[float]) -> float:
 def evaluate_projection(
     projection: TimedProjectionIR,
     representation_graph: RepresentationGraph,
-    claims: Sequence[ClaimIR],
-    evidence: Sequence[EvidenceIR],
+    claims: Sequence[ClaimLike],
+    evidence: Sequence[EvidenceLike],
 ) -> CommunicationCourtReceipt:
     errors = list(projection.validate())
     claim_map = {item.claim_id: item for item in claims}

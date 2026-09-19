@@ -1,9 +1,9 @@
+from dataclasses import dataclass
 import json
 from hashlib import sha256
 from pathlib import Path
 import unittest
 
-from tristan.jarvis_ir import ClaimIR, EvidenceIR
 from omega_omni_compiler.src.communication_projection import (
     CommunicationProjectionSpec,
     TimedProjectionIR,
@@ -20,6 +20,23 @@ from omega_omni_compiler.src.representation_ir import (
     RepresentationNode,
     RepresentationRelation,
 )
+
+
+@dataclass(frozen=True)
+class ClaimStub:
+    claim_id: str
+    evidence_ids: tuple[str, ...] = ()
+
+    def validate(self) -> list[str]:
+        return [] if self.claim_id.strip() else ["claim_id required"]
+
+
+@dataclass(frozen=True)
+class EvidenceStub:
+    evidence_id: str
+
+    def validate(self) -> list[str]:
+        return [] if self.evidence_id.strip() else ["evidence_id required"]
 
 
 def anchor(source: str = "fixture") -> ProvenanceAnchor:
@@ -73,25 +90,12 @@ def segment(**kwargs) -> TimedProjectionSegment:
     return TimedProjectionSegment(**base)
 
 
-def claim(evidence_ids=("e1",)) -> ClaimIR:
-    return ClaimIR(
-        claim_id="c1",
-        statement="bounded result",
-        evidence_ids=tuple(evidence_ids),
-        uncertainty="BOUNDED",
-    )
+def claim(evidence_ids=("e1",)) -> ClaimStub:
+    return ClaimStub("c1", tuple(evidence_ids))
 
 
-def evidence(eid="e1") -> EvidenceIR:
-    return EvidenceIR(
-        evidence_id=eid,
-        kind="dataset",
-        source="source",
-        method="bounded court",
-        result="observed result",
-        uncertainty="BOUNDED",
-        provenance=("source:fixture",),
-    )
+def evidence(eid="e1") -> EvidenceStub:
+    return EvidenceStub(eid)
 
 
 class CommunicationProjectionR01Tests(unittest.TestCase):
@@ -175,16 +179,8 @@ class CommunicationProjectionR01Tests(unittest.TestCase):
         g.add_node(RepresentationNode("battery-doc", "DOCUMENT", provenance=[a]))
         g.add_node(RepresentationNode("battery-paragraph", "PARAGRAPH", content=text, provenance=[a]))
         g.add_relation(RepresentationRelation("contains", "CONTAINS", ("battery-doc",), ("battery-paragraph",)))
-        c = ClaimIR("battery-bounded", text, evidence_ids=("calce-r04",), uncertainty="BOUNDED")
-        e = EvidenceIR(
-            "calce-r04",
-            "dataset",
-            source_ref,
-            "zero-fit transfer court",
-            "DFN/SPM/SPMe bounded CALCE first-cycle comparison",
-            "BOUNDED",
-            (source_ref,),
-        )
+        c = ClaimStub("battery-bounded", ("calce-r04",))
+        e = EvidenceStub("calce-r04")
         projection = TimedProjectionIR(
             spec(
                 projection_id="battery-video-r01",

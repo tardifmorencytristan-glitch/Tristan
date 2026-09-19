@@ -15,7 +15,7 @@ The adapter is intentionally downstream of existing knowledge/evidence owners.
 
 ## Reused owners
 
-- `tristan.jarvis_ir.ClaimIR` and `EvidenceIR`;
+- structural `ClaimLike` / `EvidenceLike` protocols, with `tristan.jarvis_ir.ClaimIR` and `EvidenceIR` verified by a separate bridge test;
 - Omni R4A `RepresentationGraph` + provenance;
 - Scientific Writing R4/R4.1 stable claim/evidence lineage;
 - existing renderers remain external adapters;
@@ -69,9 +69,9 @@ Observed local result:
 Exact construction base: public `main@eff0af246696b862bd871e6c2b761ce01e551233`.
 
 - focused R4H court: **10/10 PASS**;
-- Jarvis IR + R4H composed court: **16/16 PASS**;
+- Omni protocol + real Jarvis ClaimIR/EvidenceIR bridge: **11/11 PASS**;
 - Scientific Writing suite: **50/50 PASS**;
-- public root suite: **169/169 PASS**;
+- public root suite: **170/170 PASS**;
 - py_compile: PASS;
 - Battery-T benchmark: PASS_STRUCTURAL.
 
