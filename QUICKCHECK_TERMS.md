@@ -17,15 +17,7 @@ Current launch scope:
 
 ## Exclusions
 
-The service does not include:
-
-- repository mutation;
-- credential use;
-- execution of untrusted repository code;
-- active security testing or exploitation;
-- certification or a guarantee that a repository is safe, correct, secure, compliant, or production-ready;
-- legal, financial, medical, or other regulated professional advice;
-- scientific validation beyond the evidence explicitly stated in the receipt.
+The service does not include repository mutation, credential use, execution of untrusted repository code, active security testing or exploitation, certification, regulated professional advice, or scientific validation beyond the evidence explicitly stated in the receipt.
 
 ## Delivery
 
