@@ -1,0 +1,61 @@
+{
+  "schema_version": "jarvis-intent-reality-r12-execution-receipt-r1",
+  "observed_at": "2026-09-19",
+  "intent_id": "I-ULTRA-INTENT-REALITY",
+  "public_base_sha": "eff0af246696b862bd871e6c2b761ce01e551233",
+  "code_test_head_sha": "414040d27b2ebfc65c57678f2e6621629cb609df",
+  "pr_number": 78,
+  "execution": {
+    "shadow_node_role": "PC_SECONDARY",
+    "focused": {
+      "intent_reality_r12": "12/12 PASS",
+      "final_fusion_r8": "3/3 PASS",
+      "ultra_closure_r9": "6/6 PASS",
+      "py_compile": "PASS"
+    },
+    "full_public_suite": "181/181 PASS",
+    "compileall": "PASS",
+    "process_exit_code": 0
+  },
+  "real_ingestion": {
+    "sources": [
+      "sanitized Jarvis tablet status receipt",
+      "GitHub PR #78 exact observed candidate state"
+    ],
+    "event_count": 2,
+    "event_digest": "8fec787e5de3707e02996f49c5b2f4f5597fc3550161e89dbc60a9ddc618de85",
+    "state": {
+      "surface_state": "partial",
+      "recovered": true,
+      "accomplished": true,
+      "verified": false,
+      "externally_validated": false,
+      "closed": false
+    },
+    "evidence_refs": [
+      "sha256:2603e1e580a656fe010646e2c29f117db0bc2294687cabed513c6386674b92a7",
+      "sha256:f6b765e632c189042656d955af30a2d2caad05e78636017947f76dc664de8adc"
+    ],
+    "evidence_debt_assessed": false,
+    "raw_private_payload_published": false
+  },
+  "github_exact_head_observation": {
+    "jarvis_r6_evidence_domino": "SUCCESS on code/test head",
+    "kernel_ci": "IN_PROGRESS at last observation on code/test head"
+  },
+  "negative_memory": [
+    "Initial unittest discovery command had malformed CLI and produced PRE_RUN_CLI, not a code failure.",
+    "Initial detached-checkout invocation produced 0 tests and was classified PRE_RUN_CLI, not PASS/FAIL."
+  ],
+  "boundaries": [
+    "Recovered != Accomplished",
+    "Accomplished != Verified",
+    "Verified != ExternallyValidated",
+    "UnassessedEvidenceDebt != ZeroDebt",
+    "ReceiptCommit != CodeTestHead",
+    "RepositoryPASS != ScientificPASS",
+    "Capability != Authority",
+    "NO_ACTION is admissible"
+  ],
+  "promotion_state": "HOLD_EXACT_RECEIPT_HEAD_REQUALIFICATION"
+}
