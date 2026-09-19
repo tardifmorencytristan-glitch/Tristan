@@ -19,6 +19,7 @@ INTENT_REALITY_BOUNDARIES = (
     "IntentInference != UserInstruction",
     "Lineage != Truth",
     "EventLog != ScientificEvidence",
+    "UnassessedEvidenceDebt != ZeroDebt",
     "Capability != Authority",
     "NO_ACTION is admissible",
 )
@@ -289,6 +290,7 @@ class IntentRealityReceipt:
     schema_version: str
     state: dict
     evidence_debt: dict
+    evidence_debt_assessed: bool
     r9_debt: dict
     event_count: int
     event_digest: str
@@ -563,6 +565,7 @@ def compile_intent_reality(
     )
     if state is None:
         raise ValueError("no events visible under requested temporal cutoffs")
+    evidence_debt_assessed = evidence_debt is not None
     debt = evidence_debt or IntentEvidenceDebt()
     errors = debt.validate()
     if errors:
@@ -572,6 +575,7 @@ def compile_intent_reality(
         schema_version="jarvis-intent-reality-r12",
         state=state.to_dict(),
         evidence_debt=debt.to_dict(),
+        evidence_debt_assessed=evidence_debt_assessed,
         r9_debt=r9.to_dict(),
         event_count=len(state.event_ids),
         event_digest=_event_digest(tuple(
