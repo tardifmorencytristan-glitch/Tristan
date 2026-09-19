@@ -112,3 +112,26 @@ def test_sqlite_result_store_is_idempotent(tmp_path):
     assert not claim_result_slot(path, "cs_test", {"status": "PROCESSING"})
     store_result(path, "cs_test", {"status": "READY", "value": 7})
     assert load_result(path, "cs_test") == {"status": "READY", "value": 7}
+
+def test_optional_problem_and_scope_use_safe_defaults():
+    session = {
+        "id": "cs_test_optional",
+        "payment_status": "paid",
+        "payment_link": AUDIT_PAYMENT_LINK_ID,
+        "metadata": {
+            "offer": "audit_express_99",
+            "fulfillment": "auto_oak_audit_v1",
+            "conversion_experiment": "friction_reduction_r1",
+            "intake": "checkout_project_required_problem_scope_optional_v2",
+        },
+        "custom_fields": [
+            {"key": "project", "text": {"value": "https://github.com/acme/demo"}},
+            {"key": "problem", "text": {"value": ""}},
+            {"key": "scope", "text": {"value": ""}},
+        ],
+        "customer_details": {"email": "buyer@example.com"},
+    }
+    intake = intake_from_checkout_session(session)
+    assert intake.problem == "General bounded technical audit"
+    assert "read-only" in intake.scope
+    assert "no mutation" in intake.scope

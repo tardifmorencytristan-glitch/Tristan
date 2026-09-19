@@ -21,3 +21,5 @@ Boundaries:
 - PublicRead != MutationAuthority
 
 R1.1 storage note: SQLite is ephemeral on free Render instances; deploy/restart may require Stripe event replay. This is explicit residual debt, not durable-storage proof.
+
+R1.2 intake note: project is required; problem/scope may be omitted and compile to conservative public-GitHub read-only defaults. OptionalInput != BroaderAuthority.
