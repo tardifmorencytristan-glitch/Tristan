@@ -1,5 +1,16 @@
 # Tristan
 
+## Start here: Jarvis Repo QuickCheck
+
+Need a fast bounded review of a public GitHub repository?
+
+**First external customer: 5 CAD one-time**  
+[Open the focused QuickCheck product page](quickcheck.html)
+
+You can also [see a real sample receipt](examples/REPO_QUICKCHECK_SAMPLE.md) and review the [QuickCheck service terms](QUICKCHECK_TERMS.md).
+
+The service is read-only and bounded. No credentials, no untrusted-code execution, no active security testing, no certification, and no guarantee of repository safety.
+
 ## Live product
 
 **Jarvis Repo QuickCheck** is the current primary paid front door: a bounded read-only advisory review of one public GitHub repository.
