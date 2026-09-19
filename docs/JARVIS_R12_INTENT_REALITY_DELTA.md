@@ -76,6 +76,8 @@ R12 adds intent-specific evidence-debt dimensions:
 
 The adapter projects those dimensions into the existing R9 `DebtVector`; it does not create a competing portfolio-debt owner.
 
+An omitted debt assessment is explicitly marked `evidence_debt_assessed=false`. Numeric zero defaults are therefore not a claim that evidence debt is absent.
+
 ## Bitemporal query behavior
 
 `project_intent_state(..., as_known_at=..., valid_at=...)` supports a bounded historical question such as:
@@ -127,6 +129,7 @@ R12 should remain export-compatible in spirit with standard provenance, trace-co
 - IntentInference != UserInstruction
 - Lineage != Truth
 - EventLog != ScientificEvidence
+- UnassessedEvidenceDebt != ZeroDebt
 - Capability != Authority
 - R12 != NewMissionOwner
 - R12 != R8Replacement
