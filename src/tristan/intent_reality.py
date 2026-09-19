@@ -7,6 +7,7 @@ import json
 from typing import Iterable
 
 from .final_fusion import SourceObservation
+from .frontier_loop import ActionOutcome
 from .ultra_closure import DebtVector
 
 
@@ -219,6 +220,37 @@ class IntentEvent:
         }
 
 
+def _canonical_digest(value: object) -> str:
+    blob = json.dumps(
+        value,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+        default=str,
+    ).encode("utf-8")
+    return hashlib.sha256(blob).hexdigest()
+
+
+def deduplicate_intent_events(
+    events: Iterable[IntentEvent],
+) -> tuple[IntentEvent, ...]:
+    by_id: dict[str, IntentEvent] = {}
+    fingerprints: dict[str, str] = {}
+    for event in events:
+        errors = event.validate()
+        if errors:
+            raise ValueError("; ".join(errors))
+        fingerprint = _canonical_digest(event.to_dict())
+        previous = fingerprints.get(event.event_id)
+        if previous is not None and previous != fingerprint:
+            raise ValueError(
+                f"event_id collision with different payload: {event.event_id}"
+            )
+        by_id[event.event_id] = event
+        fingerprints[event.event_id] = fingerprint
+    return tuple(sorted(by_id.values(), key=_event_sort_key))
+
+
 @dataclass(frozen=True)
 class IntentState:
     intent_id: str
@@ -278,11 +310,7 @@ def project_intent_state(
     as_known_at: str | None = None,
     valid_at: str | None = None,
 ) -> IntentState | None:
-    rows = tuple(events)
-    for event in rows:
-        errors = event.validate()
-        if errors:
-            raise ValueError("; ".join(errors))
+    rows = deduplicate_intent_events(events)
     if not rows:
         return None
     intent_ids = {event.intent_id for event in rows}
@@ -422,6 +450,95 @@ def source_observation_to_event(
     return event
 
 
+def action_outcome_to_event(
+    outcome: ActionOutcome,
+    *,
+    intent_id: str,
+    event_id: str,
+    valid_at: str,
+    recorded_at: str,
+    source_id: str = "jarvis-frontier-r2",
+) -> IntentEvent:
+    errors = outcome.validate()
+    if errors:
+        raise ValueError("; ".join(errors))
+    accomplished = bool(outcome.success)
+    verified = bool(outcome.success and outcome.verified_gain > 0)
+    note_parts = [
+        f"verified_gain={outcome.verified_gain}",
+        f"rollback_used={outcome.rollback_used}",
+    ]
+    if outcome.residuals:
+        note_parts.append("residuals=" + ",".join(outcome.residuals))
+    if outcome.notes:
+        note_parts.extend(outcome.notes)
+    event = IntentEvent(
+        event_id=event_id,
+        intent_id=intent_id,
+        valid_at=valid_at,
+        recorded_at=recorded_at,
+        source_id=source_id,
+        event_kind="ACTION_OUTCOME",
+        surface_state="realized" if outcome.success else "failed",
+        axis_patch=IntentAxisPatch(
+            accomplished=accomplished,
+            verified=verified,
+        ),
+        object_refs=(
+            ObjectRef("intent", intent_id, "subject"),
+            ObjectRef("action", outcome.action_id, "outcome_of"),
+        ),
+        evidence_refs=tuple(outcome.evidence_refs),
+        note="; ".join(note_parts),
+    )
+    errors = event.validate()
+    if errors:
+        raise ValueError("; ".join(errors))
+    return event
+
+
+def receipt_to_event(
+    receipt: dict,
+    *,
+    intent_id: str,
+    event_id: str,
+    source_id: str,
+    event_kind: str,
+    valid_at: str,
+    recorded_at: str,
+    axis_patch: IntentAxisPatch,
+    surface_state: str | None = None,
+    object_refs: tuple[ObjectRef, ...] = (),
+    evidence_refs: tuple[str, ...] = (),
+    note: str = "",
+) -> IntentEvent:
+    if not isinstance(receipt, dict) or not receipt:
+        raise ValueError("non-empty receipt dict required")
+    receipt_digest = _canonical_digest(receipt)
+    receipt_ref = f"sha256:{receipt_digest}"
+    event = IntentEvent(
+        event_id=event_id,
+        intent_id=intent_id,
+        valid_at=valid_at,
+        recorded_at=recorded_at,
+        source_id=source_id,
+        event_kind=event_kind,
+        surface_state=surface_state,
+        axis_patch=axis_patch,
+        object_refs=(
+            ObjectRef("intent", intent_id, "subject"),
+            ObjectRef("receipt", receipt_ref, "evidence"),
+            *object_refs,
+        ),
+        evidence_refs=tuple(dict.fromkeys((*evidence_refs, receipt_ref))),
+        note=note,
+    )
+    errors = event.validate()
+    if errors:
+        raise ValueError("; ".join(errors))
+    return event
+
+
 def _event_digest(events: tuple[IntentEvent, ...]) -> str:
     ordered = sorted(events, key=_event_sort_key)
     payload = [event.to_dict() for event in ordered]
@@ -436,7 +553,7 @@ def compile_intent_reality(
     as_known_at: str | None = None,
     valid_at: str | None = None,
 ) -> IntentRealityReceipt:
-    rows = tuple(events)
+    rows = deduplicate_intent_events(events)
     if not rows:
         raise ValueError("events required")
     state = project_intent_state(
