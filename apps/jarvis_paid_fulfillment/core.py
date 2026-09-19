@@ -117,10 +117,13 @@ def intake_from_checkout_session(session: Mapping[str, object]) -> PaidAuditInta
         raise ValueError("checkout session is not the bounded audit offer")
     fields = extract_custom_fields(session)
     project = fields.get("project", "").strip()
-    problem = fields.get("problem", "").strip()
-    scope = fields.get("scope", "").strip()
-    if not project or len(problem) < 5 or len(scope) < 10:
-        raise ValueError("required audit intake fields are missing")
+    if not project:
+        raise ValueError("required project field is missing")
+    problem = fields.get("problem", "").strip() or "General bounded technical audit"
+    scope = fields.get("scope", "").strip() or (
+        "Public GitHub repository read-only advisory audit; "
+        "no mutation, credential use, or active testing"
+    )
     details = session.get("customer_details", {})
     details = details if isinstance(details, Mapping) else {}
     return PaidAuditIntake(
