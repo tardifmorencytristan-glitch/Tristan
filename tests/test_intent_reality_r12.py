@@ -1,15 +1,19 @@
 import unittest
 
 from tristan.final_fusion import SourceObservation
+from tristan.frontier_loop import ActionOutcome
 from tristan.intent_reality import (
     IntentAxisPatch,
     IntentEvidenceDebt,
     IntentEvent,
     IntentLineageEdge,
     ObjectRef,
+    action_outcome_to_event,
     compare_intent_states,
     compile_intent_reality,
+    deduplicate_intent_events,
     project_intent_state,
+    receipt_to_event,
     source_observation_to_event,
 )
 
@@ -174,6 +178,59 @@ class IntentRealityR12Tests(unittest.TestCase):
         self.assertIn("closed:False->True", delta.axis_changes)
         self.assertEqual(delta.surface_transition, ("partial", "realized"))
         self.assertEqual(delta.evidence_added, ("receipt:new",))
+
+    def test_action_outcome_ingestion_preserves_verification_boundary(self):
+        outcome = ActionOutcome(
+            action_id="A-1",
+            success=True,
+            verified_gain=1.5,
+            evidence_refs=("receipt:action-1",),
+            residuals=("EXTERNAL_VALIDATION_GAP",),
+        )
+        event = action_outcome_to_event(
+            outcome,
+            intent_id="I-1",
+            event_id="E-action",
+            valid_at="2026-09-19T14:30:00Z",
+            recorded_at="2026-09-19T14:31:00Z",
+        )
+        state = project_intent_state((event,))
+        self.assertTrue(state.accomplished)
+        self.assertTrue(state.verified)
+        self.assertFalse(state.externally_validated)
+        self.assertFalse(state.closed)
+        self.assertEqual(state.surface_state, "realized")
+
+    def test_hashed_receipt_ingestion_does_not_embed_raw_payload(self):
+        raw = {
+            "task_id": "oak-check",
+            "status": "DONE",
+            "private_field": "do-not-copy-this-payload",
+        }
+        event = receipt_to_event(
+            raw,
+            intent_id="I-1",
+            event_id="E-receipt",
+            source_id="jarvis-tablet",
+            event_kind="OAK_RECEIPT",
+            valid_at="2026-09-19T14:38:42-04:00",
+            recorded_at="2026-09-19T14:38:43-04:00",
+            axis_patch=IntentAxisPatch(accomplished=True, verified=True),
+            object_refs=(ObjectRef("worker", "tablet", "observer"),),
+            note="raw receipt retained outside event payload",
+        )
+        rendered = str(event.to_dict())
+        self.assertNotIn("do-not-copy-this-payload", rendered)
+        self.assertTrue(any(ref.startswith("sha256:") for ref in event.evidence_refs))
+
+    def test_event_id_collision_fails_closed(self):
+        first = self._event("E-collision")
+        second = self._event(
+            "E-collision",
+            surface_state="failed",
+        )
+        with self.assertRaisesRegex(ValueError, "event_id collision"):
+            deduplicate_intent_events((first, second))
 
     def test_digest_is_order_independent_after_recorded_time_sort(self):
         first = self._event(
