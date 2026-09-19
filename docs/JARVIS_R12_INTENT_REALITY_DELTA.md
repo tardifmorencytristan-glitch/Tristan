@@ -84,6 +84,18 @@ The adapter projects those dimensions into the existing R9 `DebtVector`; it does
 
 This is event-state reconstruction, not proof that an inferred intention was the user's actual private mental state.
 
+## Universal event ingestion
+
+R12 reuses existing normalized owners rather than adding provider-specific network clients:
+
+- R8 `SourceObservation` -> recovered-source event;
+- Frontier R2 `ActionOutcome` -> accomplished/verified action event;
+- arbitrary authorized receipts -> content-addressed event through `receipt_to_event`.
+
+`receipt_to_event` hashes the supplied receipt and stores the digest as evidence instead of embedding the raw payload in the event log. The caller must explicitly provide the state-axis patch; R12 does not infer user intent, authority, completion, or external validation from an opaque receipt.
+
+Duplicate event IDs are deterministic only when their canonical payloads match. Reusing one event ID with a different payload fails closed.
+
 ## Weekly IntentAtlas use
 
 A weekly report should consume R12 deltas and emit:
