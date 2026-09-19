@@ -45,6 +45,8 @@ https://buy.stripe.com/5kQaEX2qobRg1NR8Pm83C0g
 **Standard QuickCheck — 9 CAD:**  
 https://buy.stripe.com/4gM9AT2qodZoaknghO83C0f
 
+**See a real sample receipt:** [`examples/REPO_QUICKCHECK_SAMPLE.md`](examples/REPO_QUICKCHECK_SAMPLE.md)
+
 ### Audit Express — 99 CAD one-time
 
 Jarvis can automatically fulfill a bounded advisory audit for a **public GitHub repository**.
