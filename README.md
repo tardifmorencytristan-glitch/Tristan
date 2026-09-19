@@ -32,7 +32,7 @@ AI-worker capabilities are available only when actually provisioned and verified
 
 Jarvis can automatically fulfill a bounded advisory audit for a **public GitHub repository**.
 
-- checkout requires the public GitHub repository URL, the primary problem, and the authorized scope;
+- checkout requires the project locator; the problem and scope are optional, and omitted values compile to conservative public-GitHub read-only defaults;
 - the fulfillment loop checks paid orders hourly and sends the receipt by email;
 - the scan is read-only and bounded to at most 40 selected high-signal files, 200 KB per file, and 1.5 MB total;
 - unsupported/private/non-GitHub inputs are held rather than guessed;
