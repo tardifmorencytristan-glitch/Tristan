@@ -1,5 +1,17 @@
 # Tristan
 
+## Live product
+
+**Jarvis Repo QuickCheck** is the current primary paid front door: a bounded read-only advisory review of one public GitHub repository.
+
+- Product page: https://raw.githack.com/tardifmorencytristan-glitch/Tristan/main/quickcheck.html
+- First-customer checkout: 5 CAD one-time
+- Sample receipt: [examples/REPO_QUICKCHECK_SAMPLE.md](examples/REPO_QUICKCHECK_SAMPLE.md)
+- Terms and refund boundary: [QUICKCHECK_TERMS.md](QUICKCHECK_TERMS.md)
+
+Payment buys only the stated service scope. It does not buy scientific authority, evidence priority, repository permissions, or certification.
+
+
 **Status: BOOTSTRAP / PROVISIONAL ENGINEERING KERNEL**
 
 `Tristan` is a small public, regenerable kernel for routing intentions into the minimum sufficient set of sources, capabilities, evidence, failures, tests, and frontiers.
