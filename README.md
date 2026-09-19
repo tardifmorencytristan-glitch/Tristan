@@ -28,7 +28,7 @@ AI-worker capabilities are available only when actually provisioned and verified
 
 ## Professional technical services
 
-### Jarvis Repo QuickCheck — 9 CAD one-time
+### Jarvis Repo QuickCheck — first customer 5 CAD, then 9 CAD
 
 Fastest self-serve Jarvis offer: submit **one public GitHub repository URL** and receive a bounded advisory receipt by email.
 
@@ -39,7 +39,10 @@ Fastest self-serve Jarvis offer: submit **one public GitHub repository URL** and
 - secret-like values are never reproduced in the receipt;
 - unsupported/private/non-GitHub inputs are held instead of guessed.
 
-**Buy Repo QuickCheck — 9 CAD:**  
+**First-customer QuickCheck — 5 CAD (single-use promotion):**  
+https://buy.stripe.com/5kQaEX2qobRg1NR8Pm83C0g
+
+**Standard QuickCheck — 9 CAD:**  
 https://buy.stripe.com/4gM9AT2qodZoaknghO83C0f
 
 ### Audit Express — 99 CAD one-time
