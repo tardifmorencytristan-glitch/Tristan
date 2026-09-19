@@ -28,11 +28,24 @@ AI-worker capabilities are available only when actually provisioned and verified
 
 ## Professional technical services
 
-Bounded technical audits and performance work are available through the live services page:
+### Audit Express — 99 CAD one-time
+
+Jarvis can automatically fulfill a bounded advisory audit for a **public GitHub repository**.
+
+- checkout requires the public GitHub repository URL, the primary problem, and the authorized scope;
+- the fulfillment loop checks paid orders hourly and sends the receipt by email;
+- the scan is read-only and bounded to at most 40 selected high-signal files, 200 KB per file, and 1.5 MB total;
+- unsupported/private/non-GitHub inputs are held rather than guessed;
+- findings are advisory signals only: **Audit != Certification**, **StaticPattern != Exploitability**, **NoFlag != Safe**.
+
+**Buy Audit Express — 99 CAD:**  
+https://buy.stripe.com/5kQ3cvfda08yfEH6He83C04
+
+Other bounded technical audits and performance work are available through the live services page:
 
 https://tristan-tardif-morency-tfug.vercel.app/services
 
-Current public offers include self-service technical audits at **99/149 CAD** and scoped pilot engagements for infrastructure/CI security and Python-to-native performance. Every mandate preserves explicit scope, limits, evidence boundaries, and authorization requirements.
+Every mandate preserves explicit scope, limits, evidence boundaries, and authorization requirements.
 
 ## Scientific Consistency demand canary
 
