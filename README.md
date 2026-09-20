@@ -1,5 +1,11 @@
 # Tristan
 
+## Buy Jarvis Repo QuickCheck
+
+Focused product page: https://raw.githack.com/tardifmorencytristan-glitch/Tristan/main/quickcheck.html
+
+First-customer launch: **5 CAD one-time**. Public GitHub repository only, read-only, bounded, evidence-oriented. See [service terms](QUICKCHECK_TERMS.md) and a [real sample receipt](examples/REPO_QUICKCHECK_SAMPLE.md).
+
 ## Start here: Jarvis Repo QuickCheck
 
 Need a fast bounded review of a public GitHub repository?
