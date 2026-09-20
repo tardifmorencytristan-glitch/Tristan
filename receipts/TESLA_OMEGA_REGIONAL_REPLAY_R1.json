@@ -1,0 +1,24 @@
+{
+  "schema_version": "tesla-omega-regional-replay-r1",
+  "observed_at": "2026-09-18",
+  "source_pr": 48,
+  "source_head": "b7b963b069383e516e1d1933d15d014c10b7d395",
+  "source_family": "TESLA-OMEGA R0.1-R0.11",
+  "replay_policy": "COPY_REGIONAL_CAPABILITY_EXCLUDE_CONTROL_PLANE_HOOKS",
+  "copied_file_count": 71,
+  "excluded_modified_files": [
+    "src/tristan/cli.py",
+    "src/tristan/jarvis_runtime.py"
+  ],
+  "rationale": "Preserve the bounded scientific/simulation capability while preventing an older branch from overwriting the canonical R9/R10 control plane.",
+  "status": "PENDING_EXACT_HEAD_CI",
+  "scientific_pass": false,
+  "authority_granted": false,
+  "boundaries": [
+    "Simulation != Measurement",
+    "MultiMachineReplication != ExperimentalReplication",
+    "RelativeGain != PracticalEfficiency",
+    "RegionalCapability != ControlPlaneOwner",
+    "Replay != NewScientificEvidence"
+  ]
+}

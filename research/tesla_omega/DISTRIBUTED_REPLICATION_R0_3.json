@@ -1,0 +1,72 @@
+{
+  "schema_version": "tesla-omega-distributed-r0.3",
+  "status": "ROBUST_RLC_COMPUTATIONAL_REPLICATION_ONLY",
+  "authority_granted": false,
+  "physical_validation_claimed": false,
+  "novelty_claimed": false,
+  "commit": "ad74fa3bda50cad956df2178f3d2bc6c265475c8",
+  "machines": [
+    {
+      "name": "DESKTOP-SHA9IHL",
+      "role": "generation_simulation",
+      "tests_r03": {
+        "passed": 5,
+        "failed": 0,
+        "runtime_s": 6.773
+      }
+    },
+    {
+      "name": "DESKTOP-2G1SSMT",
+      "role": "independent_replication_oak",
+      "tests_r03": {
+        "passed": 5,
+        "failed": 0,
+        "runtime_s": 10.931
+      }
+    }
+  ],
+  "exact_replication": {
+    "samples": 48,
+    "seed": 20260918,
+    "sha256_machine_a": "75DE9977A6D3656DA71C0863442FC05FF6094E17FDB132494882CB8558A55340",
+    "sha256_machine_b": "75DE9977A6D3656DA71C0863442FC05FF6094E17FDB132494882CB8558A55340",
+    "identical": true
+  },
+  "bounded_screening_observation": {
+    "nominal_model": "series-RLC magnetically coupled tree network",
+    "top_degree_sequence": [
+      5,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "top_mean_peak_efficiency": 0.10026086677225975,
+    "top_std_peak_efficiency": 0.01615734254138425,
+    "top_robust_score": 0.0841035242308755,
+    "top_p10_peak_efficiency": 0.07837561429734058
+  },
+  "oak_confounder": {
+    "id": "F_R03_001",
+    "issue": "Source/receiver endpoints are selected by graph diameter, but equal graph budgets do not imply equal physical transmitter-receiver geometry or distance.",
+    "consequence": "The ranking is not a fair WPT geometry comparison and cannot support a physical topology-performance claim.",
+    "reusable_constraint": "Future WPT courts must fix or explicitly parameterize 3D source/receiver geometry, coil orientation, separation, conductor budget, and coupling extraction before comparing efficiency."
+  },
+  "next_gates": [
+    "introduce explicit 3D node coordinates and matched source-receiver separation",
+    "derive edge coupling from geometry instead of uniform k",
+    "match conductor/component budget and resonator size",
+    "add skin/proximity and dielectric-loss approximations",
+    "cross-check network result against an independent SPICE-like formulation",
+    "promote only surviving candidates to FEM/Maxwell"
+  ],
+  "boundaries": [
+    "DistributedReplication != PhysicalReplication",
+    "GraphDistance != PhysicalDistance",
+    "RLCNetworkModel != MaxwellFieldSolution",
+    "PeakEfficiencyInModel != MeasuredEfficiency",
+    "MonteCarloRobustness != ManufacturingValidation",
+    "BestInBoundedTreeCourt != Novelty"
+  ]
+}

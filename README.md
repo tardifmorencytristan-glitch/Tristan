@@ -1,10 +1,93 @@
 # Tristan
 
+## Start here: Jarvis Repo QuickCheck
+
+Need a fast bounded review of a public GitHub repository?
+
+**First external customer: 5 CAD one-time**  
+[Open the focused QuickCheck product page](quickcheck.html)
+
+You can also [see a real sample receipt](examples/REPO_QUICKCHECK_SAMPLE.md) and review the [QuickCheck service terms](QUICKCHECK_TERMS.md).
+
+The service is read-only and bounded. No credentials, no untrusted-code execution, no active security testing, no certification, and no guarantee of repository safety.
+
+## Live product
+
+**Jarvis Repo QuickCheck** is the current primary paid front door: a bounded read-only advisory review of one public GitHub repository.
+
+- Product page: https://raw.githack.com/tardifmorencytristan-glitch/Tristan/main/quickcheck.html
+- First-customer checkout: 5 CAD one-time
+- Sample receipt: [examples/REPO_QUICKCHECK_SAMPLE.md](examples/REPO_QUICKCHECK_SAMPLE.md)
+- Terms and refund boundary: [QUICKCHECK_TERMS.md](QUICKCHECK_TERMS.md)
+
+Payment buys only the stated service scope. It does not buy scientific authority, evidence priority, repository permissions, or certification.
+
+
 **Status: BOOTSTRAP / PROVISIONAL ENGINEERING KERNEL**
 
 `Tristan` is a small public, regenerable kernel for routing intentions into the minimum sufficient set of sources, capabilities, evidence, failures, tests, and frontiers.
 
 It does **not** claim to contain the entire Tristan corpus, nor to make scientific claims true by compilation.
+
+## Support the public work
+
+Voluntary support for Tristan's public tools, documentation, experiments, and research infrastructure:
+
+https://donate.stripe.com/4gM7sL5CAg7wdwz3v283C07
+
+Monthly voluntary support: **10 CAD/month**  
+https://buy.stripe.com/7sY00j8OMg7wgIL3v283C08
+
+Contributions do not purchase a specific service, promise financial returns, guarantee scientific results, or alter evidence/authority gates. See [`SUPPORT.md`](SUPPORT.md).
+
+## TRISTAN Pro pilot
+
+For users who want increased service limits, priority analysis, advanced project intake, and verified subscription management:
+
+- **49 CAD/month**: https://buy.stripe.com/00wcN57KIbRgfEHaXu83C02
+- **490 CAD/year**: https://buy.stripe.com/14AeVdfda6wW2RV9Tq83C03
+
+AI-worker capabilities are available only when actually provisioned and verified server-side. Payment does not alter scientific, evidence, or GitHub authority gates. See [`PRO.md`](PRO.md).
+
+## Professional technical services
+
+### Jarvis Repo QuickCheck — first customer 5 CAD, then 9 CAD
+
+Fastest self-serve Jarvis offer: submit **one public GitHub repository URL** and receive a bounded advisory receipt by email.
+
+- one required input: the public GitHub repository URL;
+- zero-touch fulfillment checks paid orders hourly;
+- read-only scan of at most 10 selected high-signal files, 200 KB per file, 500 KB total;
+- no repository mutation, credential use, untrusted-code execution, active security testing, certification, or guarantee;
+- secret-like values are never reproduced in the receipt;
+- unsupported/private/non-GitHub inputs are held instead of guessed.
+
+**First-customer QuickCheck — 5 CAD (single-use promotion):**  
+https://buy.stripe.com/5kQaEX2qobRg1NR8Pm83C0g
+
+**Standard QuickCheck — 9 CAD:**  
+https://buy.stripe.com/4gM9AT2qodZoaknghO83C0f
+
+**See a real sample receipt:** [`examples/REPO_QUICKCHECK_SAMPLE.md`](examples/REPO_QUICKCHECK_SAMPLE.md)
+
+### Audit Express — 99 CAD one-time
+
+Jarvis can automatically fulfill a bounded advisory audit for a **public GitHub repository**.
+
+- checkout requires the project locator; the problem and scope are optional, and omitted values compile to conservative public-GitHub read-only defaults;
+- the fulfillment loop checks paid orders hourly and sends the receipt by email;
+- the scan is read-only and bounded to at most 40 selected high-signal files, 200 KB per file, and 1.5 MB total;
+- unsupported/private/non-GitHub inputs are held rather than guessed;
+- findings are advisory signals only: **Audit != Certification**, **StaticPattern != Exploitability**, **NoFlag != Safe**.
+
+**Buy Audit Express — 99 CAD:**  
+https://buy.stripe.com/5kQ3cvfda08yfEH6He83C04
+
+Other bounded technical audits and performance work are available through the live services page:
+
+https://tristan-tardif-morency-tfug.vercel.app/services
+
+Every mandate preserves explicit scope, limits, evidence boundaries, and authorization requirements.
 
 ## Scientific Consistency demand canary
 

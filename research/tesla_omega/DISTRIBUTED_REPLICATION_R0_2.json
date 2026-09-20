@@ -1,0 +1,173 @@
+{
+  "schema_version": "tesla-omega-distributed-r0.2",
+  "status": "COMPUTATIONAL_REPLICATION_ONLY",
+  "authority_granted": false,
+  "physical_validation_claimed": false,
+  "novelty_claimed": false,
+  "commit": "952a73e13c9c4373c0209141dd16c283a6cd8fed",
+  "machines": [
+    {
+      "name": "DESKTOP-SHA9IHL",
+      "role": "generation_simulation",
+      "cpu": "Intel Core i7-12700KF",
+      "ram_gb": 63.8,
+      "gpu": "NVIDIA GeForce RTX 4070 Ti 12GB",
+      "python": "3.13.15",
+      "tests": {
+        "passed": 58,
+        "failed": 0,
+        "runtime_s": 6.705
+      }
+    },
+    {
+      "name": "DESKTOP-2G1SSMT",
+      "role": "independent_replication_oak",
+      "cpu": "Intel Core i7-13700H",
+      "ram_gb": 31.7,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop 8GB",
+      "python": "3.13.15",
+      "tests": {
+        "passed": 58,
+        "failed": 0,
+        "runtime_s": 23.846
+      }
+    }
+  ],
+  "exact_replication": {
+    "nodes": 6,
+    "coupling_k": 0.08,
+    "sha256_machine_a": "1E107AA49FF53C45AF91C275EEB8D8BDE5110932013EFB88B77249037455ABE1",
+    "sha256_machine_b": "1E107AA49FF53C45AF91C275EEB8D8BDE5110932013EFB88B77249037455ABE1",
+    "identical": true
+  },
+  "sweep": [
+    {
+      "k": 0.01,
+      "top_degree": [
+        5,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "top_score_hz": 3559.9252841472335
+    },
+    {
+      "k": 0.02,
+      "top_degree": [
+        5,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "top_score_hz": 7126.536502687057
+    },
+    {
+      "k": 0.04,
+      "top_degree": [
+        5,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "top_score_hz": 14306.878608335654
+    },
+    {
+      "k": 0.06,
+      "top_degree": [
+        5,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "top_score_hz": 21596.554293940862
+    },
+    {
+      "k": 0.08,
+      "top_degree": [
+        5,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "top_score_hz": 29054.663152341265
+    },
+    {
+      "k": 0.09,
+      "top_degree": [
+        5,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "top_score_hz": 32866.83865828696
+    },
+    {
+      "k": 0.1,
+      "top_degree": [
+        5,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "top_score_hz": 36745.99633679367
+    },
+    {
+      "k": 0.12,
+      "top_degree": [
+        5,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "top_score_hz": 44743.60860966673
+    },
+    {
+      "k": 0.14,
+      "top_degree": [
+        5,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "top_score_hz": 53132.090477763006
+    },
+    {
+      "k": 0.16,
+      "top_degree": [
+        5,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "top_score_hz": 62011.90000940996
+    }
+  ],
+  "interpretation": "Within the bounded ideal tree-screening surrogate and modal-span metric only, the 6-node star class remains the top structural class across the sampled coupling range.",
+  "boundaries": [
+    "DistributedReplication != PhysicalReplication",
+    "ModalSpan != Efficiency",
+    "BestInBoundedSearch != Novelty",
+    "NetworkSurrogate != MaxwellFieldSolution",
+    "Simulation != Measurement"
+  ]
+}
