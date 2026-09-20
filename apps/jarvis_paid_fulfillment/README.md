@@ -1,10 +1,10 @@
 # Jarvis Paid Fulfillment R1
 
-Public, secret-free deployment package for the existing **Audit Express 99 CAD** Stripe offer.
+Public, secret-free deployment package for the bounded **Jarvis Repo QuickCheck** and **Audit Express 99 CAD** Stripe offers.
 
 Flow:
 
-Stripe Checkout -> signed webhook -> bounded public GitHub audit -> SQLite ephemeral receipt -> result page
+Stripe payment fact -> verified bounded public GitHub review -> receipt -> delivery only after an external delivery receipt
 
 R1 supports public github.com/owner/repo targets only. Unsupported input fails closed and never fabricates a report. It never mutates the customer repository.
 
