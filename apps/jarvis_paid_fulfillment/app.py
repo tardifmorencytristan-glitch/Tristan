@@ -9,6 +9,8 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from core import (
     claim_result_slot,
     intake_from_checkout_session,
+    QUICKCHECK_MAX_FILES,
+    QUICKCHECK_MAX_TOTAL_BYTES,
     load_result,
     render_report_html,
     run_public_github_audit,
@@ -29,7 +31,9 @@ def health():
         "status": "ok",
         "service": "jarvis-paid-fulfillment-r1.1",
         "storage": "sqlite-ephemeral",
-        "authority_granted": False,
+        "commercial_fulfillment_authority_granted": True,
+        "authority_scope": ["verified paid bounded repository offers"],
+        "scientific_authority_granted": False,
     }
 
 
@@ -62,10 +66,16 @@ async def stripe_webhook(request: Request):
         return {"received": True, "action": "IDEMPOTENT_ALREADY_CLAIMED"}
 
     try:
+        limits = (
+            {"max_files": QUICKCHECK_MAX_FILES, "max_total_bytes": QUICKCHECK_MAX_TOTAL_BYTES}
+            if intake.offer in {"repo_quickcheck_first_5", "repo_quickcheck_9"}
+            else {}
+        )
         report = run_public_github_audit(
             intake.project,
             intake.problem,
             intake.scope,
+            **limits,
         )
         record = {
             "status": "READY",
