@@ -59,10 +59,10 @@ AI-worker capabilities are available only when actually provisioned and verified
 
 ### Jarvis Repo QuickCheck — first customer 5 CAD, then 9 CAD
 
-Fastest self-serve Jarvis offer: submit **one public GitHub repository URL** and receive a bounded advisory receipt by email.
+Fastest self-serve Jarvis offer: submit **one public GitHub repository URL** and receive a bounded advisory receipt after verified payment. Delivery is marked complete only when an external delivery receipt exists.
 
 - one required input: the public GitHub repository URL;
-- zero-touch fulfillment checks paid orders hourly;
+- zero-touch fulfillment checks paid orders hourly and queues a bounded receipt only after Stripe verifies payment;
 - read-only scan of at most 10 selected high-signal files, 200 KB per file, 500 KB total;
 - no repository mutation, credential use, untrusted-code execution, active security testing, certification, or guarantee;
 - secret-like values are never reproduced in the receipt;
