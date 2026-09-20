@@ -399,3 +399,24 @@ Hard boundaries:
 - PrivateSource -> PublicOutput = FORBIDDEN
 - PolicyProfile != TimelessExternalPolicy
 - MissionGenome != Execution
+
+
+## Jarvis R11 - Portfolio Qualification Court
+
+R11 turns repository-promotion hygiene into executable fail-closed logic. A pull request is qualified only against the currently observed `main` SHA and its exact current head, with all declared required workflows completed successfully, mergeability known and clean, no blocking review threads, and no draft state.
+
+Canonical qualification flow:
+
+`PR OBSERVATION -> EXACT BASE/HEAD -> REQUIRED CI -> MERGEABILITY/REVIEW -> QUALIFICATION RECEIPT`
+
+A qualified receipt is not merge authority and never changes scientific status. Any head move or main move requires requalification.
+
+Hard boundaries:
+
+- WorkflowSuccess != ScientificPASS
+- Mergeable != MergeAuthority
+- ExactHeadQualification != TimelessQualification
+- StaleBase -> HOLD
+- HeadMove -> Requalify
+- PortfolioDecision != MergeAuthority
+- NO_ACTION is admissible
