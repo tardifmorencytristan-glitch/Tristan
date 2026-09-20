@@ -1,0 +1,24 @@
+{
+  "schema_version": "intent-reality-r12-vs-simple-court-r1",
+  "observed_on": "2026-09-20",
+  "status": "PENDING_EXACT_HEAD_CI",
+  "base_main": "f26c368aeecfb7830e834b5eb2cea0d9b826e1a9",
+  "r12_source_head": "7cec53b3690d083af8405d45b09c17cec93294b3",
+  "challenger": "weekly_snapshot_plus_diff",
+  "discriminating_cases": [
+    "ordinary weekly delta",
+    "late evidence valid_at != recorded_at",
+    "event-id collision with different payload",
+    "supersession + reactivation lineage"
+  ],
+  "decision": "HOLD",
+  "boundaries": [
+    "Candidate!=Canonical",
+    "Generated!=Verified",
+    "RepositoryPASS!=ScientificPASS",
+    "Recovered!=Accomplished",
+    "UnassessedEvidenceDebt!=ZeroDebt",
+    "Capability!=Authority",
+    "NO_ACTION admissible"
+  ]
+}
