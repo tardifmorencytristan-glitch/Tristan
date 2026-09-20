@@ -10,6 +10,9 @@ sys.path.insert(0, str(EXPORT))
 
 from core import (
     AUDIT_PAYMENT_LINK_ID,
+    QUICKCHECK_PAYMENT_LINK_ID,
+    QUICKCHECK_MAX_FILES,
+    QUICKCHECK_MAX_TOTAL_BYTES,
     audit_repo_snapshot,
     intake_from_checkout_session,
     parse_public_github_repo,
@@ -46,6 +49,36 @@ def test_paid_audit_intake_is_bound_to_offer():
     intake = intake_from_checkout_session(session)
     assert intake.project == "https://github.com/acme/demo"
     assert intake.digest
+
+def test_paid_quickcheck_intake_is_bound_to_offer_and_limits():
+    session = {
+        "id": "cs_test_quickcheck",
+        "payment_status": "paid",
+        "payment_link": QUICKCHECK_PAYMENT_LINK_ID,
+        "metadata": {
+            "offer": "repo_quickcheck_first_5",
+            "fulfillment": "jarvis_quickcheck_v1",
+        },
+        "custom_fields": [
+            {"key": "project", "text": {"value": "https://github.com/acme/demo"}},
+        ],
+        "customer_details": {"email": "buyer@example.com"},
+    }
+    intake = intake_from_checkout_session(session)
+    assert intake.offer == "repo_quickcheck_first_5"
+    assert intake.problem == "General bounded repository QuickCheck"
+    report = audit_repo_snapshot(
+        {"full_name": "acme/demo", "default_branch": "main", "archived": False, "fork": False},
+        [{"path": f"src/f{i}.py", "type": "blob", "size": 10} for i in range(20)],
+        {},
+        problem=intake.problem,
+        scope=intake.scope,
+        max_files=QUICKCHECK_MAX_FILES,
+        max_total_bytes=QUICKCHECK_MAX_TOTAL_BYTES,
+    )
+    assert report["coverage"]["bounded_max_files"] == 10
+    assert report["coverage"]["bounded_max_total_bytes"] == 500_000
+    assert report["coverage"]["files_selected"] == 10
 
 def test_wrong_or_unpaid_offer_is_rejected():
     for session in (
