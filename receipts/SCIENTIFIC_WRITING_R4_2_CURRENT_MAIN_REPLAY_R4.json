@@ -1,0 +1,17 @@
+{
+  "schema_version": "scientific-writing-r4-2-current-main-replay-r4",
+  "observed_at": "2026-09-18",
+  "source_pr": 21,
+  "previous_head": "07505c112c6a518649678f2b0a491bd531c3fed4",
+  "current_base_main": "fd88248ca30a2cfc324b2068a59c90b9d29f6f39",
+  "purpose": "final exact-head requalification after R5A and R4G integration-court repairs",
+  "content_change": "none_to_scientific_logic",
+  "scientific_pass": false,
+  "authority_granted": false,
+  "boundaries": [
+    "ReplayReceipt != ScientificEvidence",
+    "GeneratedPDF != IndependentEvidence",
+    "PDFArtifactPASS != ScientificPASS",
+    "IntegrationCourtFix != ScientificPromotion"
+  ]
+}
