@@ -1,5 +1,28 @@
 # Tristan
 
+## Start here: Jarvis Repo QuickCheck
+
+Need a fast bounded review of a public GitHub repository?
+
+**First external customer: 5 CAD one-time**  
+[Open the focused QuickCheck product page](quickcheck.html)
+
+You can also [see a real sample receipt](examples/REPO_QUICKCHECK_SAMPLE.md) and review the [QuickCheck service terms](QUICKCHECK_TERMS.md).
+
+The service is read-only and bounded. No credentials, no untrusted-code execution, no active security testing, no certification, and no guarantee of repository safety.
+
+## Live product
+
+**Jarvis Repo QuickCheck** is the current primary paid front door: a bounded read-only advisory review of one public GitHub repository.
+
+- Product page: https://raw.githack.com/tardifmorencytristan-glitch/Tristan/main/quickcheck.html
+- First-customer checkout: 5 CAD one-time
+- Sample receipt: [examples/REPO_QUICKCHECK_SAMPLE.md](examples/REPO_QUICKCHECK_SAMPLE.md)
+- Terms and refund boundary: [QUICKCHECK_TERMS.md](QUICKCHECK_TERMS.md)
+
+Payment buys only the stated service scope. It does not buy scientific authority, evidence priority, repository permissions, or certification.
+
+
 **Status: BOOTSTRAP / PROVISIONAL ENGINEERING KERNEL**
 
 `Tristan` is a small public, regenerable kernel for routing intentions into the minimum sufficient set of sources, capabilities, evidence, failures, tests, and frontiers.
@@ -376,3 +399,24 @@ Hard boundaries:
 - PrivateSource -> PublicOutput = FORBIDDEN
 - PolicyProfile != TimelessExternalPolicy
 - MissionGenome != Execution
+
+
+## Jarvis R11 - Portfolio Qualification Court
+
+R11 turns repository-promotion hygiene into executable fail-closed logic. A pull request is qualified only against the currently observed `main` SHA and its exact current head, with all declared required workflows completed successfully, mergeability known and clean, no blocking review threads, and no draft state.
+
+Canonical qualification flow:
+
+`PR OBSERVATION -> EXACT BASE/HEAD -> REQUIRED CI -> MERGEABILITY/REVIEW -> QUALIFICATION RECEIPT`
+
+A qualified receipt is not merge authority and never changes scientific status. Any head move or main move requires requalification.
+
+Hard boundaries:
+
+- WorkflowSuccess != ScientificPASS
+- Mergeable != MergeAuthority
+- ExactHeadQualification != TimelessQualification
+- StaleBase -> HOLD
+- HeadMove -> Requalify
+- PortfolioDecision != MergeAuthority
+- NO_ACTION is admissible

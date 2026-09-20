@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Jarvis Repo QuickCheck — Order received</title>
+<style>
+body{font-family:system-ui;max-width:760px;margin:48px auto;padding:0 18px;line-height:1.55}
+.card{border:1px solid #ccc;border-radius:14px;padding:20px;margin:18px 0}
+.muted{opacity:.72}
+</style>
+</head>
+<body>
+<h1>Jarvis Repo QuickCheck</h1>
+<p>Your checkout has returned from Stripe.</p>
+
+<div class="card">
+<h2>No additional intake step is required.</h2>
+<p>The repository URL was collected during Checkout. Jarvis fulfills only after Stripe reports the session as paid.</p>
+<ol>
+<li>Stripe payment state is verified.</li>
+<li>The submitted target must resolve to a public GitHub repository.</li>
+<li>Jarvis performs a bounded read-only review without executing repository code.</li>
+<li>The evidence receipt is sent to the checkout email.</li>
+</ol>
+</div>
+
+<div class="card">
+<h2>Important boundary</h2>
+<p>This page itself is not proof of payment. A session is fulfilled only when Stripe verifies the payment.</p>
+<p>Unsupported, private, inaccessible, or out-of-scope targets are placed on HOLD rather than guessed.</p>
+</div>
+
+<div class="card">
+<h2>Delivery reference</h2>
+<p id="session">No session reference is present in this URL.</p>
+<p class="muted">Only a shortened suffix is shown. The browser page does not independently validate payment state.</p>
+</div>
+
+<p><a href="quickcheck.html">Back to QuickCheck</a> · <a href="QUICKCHECK_TERMS.md">Service terms</a></p>
+<p class="muted">Checkout != Payment · Payment != Certification · NoFlag != Safe · Payment != Scientific Authority</p>
+
+<script>
+const q=new URLSearchParams(location.search);
+const id=q.get('session_id')||'';
+const el=document.getElementById('session');
+if(/^cs_[A-Za-z0-9_\-]{6,200}$/.test(id)) el.textContent='Delivery session: …'+id.slice(-8);
+</script>
+</body>
+</html>

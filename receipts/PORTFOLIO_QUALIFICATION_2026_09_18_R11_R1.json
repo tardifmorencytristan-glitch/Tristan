@@ -1,0 +1,36 @@
+{
+  "schema_version": "tristan-portfolio-qualification-r11-observation-r1",
+  "observed_at": "2026-09-18",
+  "repository": "tardifmorencytristan-glitch/Tristan",
+  "current_main_sha": "33b2f01bf542e17fa4b73f36bd2319addc559ca6",
+  "observations": [
+    {
+      "pr": 48,
+      "head_sha": "b7b963b069383e516e1d1933d15d014c10b7d395",
+      "base_sha": "8ab652c7881f48d11228c0f3431ed314377febc7",
+      "mergeable": false,
+      "decision": "HOLD_REBASE_OR_RESOLVE",
+      "blockers": ["MERGE_CONFLICT", "STALE_BASE"],
+      "note": "Scientific/simulation branch remains substantive and is not absorbed blindly."
+    },
+    {
+      "pr": 21,
+      "head_sha": "07505c112c6a518649678f2b0a491bd531c3fed4",
+      "base_sha": "6f476202cb1b80739388fd88ec4b940ec05393c5",
+      "mergeable": true,
+      "decision": "HOLD_REPLAY_ON_CURRENT_MAIN",
+      "blockers": ["STALE_BASE"],
+      "note": "Writing compiler replay must requalify on current main."
+    }
+  ],
+  "authority_granted": false,
+  "scientific_pass": false,
+  "boundaries": [
+    "WorkflowSuccess != ScientificPASS",
+    "Mergeable != MergeAuthority",
+    "ExactHeadQualification != TimelessQualification",
+    "StaleBase -> HOLD",
+    "HeadMove -> Requalify",
+    "PortfolioDecision != MergeAuthority"
+  ]
+}
