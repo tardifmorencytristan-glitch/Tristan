@@ -42,11 +42,7 @@ REQUIRED_PATHS = (
     "src/tristan/final_fusion.py",
     "src/tristan/ultra_closure.py",
     "src/tristan/intake_guard.py",
-<<<<<<< HEAD
-    "src/tristan/portfolio_qualification.py",
-=======
     "src/tristan/tesla_omega/__init__.py",
->>>>>>> origin/main
     "src/tristan/autonomous_decision.py",
     "src/tristan/frontier_loop.py",
     "src/tristan/frontier_scheduler.py",
@@ -56,16 +52,11 @@ REQUIRED_PATHS = (
     "tests/test_final_fusion_r8.py",
     "tests/test_ultra_closure_r9.py",
     "tests/test_intake_guard_r10.py",
-    "tests/test_portfolio_qualification_r11.py",
     "docs/JARVIS_R10_INTAKE_ABSORPTION.md",
-<<<<<<< HEAD
-    "docs/JARVIS_R11_PORTFOLIO_QUALIFICATION.md",
-=======
     "docs/TESLA_OMEGA_REGIONAL_REPLAY.md",
     "research/tesla_omega/README.md",
     "schemas/tesla_claim.schema.json",
     "receipts/TESLA_OMEGA_REGIONAL_REPLAY_R1.json",
->>>>>>> origin/main
     "docs/JARVIS_R9_ULTRA_CLOSURE.md",
     "receipts/PORTFOLIO_CLOSURE_2026_09_18_R1.json",
     "receipts/PORTFOLIO_CLOSURE_2026_09_18_R2.json",
@@ -121,10 +112,6 @@ def verify_repository(root: str | Path) -> dict:
         "errors": errors,
         "registry_count": registry_count,
         "context_debt_clean": bool(context_debt.clean) if context_debt is not None else False,
-<<<<<<< HEAD
-        "scope": "repository_structure_registry_context_debt_jarvis_r11_portfolio_qualification",
-=======
         "scope": "repository_structure_registry_context_debt_jarvis_r10_plus_tesla_omega_regional",
->>>>>>> origin/main
         "scientific_pass": False,
     }
