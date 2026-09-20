@@ -14,9 +14,12 @@ from urllib.parse import quote, urlparse
 from urllib.request import Request, urlopen
 
 AUDIT_PAYMENT_LINK_ID = "plink_1U8GS0EBGsbM207Ty2xac9pI"
+QUICKCHECK_PAYMENT_LINK_ID = "plink_1UHCMVEBGsbM207TH7l3Cj2F"
 MAX_FILES = 40
 MAX_FILE_BYTES = 200_000
 MAX_TOTAL_BYTES = 1_500_000
+QUICKCHECK_MAX_FILES = 10
+QUICKCHECK_MAX_TOTAL_BYTES = 500_000
 ALLOWED_SUFFIXES = (
     ".py", ".js", ".ts", ".tsx", ".jsx", ".go", ".rs", ".rb", ".php",
     ".java", ".c", ".cc", ".cpp", ".h", ".hpp", ".toml", ".yaml", ".yml",
@@ -113,16 +116,24 @@ def intake_from_checkout_session(session: Mapping[str, object]) -> PaidAuditInta
     fulfillment = str(metadata.get("fulfillment", "")).strip()
     if payment_status != "paid":
         raise ValueError("checkout session is not paid")
-    if payment_link != AUDIT_PAYMENT_LINK_ID and not (offer == "audit_express_99" and fulfillment == "auto_oak_audit_v1"):
-        raise ValueError("checkout session is not the bounded audit offer")
+    is_audit = payment_link == AUDIT_PAYMENT_LINK_ID or (
+        offer == "audit_express_99" and fulfillment == "auto_oak_audit_v1"
+    )
+    is_quickcheck = payment_link == QUICKCHECK_PAYMENT_LINK_ID or (
+        offer in {"repo_quickcheck_first_5", "repo_quickcheck_9"}
+        and fulfillment == "jarvis_quickcheck_v1"
+    )
+    if not (is_audit or is_quickcheck):
+        raise ValueError("checkout session is not a supported bounded repository offer")
     fields = extract_custom_fields(session)
     project = fields.get("project", "").strip()
     if not project:
         raise ValueError("required project field is missing")
-    problem = fields.get("problem", "").strip() or "General bounded technical audit"
+    default_problem = "General bounded repository QuickCheck" if is_quickcheck else "General bounded technical audit"
+    problem = fields.get("problem", "").strip() or default_problem
     scope = fields.get("scope", "").strip() or (
-        "Public GitHub repository read-only advisory audit; "
-        "no mutation, credential use, or active testing"
+        "Public GitHub repository read-only advisory review; "
+        "no mutation, credential use, untrusted-code execution, or active testing"
     )
     details = session.get("customer_details", {})
     details = details if isinstance(details, Mapping) else {}
@@ -133,7 +144,7 @@ def intake_from_checkout_session(session: Mapping[str, object]) -> PaidAuditInta
         scope=scope,
         customer_email=str(details.get("email", "")).strip(),
         payment_link=payment_link,
-        offer=offer or "audit_express_99",
+        offer=offer or ("repo_quickcheck_first_5" if is_quickcheck else "audit_express_99"),
     ).with_digest()
 
 def parse_public_github_repo(project: str) -> tuple[str, str]:
@@ -179,7 +190,7 @@ def _path_priority(path: str) -> tuple[int, int, str]:
         return (3, len(path), path)
     return (4, len(path), path)
 
-def select_tree_files(tree_entries: Sequence[Mapping[str, object]]) -> tuple[str, ...]:
+def select_tree_files(tree_entries: Sequence[Mapping[str, object]], *, max_files: int = MAX_FILES) -> tuple[str, ...]:
     candidates: list[str] = []
     for row in tree_entries:
         if str(row.get("type", "")) != "blob":
@@ -190,9 +201,15 @@ def select_tree_files(tree_entries: Sequence[Mapping[str, object]]) -> tuple[str
             continue
         if path in ROOT_HIGH_SIGNAL or path.rsplit("/", 1)[-1] in ROOT_HIGH_SIGNAL or path.lower().endswith(ALLOWED_SUFFIXES):
             candidates.append(path)
-    return tuple(sorted(set(candidates), key=_path_priority)[:MAX_FILES])
+    return tuple(sorted(set(candidates), key=_path_priority)[:max_files])
 
-def fetch_public_repo_snapshot(owner: str, repo: str) -> tuple[Mapping[str, object], tuple[Mapping[str, object], ...], dict[str, str]]:
+def fetch_public_repo_snapshot(
+    owner: str,
+    repo: str,
+    *,
+    max_files: int = MAX_FILES,
+    max_total_bytes: int = MAX_TOTAL_BYTES,
+) -> tuple[Mapping[str, object], tuple[Mapping[str, object], ...], dict[str, str]]:
     meta = _get_json(f"https://api.github.com/repos/{quote(owner)}/{quote(repo)}")
     if bool(meta.get("private", False)):
         raise ValueError("private repositories are outside R1 public scope")
@@ -202,12 +219,12 @@ def fetch_public_repo_snapshot(owner: str, repo: str) -> tuple[Mapping[str, obje
     if not isinstance(rows, Sequence):
         raise ValueError("GitHub tree payload malformed")
     entries = tuple(row for row in rows if isinstance(row, Mapping))
-    selected = select_tree_files(entries)
+    selected = select_tree_files(entries, max_files=max_files)
     files: dict[str, str] = {}
     budget = 0
     for path in selected:
         size = next((int(row.get("size") or 0) for row in entries if row.get("path") == path), 0)
-        if budget + size > MAX_TOTAL_BYTES:
+        if budget + size > max_total_bytes:
             continue
         raw = f"https://raw.githubusercontent.com/{quote(owner)}/{quote(repo)}/{quote(branch)}/{quote(path, safe='/')}"
         try:
@@ -220,7 +237,16 @@ def fetch_public_repo_snapshot(owner: str, repo: str) -> tuple[Mapping[str, obje
 def _finding(code: str, severity: str, path: str, rationale: str) -> dict[str, str]:
     return {"code": code, "severity": severity, "path": path, "rationale": rationale}
 
-def audit_repo_snapshot(repo_meta: Mapping[str, object], tree_entries: Sequence[Mapping[str, object]], files: Mapping[str, str], *, problem: str, scope: str) -> dict[str, object]:
+def audit_repo_snapshot(
+    repo_meta: Mapping[str, object],
+    tree_entries: Sequence[Mapping[str, object]],
+    files: Mapping[str, str],
+    *,
+    problem: str,
+    scope: str,
+    max_files: int = MAX_FILES,
+    max_total_bytes: int = MAX_TOTAL_BYTES,
+) -> dict[str, object]:
     paths = {str(row.get("path", "")) for row in tree_entries if str(row.get("path", ""))}
     has_ci = any(path.startswith(".github/workflows/") for path in paths)
     has_tests = any("/test" in path.lower() or path.lower().startswith(("test", "tests/")) for path in paths)
@@ -265,10 +291,10 @@ def audit_repo_snapshot(repo_meta: Mapping[str, object], tree_entries: Sequence[
         "intake": {"problem": problem[:200], "scope": scope[:200]},
         "coverage": {
             "tree_entries": len(tree_entries),
-            "files_selected": len(select_tree_files(tree_entries)),
+            "files_selected": len(select_tree_files(tree_entries, max_files=max_files)),
             "files_scanned": len(files),
-            "bounded_max_files": MAX_FILES,
-            "bounded_max_total_bytes": MAX_TOTAL_BYTES,
+            "bounded_max_files": max_files,
+            "bounded_max_total_bytes": max_total_bytes,
         },
         "signals": {
             "ci_observed": has_ci,
@@ -290,10 +316,30 @@ def audit_repo_snapshot(repo_meta: Mapping[str, object], tree_entries: Sequence[
     report["digest"] = _digest(report)
     return report
 
-def run_public_github_audit(project: str, problem: str, scope: str) -> dict[str, object]:
+def run_public_github_audit(
+    project: str,
+    problem: str,
+    scope: str,
+    *,
+    max_files: int = MAX_FILES,
+    max_total_bytes: int = MAX_TOTAL_BYTES,
+) -> dict[str, object]:
     owner, repo = parse_public_github_repo(project)
-    meta, tree, files = fetch_public_repo_snapshot(owner, repo)
-    return audit_repo_snapshot(meta, tree, files, problem=problem, scope=scope)
+    meta, tree, files = fetch_public_repo_snapshot(
+        owner,
+        repo,
+        max_files=max_files,
+        max_total_bytes=max_total_bytes,
+    )
+    return audit_repo_snapshot(
+        meta,
+        tree,
+        files,
+        problem=problem,
+        scope=scope,
+        max_files=max_files,
+        max_total_bytes=max_total_bytes,
+    )
 
 def render_report_html(report: Mapping[str, object]) -> str:
     esc = html.escape
