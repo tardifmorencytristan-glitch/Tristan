@@ -1,0 +1,54 @@
+{
+  "schema": "quickcheck-public-route-r1",
+  "observed_at_utc": "2026-09-22T02:43:00Z",
+  "repository": "tardifmorencytristan-glitch/Tristan",
+  "source_commit": "f26c368aeecfb7830e834b5eb2cea0d9b826e1a9",
+  "source_page": "quickcheck.html",
+  "source_page_blob_sha": "d17e4142e0951bb49874cf5338461208d1b1a638",
+  "production_route": "https://rawcdn.githack.com/tardifmorencytristan-glitch/Tristan/f26c368aeecfb7830e834b5eb2cea0d9b826e1a9/quickcheck.html",
+  "development_route": "https://raw.githack.com/tardifmorencytristan-glitch/Tristan/main/quickcheck.html",
+  "external_readback": {
+    "production_http_status": 200,
+    "production_content_type": "text/html; charset=utf-8",
+    "production_bytes": 2589,
+    "production_sha256": "b47591e1533a7594b688300293c15563b6ebf100e176971c03274cdaaec4c461",
+    "contains_quickcheck": true,
+    "contains_first_customer_checkout": true,
+    "browser_confirmation_detected": false
+  },
+  "stripe": {
+    "payment_link_id": "plink_1UHCMVEBGsbM207TH7l3Cj2F",
+    "url": "https://buy.stripe.com/5kQaEX2qobRg1NR8Pm83C0g",
+    "active": true,
+    "price_id": "price_1UHCMMEBGsbM207TO7yJRryw",
+    "product_id": "prod_VHlnxqu32H6dbL",
+    "description": "Jarvis Repo QuickCheck",
+    "unit_amount": 500,
+    "currency": "cad",
+    "type": "one_time",
+    "required_custom_field": "Public GitHub repository URL",
+    "completed_session_limit": 1,
+    "completed_sessions_observed": 0,
+    "metadata": {
+      "offer": "repo_quickcheck_first_5",
+      "price_experiment": "first_customer_5_cad",
+      "fulfillment": "jarvis_quickcheck_v1",
+      "deactivation_rule": "after_first_paid_session"
+    }
+  },
+  "live_payment_truth": {
+    "quickcheck_checkout_sessions_observed": 6,
+    "paid_quickcheck_sessions": 0,
+    "open_unpaid_quickcheck_sessions": 1,
+    "expired_unpaid_quickcheck_sessions": 5,
+    "payment_intents_account_total": 0
+  },
+  "decision": "USE_EXISTING_IMMUTABLE_RAWCDN_ROUTE_NO_NEW_DEPLOYMENT",
+  "github_pages_state": "SEPARATE_NONBLOCKING_INFRA_DEBT",
+  "nonclaims": [
+    "PublicRoutePASS != PaidDemand",
+    "CheckoutSession != Payment",
+    "ThirdPartyCDN != FormalUptimeGuarantee",
+    "No new product or price created"
+  ]
+}

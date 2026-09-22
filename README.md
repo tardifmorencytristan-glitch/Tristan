@@ -2,9 +2,9 @@
 
 ## Buy Jarvis Repo QuickCheck
 
-Focused product page: https://raw.githack.com/tardifmorencytristan-glitch/Tristan/main/quickcheck.html
+Focused product page: https://rawcdn.githack.com/tardifmorencytristan-glitch/Tristan/f26c368aeecfb7830e834b5eb2cea0d9b826e1a9/quickcheck.html
 
-First-customer launch: **5 CAD one-time**. Public GitHub repository only, read-only, bounded, evidence-oriented. See [service terms](QUICKCHECK_TERMS.md) and a [real sample receipt](examples/REPO_QUICKCHECK_SAMPLE.md).
+First-customer launch: **5 CAD one-time**. Public GitHub repository only, read-only, bounded, evidence-oriented. See [service terms](QUICKCHECK_TERMS.md), a [real sample receipt](examples/REPO_QUICKCHECK_SAMPLE.md), and the [public-route receipt](receipts/QUICKCHECK_PUBLIC_ROUTE_R1_20260922.json).\n\nLatest-development mirror: https://raw.githack.com/tardifmorencytristan-glitch/Tristan/main/quickcheck.html
 
 ## Start here: Jarvis Repo QuickCheck
 
@@ -21,7 +21,7 @@ The service is read-only and bounded. No credentials, no untrusted-code executio
 
 **Jarvis Repo QuickCheck** is the current primary paid front door: a bounded read-only advisory review of one public GitHub repository.
 
-- Product page: https://raw.githack.com/tardifmorencytristan-glitch/Tristan/main/quickcheck.html
+- Product page: https://rawcdn.githack.com/tardifmorencytristan-glitch/Tristan/f26c368aeecfb7830e834b5eb2cea0d9b826e1a9/quickcheck.html
 - First-customer checkout: 5 CAD one-time
 - Sample receipt: [examples/REPO_QUICKCHECK_SAMPLE.md](examples/REPO_QUICKCHECK_SAMPLE.md)
 - Terms and refund boundary: [QUICKCHECK_TERMS.md](QUICKCHECK_TERMS.md)
