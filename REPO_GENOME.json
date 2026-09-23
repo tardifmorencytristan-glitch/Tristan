@@ -1,0 +1,18 @@
+{
+  "schema": "tristan-repo-genome-r1",
+  "repository": "tardifmorencytristan-glitch/Tristan",
+  "visibility": "PUBLIC",
+  "role": "PUBLIC_REGENERABLE_KERNEL_AND_PROOF_SURFACE",
+  "branches": {
+    "integration": "main",
+    "production": "production"
+  },
+  "capability_identity_rule": "CAPABILITY_IDENTITY_INDEPENDENT_OF_REPOSITORY_LOCATION",
+  "federation_root": "tardifmorencytristan-glitch/Tristan-Tardif-Morency",
+  "production_policy": "MAIN_TO_PRODUCTION_REQUIRES_EXACT_HEAD_GATES_AND_READBACK",
+  "public_not_equal_production": true,
+  "right_to_split": true,
+  "right_to_merge": true,
+  "right_to_die": true,
+  "authority_granted": false
+}
