@@ -1,0 +1,46 @@
+{
+  "schema_version": "intent-reality-r12-vs-simple-court-r1",
+  "observed_on": "2026-09-20",
+  "status": "PASS_CURRENT_MAIN_FRESH_PORT_WITH_REGIONAL_R12_ADVANTAGE",
+  "base_main": "f26c368aeecfb7830e834b5eb2cea0d9b826e1a9",
+  "r12_source_head": "7cec53b3690d083af8405d45b09c17cec93294b3",
+  "court_pr": 79,
+  "qualified_code_test_head": "2fb411a93f1f1cd6523b356f347a203549c2a8fc",
+  "challenger": "weekly_snapshot_plus_diff",
+  "focused_results": {
+    "r12_plus_court": "17/17 PASS",
+    "r8_r9_corrected_invocation": "9/9 PASS",
+    "full_public_suite": "191/191 PASS"
+  },
+  "hosted_ci_on_qualified_code_test_head": {
+    "jarvis_r6_evidence_domino": "SUCCESS",
+    "kernel_ci": "SUCCESS"
+  },
+  "negative_memory": [
+    "Initial R8/R9 unittest invocation used non-existent module names tests.test_final_fusion and tests.test_ultra_closure, producing 2 ImportError PRE_RUN_CLI errors.",
+    "Corrected modules tests.test_final_fusion_r8 and tests.test_ultra_closure_r9 passed 9/9.",
+    "Earlier PowerShell-based local requalification attempt blocked without interpretable output and was terminated; no software conclusion was drawn."
+  ],
+  "discriminating_cases": {
+    "ordinary_weekly_delta": "SIMPLE_MATCHES_REQUIRED_STATE_DELTA_AND_REMAINS_PREFERRED",
+    "late_evidence_valid_at_not_recorded_at": "R12_DISTINCT_CAPABILITY",
+    "event_id_collision_different_payload": "R12_DISTINCT_FAIL_CLOSED_CAPABILITY",
+    "supersession_reactivation_lineage": "R12_PRESERVES_HISTORICAL_LINEAGE"
+  },
+  "decision": {
+    "weekly_default": "SIMPLE_SNAPSHOT_PLUS_DIFF",
+    "historical_bitemporal_region": "R12",
+    "promotion": "HOLD_REVIEW_NO_AUTO_MERGE",
+    "reason": "R12 demonstrates bounded regional capability not supplied by the minimal SIMPLE challenger, while SIMPLE remains lower-complexity and sufficient for ordinary weekly reporting."
+  },
+  "boundaries": [
+    "Candidate!=Canonical",
+    "Generated!=Verified",
+    "RepositoryPASS!=ScientificPASS",
+    "Recovered!=Accomplished",
+    "UnassessedEvidenceDebt!=ZeroDebt",
+    "Capability!=Authority",
+    "RegionalWin!=UniversalWin",
+    "NO_ACTION admissible"
+  ]
+}
