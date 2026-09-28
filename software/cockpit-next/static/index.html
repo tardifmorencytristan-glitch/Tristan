@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tristan Reality Cockpit</title><link rel="stylesheet" href="/styles.css"></head>
+<body><div class="shell">
+<aside><div class="brand">TRISTAN<span>REALITY</span></div><nav>
+<button class="nav active" data-view="mission">Mission</button><button class="nav" data-view="reality">Reality</button>
+<button class="nav" data-view="capabilities">Capabilities</button><button class="nav" data-view="residuals">Residuals</button>
+<button class="nav" data-view="evidence">Evidence</button><button class="nav" data-view="git">Git</button>
+<button class="nav" data-view="nodes">Nodes</button></nav><div class="aside-foot" id="clock"></div></aside>
+<main><header><div><div class="eyebrow" id="role">—</div><h1 id="title">Mission</h1></div>
+<div class="header-actions"><button data-action="morph_refresh">Recompute</button><button data-action="git_sync">Git Sync</button>
+<div class="status"><span class="dot"></span><span id="health">LIVE</span></div></div></header>
+<section class="hero"><div><span class="label">Node</span><strong id="node">—</strong></div>
+<div><span class="label">Memory</span><strong id="memory">—</strong></div>
+<div><span class="label">GPU</span><strong id="gpu">—</strong></div>
+<div><span class="label">WorkerTruth</span><strong id="worker">—</strong></div></section>
+<section id="content"></section></main></div><script src="/app.js"></script></body></html>
