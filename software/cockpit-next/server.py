@@ -64,6 +64,14 @@ def acceleration_score(hyper,git,weak):
     raw=boost*35 + min(35,current) + min(20,pressure*10) - min(20,holds)
     return max(0,min(100,round(raw,1)))
 
+def go_sigma_state():
+    repo=HOME/"TristanRepos"/"Tristan"
+    contract=loadj(repo/"schemas"/"go_sigma_execution_contract_r1.json")
+    mission=loadj(repo/"data"/"GO_SIGMA_CONTINUOUS_MISSION_R1.json")
+    return {"contract_schema":contract.get("schema"),"mission_schema":mission.get("schema"),
+            "mission_id":mission.get("mission_id"),"modes":mission.get("mode") or [],
+            "invariants":contract.get("invariants") or [],"stop_rule":contract.get("stop_rule")}
+
 def collect():
     host=socket.gethostname()
     role="FORGE" if "SHA9IHL" in host else "OAK" if "2G1SSMT" in host else "HERITAGE"
@@ -75,12 +83,12 @@ def collect():
     event=loadj(HOME/".tristan"/"event-morphogenesis"/"state.json")
     fleet=loadj(HOME/".tristan"/"autonomous-maintenance"/"morphogenesis"/"fleet-worker-truth-wave-a.json")
     weak=morph.get("weakness_atlas") or []
-    return {"schema":"tristan.cockpit.next.state.r3","ts":time.time(),"node":host,"role":role,
+    return {"schema":"tristan.cockpit.next.state.r4","ts":time.time(),"node":host,"role":role,
       "system":{"memory":mem(),"gpu":gpu()},"hyperloop":hyper,"git":git,"legacy_cockpit":old,
       "morphogenesis":morph,"worker_truth":worker,"fleet_truth":fleet,
       "capabilities":morph.get("capability_graph") or {},"weaknesses":weak,
       "feed":latest_feed(role),"reports":report_meta(),"fleet_projection":fleet_projection(fleet),
-      "acceleration_score":acceleration_score(hyper,git,weak),"event_engine":event}
+      "acceleration_score":acceleration_score(hyper,git,weak),"event_engine":event,"go_sigma":go_sigma_state()}
 def launch(action):
     py=HOME/"AppData"/"Local"/"Programs"/"Python"/"Python313"/"python.exe"
     if action=="git_sync":

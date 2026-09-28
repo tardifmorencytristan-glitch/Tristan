@@ -1,7 +1,7 @@
 {
   "schema": "tristan.cockpit.next.release.r1",
-  "version": "1.2.0",
-  "release": "EVENT_MORPHOGENESIS",
+  "version": "1.3.0",
+  "release": "GSIGMA_EXECUTION_CONSTITUTION",
   "entrypoint": "server.py",
   "self_test": [
     "python",
@@ -38,6 +38,9 @@
     "residual frontier",
     "event morphogenesis state",
     "event acceleration level",
-    "causal trigger trace"
+    "causal trigger trace",
+    "GO Sigma constitution",
+    "continuous mission contract",
+    "runtime invariant projection"
   ]
 }

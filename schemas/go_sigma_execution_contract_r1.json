@@ -1,0 +1,158 @@
+{
+  "schema": "tristan.go_sigma.execution_contract.r1",
+  "id": "OMEGA_GSIGMA_GO_SIGMA_R1",
+  "purpose": "Continuous bounded verified morphogenesis from reality residuals to reusable capability crystals.",
+  "persistent_kernel": [
+    "Reality",
+    "Intent",
+    "ResidualField",
+    "CapabilityFabric",
+    "EvidenceAuthority",
+    "RegenerationKernel"
+  ],
+  "mother_loop": [
+    "OBSERVE_REALITY",
+    "RECOVER_INTENT",
+    "BUILD_CONTEXT_STAR",
+    "RESIDUALIZE",
+    "DISCOVER_CANDIDATES",
+    "MATCHED_EXPERIMENT",
+    "EXECUTE",
+    "WORKER_TRUTH",
+    "VERIFY",
+    "CAUSAL_CREDIT",
+    "CRYSTALLIZE",
+    "PROMOTION_COURT",
+    "IMPACT_CONE",
+    "PROPAGATE",
+    "REGENERATE"
+  ],
+  "invariants": [
+    "Reality!=Model",
+    "Memory!=Truth",
+    "Generated!=Verified",
+    "Simulation!=Measurement",
+    "Dispatch!=Execution!=Verification",
+    "Capability!=Authority",
+    "Repository!=Capability",
+    "Mergeable!=Qualified",
+    "LocalPASS!=GlobalPASS",
+    "OriginBonus=0",
+    "Generator!=Judge!=Executor!=Authority",
+    "ClaimScope<=EvidenceScope",
+    "MissingCapability!=CreateCapability",
+    "PersistentStructure<=VerifiedNecessaryStructure",
+    "RightToLose",
+    "RightToDie",
+    "NO_ACTION_admissible"
+  ],
+  "operators": {
+    "expansion": [
+      "EXP",
+      "ZOOM",
+      "MAX",
+      "GEXP",
+      "GZOOM",
+      "GMAX"
+    ],
+    "contraction": [
+      "LOG",
+      "DEZOOM",
+      "MIN",
+      "GLOG",
+      "GDEZOOM",
+      "GMIN",
+      "FACTORIZE",
+      "CONTRACT"
+    ],
+    "representation": [
+      "HGFM",
+      "FFWT",
+      "CVCD",
+      "gHGFM",
+      "gFFWT",
+      "gCVCD",
+      "TENSOR",
+      "VECTOR"
+    ],
+    "cognition": [
+      "Bayes-Tristan",
+      "YY3",
+      "GameMasters",
+      "JKD",
+      "GTVNT",
+      "MBAT",
+      "ResidualModeField"
+    ],
+    "meta": [
+      "T2",
+      "Tn",
+      "CommutatorCourt",
+      "GTRISTAN",
+      "GJARVIS"
+    ],
+    "lifecycle": [
+      "GENERATE",
+      "COUNTERGENERATE",
+      "TRANSLATE",
+      "TRANSFORM",
+      "ANALYZE",
+      "FALSIFY",
+      "VERIFY",
+      "REPAIR",
+      "REGENERATE",
+      "CRYSTALLIZE"
+    ]
+  },
+  "tournament_candidates": [
+    "CURRENT",
+    "SIMPLE_BASELINE",
+    "EXTERNAL_BEST_AVAILABLE",
+    "TRISTAN",
+    "HYBRID",
+    "KEEP_SEPARATE",
+    "NO_ACTION"
+  ],
+  "terminal_states": [
+    "MERGED",
+    "PATCH_EXISTING",
+    "COMPOSE",
+    "KEEP_SEPARATE",
+    "HOLD",
+    "REPAIR",
+    "REBASE",
+    "REGENERATE",
+    "SPLIT",
+    "ABSORB",
+    "SUPERSEDE",
+    "ARCHIVE",
+    "REJECT",
+    "NO_ACTION",
+    "DEPLOY_CANDIDATE",
+    "ROLLBACK"
+  ],
+  "promotion_gates": [
+    "evidence",
+    "tests",
+    "fresh_exact_head",
+    "compatibility",
+    "authority",
+    "rollback",
+    "post_promotion_verification"
+  ],
+  "resource_laws": [
+    "GenerationRate<=VerificationCapacity",
+    "ExecutionRate<=ObservationCapacity",
+    "ExecutionRate<=RecoveryCapacity",
+    "AutomationRate<=ValidationCapacity"
+  ],
+  "execution_policy": {
+    "execute_safe_authorized_reversible_now": true,
+    "require_worker_truth_for_important_actions": true,
+    "reuse_before_create": true,
+    "generate_ephemeral": true,
+    "crystallize_sparse": true,
+    "closure_before_continuation": true
+  },
+  "stop_rule": "ExpectedMarginalVerifiedGain <= MarginalCost + Risk + Latency + Complexity + ProofDebt"
+}
