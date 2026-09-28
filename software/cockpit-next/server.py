@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 import argparse, ctypes, json, os, pathlib, secrets, socket, subprocess, sys, time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlparse
@@ -38,6 +38,32 @@ def latest_feed(role):
     day=time.strftime("%Y-%m-%d")
     p=HOME/"TristanRepos"/"Tristan"/"reports"/"append-only"/role/f"{day}.jsonl"
     return tail_jsonl(p,16)
+def report_meta():
+    root=HOME/"TristanRepos"/"Tristan"/"reports"/"mutable"
+    out={}
+    for name in ("NOW.md","OPERATING_STATE.md","GRAND_STATE.md"):
+        f=root/name
+        if f.exists():
+            st=f.stat(); out[name]={"bytes":st.st_size,"mtime":st.st_mtime}
+    return out
+
+def fleet_projection(fleet):
+    roles={"DESKTOP-SHA9IHL":"FORGE","DESKTOP-2G1SSMT":"OAK","LAPTOP-AIU36QN6":"HERITAGE"}
+    rows=[]
+    for x in fleet.get("nodes") or []:
+        rows.append({"node":x.get("nodeID"),"role":roles.get(x.get("nodeID"),"NODE"),
+                     "input":(x.get("inputHash") or "")[:12],"result":(x.get("resultHash") or "")[:12]})
+    return rows
+
+def acceleration_score(hyper,git,weak):
+    gs=git.get("summary") or {}
+    current=sum(int(v) for k,v in gs.items() if k in ("CURRENT","CLONED","UPDATED"))
+    holds=sum(int(v) for k,v in gs.items() if str(k).startswith("HOLD"))
+    pressure=float((weak[0].get("priority",0) if weak else 0) or 0)
+    boost=1.0 if hyper.get("status")=="ACTIVE" else 0.0
+    raw=boost*35 + min(35,current) + min(20,pressure*10) - min(20,holds)
+    return max(0,min(100,round(raw,1)))
+
 def collect():
     host=socket.gethostname()
     role="FORGE" if "SHA9IHL" in host else "OAK" if "2G1SSMT" in host else "HERITAGE"
@@ -48,11 +74,11 @@ def collect():
     worker=loadj(HOME/".tristan"/"autonomous-maintenance"/"morphogenesis"/"worker-truth-latest.json")
     fleet=loadj(HOME/".tristan"/"autonomous-maintenance"/"morphogenesis"/"fleet-worker-truth-wave-a.json")
     weak=morph.get("weakness_atlas") or []
-    return {"schema":"tristan.cockpit.next.state.r1","ts":time.time(),"node":host,"role":role,
+    return {"schema":"tristan.cockpit.next.state.r2","ts":time.time(),"node":host,"role":role,
       "system":{"memory":mem(),"gpu":gpu()},"hyperloop":hyper,"git":git,"legacy_cockpit":old,
       "morphogenesis":morph,"worker_truth":worker,"fleet_truth":fleet,
       "capabilities":morph.get("capability_graph") or {},"weaknesses":weak,
-      "feed":latest_feed(role)}
+      "feed":latest_feed(role),"reports":report_meta(),"fleet_projection":fleet_projection(fleet),"acceleration_score":acceleration_score(hyper,git,weak)}
 def launch(action):
     py=HOME/"AppData"/"Local"/"Programs"/"Python"/"Python313"/"python.exe"
     if action=="git_sync":
