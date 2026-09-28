@@ -1,6 +1,6 @@
 # TRISTAN NOW
 
-Generated: 2026-09-28 19:50:14
+Generated: 2026-09-28 19:55:19
 
 ## Current
 
@@ -15,11 +15,10 @@ Generated: 2026-09-28 19:50:14
     "UPDATED": 1
   },
   "weakness": [
-    "repo_dirty_hold",
     "admin_update_lane_missing"
   ],
   "worker": "PASS",
   "boost": "ACTIVE",
-  "memory": 57
+  "memory": 54
 }
 
