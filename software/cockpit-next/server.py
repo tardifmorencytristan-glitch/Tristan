@@ -72,13 +72,15 @@ def collect():
     old=loadj(HOME/"JarvisTristan"/"cockpit_runtime"/"state.json")
     morph=loadj(HOME/".tristan"/"autonomous-maintenance"/"morphogenesis"/"state-latest.json")
     worker=loadj(HOME/".tristan"/"autonomous-maintenance"/"morphogenesis"/"worker-truth-latest.json")
+    event=loadj(HOME/".tristan"/"event-morphogenesis"/"state.json")
     fleet=loadj(HOME/".tristan"/"autonomous-maintenance"/"morphogenesis"/"fleet-worker-truth-wave-a.json")
     weak=morph.get("weakness_atlas") or []
-    return {"schema":"tristan.cockpit.next.state.r2","ts":time.time(),"node":host,"role":role,
+    return {"schema":"tristan.cockpit.next.state.r3","ts":time.time(),"node":host,"role":role,
       "system":{"memory":mem(),"gpu":gpu()},"hyperloop":hyper,"git":git,"legacy_cockpit":old,
       "morphogenesis":morph,"worker_truth":worker,"fleet_truth":fleet,
       "capabilities":morph.get("capability_graph") or {},"weaknesses":weak,
-      "feed":latest_feed(role),"reports":report_meta(),"fleet_projection":fleet_projection(fleet),"acceleration_score":acceleration_score(hyper,git,weak)}
+      "feed":latest_feed(role),"reports":report_meta(),"fleet_projection":fleet_projection(fleet),
+      "acceleration_score":acceleration_score(hyper,git,weak),"event_engine":event}
 def launch(action):
     py=HOME/"AppData"/"Local"/"Programs"/"Python"/"Python313"/"python.exe"
     if action=="git_sync":

@@ -1,7 +1,7 @@
 {
   "schema": "tristan.cockpit.next.release.r1",
-  "version": "1.1.0",
-  "release": "FLEET_INTELLIGENCE",
+  "version": "1.2.0",
+  "release": "EVENT_MORPHOGENESIS",
   "entrypoint": "server.py",
   "self_test": [
     "python",
@@ -35,6 +35,9 @@
     "acceleration score",
     "fleet projection",
     "report health",
-    "residual frontier"
+    "residual frontier",
+    "event morphogenesis state",
+    "event acceleration level",
+    "causal trigger trace"
   ]
 }
