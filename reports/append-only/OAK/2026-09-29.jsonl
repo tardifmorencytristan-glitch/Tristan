@@ -132,3 +132,4 @@
 {"ts":1790672494.9873958,"node":"DESKTOP-2G1SSMT","cockpit":["PASS",22],"git":{"CURRENT":45},"weakness":["repo_git_drift","admin_update_lane_missing"],"worker":"PASS","boost":"ACTIVE","memory":66}
 {"ts":1790672558.0167537,"node":"DESKTOP-2G1SSMT","cockpit":["PASS",22],"git":{"CURRENT":45},"weakness":["admin_update_lane_missing"],"worker":"PASS","boost":"ACTIVE","memory":69}
 {"ts":1790672620.9133065,"node":"DESKTOP-2G1SSMT","cockpit":["PASS",22],"git":{"CURRENT":45},"weakness":["admin_update_lane_missing"],"worker":"PASS","boost":"ACTIVE","memory":72}
+{"ts":1790672684.2222912,"node":"DESKTOP-2G1SSMT","cockpit":["PASS",22],"git":{"CURRENT":45},"weakness":["admin_update_lane_missing"],"worker":"PASS","boost":"EXPIRED_REVERTED","memory":null}
