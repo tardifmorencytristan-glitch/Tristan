@@ -2,7 +2,7 @@
 
 Current-state regeneration; obsolete state is omitted.
 
-Generated: 2026-09-28 21:48:45
+Generated: 2026-09-28 23:49:02
 
 ## HYPER
 
@@ -10,51 +10,20 @@ Generated: 2026-09-28 21:48:45
   "schema": "tristan.boost.state.r1",
   "node": "DESKTOP-2G1SSMT",
   "status": "ACTIVE",
-  "ts": 1790646524.6984138,
+  "ts": 1790653740.3156893,
   "expires_utc": "2026-09-29T09:04:02.4337846Z",
-  "memory_load_pct": 57,
+  "memory_load_pct": 61,
   "gpu": {
     "temp_c": 41,
     "util_pct": 0,
     "mem_used_mb": 0,
     "mem_total_mb": 8188
   },
-  "events": [
-    {
-      "task": "morph",
-      "result": {
-        "ok": true,
-        "code": 0,
-        "seconds": 0.22,
-        "out": "{\"host\": \"DESKTOP-2G1SSMT\", \"residuals\": 3, \"crystals\": 2, \"top\": [\"repo_dirty_hold\", \"repo_git_drift\", \"admin_update_lane_missing\"]}\n",
-        "err": ""
-      }
-    },
-    {
-      "task": "wave",
-      "result": {
-        "ok": true,
-        "code": 0,
-        "seconds": 2.14,
-        "out": "{\n  \"node\": \"DESKTOP-2G1SSMT\",\n  \"best_size\": \"CURRENT_MINIMAL\",\n  \"best_coverage\": \"MCP_RESOURCE_NOTIFICATION\",\n  \"decision\": {\n    \"event_envelope\": \"COMPOSE_CLOUDEVENTS_FIELDS\",\n    \"telemetry\": \"KEEP_SEPARATE_CHALLENGER_OTEL\",\n    \"inventory\": \"KEEP_SEPARATE_CHALLENGER_OSQUERY\",\n    \"capability_protocol\": \"COMPOSE_MCP_CONCEPTS_NOT_FULL_RUNTIME\",\n    \"runtime_install\": \"NO_ACTION_UNTIL_REAL_WORKLOAD_WIN\"\n  },\n  \"bytes\": {\n    \"CURRENT_MINIMAL\": 2196.6,\n    \"CLOUDEVENTS_ENVELOPE\": 2280.6,\n    \"OTEL_RESOURCE_SIGNAL\": 2333.8,\n    \"MCP_RESOURCE_NOTIFICATION\": 2257.8\n  },\n  \"ms\": {\n    \"CURRENT_MINIMAL\": 124.2,\n    \"CLOUDEVENTS_ENVELOPE\": 120.77,\n    \"OTEL_RESOURCE_SIGNAL\": 129.36,\n    \"MCP_RESOURCE_NOTIFICATION\": 122.53\n  }\n}\n",
-        "err": ""
-      }
-    },
-    {
-      "task": "workertruth",
-      "result": {
-        "ok": true,
-        "code": 0,
-        "seconds": 0.09,
-        "out": "{\n  \"node\": \"DESKTOP-2G1SSMT\",\n  \"verifierResult\": \"PASS\",\n  \"inputHash\": \"8a0271c2de2ca9068c34450d3eade4f2b06fe00a7e1bce5db351d75400b3a5fc\",\n  \"planHash\": \"3b199fcda50f0583d4d8906c4d81e7a6f189913bfc46785f5f52a01bc7a9556c\",\n  \"resultHash\": \"035373738728a8f4fef85d592e7d8109c112580ce4820661e1ec1ddd935439cb\"\n}\n",
-        "err": ""
-      }
-    }
-  ],
+  "events": [],
   "last": {
-    "git": 1790646474.6220338,
-    "morph": 1790646524.6982417,
-    "maintenance": 1790646197.8563101
+    "git": 1790653703.9357035,
+    "morph": 1790653716.8261063,
+    "maintenance": 1790653234.4368708
   }
 }
 
@@ -62,7 +31,7 @@ Generated: 2026-09-28 21:48:45
 
 {
   "schema": "tristan.git.autosync.receipt.r2",
-  "ts": "2026-09-29T01:47:54Z",
+  "ts": "2026-09-29T03:48:23Z",
   "node": "DESKTOP-2G1SSMT",
   "manifest_count": 45,
   "clone_budget_successes": 20,
@@ -72,15 +41,14 @@ Generated: 2026-09-28 21:48:45
     "err": ""
   },
   "summary": {
-    "CURRENT": 44,
-    "HOLD_DIRTY": 1
+    "CURRENT": 45
   },
   "repos": [
     {
       "name": "Tristan-Priv-",
       "full_name": "tardifmorencytristan-glitch/Tristan-Priv-",
       "path": "C:\\Users\\trist\\TristanRepos\\Tristan-Priv-",
-      "ts": "2026-09-29T01:46:45Z",
+      "ts": "2026-09-29T03:47:23Z",
       "branch": "main",
       "dirty": false,
       "head_before": "6dd6028e982fdbeb19446ceda30fb1f17641d1b9",
@@ -94,32 +62,35 @@ Generated: 2026-09-28 21:48:45
       "name": "Tristan-Tardif-Morency",
       "full_name": "tardifmorencytristan-glitch/Tristan-Tardif-Morency",
       "path": "C:\\Users\\trist\\TristanRepos\\Tristan-Tardif-Morency",
-      "ts": "2026-09-29T01:46:47Z",
+      "ts": "2026-09-29T03:47:25Z",
       "branch": "main",
       "dirty": false,
-      "head_before": "b9457965a27d72f9bcf1b424acc2b4ae49d43edd",
+      "head_before": "e2f8925261e33d59c7a55d01c5d3ef32306aa5fe",
       "ahead": 0,
       "behind": 0,
       "action": "NO_ACTION",
       "status": "CURRENT",
-      "head_after": "b9457965a27d72f9bcf1b424acc2b4ae49d43edd"
+      "head_after": "e2f8925261e33d59c7a55d01c5d3ef32306aa5fe"
     },
     {
       "name": "Tristan",
       "full_name": "tardifmorencytristan-glitch/Tristan",
       "path": "C:\\Users\\trist\\TristanRepos\\Tristan",
-      "ts": "2026-09-29T01:46:49Z",
+      "ts": "2026-09-29T03:47:27Z",
       "branch": "main",
-      "dirty": true,
-      "head_before": "05e484f6172bd38e0b40fc39cc32b443bbb63b47",
-      "action": "FETCH_ONLY",
-      "status": "HOLD_DIRTY"
+      "dirty": false,
+      "head_before": "26bd6d7ae73f7d8051571e56800d9b9a747d7edc",
+      "ahead": 0,
+      "behind": 0,
+      "action": "NO_ACTION",
+      "status": "CURRENT",
+      "head_after": "26bd6d7ae73f7d8051571e56800d9b9a747d7edc"
     },
     {
       "name": "tristan-sovereign",
       "full_name": "tardifmorencytristan-glitch/tristan-sovereign",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-sovereign",
-      "ts": "2026-09-29T01:46:50Z",
+      "ts": "2026-09-29T03:47:28Z",
       "branch": "main",
       "dirty": false,
       "head_before": "f4d6374bef3869f8ce4aa84d43e65546af5250d6",
@@ -133,7 +104,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-registry",
       "full_name": "tardifmorencytristan-glitch/tristan-registry",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-registry",
-      "ts": "2026-09-29T01:46:52Z",
+      "ts": "2026-09-29T03:47:29Z",
       "branch": "main",
       "dirty": false,
       "head_before": "b4b54f1bc7edf919dcc666c7ab5d6eef3ed3b951",
@@ -147,7 +118,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-core",
       "full_name": "tardifmorencytristan-glitch/tristan-core",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-core",
-      "ts": "2026-09-29T01:46:53Z",
+      "ts": "2026-09-29T03:47:31Z",
       "branch": "main",
       "dirty": false,
       "head_before": "65d922239cff567ccfc2000deb9ab5a22deee6b8",
@@ -161,7 +132,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-hgfm",
       "full_name": "tardifmorencytristan-glitch/tristan-hgfm",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-hgfm",
-      "ts": "2026-09-29T01:46:56Z",
+      "ts": "2026-09-29T03:47:33Z",
       "branch": "main",
       "dirty": false,
       "head_before": "d11832d56b2dbcfc272afdfc63c24b78dc610e4b",
@@ -175,7 +146,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-cvcd",
       "full_name": "tardifmorencytristan-glitch/tristan-cvcd",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-cvcd",
-      "ts": "2026-09-29T01:46:58Z",
+      "ts": "2026-09-29T03:47:34Z",
       "branch": "main",
       "dirty": false,
       "head_before": "15b41da5c8a1c79f768fd0c1634ae082ca6651b7",
@@ -189,7 +160,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-ffwt",
       "full_name": "tardifmorencytristan-glitch/tristan-ffwt",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-ffwt",
-      "ts": "2026-09-29T01:46:59Z",
+      "ts": "2026-09-29T03:47:35Z",
       "branch": "main",
       "dirty": false,
       "head_before": "4032fedd782b7ed9dbd44a0777436c7e4af43b23",
@@ -203,7 +174,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-t2",
       "full_name": "tardifmorencytristan-glitch/tristan-t2",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-t2",
-      "ts": "2026-09-29T01:47:00Z",
+      "ts": "2026-09-29T03:47:35Z",
       "branch": "main",
       "dirty": false,
       "head_before": "ca6995ffcd3b3bf331cc8709e1174d3181856b2c",
@@ -217,7 +188,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-oak",
       "full_name": "tardifmorencytristan-glitch/tristan-oak",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-oak",
-      "ts": "2026-09-29T01:47:02Z",
+      "ts": "2026-09-29T03:47:37Z",
       "branch": "main",
       "dirty": false,
       "head_before": "7a3c740d585538248ed4b0da0d33c39dfc0cd93b",
@@ -231,7 +202,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-anti-ego",
       "full_name": "tardifmorencytristan-glitch/tristan-anti-ego",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-anti-ego",
-      "ts": "2026-09-29T01:47:02Z",
+      "ts": "2026-09-29T03:47:38Z",
       "branch": "main",
       "dirty": false,
       "head_before": "a8d5ccfe8fe42afb809170b5a5c79c3b6f0e00ca",
@@ -245,7 +216,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-memory",
       "full_name": "tardifmorencytristan-glitch/tristan-memory",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-memory",
-      "ts": "2026-09-29T01:47:03Z",
+      "ts": "2026-09-29T03:47:38Z",
       "branch": "main",
       "dirty": false,
       "head_before": "bed6a04f63a1f10e2be82ccf8ab7acd72780ddf5",
@@ -259,7 +230,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-regeneration",
       "full_name": "tardifmorencytristan-glitch/tristan-regeneration",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-regeneration",
-      "ts": "2026-09-29T01:47:05Z",
+      "ts": "2026-09-29T03:47:40Z",
       "branch": "main",
       "dirty": false,
       "head_before": "71049f151c8af7fa72896096085f572266510410",
@@ -273,7 +244,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-jarvis-core",
       "full_name": "tardifmorencytristan-glitch/tristan-jarvis-core",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-jarvis-core",
-      "ts": "2026-09-29T01:47:07Z",
+      "ts": "2026-09-29T03:47:42Z",
       "branch": "main",
       "dirty": false,
       "head_before": "7a99cf84db8cf81db0a0881c72d3482389445831",
@@ -287,7 +258,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-jarvis-windows",
       "full_name": "tardifmorencytristan-glitch/tristan-jarvis-windows",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-jarvis-windows",
-      "ts": "2026-09-29T01:47:09Z",
+      "ts": "2026-09-29T03:47:43Z",
       "branch": "main",
       "dirty": false,
       "head_before": "8522ca6a69705040445a17d980ba134a8988b456",
@@ -301,7 +272,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-jarvis-mobile",
       "full_name": "tardifmorencytristan-glitch/tristan-jarvis-mobile",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-jarvis-mobile",
-      "ts": "2026-09-29T01:47:11Z",
+      "ts": "2026-09-29T03:47:45Z",
       "branch": "main",
       "dirty": false,
       "head_before": "a15901d2783d13d7416227db32d532a1480feeb9",
@@ -315,7 +286,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-jarvis-mesh",
       "full_name": "tardifmorencytristan-glitch/tristan-jarvis-mesh",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-jarvis-mesh",
-      "ts": "2026-09-29T01:47:13Z",
+      "ts": "2026-09-29T03:47:47Z",
       "branch": "main",
       "dirty": false,
       "head_before": "1a90b41fba7658e6ccd15f0d8456cbc65fa183de",
@@ -329,7 +300,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-virtual-compute",
       "full_name": "tardifmorencytristan-glitch/tristan-virtual-compute",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-virtual-compute",
-      "ts": "2026-09-29T01:47:15Z",
+      "ts": "2026-09-29T03:47:48Z",
       "branch": "main",
       "dirty": false,
       "head_before": "2d287c5c0b2803d61a7c9406c02be2991b1e5bbb",
@@ -343,7 +314,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-resource-fabric",
       "full_name": "tardifmorencytristan-glitch/tristan-resource-fabric",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-resource-fabric",
-      "ts": "2026-09-29T01:47:16Z",
+      "ts": "2026-09-29T03:47:50Z",
       "branch": "main",
       "dirty": false,
       "head_before": "eb7a38cc9ecc29271d834608de7576b6bc34c164",
@@ -357,7 +328,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-reality",
       "full_name": "tardifmorencytristan-glitch/tristan-reality",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-reality",
-      "ts": "2026-09-29T01:47:18Z",
+      "ts": "2026-09-29T03:47:52Z",
       "branch": "main",
       "dirty": false,
       "head_before": "06740f061a6632895eb8c6bf2a9c12a56cd9705e",
@@ -371,7 +342,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-git",
       "full_name": "tardifmorencytristan-glitch/tristan-git",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-git",
-      "ts": "2026-09-29T01:47:20Z",
+      "ts": "2026-09-29T03:47:53Z",
       "branch": "main",
       "dirty": false,
       "head_before": "646f3c0762a2b0c8daf0d1697dece6b721698704",
@@ -385,7 +356,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-proof",
       "full_name": "tardifmorencytristan-glitch/tristan-proof",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-proof",
-      "ts": "2026-09-29T01:47:21Z",
+      "ts": "2026-09-29T03:47:56Z",
       "branch": "main",
       "dirty": false,
       "head_before": "4fda508097b2bd42f08d6fc71189392811d1b1bd",
@@ -399,7 +370,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-bench",
       "full_name": "tardifmorencytristan-glitch/tristan-bench",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-bench",
-      "ts": "2026-09-29T01:47:22Z",
+      "ts": "2026-09-29T03:47:56Z",
       "branch": "main",
       "dirty": false,
       "head_before": "e83af0b36423c3926f5960284da4e0a928300500",
@@ -413,7 +384,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-evidence",
       "full_name": "tardifmorencytristan-glitch/tristan-evidence",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-evidence",
-      "ts": "2026-09-29T01:47:23Z",
+      "ts": "2026-09-29T03:47:57Z",
       "branch": "main",
       "dirty": false,
       "head_before": "5b46dab3f9d4184d69db475817a762bee19cb4b1",
@@ -427,7 +398,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-physics",
       "full_name": "tardifmorencytristan-glitch/tristan-physics",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-physics",
-      "ts": "2026-09-29T01:47:25Z",
+      "ts": "2026-09-29T03:47:59Z",
       "branch": "main",
       "dirty": false,
       "head_before": "4dba1e0251119153b7d4f1f0a767fe9f42cf301f",
@@ -441,7 +412,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-materials",
       "full_name": "tardifmorencytristan-glitch/tristan-materials",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-materials",
-      "ts": "2026-09-29T01:47:26Z",
+      "ts": "2026-09-29T03:47:59Z",
       "branch": "main",
       "dirty": false,
       "head_before": "caafc84c3b652f6c0275b343994f8a7fbbb5ad4b",
@@ -455,7 +426,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-chemistry",
       "full_name": "tardifmorencytristan-glitch/tristan-chemistry",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-chemistry",
-      "ts": "2026-09-29T01:47:27Z",
+      "ts": "2026-09-29T03:48:00Z",
       "branch": "main",
       "dirty": false,
       "head_before": "f7ad91646d05c8d4d4ffb7ffecc1d47c26405bfb",
@@ -469,7 +440,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-biology",
       "full_name": "tardifmorencytristan-glitch/tristan-biology",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-biology",
-      "ts": "2026-09-29T01:47:29Z",
+      "ts": "2026-09-29T03:48:01Z",
       "branch": "main",
       "dirty": false,
       "head_before": "2c1bf3e5d8fdce5d43b51c22db9343045aeabf15",
@@ -483,7 +454,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-health",
       "full_name": "tardifmorencytristan-glitch/tristan-health",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-health",
-      "ts": "2026-09-29T01:47:30Z",
+      "ts": "2026-09-29T03:48:03Z",
       "branch": "main",
       "dirty": false,
       "head_before": "89fed643f2bcda3febbc28d9b3cbecd00c558d45",
@@ -497,7 +468,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-education",
       "full_name": "tardifmorencytristan-glitch/tristan-education",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-education",
-      "ts": "2026-09-29T01:47:32Z",
+      "ts": "2026-09-29T03:48:05Z",
       "branch": "main",
       "dirty": false,
       "head_before": "819cbe360e5f55c6f0e91f60bfc164c1e5b64975",
@@ -511,7 +482,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-economic",
       "full_name": "tardifmorencytristan-glitch/tristan-economic",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-economic",
-      "ts": "2026-09-29T01:47:33Z",
+      "ts": "2026-09-29T03:48:05Z",
       "branch": "main",
       "dirty": false,
       "head_before": "20aca9145b098101daec3c47fe4e43339806bf17",
@@ -525,7 +496,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-research-factory",
       "full_name": "tardifmorencytristan-glitch/tristan-research-factory",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-research-factory",
-      "ts": "2026-09-29T01:47:35Z",
+      "ts": "2026-09-29T03:48:07Z",
       "branch": "main",
       "dirty": false,
       "head_before": "11c181c39cef65c957946846151b45ff74f00768",
@@ -539,7 +510,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-patents-ip",
       "full_name": "tardifmorencytristan-glitch/tristan-patents-ip",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-patents-ip",
-      "ts": "2026-09-29T01:47:37Z",
+      "ts": "2026-09-29T03:48:08Z",
       "branch": "main",
       "dirty": false,
       "head_before": "3a2933e458672c6aa8ec81fd66a712678d857946",
@@ -553,7 +524,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-science",
       "full_name": "tardifmorencytristan-glitch/tristan-science",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-science",
-      "ts": "2026-09-29T01:47:39Z",
+      "ts": "2026-09-29T03:48:10Z",
       "branch": "main",
       "dirty": false,
       "head_before": "7fbf5020419da55bb16e8d4a62ade820d9bd2cf3",
@@ -567,7 +538,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-revenue",
       "full_name": "tardifmorencytristan-glitch/tristan-revenue",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-revenue",
-      "ts": "2026-09-29T01:47:41Z",
+      "ts": "2026-09-29T03:48:11Z",
       "branch": "main",
       "dirty": false,
       "head_before": "5695ee97f1411d88a0bc2102b2f6f4f481486983",
@@ -581,7 +552,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-company",
       "full_name": "tardifmorencytristan-glitch/tristan-company",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-company",
-      "ts": "2026-09-29T01:47:42Z",
+      "ts": "2026-09-29T03:48:13Z",
       "branch": "main",
       "dirty": false,
       "head_before": "e4a8b50585496d155836e7ddd294df9c60161edf",
@@ -595,7 +566,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-polytechnique",
       "full_name": "tardifmorencytristan-glitch/tristan-polytechnique",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-polytechnique",
-      "ts": "2026-09-29T01:47:44Z",
+      "ts": "2026-09-29T03:48:14Z",
       "branch": "main",
       "dirty": false,
       "head_before": "592785fff24667ded6104825661a8349a44f40bf",
@@ -609,7 +580,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-sdk-python",
       "full_name": "tardifmorencytristan-glitch/tristan-sdk-python",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-sdk-python",
-      "ts": "2026-09-29T01:47:46Z",
+      "ts": "2026-09-29T03:48:16Z",
       "branch": "main",
       "dirty": false,
       "head_before": "3c47065e88f6770d424e65dd6447f5323e83ac78",
@@ -623,7 +594,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-sdk-js",
       "full_name": "tardifmorencytristan-glitch/tristan-sdk-js",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-sdk-js",
-      "ts": "2026-09-29T01:47:47Z",
+      "ts": "2026-09-29T03:48:17Z",
       "branch": "main",
       "dirty": false,
       "head_before": "9cadedb0df3b9ee803a148534c00633106650ef2",
@@ -637,7 +608,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-cli",
       "full_name": "tardifmorencytristan-glitch/tristan-cli",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-cli",
-      "ts": "2026-09-29T01:47:48Z",
+      "ts": "2026-09-29T03:48:17Z",
       "branch": "main",
       "dirty": false,
       "head_before": "045a2f54f83133b78bc2023472d47552462f7d10",
@@ -651,7 +622,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-web",
       "full_name": "tardifmorencytristan-glitch/tristan-web",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-web",
-      "ts": "2026-09-29T01:47:48Z",
+      "ts": "2026-09-29T03:48:18Z",
       "branch": "main",
       "dirty": false,
       "head_before": "d0fbe0ab6a488f647e490b9d774299201844e949",
@@ -665,7 +636,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-public",
       "full_name": "tardifmorencytristan-glitch/tristan-public",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-public",
-      "ts": "2026-09-29T01:47:49Z",
+      "ts": "2026-09-29T03:48:19Z",
       "branch": "main",
       "dirty": false,
       "head_before": "c6ae172471dac76950613680b52d36ab32944fac",
@@ -679,7 +650,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-datasets",
       "full_name": "tardifmorencytristan-glitch/tristan-datasets",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-datasets",
-      "ts": "2026-09-29T01:47:50Z",
+      "ts": "2026-09-29T03:48:19Z",
       "branch": "main",
       "dirty": false,
       "head_before": "723b47d74e40d406f0b33622adfbe7e5970c4dbd",
@@ -693,7 +664,7 @@ Generated: 2026-09-28 21:48:45
       "name": "tristan-oss-digest",
       "full_name": "tardifmorencytristan-glitch/tristan-oss-digest",
       "path": "C:\\Users\\trist\\TristanRepos\\tristan-oss-digest",
-      "ts": "2026-09-29T01:47:52Z",
+      "ts": "2026-09-29T03:48:21Z",
       "branch": "main",
       "dirty": false,
       "head_before": "c66588f4f295e1296ee9e595eedb5644db0ecd24",
@@ -718,7 +689,7 @@ Generated: 2026-09-28 21:48:45
   "post_sync_materializer": {
     "ok": true,
     "code": 0,
-    "seconds": 0.303,
+    "seconds": 0.308,
     "err": ""
   }
 }
@@ -762,9 +733,9 @@ Generated: 2026-09-28 21:48:45
 
 {
   "schema": "tristan.residual.morphogenesis.derived.r1",
-  "ts": 1790646522.4625273,
+  "ts": 1790653715.0163393,
   "host": "DESKTOP-2G1SSMT",
-  "source_receipt": "C:\\Users\\trist\\.tristan\\autonomous-maintenance\\receipts\\maintenance-20260929T014314Z.json",
+  "source_receipt": "C:\\Users\\trist\\.tristan\\autonomous-maintenance\\receipts\\maintenance-20260929T034031Z.json",
   "capability_graph": {
     "node": "DESKTOP-2G1SSMT",
     "local_roots": [
@@ -774,7 +745,7 @@ Generated: 2026-09-28 21:48:45
     ],
     "maintenance": "AVAILABLE",
     "cockpit": "VERIFIED",
-    "repo_mode": "LIVE_DIRTY",
+    "repo_mode": "LIVE_CLEAN",
     "autonomy": "ACTIVE_OR_STARTED",
     "system_update_lane": "HOLD_ADMIN_CANARY_REQUIRED",
     "runtime_capabilities": {
@@ -821,36 +792,6 @@ Generated: 2026-09-28 21:48:45
   },
   "weakness_atlas": [
     {
-      "kind": "repo_dirty_hold",
-      "severity": 0.7,
-      "centrality": 0.7,
-      "uncertainty": 0.2,
-      "repairability": 0.8,
-      "priority": 0.49,
-      "evidence": {
-        "exists": true,
-        "clean": false,
-        "ahead": 1,
-        "behind": 0
-      },
-      "route": "REVIEW_LOCAL_CHANGES"
-    },
-    {
-      "kind": "repo_git_drift",
-      "severity": 0.55,
-      "centrality": 0.65,
-      "uncertainty": 0.15,
-      "repairability": 0.9,
-      "priority": 0.3737,
-      "evidence": {
-        "exists": true,
-        "clean": false,
-        "ahead": 1,
-        "behind": 0
-      },
-      "route": "VERIFY_SYNC"
-    },
-    {
       "kind": "admin_update_lane_missing",
       "severity": 0.5,
       "centrality": 0.65,
@@ -862,26 +803,6 @@ Generated: 2026-09-28 21:48:45
     }
   ],
   "operator_routes": [
-    {
-      "residual": "repo_dirty_hold",
-      "candidate_operators": [
-        "GitTristan",
-        "KEEP_SEPARATE",
-        "NO_ACTION"
-      ],
-      "selection_rule": "maximize verified closure / (cost+risk+complexity+proof_debt)"
-    },
-    {
-      "residual": "repo_git_drift",
-      "candidate_operators": [
-        "GitTristan",
-        "fetch",
-        "ff-only",
-        "rebase-if-clean",
-        "HOLD"
-      ],
-      "selection_rule": "maximize verified closure / (cost+risk+complexity+proof_debt)"
-    },
     {
       "residual": "admin_update_lane_missing",
       "candidate_operators": [
@@ -897,7 +818,7 @@ Generated: 2026-09-28 21:48:45
     {
       "capability_id": "verified-local-cockpit",
       "status": "MERGEABLE_DERIVED_CAPABILITY",
-      "source": "C:\\Users\\trist\\.tristan\\autonomous-maintenance\\receipts\\maintenance-20260929T014314Z.json",
+      "source": "C:\\Users\\trist\\.tristan\\autonomous-maintenance\\receipts\\maintenance-20260929T034031Z.json",
       "mechanism": "highest local cockpit release passing self-test",
       "integration": "retain current verified cockpit",
       "rollback": "previous verified cockpit release",
@@ -955,12 +876,12 @@ Generated: 2026-09-28 21:48:45
 {
   "schema": "tristan.workertruth.r1",
   "nodeID": "DESKTOP-2G1SSMT",
-  "inputHash": "8a0271c2de2ca9068c34450d3eade4f2b06fe00a7e1bce5db351d75400b3a5fc",
+  "inputHash": "7a2679d39af42037d4bb3fbf3442ee43673a3cae64e42eb9bd3bd13d1df97488",
   "planHash": "3b199fcda50f0583d4d8906c4d81e7a6f189913bfc46785f5f52a01bc7a9556c",
-  "resultHash": "035373738728a8f4fef85d592e7d8109c112580ce4820661e1ec1ddd935439cb",
+  "resultHash": "18e8bf102c2e632de2fcdf6d1fba9583baf8c7ce214dde5c8c7455cd9b228c56",
   "genomeHash": "4685ac4060daf74e80b6bc85a66a28b6c1b35a5174258ddb9db04f237c6c2c45",
   "timestamps": {
-    "verified_at_unix": 1790646524.7189047
+    "verified_at_unix": 1790653716.8154907
   },
   "verifierResult": "PASS",
   "authorityGranted": false,
