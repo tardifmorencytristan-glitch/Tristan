@@ -20,9 +20,15 @@ def compile_dag(mission_id:str,tasks:Sequence[Mapping[str,object]],signals:Mappi
     body["digest"]=digest(body)
     return body
 
-def compile_pipeline(mission_id:str,tasks:Sequence[Mapping[str,object]],signals:Mapping[str,object]|None=None)->dict:
+def compile_pipeline(
+    mission_id:str,
+    tasks:Sequence[Mapping[str,object]],
+    signals:Mapping[str,object]|None=None,
+    *,
+    fleet_path=None,
+)->dict:
     dag=compile_dag(mission_id,tasks,signals)
-    auction=compile_auction(list(tasks))
+    auction=compile_auction(list(tasks)) if fleet_path is None else compile_auction(list(tasks), fleet_path=fleet_path)
     if auction.get("status")!="PASS":
         return {
             "schema":SCHEMA,
