@@ -1,0 +1,45 @@
+{
+  "schema": "tristan.mission-truth-runtime-crystal.r204",
+  "status": "QUALIFIED_LOCAL_CRYSTAL",
+  "lineage": [
+    "R190 durable closure",
+    "R194 SuperFabric",
+    "R195 runtime capability truth",
+    "R199 WorkerTruth runtime crystal",
+    "R200 effect ledger",
+    "R201 capability-aware auction",
+    "R202 unified compile/auction/execute pipeline",
+    "R203 freshness/resource-aware re-auction + peer integrity quorum",
+    "R204 execution/effect/outcome separation"
+  ],
+  "components": [
+    "src/tristan_connector_os/jarvis_worker_truth_r01.py",
+    "src/tristan_connector_os/jarvis_mission_truth_executor_r01.py",
+    "src/capability_auction_r201.py",
+    "src/capability_pipeline_r202.py",
+    "src/capability_auction_r203.py",
+    "src/effect_verifier_r204.py"
+  ],
+  "qualification": {
+    "focused_tests": "5/5 PASS",
+    "compileall": "PASS",
+    "r202_live_execution": "PASS selected=1 verified=1",
+    "r203_peer_quorum": "2/2 INDEPENDENT_INTEGRITY_PASS",
+    "r203_reauction": "PASS SHA9IHL -> 2G1SSMT on exclusion for admissible task",
+    "r204_local_effect": "VERIFIED",
+    "r204_mission_outcome": "HOLD_EXTERNAL_OUTCOME_EVIDENCE"
+  },
+  "invariants": [
+    "Dispatch!=Execution",
+    "ExecutionVerified!=EffectVerified",
+    "EffectVerified!=MissionOutcomeVerified",
+    "Capability!=Authority",
+    "LoadIsDynamic",
+    "Freshness!=Capability",
+    "NO_ACTION admissible",
+    "RightToLose"
+  ],
+  "authority": "local bounded only",
+  "external_side_effects": false,
+  "promotion": "branch candidate; main promotion requires normal Git/OAK gates"
+}
