@@ -65,3 +65,4 @@
 {"ts":1790662732.082215,"node":"DESKTOP-2G1SSMT","cockpit":["PASS",22],"git":{"CURRENT":45},"weakness":["admin_update_lane_missing"],"worker":"PASS","boost":"ACTIVE","memory":71}
 {"ts":1790662795.4501128,"node":"DESKTOP-2G1SSMT","cockpit":["PASS",22],"git":{"CURRENT":45},"weakness":["admin_update_lane_missing"],"worker":"PASS","boost":"ACTIVE","memory":72}
 {"ts":1790663045.2863877,"node":"DESKTOP-2G1SSMT","cockpit":["PASS",22],"git":{"CURRENT":45},"weakness":["admin_update_lane_missing"],"worker":"PASS","boost":"ACTIVE","memory":71}
+{"ts":1790663110.431986,"node":"DESKTOP-2G1SSMT","cockpit":["PASS",22],"git":{"CURRENT":45},"weakness":["repo_git_drift","admin_update_lane_missing"],"worker":"PASS","boost":"ACTIVE","memory":72}
