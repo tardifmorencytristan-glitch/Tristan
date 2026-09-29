@@ -19,8 +19,9 @@ def compatible(task,node):
     return True
 def digest(x):
     return hashlib.sha256(json.dumps(x,sort_keys=True,separators=(",",":")).encode()).hexdigest()
-def compile_auction(tasks):
-    fleet=json.loads(FLEET.read_text())
+def compile_auction(tasks, *, fleet_path=FLEET):
+    fleet_path=Path(fleet_path)
+    fleet=json.loads(fleet_path.read_text())
     nodes=fleet["nodes"]
     compatible_by_task={t["id"]:[n for n in nodes if compatible(t,n)] for t in tasks}
     impossible=[tid for tid,x in compatible_by_task.items() if not x]
@@ -38,7 +39,7 @@ def compile_auction(tasks):
         eligible.sort(key=lambda n:(v(n.get("python_version")),v(n.get("node_version")),n["node"]),reverse=True)
         winner=eligible[0]
         bids.append({"task_id":t["id"],"winner":{"node":winner["node"],"score":1.0,"why":{"runtime_requirements_satisfied":True,"measured_capability":True}},"alternatives":[{"node":n["node"]} for n in eligible[1:]],"priority":t.get("priority",0)})
-    out={"schema":"tristan.capability-auction.r201","status":"PASS","created":time.time(),"coalition_size":len(best),"coalition":[n["node"] for n in best],"bids":bids,"capability_snapshot_sha256":hashlib.sha256(FLEET.read_bytes()).hexdigest(),"authority_granted":False}
+    out={"schema":"tristan.capability-auction.r201","status":"PASS","created":time.time(),"coalition_size":len(best),"coalition":[n["node"] for n in best],"bids":bids,"capability_snapshot_sha256":hashlib.sha256(fleet_path.read_bytes()).hexdigest(),"authority_granted":False}
     out["digest"]=digest(out)
     return out
 if __name__=="__main__":
