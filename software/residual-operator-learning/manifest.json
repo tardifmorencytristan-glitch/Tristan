@@ -1,0 +1,42 @@
+{
+  "schema": "tristan.residual_operator_learning.release.r1",
+  "version": "1.0.0",
+  "release": "CAUSAL_SHADOW_ANTI_COMPUTATION",
+  "purpose": "Learn residual-signature to operator-path outcomes, distinguish operational PASS from residual reduction, and suppress repeatedly neutral work with bounded revalidation cooldowns.",
+  "entrypoints": {
+    "watcher": "watcher.pyw",
+    "learner": "learner.pyw"
+  },
+  "modes": [
+    "SHADOW_ONLY_CAUSAL",
+    "NO_ACTION_COOLDOWN"
+  ],
+  "gates": {
+    "run_path": {
+      "min_attempts": 3,
+      "requires_improved_episode": true,
+      "evidence_score_gt": 0,
+      "residual_gain_gt": 0
+    },
+    "no_action_cooldown": {
+      "min_attempts": 3,
+      "improved_eq": 0,
+      "worsened_eq": 0,
+      "failed_eq": 0,
+      "neutral_gte": 3,
+      "residual_gain_eq": 0,
+      "cooldown_seconds": 600
+    }
+  },
+  "invariants": [
+    "OperationalPASS!=ResidualImprovement",
+    "Correlation!=CausalCredit",
+    "ModelEpochChange=>ArchiveAndReset",
+    "ShadowBeforeInfluence",
+    "NO_ACTION_admissible",
+    "RightToLose",
+    "RightToDie"
+  ],
+  "rollback": "Restore previous watcher/learner from local archive or Git history.",
+  "authority": "Local user-scope only; no privilege escalation."
+}

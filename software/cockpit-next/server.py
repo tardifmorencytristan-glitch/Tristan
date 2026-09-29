@@ -72,10 +72,11 @@ def operator_learning_state():
     for key,val in mp.items():
         rec=(val or {}).get("recommendation") or {}
         if rec:
-            rows.append({"signature":key,"path":rec.get("path"),
+            rows.append({"signature":key,"decision":rec.get("decision"),"path":rec.get("path"),
                          "evidence_score":rec.get("evidence_score"),
                          "attempts":rec.get("attempts"),
                          "residual_gain":rec.get("residual_gain"),
+                         "cooldown_seconds":rec.get("cooldown_seconds"),
                          "eligible":bool(rec.get("eligible_to_influence"))})
     rows=sorted(rows,key=lambda x:((x.get("eligible") is True),x.get("evidence_score") or -999,x.get("attempts") or 0),reverse=True)
     return {"state":state,"recommendations":rows[:12]}
@@ -99,7 +100,7 @@ def collect():
     event=loadj(HOME/".tristan"/"event-morphogenesis"/"state.json")
     fleet=loadj(HOME/".tristan"/"autonomous-maintenance"/"morphogenesis"/"fleet-worker-truth-wave-a.json")
     weak=morph.get("weakness_atlas") or []
-    return {"schema":"tristan.cockpit.next.state.r5","ts":time.time(),"node":host,"role":role,
+    return {"schema":"tristan.cockpit.next.state.r6","ts":time.time(),"node":host,"role":role,
       "system":{"memory":mem(),"gpu":gpu()},"hyperloop":hyper,"git":git,"legacy_cockpit":old,
       "morphogenesis":morph,"worker_truth":worker,"fleet_truth":fleet,
       "capabilities":morph.get("capability_graph") or {},"weaknesses":weak,

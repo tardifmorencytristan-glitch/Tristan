@@ -1,7 +1,7 @@
 {
   "schema": "tristan.cockpit.next.release.r1",
-  "version": "1.4.0",
-  "release": "RESIDUAL_OPERATOR_LEARNING",
+  "version": "1.5.0",
+  "release": "ANTI_COMPUTE_OPERATOR_LEARNING",
   "entrypoint": "server.py",
   "self_test": [
     "python",
@@ -44,6 +44,9 @@
     "runtime invariant projection",
     "Residual\u2192Operator empirical map",
     "causal recommendation gate",
-    "shadow learning visibility"
+    "shadow learning visibility",
+    "NO_ACTION_COOLDOWN visibility",
+    "learned suppression receipts",
+    "operator decision column"
   ]
 }

@@ -1,0 +1,53 @@
+{
+  "schema": "tristan.capability_crystal.r1",
+  "capability_id": "residual-operator-causal-learning-r1",
+  "status": "TESTED_BOUNDED_CAPABILITY",
+  "intent": "Reduce repeated useless computation by learning which operator paths actually change the ResidualField.",
+  "mechanism": "Append-only event episodes record before/after residual burden and operator actions. Learner computes evidence per residual signature. Repeatedly neutral paths can become NO_ACTION_COOLDOWN with periodic revalidation.",
+  "implementation": [
+    "software/residual-operator-learning/watcher.pyw",
+    "software/residual-operator-learning/learner.pyw"
+  ],
+  "evidence": {
+    "nodes": [
+      "DESKTOP-SHA9IHL",
+      "DESKTOP-2G1SSMT",
+      "LAPTOP-AIU36QN6"
+    ],
+    "observed_signature": "7663c243a86d2411",
+    "residual": "admin_update_lane_missing",
+    "tested_path": "wave>worker",
+    "residual_gain": 0,
+    "observed_attempts_approx": {
+      "FORGE": 12,
+      "OAK": 12,
+      "HERITAGE": 9
+    },
+    "observed_decision": "NO_ACTION_COOLDOWN",
+    "oak_receipt": "suppressed_by_learning=true with actions=[] after bounded revalidation"
+  },
+  "uncertainty": [
+    "Evidence currently covers a small number of residual signatures.",
+    "Neutrality for one signature does not imply global uselessness of wave or WorkerTruth.",
+    "Operator credit may require stronger causal designs for interacting transformations."
+  ],
+  "failure_modes": [
+    "Stale truth model can confound causal credit.",
+    "Epoch reset race can skip events if processes are not stopped first.",
+    "Over-suppression if signatures are too coarse."
+  ],
+  "baseline": "Always execute wave>worker on each repeated morph change.",
+  "measured_gain": "Verified reduction in repeated compute for the stable admin-update residual; no claim yet of improved residual closure.",
+  "rollback": "Disable learned influence or restore prior watcher; event logs and archived epochs retained.",
+  "regeneration_recipe": "Copy canonical watcher.pyw and learner.pyw into their .tristan runtime folders, compile, start with pythonw, preserve Startup VBS launchers.",
+  "lineage": [
+    "event-morphogenesis-r4",
+    "residual-operator-map-r3",
+    "GO_SIGMA_CONTINUOUS"
+  ],
+  "residuals": [
+    "admin_update_lane_missing remains unresolved because it is an authority/update-lane boundary."
+  ],
+  "right_to_lose": true,
+  "right_to_die": true
+}
