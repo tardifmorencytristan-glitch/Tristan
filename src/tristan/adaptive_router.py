@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass
 from itertools import combinations
+from typing import Mapping
 
 
 @dataclass(frozen=True)
@@ -113,4 +114,81 @@ def select_minimal_coalition(
             "OriginBonus = 0",
             "NO_ACTION is admissible",
         ),
+    )
+
+
+@dataclass(frozen=True)
+class RuntimeNode:
+    candidate_id: str
+    python_version: str | None
+    node_version: str | None
+    reliability: float = 1.0
+    uncertainty: float = 0.0
+    cost: float = 0.0
+    latency: float = 0.0
+    evidence_status: str = "UNKNOWN"
+
+
+def _version_tuple(value: object) -> tuple[int, ...]:
+    text = str(value or "")
+    current = ""
+    for ch in text:
+        if ch.isdigit() or (ch == "." and current):
+            current += ch
+        elif current:
+            break
+    if not current:
+        return ()
+    return tuple(int(part) for part in current.strip(".").split(".") if part.isdigit())
+
+
+def runtime_requirements_satisfied(
+    requirements: Mapping[str, object],
+    node: RuntimeNode,
+) -> bool:
+    if node.evidence_status != "MEASURED":
+        return False
+    python_min = requirements.get("python_min")
+    node_min = requirements.get("node_min")
+    if python_min and _version_tuple(node.python_version) < _version_tuple(python_min):
+        return False
+    if node_min and _version_tuple(node.node_version) < _version_tuple(node_min):
+        return False
+    return True
+
+
+def select_runtime_coalition(
+    task_requirements: Mapping[str, Mapping[str, object]],
+    nodes: tuple[RuntimeNode, ...],
+    *,
+    max_coalition_size: int = 4,
+) -> CoalitionReceipt:
+    if not task_requirements:
+        raise ValueError("task_requirements required")
+
+    candidates: list[CapabilityCandidate] = []
+    for node in nodes:
+        covered_tasks = tuple(
+            task_id
+            for task_id, requirements in task_requirements.items()
+            if runtime_requirements_satisfied(requirements, node)
+        )
+        if not covered_tasks:
+            continue
+        candidates.append(
+            CapabilityCandidate(
+                candidate_id=node.candidate_id,
+                capabilities=covered_tasks,
+                reliability=node.reliability,
+                uncertainty=node.uncertainty,
+                cost=node.cost,
+                latency=node.latency,
+                evidence_status=node.evidence_status,
+            )
+        )
+
+    return select_minimal_coalition(
+        tuple(task_requirements),
+        tuple(candidates),
+        max_coalition_size=max_coalition_size,
     )
