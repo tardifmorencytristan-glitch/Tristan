@@ -1,4 +1,5 @@
 import datetime as dt
+import json
 import pathlib
 import sys
 import tempfile
@@ -18,6 +19,68 @@ from effect_verifier_r204 import (
 
 
 class MissionTruthRuntimeCrystalTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        root = pathlib.Path(self.tmp.name)
+        self.capabilities = root / "fleet-capabilities.json"
+        self.resources = root / "fleet-resources.json"
+        self.now = dt.datetime(2026, 9, 29, 1, 30, 0, tzinfo=dt.timezone.utc)
+
+        self.capabilities.write_text(
+            json.dumps(
+                {
+                    "nodes": [
+                        {"node": "DESKTOP-SHA9IHL", "python_version": "3.13.15", "node_version": "24.0.0"},
+                        {"node": "DESKTOP-2G1SSMT", "python_version": "3.13.15", "node_version": "24.0.0"},
+                        {"node": "LAPTOP-AIU36QN6", "python_version": "3.8.5", "node_version": "20.0.0"},
+                    ]
+                }
+            ),
+            encoding="utf-8",
+        )
+        self.resources.write_text(
+            json.dumps(
+                {
+                    "nodes": [
+                        {
+                            "node": "DESKTOP-SHA9IHL",
+                            "available": True,
+                            "observed_at": "2026-09-29T01:00:00+00:00",
+                            "python_version": "3.13.15",
+                            "node_version": "24.0.0",
+                            "free_ram_gb": 20,
+                            "disk_free_gb": 200,
+                            "cpu_load_pct": 20,
+                        },
+                        {
+                            "node": "DESKTOP-2G1SSMT",
+                            "available": True,
+                            "observed_at": "2026-09-29T01:00:00+00:00",
+                            "python_version": "3.13.15",
+                            "node_version": "24.0.0",
+                            "free_ram_gb": 12,
+                            "disk_free_gb": 120,
+                            "cpu_load_pct": 30,
+                        },
+                        {
+                            "node": "LAPTOP-AIU36QN6",
+                            "available": True,
+                            "observed_at": "2026-09-29T01:00:00+00:00",
+                            "python_version": "3.8.5",
+                            "node_version": "20.0.0",
+                            "free_ram_gb": 6,
+                            "disk_free_gb": 80,
+                            "cpu_load_pct": 40,
+                        },
+                    ]
+                }
+            ),
+            encoding="utf-8",
+        )
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
     def task(self, tid="x", **requires):
         return {
             "id": tid,
@@ -32,13 +95,17 @@ class MissionTruthRuntimeCrystalTests(unittest.TestCase):
         }
 
     def test_r201_holds_uncovered_requirement(self):
-        out = compile_r201([self.task("impossible", python_min="99.0")])
+        out = compile_r201(
+            [self.task("impossible", python_min="99.0")],
+            fleet_path=self.capabilities,
+        )
         self.assertEqual(out["status"], "HOLD_UNCOVERED_REQUIREMENTS")
 
     def test_r202_executes_bounded_compatible_task(self):
         compiled = compile_pipeline(
             "r202-crystal-test",
             [self.task("compatible", python_min="3.13")],
+            fleet_path=self.capabilities,
         )
         self.assertEqual(compiled["status"], "READY")
         with tempfile.TemporaryDirectory() as tmp:
@@ -58,12 +125,19 @@ class MissionTruthRuntimeCrystalTests(unittest.TestCase):
                 max_cpu_load_pct=80,
             )
         ]
-        normal = compile_r203(tasks, max_age_s=3600)
+        normal = compile_r203(
+            tasks,
+            snapshot_path=self.resources,
+            max_age_s=3600,
+            now=self.now,
+        )
         self.assertEqual(normal["status"], "PASS")
         self.assertEqual(normal["coalition"], ["DESKTOP-SHA9IHL"])
         failover = compile_r203(
             tasks,
+            snapshot_path=self.resources,
             max_age_s=3600,
+            now=self.now,
             exclude_nodes=("DESKTOP-SHA9IHL",),
         )
         self.assertEqual(failover["status"], "PASS")
@@ -72,7 +146,12 @@ class MissionTruthRuntimeCrystalTests(unittest.TestCase):
     def test_r203_stale_snapshot_holds(self):
         tasks = [self.task("general", python_min="3.13")]
         now = dt.datetime(2026, 9, 29, 2, 0, 0, tzinfo=dt.timezone.utc)
-        out = compile_r203(tasks, max_age_s=1, now=now)
+        out = compile_r203(
+            tasks,
+            snapshot_path=self.resources,
+            max_age_s=1,
+            now=now,
+        )
         self.assertEqual(out["status"], "HOLD_UNCOVERED_OR_STALE_REQUIREMENTS")
 
     def test_r204_separates_execution_effect_and_outcome(self):
