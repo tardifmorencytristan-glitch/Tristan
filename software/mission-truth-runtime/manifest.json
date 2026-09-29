@@ -10,7 +10,8 @@
     "R201 capability-aware auction",
     "R202 unified compile/auction/execute pipeline",
     "R203 freshness/resource-aware re-auction + peer integrity quorum",
-    "R204 execution/effect/outcome separation"
+    "R204 execution/effect/outcome separation",
+    "R205 bounded causal effect attribution + verified-gain feedback"
   ],
   "components": [
     "src/tristan_connector_os/jarvis_worker_truth_r01.py",
@@ -18,10 +19,11 @@
     "src/capability_auction_r201.py",
     "src/capability_pipeline_r202.py",
     "src/capability_auction_r203.py",
-    "src/effect_verifier_r204.py"
+    "src/effect_verifier_r204.py",
+    "src/causal_effect_r205.py"
   ],
   "qualification": {
-    "focused_tests": "5/5 PASS",
+    "focused_tests": "10/10 PASS",
     "compileall": "PASS",
     "r202_live_execution": "PASS selected=1 verified=1",
     "r203_peer_quorum": "2/2 INDEPENDENT_INTEGRITY_PASS",
