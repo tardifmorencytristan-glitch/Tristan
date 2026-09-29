@@ -1,7 +1,7 @@
 {
   "schema": "tristan.cockpit.next.release.r1",
-  "version": "1.3.0",
-  "release": "GSIGMA_EXECUTION_CONSTITUTION",
+  "version": "1.4.0",
+  "release": "RESIDUAL_OPERATOR_LEARNING",
   "entrypoint": "server.py",
   "self_test": [
     "python",
@@ -41,6 +41,9 @@
     "causal trigger trace",
     "GO Sigma constitution",
     "continuous mission contract",
-    "runtime invariant projection"
+    "runtime invariant projection",
+    "Residual\u2192Operator empirical map",
+    "causal recommendation gate",
+    "shadow learning visibility"
   ]
 }

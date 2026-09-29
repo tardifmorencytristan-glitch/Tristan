@@ -64,6 +64,22 @@ def acceleration_score(hyper,git,weak):
     raw=boost*35 + min(35,current) + min(20,pressure*10) - min(20,holds)
     return max(0,min(100,round(raw,1)))
 
+def operator_learning_state():
+    root=HOME/".tristan"/"residual-operator-map"
+    state=loadj(root/"state.json")
+    mp=loadj(root/"map.json")
+    rows=[]
+    for key,val in mp.items():
+        rec=(val or {}).get("recommendation") or {}
+        if rec:
+            rows.append({"signature":key,"path":rec.get("path"),
+                         "evidence_score":rec.get("evidence_score"),
+                         "attempts":rec.get("attempts"),
+                         "residual_gain":rec.get("residual_gain"),
+                         "eligible":bool(rec.get("eligible_to_influence"))})
+    rows=sorted(rows,key=lambda x:((x.get("eligible") is True),x.get("evidence_score") or -999,x.get("attempts") or 0),reverse=True)
+    return {"state":state,"recommendations":rows[:12]}
+
 def go_sigma_state():
     repo=HOME/"TristanRepos"/"Tristan"
     contract=loadj(repo/"schemas"/"go_sigma_execution_contract_r1.json")
@@ -83,12 +99,12 @@ def collect():
     event=loadj(HOME/".tristan"/"event-morphogenesis"/"state.json")
     fleet=loadj(HOME/".tristan"/"autonomous-maintenance"/"morphogenesis"/"fleet-worker-truth-wave-a.json")
     weak=morph.get("weakness_atlas") or []
-    return {"schema":"tristan.cockpit.next.state.r4","ts":time.time(),"node":host,"role":role,
+    return {"schema":"tristan.cockpit.next.state.r5","ts":time.time(),"node":host,"role":role,
       "system":{"memory":mem(),"gpu":gpu()},"hyperloop":hyper,"git":git,"legacy_cockpit":old,
       "morphogenesis":morph,"worker_truth":worker,"fleet_truth":fleet,
       "capabilities":morph.get("capability_graph") or {},"weaknesses":weak,
       "feed":latest_feed(role),"reports":report_meta(),"fleet_projection":fleet_projection(fleet),
-      "acceleration_score":acceleration_score(hyper,git,weak),"event_engine":event,"go_sigma":go_sigma_state()}
+      "acceleration_score":acceleration_score(hyper,git,weak),"event_engine":event,"go_sigma":go_sigma_state(),"operator_learning":operator_learning_state()}
 def launch(action):
     py=HOME/"AppData"/"Local"/"Programs"/"Python"/"Python313"/"python.exe"
     if action=="git_sync":

@@ -1,0 +1,36 @@
+{
+  "schema": "tristan.residual_operator_map.contract.r1",
+  "purpose": "Learn empirical ResidualSignature -> OperatorPath outcomes without granting execution authority until causal evidence exists.",
+  "mode": "SHADOW_ONLY_CAUSAL",
+  "episode_fields": [
+    "changed",
+    "before_residuals",
+    "after_residuals",
+    "before_burden",
+    "after_burden",
+    "residual_delta",
+    "actions",
+    "results"
+  ],
+  "recommendation_gate": {
+    "min_attempts": 3,
+    "requires_improved_episode": true,
+    "evidence_score_gt": 0,
+    "residual_gain_gt_or_equal": 0
+  },
+  "evidence_classes": [
+    "IMPROVED",
+    "NEUTRAL",
+    "WORSENED",
+    "FAIL"
+  ],
+  "invariants": [
+    "OperationalPASS!=ResidualImprovement",
+    "Correlation!=CausalCredit",
+    "ModelEpochChange=>ArchiveAndReset",
+    "NoRecommendationWithoutMeasuredResidualGain",
+    "ShadowBeforeInfluence",
+    "RightToLose",
+    "NO_ACTION_admissible"
+  ]
+}
