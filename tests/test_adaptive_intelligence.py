@@ -1,6 +1,11 @@
 import unittest
 
-from tristan.adaptive_router import CapabilityCandidate, select_minimal_coalition
+from tristan.adaptive_router import (
+    CapabilityCandidate,
+    RuntimeNode,
+    select_minimal_coalition,
+    select_runtime_coalition,
+)
 from tristan.calibration import CalibrationSample, calibration_report
 from tristan.causal_credit import AblationResult, assign_ablation_credit
 from tristan.epistemic_memory import (
@@ -70,6 +75,35 @@ class AdaptiveIntelligenceTests(unittest.TestCase):
         receipt = select_minimal_coalition(
             ("search", "code"),
             (CapabilityCandidate("A", ("search",), 0.9, 0.1, 1.0, 5.0),),
+        )
+        self.assertEqual(receipt.status, "HOLD_NO_CAPABILITY_COVERAGE")
+        self.assertEqual(receipt.selected_candidates, ())
+
+    def test_runtime_router_selects_smallest_measured_coalition(self):
+        nodes = (
+            RuntimeNode("desktop-a", "Python 3.13.15", "v24.19.0", evidence_status="MEASURED"),
+            RuntimeNode("laptop", "Python 3.8.5", "v24.21.0", evidence_status="MEASURED"),
+            RuntimeNode("stale", "Python 99.0", "v99.0", evidence_status="UNKNOWN"),
+        )
+        receipt = select_runtime_coalition(
+            {
+                "py313": {"python_min": "3.13"},
+                "node24": {"node_min": "24.0"},
+            },
+            nodes,
+        )
+        self.assertEqual(receipt.status, "COALITION_SELECTED")
+        self.assertEqual(len(receipt.selected_candidates), 1)
+        self.assertEqual(receipt.selected_candidates, ("desktop-a",))
+        self.assertFalse(receipt.authority_granted)
+
+    def test_runtime_router_holds_when_no_measured_node_satisfies_requirement(self):
+        receipt = select_runtime_coalition(
+            {"future-python": {"python_min": "99.0"}},
+            (
+                RuntimeNode("desktop", "Python 3.13.15", "v24.19.0", evidence_status="MEASURED"),
+                RuntimeNode("unverified", "Python 100.0", "v100.0", evidence_status="UNKNOWN"),
+            ),
         )
         self.assertEqual(receipt.status, "HOLD_NO_CAPABILITY_COVERAGE")
         self.assertEqual(receipt.selected_candidates, ())
