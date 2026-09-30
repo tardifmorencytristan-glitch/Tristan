@@ -117,3 +117,4 @@
 {"ts":1790734123.910003,"node":"LAPTOP-AIU36QN6","cockpit":["PASS",21],"git":{"CURRENT":44,"HOLD_DIRTY":1},"weakness":["admin_update_lane_missing"],"worker":"PASS","boost":"EXPIRED_REVERTED","memory":null}
 {"ts":1790734792.8844328,"node":"LAPTOP-AIU36QN6","cockpit":["PASS",21],"git":{"CURRENT":44,"HOLD_NO_UPSTREAM":1},"weakness":["admin_update_lane_missing"],"worker":"PASS","boost":"EXPIRED_REVERTED","memory":null}
 {"ts":1790735342.0691533,"node":"LAPTOP-AIU36QN6","cockpit":["PASS",21],"git":{"CURRENT":44,"HOLD_DIRTY":1},"weakness":["admin_update_lane_missing"],"worker":"PASS","boost":"EXPIRED_REVERTED","memory":null}
+{"ts":1790735646.1746273,"node":"LAPTOP-AIU36QN6","cockpit":["PASS",21],"git":{"CURRENT":44,"HOLD_NO_UPSTREAM":1},"weakness":["admin_update_lane_missing"],"worker":"PASS","boost":"EXPIRED_REVERTED","memory":null}
