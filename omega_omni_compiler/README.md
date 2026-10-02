@@ -38,3 +38,13 @@ These are routing contracts, not claims that every operator is already fully imp
 5. Connect ScientificTypeSystem/ProofObligations from `omega_scientific_writing`.
 6. Add incremental invalidation graph and content-addressed cache.
 7. Run one real end-to-end benchmark: external artifact -> IR -> code/Git -> document/PDF -> reverse IR.
+
+## R4H communication projection adapter
+
+R4H reuses `ClaimIR`/`EvidenceIR`, the R4A `RepresentationGraph`, and Scientific Writing lineage to compile bounded timed projections for text/voice/video/slides/web/live surfaces without creating a second writer, Presence runtime, or video OS.
+
+It adds evidence-bound timed segments, fail-closed accessibility/time/loss gates, deterministic JSON round-trip, and a WebVTT export adapter. The Battery-T R4.1 fixture is the first integration court.
+
+See `R4H.md` and `evidence/R4H_COMMUNICATION_PROJECTION_R01.json`.
+
+`PASS_STRUCTURAL != SemanticEquivalence`; `WebVTTExport != VideoRender`; `Capability != Authority`.

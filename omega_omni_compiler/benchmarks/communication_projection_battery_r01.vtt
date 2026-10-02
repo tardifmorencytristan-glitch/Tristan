@@ -1,0 +1,5 @@
+WEBVTT
+
+battery-s1
+00:00:00.000 --> 00:00:25.000
+Within the three first-cycle CALCE slices, DFN measured the lowest mean voltage-shape RMSE (0.0722 V), compared with SPM (0.1709 V) and SPMe (0.2550 V). All three models nevertheless overpredicted absolute capacity by roughly 38-45%; this bounded comparison is not a calibrated validation and does not establish universal model superiority.
