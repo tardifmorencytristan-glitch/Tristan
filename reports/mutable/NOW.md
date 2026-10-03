@@ -1,6 +1,6 @@
 # TRISTAN NOW
 
-Generated: 2026-09-29 18:52:53
+Generated: 2026-10-03 15:35:53
 
 ## Current
 
@@ -11,9 +11,11 @@ Generated: 2026-09-29 18:52:53
     22
   ],
   "git": {
-    "CURRENT": 45
+    "CURRENT": 44,
+    "HOLD_FETCH_FAILED": 1
   },
   "weakness": [
+    "repo_dirty_hold",
     "admin_update_lane_missing"
   ],
   "worker": "PASS",
