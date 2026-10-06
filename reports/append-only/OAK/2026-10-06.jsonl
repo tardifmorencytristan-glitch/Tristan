@@ -2,3 +2,4 @@
 {"ts":1791260886.2581072,"node":"DESKTOP-2G1SSMT","cockpit":["PASS",22],"git":{"CURRENT":45},"weakness":["admin_authority_unavailable"],"worker":"PASS","boost":"EXPIRED_REVERTED","memory":null}
 {"ts":1791261188.2326987,"node":"DESKTOP-2G1SSMT","cockpit":["PASS",22],"git":{"CURRENT":44,"UPDATED":1},"weakness":["admin_authority_unavailable"],"worker":"PASS","boost":"EXPIRED_REVERTED","memory":null}
 {"ts":1791261490.6975384,"node":"DESKTOP-2G1SSMT","cockpit":["PASS",22],"git":{"CURRENT":45},"weakness":["admin_authority_unavailable"],"worker":"PASS","boost":"EXPIRED_REVERTED","memory":null}
+{"ts":1791263553.7509072,"node":"DESKTOP-2G1SSMT","cockpit":["PASS",22],"git":{"CURRENT":45},"weakness":["repo_local_ahead_hold_publish","admin_authority_unavailable"],"worker":"PASS","boost":"EXPIRED_REVERTED","memory":null}
