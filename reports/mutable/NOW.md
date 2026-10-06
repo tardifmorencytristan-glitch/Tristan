@@ -1,6 +1,6 @@
 # TRISTAN NOW
 
-Generated: 2026-10-06 10:39:22
+Generated: 2026-10-06 10:44:27
 
 ## Current
 
@@ -16,7 +16,7 @@ Generated: 2026-10-06 10:39:22
   "weakness": [
     "admin_authority_unavailable"
   ],
-  "worker": null,
+  "worker": "PASS",
   "boost": "EXPIRED_REVERTED",
   "memory": null
 }
