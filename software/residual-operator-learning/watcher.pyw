@@ -43,15 +43,23 @@ def main():
         sig=signature(changed,before);rec=learned_decision(sig);suppressed=False;actions=[];debounce=max(2,12-level)
         def ready(k):return now-last_action.get(k,0)>=debounce
         noact=rec.get("decision")=="NO_ACTION_COOLDOWN" and rec.get("eligible_to_influence")
+        runpath=rec.get("decision")=="RUN_PATH" and rec.get("eligible_to_influence")
+        learned_tokens=[x for x in str(rec.get("path") or "").split(">") if x]
+        allowed_actions={"morph":MORPH,"wave":WAVE,"worker":WT}
+        learned_path_safe=runpath and bool(learned_tokens) and all(x in allowed_actions for x in learned_tokens)
         cooldown=int(rec.get("cooldown_seconds",600) or 600)
         if noact and now-last_no_action.get(sig,0)<cooldown:
             suppressed=True
         else:
             if noact:last_no_action[sig]=now
-            if "git" in changed and ready("morph"):actions.append(("morph",MORPH))
-            if "morph" in changed:
-                if ready("wave"):actions.append(("wave",WAVE))
-                if ready("worker"):actions.append(("worker",WT))
+            if learned_path_safe:
+                for name in learned_tokens:
+                    if ready(name):actions.append((name,allowed_actions[name]))
+            else:
+                if "git" in changed and ready("morph"):actions.append(("morph",MORPH))
+                if "morph" in changed:
+                    if ready("wave"):actions.append(("wave",WAVE))
+                    if ready("worker"):actions.append(("worker",WT))
         if changed:idle=0;level=min(8,level+1)
         else:
             idle+=1
@@ -64,12 +72,12 @@ def main():
         after=residual_vector()
         if results or suppressed:
             evt={"schema":"tristan.event.morphogenesis.episode.r2","ts":time.time(),"node":host,"signature":sig,
-                 "changed":changed,"actions":results,"suppressed_by_learning":suppressed,"learned_recommendation":rec,
+                 "changed":changed,"actions":results,"suppressed_by_learning":suppressed,"learned_recommendation":rec,"learned_path_applied":learned_path_safe,
                  "before_residuals":before,"after_residuals":after,"before_burden":burden(before),"after_burden":burden(after),
                  "residual_delta":round(burden(before)-burden(after),4)}
             append_event(evt)
         STATE.write_text(json.dumps({"schema":"tristan.event.morphogenesis.r4","ts":now,"node":host,"changed":changed,
-          "acceleration_level":level,"results":results,"learned_decision":rec,"suppressed_by_learning":suppressed,
+          "acceleration_level":level,"results":results,"learned_decision":rec,"learned_path_applied":learned_path_safe,"suppressed_by_learning":suppressed,
           "poll_seconds":max(1,5-level//2)},indent=2),encoding="utf-8")
         prev=cur;time.sleep(max(1,5-level//2))
 if __name__=="__main__":main()
