@@ -2,3 +2,4 @@
 {"ts":1791368610.273288,"node":"LAPTOP-AIU36QN6","cockpit":["PASS",21],"git":{"CURRENT":43,"HOLD_NO_UPSTREAM":1,"UPDATED":1},"weakness":["admin_authority_unavailable"],"worker":"PASS","boost":"EXPIRED_REVERTED","memory":null}
 {"ts":1791399664.738862,"node":"LAPTOP-AIU36QN6","cockpit":["PASS",21],"git":{"CURRENT":43,"HOLD_NO_UPSTREAM":1,"UPDATED":1},"weakness":["repo_git_behind","admin_authority_unavailable"],"worker":"PASS","boost":"EXPIRED_REVERTED","memory":null}
 {"ts":1791399995.8825183,"node":"LAPTOP-AIU36QN6","cockpit":["PASS",21],"git":{"CURRENT":43,"HOLD_NO_UPSTREAM":1,"UPDATED":1},"weakness":["admin_authority_unavailable"],"worker":"PASS","boost":"EXPIRED_REVERTED","memory":null}
+{"ts":1791401586.0950422,"node":"LAPTOP-AIU36QN6","cockpit":["PASS",21],"git":{"CURRENT":43,"HOLD_NO_UPSTREAM":1,"UPDATED":1},"weakness":["repo_git_behind","admin_authority_unavailable"],"worker":"PASS","boost":"EXPIRED_REVERTED","memory":null}
