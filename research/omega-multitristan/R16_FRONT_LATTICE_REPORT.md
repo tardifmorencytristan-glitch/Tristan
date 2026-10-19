@@ -10,7 +10,7 @@ R16 extends the finite R15 experiment without replacing its result. Recovered or
 The existing Ω-M4OPT R0.2 RightToLose work already rejects M4OPT as a universal optimizer: five frozen cases, zero strict wins, two ties and three quality losses. Its candidate value is **routing and guarding against loss of information**, not superseding direct specialists. Refer to `docs/OMEGA_M4OPT_R0_2_RIGHTTOLOSE.md` in the `Tristan-Tardif-Morency` repository. `NO_M4OPT`, `KEEP_SEPARATE` and `NO_ACTION` are admissible.
 
 The conventional Pareto order, efficient decision points, Pareto objective vectors and objective reduction have extensive prior literature. Relevant references include:
-- A. H. et al. (2018), *A tutorial on multiobjective optimization: fundamentals and evolutionary methods*, Natural Computing, https://doi.org/10.1007/s11047-018-9685-y
+- Michael T. M. Emmerich and André H. Deutz (2018), *A tutorial on multiobjective optimization: fundamentals and evolutionary methods*, Natural Computing, https://doi.org/10.1007/s11047-018-9685-y
 - *Objective Reduction in Many-Objective Optimization: Evolutionary Multiobjective Approaches and Comprehensive Analysis*, IEEE Transactions on Evolutionary Computation (2018), https://doi.org/10.1109/TEVC.2017.2672668
 
 **Terminology:** Our JSON maps a context to its **set of non-dominated candidate IDs in decision space**. Because lossy transformations create tied objective values, the number of such IDs can exceed the number of unique objective vectors on the Pareto front. We deliberately preserve candidate IDs for provenance and inverse incidence.
