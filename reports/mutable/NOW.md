@@ -1,6 +1,6 @@
 # TRISTAN NOW
 
-Generated: 2026-10-19 21:27:09
+Generated: 2026-10-19 21:32:12
 
 ## Current
 
@@ -13,9 +13,7 @@ Generated: 2026-10-19 21:27:09
   "git": {
     "CURRENT": 45
   },
-  "weakness": [
-    "admin_authority_unavailable"
-  ],
+  "weakness": [],
   "worker": "PASS",
   "boost": "EXPIRED_REVERTED",
   "memory": null
