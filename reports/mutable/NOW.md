@@ -1,6 +1,6 @@
 # TRISTAN NOW
 
-Generated: 2026-10-21 00:47:00
+Generated: 2026-10-21 00:52:12
 
 ## Current
 
@@ -15,7 +15,6 @@ Generated: 2026-10-21 00:47:00
     "HOLD_DIRTY": 1
   },
   "weakness": [
-    "repo_dirty_hold",
     "admin_authority_unavailable"
   ],
   "worker": "PASS",
