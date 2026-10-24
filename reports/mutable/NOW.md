@@ -1,6 +1,6 @@
 # TRISTAN NOW
 
-Generated: 2026-10-24 00:13:33
+Generated: 2026-10-24 00:18:47
 
 ## Current
 
@@ -14,6 +14,7 @@ Generated: 2026-10-24 00:13:33
     "CURRENT": 45
   },
   "weakness": [
+    "repo_local_ahead_hold_publish",
     "admin_authority_unavailable"
   ],
   "worker": "PASS",
