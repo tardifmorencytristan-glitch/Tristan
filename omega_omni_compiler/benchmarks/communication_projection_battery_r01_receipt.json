@@ -1,0 +1,34 @@
+{
+  "boundaries": [
+    "PASS_STRUCTURAL != SemanticEquivalence",
+    "DeclaredSemanticLoss != MeasuredSemanticLoss",
+    "WebVTTExport != VideoRender",
+    "Generated != Verified",
+    "Capability != Authority"
+  ],
+  "court": {
+    "authority_granted": false,
+    "caption_gap_segments": [],
+    "claim_count": 1,
+    "declared_semantic_loss": 0.010000000000000009,
+    "digest": "e07b6a679eda9bca9bc0f1cf54345081bc507950f4a79f1863fa2b13b2499c32",
+    "duration_s": 25.0,
+    "evidence_count": 1,
+    "generated_is_verified": false,
+    "missing_claim_ids": [],
+    "missing_evidence_ids": [],
+    "missing_representation_ids": [],
+    "projection_id": "battery-video-r01",
+    "segment_count": 1,
+    "semantic_loss_budget": 0.05,
+    "status": "PASS_STRUCTURAL",
+    "structural_errors": [],
+    "unsupported_claim_ids": []
+  },
+  "projection_digest": "6a62f1fad38d02e87b80e213672dcbadea46cb1e2a497b4be210ac2d8c900a51",
+  "schema": "communication-projection-r0.1-battery-court",
+  "source_commit": "d759105682704f037f21fef8f6d396b4d0408f3a",
+  "source_fixture": "omega_scientific_writing/fixtures/battery_t_r0_4_writing_court.json",
+  "source_fixture_sha256": "89141c9158e5563bb5bc43f94d053f85a86769de4908cab765a5869eb5efc2a3",
+  "webvtt_sha256": "6d9cb555e298a137e99937daa0cb352e39f60e8ab542c78c744576cae6f0a9d8"
+}

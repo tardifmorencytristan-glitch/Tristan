@@ -35,6 +35,20 @@ def default_capability_registry() -> tuple[CapabilityRecord, ...]:
             ("document generation does not certify claim truth",),
         ),
         CapabilityRecord(
+            CapabilityIR(
+                "CommunicationProjection",
+                ("timed_projection", "claim_evidence_binding", "webvtt_export"),
+                ("omega_omni_compiler/evidence/R4H_COMMUNICATION_PROJECTION_R01.json",),
+                "AUTOMATED",
+            ),
+            "LOCAL_BOUNDED_ENGINEERING_PASS",
+            ("omega_omni_compiler/evidence/R4H_COMMUNICATION_PROJECTION_R01.json",),
+            (
+                "structural projection pass is not semantic equivalence",
+                "voice/video rendering and human comprehension remain separate gates",
+            ),
+        ),
+        CapabilityRecord(
             CapabilityIR("DemandToCapability", ("opportunity_assessment", "capability_gap", "evidence_gap"), ("src/tristan/demand_ir.py",), "AUTOMATED"),
             "LOCAL_CI_VERIFIED",
             ("src/tristan/demand_ir.py",),
