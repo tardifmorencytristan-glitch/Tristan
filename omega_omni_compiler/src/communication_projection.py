@@ -25,11 +25,22 @@ class EvidenceLike(Protocol):
     def validate(self) -> list[str]: ...
 
 
+MAX_EXACT_NUMBER = (1 << 53) - 1
+
+def _finite_number(value: object) -> float | None:
+    if isinstance(value, bool):
+        return None
+    try:
+        num = float(value)
+    except (ValueError, TypeError, OverflowError):
+        return None
+    return num if math.isfinite(num) and abs(num) <= MAX_EXACT_NUMBER else None
+
 def _unit(value: float, name: str) -> float:
-    value = float(value)
-    if not math.isfinite(value) or not 0.0 <= value <= 1.0:
+    number = _finite_number(value)
+    if number is None or not 0.0 <= number <= 1.0:
         raise ValueError(f"{name} must be finite in [0,1]")
-    return value
+    return number
 
 
 def _digest(payload: object) -> str:
@@ -60,7 +71,8 @@ class CommunicationProjectionSpec:
             errors.append("audience required")
         if not self.language.strip():
             errors.append("language required")
-        if not math.isfinite(float(self.duration_budget_s)) or self.duration_budget_s <= 0:
+        duration = _finite_number(self.duration_budget_s)
+        if duration is None or duration <= 0:
             errors.append("duration_budget_s must be finite and positive")
         try:
             _unit(self.semantic_loss_budget, "semantic_loss_budget")
@@ -91,9 +103,10 @@ class TimedProjectionSegment:
         errors: list[str] = []
         if not self.segment_id.strip():
             errors.append("segment_id required")
-        if not math.isfinite(float(self.start_s)) or not math.isfinite(float(self.end_s)):
+        start, end = _finite_number(self.start_s), _finite_number(self.end_s)
+        if start is None or end is None:
             errors.append("segment times must be finite")
-        elif self.start_s < 0 or self.end_s <= self.start_s:
+        elif start < 0 or end <= start:
             errors.append("segment requires 0 <= start_s < end_s")
         if not self.source_representation_ids:
             errors.append("source_representation_ids required")
@@ -197,11 +210,20 @@ def evaluate_projection(
     errors.extend(f"unsupported claim: {x}" for x in sorted(unsupported))
     errors.extend(f"caption required: {x}" for x in sorted(caption_gaps))
 
-    duration = max((seg.end_s for seg in projection.segments), default=0.0)
-    if duration > projection.spec.duration_budget_s + 1e-12:
+    duration = max((_finite_number(seg.end_s) or 0.0 for seg in projection.segments), default=0.0)
+    budget = _finite_number(projection.spec.duration_budget_s)
+    if budget is None or duration > budget + 1e-12:
         errors.append("duration budget exceeded")
-    loss = _accumulated_loss([seg.declared_semantic_loss for seg in projection.segments])
-    if loss > projection.spec.semantic_loss_budget + 1e-12:
+    try:
+        loss = _accumulated_loss([seg.declared_semantic_loss for seg in projection.segments])
+    except (ValueError, TypeError, OverflowError):
+        errors.append("invalid declared semantic loss")
+        loss = 1.0
+    loss_budget = _finite_number(projection.spec.semantic_loss_budget)
+    if loss_budget is None or not 0.0 <= loss_budget <= 1.0:
+        errors.append("invalid semantic loss budget")
+        loss_budget = 0.0
+    if loss > loss_budget + 1e-12:
         errors.append("semantic loss budget exceeded")
 
     payload = {
@@ -217,7 +239,7 @@ def evaluate_projection(
         "unsupported_claim_ids": tuple(sorted(unsupported)),
         "caption_gap_segments": tuple(sorted(caption_gaps)),
         "declared_semantic_loss": loss,
-        "semantic_loss_budget": projection.spec.semantic_loss_budget,
+        "semantic_loss_budget": loss_budget,
         "structural_errors": tuple(errors),
         "generated_is_verified": False,
         "authority_granted": False,
