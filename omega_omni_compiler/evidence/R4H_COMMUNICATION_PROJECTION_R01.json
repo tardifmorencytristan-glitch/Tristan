@@ -1,0 +1,54 @@
+{
+  "schema": "omega-omni-r4h-communication-projection-r0.1",
+  "status": "EXACT_HEAD_EXTERNAL_ENGINEERING_PASS_CODE_HEAD",
+  "construction_base": "eff0af246696b862bd871e6c2b761ce01e551233",
+  "qualified_code_head": "0e46402660480024aec3573e9b7fc949ea927414",
+  "github_exact_head": {
+    "omega_omni_workflow": "SUCCESS run 35458548462",
+    "kernel_ci": "SUCCESS run 35458548566",
+    "jarvis_r6_evidence_domino": "SUCCESS run 35458548486"
+  },
+  "module_sha256": "c6e16c79b483c3a84154e4c8bd21fe646156ec929f547046cb712637f4ec91dc",
+  "test_sha256": "42ea54fcf026e200727fa3254295eaf50e6415905b0104f62142d766fe43a7df",
+  "bridge_test_sha256": "e1a2e7f17e74dd5aa08d7d11225a4d4f12580e3b836bff384c29cb5e9a103a20",
+  "benchmark_sha256": "f8e809dd1a9638e9f43b0b3fcf277f9bc0f8a9d5bb24bf41039508bcf6c178d3",
+  "battery_fixture_sha256": "89141c9158e5563bb5bc43f94d053f85a86769de4908cab765a5869eb5efc2a3",
+  "projection_digest": "6a62f1fad38d02e87b80e213672dcbadea46cb1e2a497b4be210ac2d8c900a51",
+  "court_digest": "e07b6a679eda9bca9bc0f1cf54345081bc507950f4a79f1863fa2b13b2499c32",
+  "webvtt_sha256": "6d9cb555e298a137e99937daa0cb352e39f60e8ab542c78c744576cae6f0a9d8",
+  "qualification": {
+    "focused_r4h": "10/10 PASS",
+    "omni_protocol_plus_jarvis_bridge": "11/11 PASS",
+    "scientific_writing": "50/50 PASS",
+    "public_root_suite": "170/170 PASS",
+    "py_compile": "PASS",
+    "battery_projection_benchmark": "PASS_STRUCTURAL",
+    "omni_candidate": "71 total / 69 PASS / 2 inherited FAIL",
+    "omni_baseline": "61 total / 59 PASS / 2 same inherited FAIL",
+    "new_failure_identities": 0
+  },
+  "inherited_failures": [
+    "R4D fixture expected SHA cc45d6d9... but clean checkout bytes hash cbab3b25...",
+    "same source-byte mismatch propagates to the second-parser exact-byte assertion"
+  ],
+  "reuse": [
+    "tristan.jarvis_ir.ClaimIR",
+    "tristan.jarvis_ir.EvidenceIR",
+    "omega_omni_compiler.src.representation_ir.RepresentationGraph",
+    "omega_scientific_writing R4/R4.1 fixture lineage",
+    "WebVTT external timed-text format"
+  ],
+  "boundaries": [
+    "PASS_STRUCTURAL != SemanticEquivalence",
+    "DeclaredSemanticLoss != MeasuredSemanticLoss",
+    "WebVTTExport != VideoRender",
+    "CaptionPresent != HumanComprehension",
+    "ProvenanceBound != ClaimTrue",
+    "Generated != Verified",
+    "Capability != Authority",
+    "NO_ACTION admissible"
+  ],
+  "authority_granted": false,
+  "scientific_pass_claimed": false,
+  "production_pass_claimed": false
+}
