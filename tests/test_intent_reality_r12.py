@@ -142,6 +142,14 @@ class IntentRealityR12Tests(unittest.TestCase):
         self.assertFalse(receipt.scientific_pass)
         self.assertFalse(receipt.authority_granted)
 
+    def test_invalid_debt_rejected_before_receipt(self):
+        for invalid in (float("nan"), float("inf"), 10**10000, True):
+            with self.subTest(invalid_type=type(invalid).__name__):
+                debt = IntentEvidenceDebt(source_completeness=invalid)
+                self.assertTrue(debt.validate())
+                with self.assertRaisesRegex(ValueError, "source_completeness"):
+                    compile_intent_reality((self._event("E-invalid"),), evidence_debt=debt)
+
     def test_missing_evidence_debt_is_unassessed_not_zero_claim(self):
         receipt = compile_intent_reality((self._event("E-unassessed"),))
         self.assertFalse(receipt.evidence_debt_assessed)
