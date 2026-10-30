@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 import hashlib
+import math
 import json
 from typing import Iterable
 
@@ -128,7 +129,9 @@ class IntentEvidenceDebt:
     def validate(self) -> list[str]:
         errors: list[str] = []
         for name, value in asdict(self).items():
-            if value < 0:
+            if type(value) not in (int, float) or (type(value) is int and value.bit_length() > 53) or (type(value) is float and not math.isfinite(value)):
+                errors.append(f"{name} debt must be finite and representable")
+            elif value < 0:
                 errors.append(f"{name} debt must be non-negative")
         return errors
 
