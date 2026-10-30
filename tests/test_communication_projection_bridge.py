@@ -12,6 +12,26 @@ from omega_omni_compiler.src.representation_ir import RepresentationGraph, Repre
 
 
 class CommunicationProjectionBridgeTests(unittest.TestCase):
+    def test_extreme_numeric_values_fail_closed(self):
+        spec = CommunicationProjectionSpec("bad", "TEXT", "technical", "fr", 10**10000, semantic_loss_budget=float("nan"))
+        projection = TimedProjectionIR(spec, (
+            TimedProjectionSegment("s", 0.0, 10**10000, ("missing",), on_screen_text="x",
+                                   provenance_ids=("source",), declared_semantic_loss=10**10000),
+        ))
+        receipt = evaluate_projection(projection, RepresentationGraph(), (), ())
+        self.assertEqual(receipt.status, "HOLD")
+        self.assertFalse(receipt.authority_granted)
+        self.assertTrue(receipt.structural_errors)
+
+    def test_boolean_semantic_loss_fails_closed(self):
+        spec = CommunicationProjectionSpec("bad", "TEXT", "technical", "fr", 2.0)
+        projection = TimedProjectionIR(spec, (
+            TimedProjectionSegment("s", 0.0, 1.0, ("missing",), on_screen_text="x",
+                                   provenance_ids=("source",), declared_semantic_loss=True),
+        ))
+        receipt = evaluate_projection(projection, RepresentationGraph(), (), ())
+        self.assertEqual(receipt.status, "HOLD")
+
     def test_jarvis_claim_evidence_ir_structurally_satisfies_omni_projection_protocol(self):
         anchor = ProvenanceAnchor(
             source_artifact_id="bridge",
