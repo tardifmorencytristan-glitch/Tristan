@@ -20,3 +20,13 @@ Préparer des instructions de succession, nommer des personnes de confiance, exa
 - Les accès privés restent protégés.
 
 **État actuel : plan documenté, copies indépendantes non vérifiées.**
+
+## Capsule BOOK0 hors ligne — expérience bornée du 8 novembre 2026
+
+Un paquet public-sûr `TRISTAN_BOOK0_PUBLIC_SURVIVAL_CAPSULE_R01.zip` a été produit comme artefact de conversation (ZIP **non hébergé ici dans GitHub**). Il utilise une structure BagIt réduite (déclaration, manifest SHA-256, tagmanifest), un index de 13 familles, un exemplaire exact du module BOOK0 public, une procédure de restauration et 20 tests unitaires. SHA-256 du ZIP : `31008d122abab8c527826d6704c0bff3c0d7999ebdd8a7fde82466b436e37b17`. Environnement de test local : 20/20 PASS; extraction en dossier temporaire indépendant et validation d'intégrité + 20/20 PASS, sans réseau.
+
+**Portée de preuve :** la copie des octets, les digests BOOK0, les tests de détection de corruption et de suppression sont vérifiés sur une capsule **réduite**, pas sur les manuscrits originaux ni sur une panne simultanée des fournisseurs. L'existence du ZIP dans une conversation ne suffit pas à le rendre accessible à tous après le décès de son auteur. Il faut ultérieurement une copie publique autorisée et des miroirs indépendants, avec droits/licences et vérification extérieure.
+
+**Règle de progrès :** comparer par époque, à critères gelés, des mesures de capacité utile reconnues par un juge indépendant. Une suite peut viser `ΔK>0` et `Δ²K>0` sur une période finie, mais ces conditions ne sont pas vérifiées pour la vie entière du système; elles sont impossibles globalement si `K` reste bornée et `K'(0)>0`. Ne jamais transformer un `HOLD`, une panne ou un `NO_ACTION` justifié en gain artificiel.
+
+**À faire avant publication canonique et continuité réelle :** provenance complète, examen de licences et consentements, publication de l'archive ZIP sur un hébergeur avec mirrors autorisés, essai par un tiers sans les comptes de Tristan, gouvernance successorale et tests réels de reprise. Aucun déclencheur autonome, accès privilégié ou garantie perpétuelle introduit.
