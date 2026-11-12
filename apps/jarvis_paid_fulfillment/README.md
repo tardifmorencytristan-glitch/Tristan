@@ -85,3 +85,40 @@ required before broader commercial rollout.
 To roll back application behavior: redeploy the last verified artifact after
 reviewing already queued orders. Do **not** drop or delete the queue or its
 database on rollback; isolate and reconcile outstanding paid orders first.
+
+
+## R150: report access is independently authorized (fail-closed)
+
+The original `/result?session_id=...` and `/receipt/{session_id}` endpoints
+were insufficiently protected because a Checkout session identifier alone was
+a bearer credential. In R150, **both routes require a separate short-lived
+HMAC capability token sent in the HTTP `Authorization: Bearer ...` header**.
+The token is cryptographically bound to exactly one Checkout session and expires
+after at most 900 seconds. Missing, expired, forged, wrong-session, query-only,
+or incorrectly signed tokens are rejected **before database lookup**. Receipt
+responses remain `private, no-store`, `noindex`, and `no-referrer`.
+The webhook signing secret is not accepted as a report-access secret.
+
+Configuration (no secrets committed):
+- `JARVIS_RESULT_ACCESS_SECRET`: independent, high-entropy key with at least
+  32 UTF-8 bytes, stored in a platform vault or restricted secret settings.
+- Rotate report-access secrets when access must be revoked globally. Individual
+  token revocation is not implemented.
+- TLS and appropriate logging redaction must be enforced by the HTTPS host.
+
+The `result_access.issue_result_access_token(...)` function **does not identify
+a customer**. An already-authenticated customer delivery owner must establish
+the legitimate recipient by independent server-side checks before issuing a
+token. This repository deliberately exposes **no public token-minting API**,
+does not email tokens or give them out on the Checkout success page, and does
+not put tokens in URLs. Do not build automated delivery by copying this helper
+into unauthenticated browser code.
+
+The customer-facing delivery flow is **blocked** until an authorized account,
+customer portal, or similarly verified delivery channel exists and has been
+end-to-end tested. An otherwise green `/ready` checks only inbound intake
+configuration; it does not imply private report delivery is configured.
+
+**Security claims limited to:** isolated tests of signed capability verification
+and rejection of unauthenticated report reads. This does not verify the host,
+customer identity, backups, revocation, or real production delivery.
