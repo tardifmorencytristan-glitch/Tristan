@@ -1,0 +1,41 @@
+{
+  "actions": {
+    "deployed": false,
+    "git_actions_tests": false,
+    "live_stripe_mutations": 0,
+    "merged": false
+  },
+  "baseline_local_commit": "8de1e976acabe52762ea8192ab1fc96a2c12bd22",
+  "created_utc": "2026-11-12T16:01:40.021041+00:00",
+  "m_negative": [
+    "PowerShell 5.1 ConvertFrom-Json has no -Depth parameter; eliminated",
+    ".NET Framework Dictionary lacks TryAdd; used ContainsKey plus Add",
+    "PowerShell automatic $PID is read-only; renamed local variable",
+    "Set-StrictMode disallows missing metadata property access; explicit optional-field handling added"
+  ],
+  "multi_method": {
+    "method_1": "Stripe API live read: list, direct lookup, search, and 23 link line item reads",
+    "method_2": "Python standard-library catalog audit with 12 unit tests and redacted report",
+    "method_3": "Windows PowerShell 5.1 cross-join and mismatch rejection on same private snapshot",
+    "source_independence": "NOT INDEPENDENT external data: PowerShell and Python share the sanitized Stripe snapshot, so findings remain source-bound"
+  },
+  "owner": "Tristan/apps/jarvis_paid_fulfillment",
+  "promotion": "BLOCKED: no tax/webhook/customer delivery/committees/exact-head end-to-end evidence",
+  "proofs": [
+    {
+      "description": "Independent Windows PowerShell 5.1 JSON cross-join confirms 23 payment links, at least 25 products, at least 24 prices, 2 held-offer active links, 22 active links without automatic tax",
+      "name": "positive",
+      "status": "PASS"
+    },
+    {
+      "description": "A deliberately corrupted aggregate listed-product count was rejected; output generated only from an isolated local fixture",
+      "name": "negative",
+      "status": "PASS_EXPECTED_REJECTION"
+    }
+  ],
+  "schema": "tristan-stripe-r151-independent-powershell-oak-v1",
+  "script": "tests/stripe_catalog_independent_r151.ps1",
+  "script_sha256": "9750f0733f63343093fc8fc0d1a38634d0c9acd72e91da0eb4e0400998159f4c",
+  "source_private_snapshot_sha256": "93e9bdb7bb019d405edbcaf6093f7655617a158a3daf491fb40a079dbc4e1d3c",
+  "status": "VERIFIED_SOFTWARE_COURT_ONLY"
+}
