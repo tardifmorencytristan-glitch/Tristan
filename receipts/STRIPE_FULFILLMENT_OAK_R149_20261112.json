@@ -1,0 +1,77 @@
+{
+  "action_evidence": {
+    "git_ci_or_actions_used": false,
+    "local_commit": "f8f971dc466b7bb50b3b876eaaef31910cfc7040",
+    "merge": false,
+    "new_scheduler": false,
+    "remote_pr_change": "PENDING_WRITE_AT_RECEIPT_CREATION",
+    "render_deploy": false,
+    "stripe_financial_actions": false
+  },
+  "blockers": {
+    "customer_auth_and_external_delivery_receipt": "UNVERIFIED",
+    "exact_head_merge_and_production_gate": "BLOCKED",
+    "full_repo_tests": "PREVIOUS_UNRELATED_FAILURE_NOT_RETESTED",
+    "jarvis_committee_review": "PENDING",
+    "live_webhook_destination": "UNVERIFIED",
+    "persistent_storage_across_restart": "UNVERIFIED",
+    "stripe_tax_setup": "PRIOR_OBSERVATION_INCOMPLETE_NOT_MODIFIED",
+    "worker_runtime_scheduling": "NOT_ENABLED"
+  },
+  "control_observations": [
+    "enqueue is atomic and idempotent by paid Checkout session",
+    "bounded retry and lease expiry are tested with stale-worker fencing",
+    "no secrets/customer email are persisted in the queue intake",
+    "webhook responds without running audit synchronously",
+    "worker requires explicit local configuration and was not started as a daemon",
+    "readiness and live delivery are distinct",
+    "no live customer delivery was attempted or asserted"
+  ],
+  "local_source_commit": "f8f971dc466b7bb50b3b876eaaef31910cfc7040",
+  "node_results": {
+    "DESKTOP-2G1SSMT": {
+      "fail": 0,
+      "pass": 24,
+      "scope": "core/queue/post-checkout, FastAPI tests unavailable"
+    },
+    "DESKTOP-SHA9IHL": {
+      "fail": 0,
+      "pass": 36,
+      "scope": "core/queue/webhook/readiness/post-checkout"
+    },
+    "LAPTOP-AIU36QN6": {
+      "fail": 0,
+      "pass": 36,
+      "scope": "core/queue/webhook/readiness/post-checkout"
+    }
+  },
+  "normalization": "same twelve UTF-8 snapshot files on all three PCs, LF-normalized; raw original repository bytes can differ",
+  "observed_utc": "2026-11-12T12:12:14.467690+00:00",
+  "pr": 94,
+  "proof_boundary": "software tests only; no payment, no live webhook, no production delivery",
+  "repo": "tardifmorencytristan-glitch/Tristan",
+  "resume_cursor": "PR #94 -> independent committee receipts -> durable storage/restart tests -> sandbox signed event -> authenticated delivery -> exact-head gate",
+  "rollback": "keep queue database and reconcile paid work before reverting worker code; never delete pending records",
+  "schema": "omega_stripe_fulfillment_oak_r149_v1",
+  "scope": "signed paid Checkout intake -> crash-recoverable local queue -> one-shot worker -> generated report",
+  "snapshot_sha256": {
+    "after-purchase.html": "0c77de46433bd67b8489f103b43d9bcee08d1bc4e05ed5e4840ca01bb304bd79",
+    "apps/jarvis_paid_fulfillment/README.md": "96d668ffaa1b9496433fb5f9753b6914f44193141995c6c6158f4f396597c6c2",
+    "apps/jarvis_paid_fulfillment/app.py": "0b159ce7528f95f38d07e5e6540043ffb448c2cdf1c3ad5fc220aa8416ca8f56",
+    "apps/jarvis_paid_fulfillment/core.py": "90b784f38e27deca0031d588798a8dfb51a8910254f6edb720da18b40ef99b7f",
+    "apps/jarvis_paid_fulfillment/fulfillment_queue.py": "3bc1ad1c8ec380da846f73431bb4ac03b1911e3cfc8c3230e0595a9d9baea003",
+    "apps/jarvis_paid_fulfillment/worker.py": "72294c8391fb4e181e5fc7b7f5b7fc80c9329a72114eab3f32e69683d6f371c7",
+    "quickcheck-after-purchase.html": "0e6890afeca2b6c617d9ea7e905a1d1a8ae8f0c15b0b1fbaf1ba04a8996f74e1",
+    "tests/test_paid_fulfillment_queue_r149.py": "fae88269f2f180ad5b11d9d803dc1176ee86ae9b6c4dee3cd411200a31880ff8",
+    "tests/test_paid_fulfillment_r1.py": "2462a76a5ae86fe079654f99029972289388ab13d013f064c47b0d4645d70723",
+    "tests/test_paid_fulfillment_readiness_r148.py": "5b8d2c326aebb552e40482dd21850a3dbcd410d82dffab7019b2c01a9e7c1b8e",
+    "tests/test_paid_fulfillment_webhook_r149.py": "1940f5a676b7974240294d12bfe3908764fa14b4c2a99a88a52c4e703bf44b4d",
+    "tests/test_quickcheck_fulfillment_truth_r147.py": "a4ffb907c5ed2f9114afa5280daa9a7f8c282ea659e54d58d6f325ed46cf6511"
+  },
+  "source_branch": "fix/stripe-quickcheck-fulfillment-truth-r147",
+  "source_targeted_tests": {
+    "fail": 0,
+    "pass": 39,
+    "warning": "Starlette/httpx test-client deprecation warning"
+  }
+}
