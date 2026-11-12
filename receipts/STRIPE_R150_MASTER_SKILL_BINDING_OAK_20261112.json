@@ -1,0 +1,146 @@
+{
+  "changes": {
+    "issuance_boundary": "only an independently authenticated customer/delivery owner may mint the capability; no public token mint route exists",
+    "known_residual": "without a verified buyer delivery flow the report is intentionally inaccessible; tokens are not individually revocable and require HTTPS at host",
+    "local_commit": "fa456a39a509fd8ec27c49aca467f930568da630",
+    "routes": "GET /result and GET /receipt now verify separate independent HMAC bearer authorization before SQLite lookup",
+    "secret_policy": "JARVIS_RESULT_ACCESS_SECRET distinct from STRIPE_WEBHOOK_SECRET, >=32 UTF-8 bytes; never logged/committed",
+    "token_max_seconds": 900
+  },
+  "created_utc": "2026-11-12T15:17:44.402231+00:00",
+  "evidence": {
+    "cross_pc_proof": "the same 14-file normalized snapshot hashes matched on three PCs",
+    "independence_limit": "three executions of the same code are not three independent implementations or an external security review",
+    "node_tests": {
+      "DESKTOP-2G1SSMT": {
+        "failed": 0,
+        "limitations": "FastAPI not available; pure-Python tests only",
+        "passed": 28
+      },
+      "DESKTOP-SHA9IHL": {
+        "failed": 0,
+        "limitations": "same source snapshot",
+        "passed": 58
+      },
+      "LAPTOP-AIU36QN6": {
+        "failed": 0,
+        "limitations": "same source snapshot",
+        "passed": 58
+      }
+    },
+    "normalized_snapshot_sha256": {
+      "apps/jarvis_paid_fulfillment/README.md": "dcf4ab546ae5e490f2fac6f1e4ce8d3928eae8093586e448adc69544094c0cd5",
+      "apps/jarvis_paid_fulfillment/app.py": "5a2561396cad78bca33418bcd8c5791b8a619d129f091a43caa1eaeb09b1e638",
+      "apps/jarvis_paid_fulfillment/core.py": "90b784f38e27deca0031d588798a8dfb51a8910254f6edb720da18b40ef99b7f",
+      "apps/jarvis_paid_fulfillment/fulfillment_queue.py": "3bc1ad1c8ec380da846f73431bb4ac03b1911e3cfc8c3230e0595a9d9baea003",
+      "apps/jarvis_paid_fulfillment/result_access.py": "a00c0c986687d49985bde9a2fb476949f961d821f16f8b939070594673c338a9",
+      "apps/jarvis_paid_fulfillment/worker.py": "72294c8391fb4e181e5fc7b7f5b7fc80c9329a72114eab3f32e69683d6f371c7",
+      "tests/test_paid_fulfillment_access_r150.py": "f6aa1a06a212e656eada7e9f798385ec10cb149446b86e3944f44e7f8bd5d4fb",
+      "tests/test_paid_fulfillment_process_recovery_r149.py": "6250afe230b6e451ce4b87de5488f76dc9db6d14714a80dae6c3f1ea98b2df3e",
+      "tests/test_paid_fulfillment_queue_r149.py": "fae88269f2f180ad5b11d9d803dc1176ee86ae9b6c4dee3cd411200a31880ff8",
+      "tests/test_paid_fulfillment_r1.py": "2462a76a5ae86fe079654f99029972289388ab13d013f064c47b0d4645d70723",
+      "tests/test_paid_fulfillment_readiness_r148.py": "5b8d2c326aebb552e40482dd21850a3dbcd410d82dffab7019b2c01a9e7c1b8e",
+      "tests/test_paid_fulfillment_webhook_r149.py": "0b32befdbbee6b3afeced8ea4dcfcb7ff6abfa20d65b8e7d322f8cf04aeda858",
+      "tests/test_quickcheck_fulfillment_truth_r147.py": "a4ffb907c5ed2f9114afa5280daa9a7f8c282ea659e54d58d6f325ed46cf6511",
+      "tests/test_result_access_kernel_r150.py": "2b8928cfebc9b71cd1c33520e326ffb29b84321cad2be9cbde0d2e1752066b80"
+    },
+    "source_targeted_tests": {
+      "failed": 0,
+      "passed": 61,
+      "warning": "test client deprecation"
+    },
+    "total_pc_test_executions": 144
+  },
+  "intent": "GO ALL TRISTAN: enforce MASTER-first operations and secure Stripe-Jarvis customer-report access",
+  "negative_memory": [
+    "previous R149 lacked customer result authorization, checkout session ID acted as bearer secret",
+    "a PowerShell shell expansion passed pytest a literal wildcard and ran zero tests; corrected with explicit file paths",
+    "Remote Desktop Commander asynchronous writes required readback and hash verification, not assumed success",
+    "full repository test suite remains outside the verified scope"
+  ],
+  "promotion": {
+    "no_deploy": true,
+    "no_financial_action": true,
+    "no_git_actions": true,
+    "no_merge": true,
+    "reasons": [
+      "verified customer identity & token delivery still absent",
+      "live webhook endpoint and durable storage not proven",
+      "Stripe Tax pending and registrations absent in prior account audit",
+      "no Jarvis committee review receipts",
+      "no independent exact-head production qualification",
+      "no full sandbox payment-to-customer delivery test"
+    ],
+    "status": "BLOCKED"
+  },
+  "residual_action": "independent Jarvis owner must validate customer identity, issue capability after verified paid order, then deliver report through authenticated channel; OAK 3-way and approvals before production",
+  "schema": "tristan.skill_binding_evidence_r150_1",
+  "skill_binding_ir": {
+    "action_class": "local Git branch + isolated PC read/verification; future remote PR only after exact content check",
+    "authorized_external_financial_change": false,
+    "decision": "REUSE_EXISTING_OWNER, no competing Jarvis daemon, scheduler, payment gateway, or database",
+    "existing_pr": "https://github.com/tardifmorencytristan-glitch/Tristan/pull/94",
+    "owner": "Tristan/apps/jarvis_paid_fulfillment",
+    "skills": [
+      {
+        "purpose": "payment integration and safe default",
+        "uri": "skills://plugins/stripe/stripe-best-practices/skill.md"
+      },
+      {
+        "purpose": "customer result access security and secrets",
+        "uri": "skills://plugins/stripe/stripe-best-practices/references/security.md"
+      },
+      {
+        "purpose": "webhook and post-payment boundaries",
+        "uri": "skills://plugins/stripe/stripe-best-practices/references/payments.md"
+      },
+      {
+        "purpose": "durable private decision and evidence memory",
+        "uri": "skills://plugins/notion/notion-knowledge-capture/skill.md"
+      }
+    ],
+    "tool_ir": [
+      {
+        "authority": "private workspace",
+        "mode": "READ",
+        "result": "guide/master/oak read",
+        "tool": "mcp__Notion__fetch"
+      },
+      {
+        "authority": "installed skills",
+        "mode": "READ",
+        "result": "specialist skill guides read",
+        "tool": "skills__read"
+      },
+      {
+        "authority": "connected owner PCs",
+        "mode": "LOCAL_REVERSIBLE",
+        "result": "code changed in isolated working branch, tests run",
+        "tool": "mcp__Remote_Desktop_Commander__start_process/read_file/write_file"
+      },
+      {
+        "authority": "authorized repository",
+        "mode": "READ",
+        "result": "PR 94 DRAFT verified",
+        "tool": "mcp__GitHub__fetch_pr"
+      }
+    ]
+  },
+  "source_version": {
+    "agent_guide": {
+      "page": "https://app.notion.com/p/4108c41e6e11812e9948f262daf64a9a",
+      "read_in_turn": true,
+      "version": "0.0.6"
+    },
+    "master": {
+      "last_edited_at_observed": "2026-11-12T14:51:30.291Z",
+      "page": "https://app.notion.com/p/4108c41e6e118132a931c8b72effadb0",
+      "read_in_turn": true,
+      "title_version": "R0.11"
+    },
+    "oak": {
+      "page": "https://app.notion.com/p/3ea8c41e6e1181648a3be808bc755c66",
+      "read_in_turn": true
+    }
+  }
+}
