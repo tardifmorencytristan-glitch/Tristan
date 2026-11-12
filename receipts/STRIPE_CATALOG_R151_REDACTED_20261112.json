@@ -1,0 +1,94 @@
+{
+  "actions": [
+    "Do not delete/archive/change live products, tax settings, links, or subscriptions from incomplete list reads",
+    "Confirm every direct-linked item, fulfillment owner, refunds/support policy, and existing customer obligations",
+    "Compare list/search/direct results; reconcile pagination inconsistencies before any catalog migration",
+    "Establish verified sandbox paid-order fulfillment and customer delivery before promoting automation",
+    "Require Stripe fiscal/tax authority and independent Jarvis/OAK reviews before financial configuration changes"
+  ],
+  "captured_date": "2026-11-12",
+  "coverage": {
+    "completeness": "NOT_PROVEN",
+    "direct_confirmed_additional_prices": 2,
+    "direct_confirmed_additional_products": 2,
+    "identified_prices_at_least": 24,
+    "identified_products_at_least": 25,
+    "link_line_items_checked": 23,
+    "linked_extra_products": 2,
+    "listed_prices": 22,
+    "listed_products": 23,
+    "payment_links_checked": 23
+  },
+  "findings": [
+    {
+      "affected_count": 4,
+      "code": "LIST_DISCOVERY_INCOMPLETE",
+      "scope": "Confirmed direct objects absent from list result; completeness cannot be claimed",
+      "severity": "BLOCKER"
+    },
+    {
+      "affected_count": 2,
+      "code": "LIVE_LINK_PRODUCT_HAS_HOLD_METADATA",
+      "scope": "Live payment link advertises a product marked HOLD or unverified in catalog metadata",
+      "severity": "BLOCKER"
+    },
+    {
+      "affected_count": 1,
+      "code": "LIVE_WEBHOOK_DESTINATION_MISSING",
+      "scope": "Account list shows no webhook endpoint for automatic fulfillment",
+      "severity": "BLOCKER"
+    },
+    {
+      "affected_count": 1,
+      "code": "TAX_SETTINGS_NOT_ACTIVE",
+      "scope": "Tax configuration needs competent review; no legal obligation inferred",
+      "severity": "REVIEW"
+    },
+    {
+      "affected_count": 22,
+      "code": "TAX_AUTOMATION_DISABLED",
+      "scope": "Automatic tax off on active link; collection obligation not determined",
+      "severity": "REVIEW"
+    },
+    {
+      "affected_count": 8,
+      "code": "ACTIVE_PRODUCTS_WITHOUT_DEFAULT_PRICE",
+      "scope": "Product has no default price; may be intentional for link-only offers",
+      "severity": "REVIEW"
+    },
+    {
+      "affected_count": 2,
+      "code": "ACTIVE_PRODUCTS_WITHOUT_ACTIVE_PAYMENT_LINK",
+      "scope": "Might be intentionally sold via invoice or custom Checkout; not proof of breakage",
+      "severity": "INFO"
+    }
+  ],
+  "invariants": [
+    "Listed != Exhaustive",
+    "Checkout != Paid",
+    "Paid != Delivered",
+    "ConfigurationReady != DeliveryVerified",
+    "Generated != Verified"
+  ],
+  "mode": "READ_ONLY_RECONCILIATION",
+  "observations": {
+    "active_links_to_products_with_hold_metadata": 2,
+    "active_links_with_automatic_tax_disabled": 22,
+    "active_payment_links": 22,
+    "active_prices_identified": 24,
+    "active_products_identified": 22,
+    "active_products_linked": 20,
+    "active_products_without_active_link": 2,
+    "active_products_without_default_price": 8,
+    "stripe_tax_registrations": 0,
+    "tax_settings_status": "pending",
+    "webhook_endpoints": 0
+  },
+  "promotion_status": "BLOCKED",
+  "schema": "tristan-stripe-catalog-audit-r151-v1",
+  "severity_counts": {
+    "BLOCKER": 3,
+    "INFO": 1,
+    "REVIEW": 3
+  }
+}

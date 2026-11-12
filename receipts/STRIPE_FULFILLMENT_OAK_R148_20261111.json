@@ -1,0 +1,50 @@
+{
+  "captured_utc": "2026-11-12T01:38:27.359527+00:00",
+  "checks": {
+    "node_A": {
+      "failed": 0,
+      "passed": 12,
+      "status": "PASS",
+      "test_scope": "paid fulfillment core plus QuickCheck fulfillment truth"
+    },
+    "node_B": {
+      "failed": 0,
+      "passed": 16,
+      "status": "PASS",
+      "test_scope": "same plus readiness/HTTP tests"
+    },
+    "node_C": {
+      "failed": 0,
+      "passed": 16,
+      "status": "PASS",
+      "test_scope": "same plus readiness/HTTP tests"
+    }
+  },
+  "cross_node": "seven snapshot file SHA256 signatures matched on all three machines",
+  "governance": "Generator != Judge; LocalPASS != ProductionPASS; Payment != Delivery; Capability != Authority",
+  "limits": [
+    "shared test snapshot is not three independent implementations or a full-repo exact-head replay",
+    "node_A lacks FastAPI dependency for HTTP readiness tests",
+    "readiness endpoint validates only local configuration, not durable disk, remote Stripe endpoint or delivery",
+    "the existing webhook handler still performs bounded repository analysis inline and needs durable queue/recovery qualification",
+    "full repository suite not green: 52 passed then one failure in unrelated test_epistemic_ir::test_dataset_identity_contract",
+    "remote git push was interrupted after no output; the branch was not confirmed on GitHub",
+    "no automated Stripe payment to Jarvis delivery receipt was produced"
+  ],
+  "no_action": "no merge, no production deploy, no payment or tax/account mutation, no GitHub Actions tests",
+  "promotion_gate": "BLOCKED_PENDING_REMOTE_HEAD_AND_LIVE_FULFILLMENT_EVIDENCE",
+  "schema": "omega_stripe_fulfillment_oak_receipt_r148_v1",
+  "scope": "bounded local code safety/readiness fixes only; no live Stripe configuration modifications",
+  "snapshot_file_sha256": {
+    "after-purchase.html": "0c77de46433bd67b8489f103b43d9bcee08d1bc4e05ed5e4840ca01bb304bd79",
+    "apps/jarvis_paid_fulfillment/app.py": "c0cbac4817c08d3db7ec3bceb122f5c93ce68dd4193886dac4947135de3f7baa",
+    "apps/jarvis_paid_fulfillment/core.py": "90b784f38e27deca0031d588798a8dfb51a8910254f6edb720da18b40ef99b7f",
+    "quickcheck-after-purchase.html": "0e6890afeca2b6c617d9ea7e905a1d1a8ae8f0c15b0b1fbaf1ba04a8996f74e1",
+    "tests/test_paid_fulfillment_r1.py": "2462a76a5ae86fe079654f99029972289388ab13d013f064c47b0d4645d70723",
+    "tests/test_paid_fulfillment_readiness_r148.py": "5b8d2c326aebb552e40482dd21850a3dbcd410d82dffab7019b2c01a9e7c1b8e",
+    "tests/test_quickcheck_fulfillment_truth_r147.py": "0de3ec8731dd9dc644433f3a940f90288b61c3e08bd28c9c3b2cecf2d72fc15d"
+  },
+  "snapshot_normalization": "remote copy uses identical normalized newlines; source repository can differ in byte-level newline encoding",
+  "source_branch": "fix/stripe-quickcheck-fulfillment-truth-r147",
+  "source_commit": "e9ba320b6977e56567ccfd0ec0cb29f8114835ba"
+}

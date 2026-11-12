@@ -1,0 +1,107 @@
+{
+  "blockers": [
+    "Stripe live webhook destination absent",
+    "tax account status pending",
+    "customer authenticated delivery absent",
+    "persistent storage proof absent",
+    "Jarvis committee reviews not confirmed",
+    "full end-to-end sandbox and exact-head verification absent",
+    "full repository tests outside scope"
+  ],
+  "decisions": [
+    "no product deletion/deactivation without verified customer/fulfillment obligations and explicit authority",
+    "do not infer tax compliance/noncompliance from Stripe Tax disabled alone",
+    "hold metadata on active QuickCheck sales must trigger review before automatic processing",
+    "list.has_more=false is not proof of complete catalog in this observed dataset",
+    "use READ_ONLY audit until owner, taxes, webhook, delivery and OAK gates verified"
+  ],
+  "deploy": false,
+  "git_actions_tests_used": false,
+  "live_financial_mutations": 0,
+  "merge": false,
+  "negative_memory": [
+    "Product/price list results omitted two active price-linked resources verified directly and by search",
+    "catalog totals must be expressed as at-least counts with an uncertainty ledger",
+    "product default_price missing can be intentional; catalog audit flags review, not automatic correction",
+    "legacy unpaid or failed checkouts do not establish actual customer demand or delivery"
+  ],
+  "observed_utc": "2026-11-12T15:52:11.791957+00:00",
+  "owner": "Tristan/apps/jarvis_paid_fulfillment",
+  "promotion_status": "BLOCKED",
+  "real_world_observations": {
+    "active_links_automatic_tax_disabled": 22,
+    "active_payment_links": 22,
+    "active_products_without_active_payment_link": 2,
+    "active_products_without_default_price": 8,
+    "active_quickcheck_hold_links": 2,
+    "live_webhook_endpoints": 0,
+    "stripe_tax_registrations": 0,
+    "stripe_tax_status": "pending"
+  },
+  "schema": "tristan-stripe-catalog-r151-oak-receipt-1",
+  "scope": "read-only Stripe production catalog snapshot, offline reconciliation, no Stripe writes",
+  "skill_binding": {
+    "authority": "read-only financial API, reversible local code/tests, draft PR; NO financial writes, merge, deployment",
+    "connectors": [
+      "Stripe GET catalog/prices/links/line_items/direct-retrieve/search",
+      "Remote Desktop Commander",
+      "GitHub read/create/update draft PR",
+      "Notion private Atlas"
+    ],
+    "master": "MASTER META SKILL R0.11; Notion guide v0.0.6 read this turn",
+    "owner_reused": true,
+    "specialists": [
+      "stripe-best-practices",
+      "stripe-best-practices/references/payments",
+      "stripe-best-practices/references/security",
+      "notion-knowledge-capture"
+    ]
+  },
+  "source_branch": "fix/stripe-quickcheck-fulfillment-truth-r147",
+  "source_head": "668ed6872edbe00e20bd8b75834308cf93c49c2a",
+  "sources": {
+    "all_link_lines_read": true,
+    "catalog_list_returns_has_more_false": true,
+    "completeness": "NOT_PROVEN",
+    "directly_confirmed_additional_prices": 2,
+    "directly_confirmed_additional_products": 2,
+    "links": 23,
+    "listed_prices": 22,
+    "listed_products": 23,
+    "live_mode": true,
+    "minimum_identified_prices": 24,
+    "minimum_identified_products": 25,
+    "private_snapshot_path": "held only on authorized PC, not published",
+    "private_snapshot_sha256": "93e9bdb7bb019d405edbcaf6093f7655617a158a3daf491fb40a079dbc4e1d3c",
+    "redacted_report_path": "receipts/STRIPE_CATALOG_R151_REDACTED_20261112.json",
+    "redacted_report_sha256": "935b16d76773a6bf9f874237a183c7a7b6d57b0e1dd43a68b8856b7f148fa6bd"
+  },
+  "tests": {
+    "independence_limit": "same normalized files and partly repeated cases; no independent production test",
+    "nodes": {
+      "DESKTOP-2G1SSMT": {
+        "coverage": "core/queue/access-kernel/catalog, no FastAPI",
+        "failed": 0,
+        "passed": 40
+      },
+      "DESKTOP-SHA9IHL": {
+        "coverage": "core/queue/access HTTP/catalog",
+        "failed": 0,
+        "passed": 70
+      },
+      "LAPTOP-AIU36QN6": {
+        "coverage": "core/queue/access HTTP/catalog",
+        "failed": 0,
+        "passed": 70
+      }
+    },
+    "source_repo_targeted": {
+      "failed": 0,
+      "passed": 73,
+      "warning": "one test-client deprecation warning"
+    },
+    "total_test_executions": 180,
+    "tri_pc_file_count": 18,
+    "tri_pc_normalized_sha256_manifest": "e3d0247c0dc35b16d61cc1155a0fd98ba08460e267e95c7dfa6aaa744cf4d457"
+  }
+}

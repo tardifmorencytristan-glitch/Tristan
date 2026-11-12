@@ -1,0 +1,31 @@
+{
+  "method": "Five separate Python subprocesses use the same SQLite file: enqueue -> claim -> intentional process exit -> cannot reclaim before lease -> reclaim after lease -> persist READY -> readback in a fresh process. Only synthetic records; no GitHub network and no payment.",
+  "normalized_sha256": "6250afe230b6e451ce4b87de5488f76dc9db6d14714a80dae6c3f1ea98b2df3e",
+  "not_verified": [
+    "machine power loss or whole-host restart",
+    "durability across Render deployments or ephemeral filesystems",
+    "payment authenticity in a real Stripe environment",
+    "real worker scheduling, customer delivery or independent verification of external receipts",
+    "exact-head committee approval, merge and deployment"
+  ],
+  "observed_utc": "2026-11-12T12:22:15.143558+00:00",
+  "policy": "TESTED_IN_SCOPE / PR_DRAFT / NO_LIVE_CHANGES / NO_GITHUB_ACTIONS",
+  "schema": "stripe_process_replay_oak_r149_1",
+  "source_local_commit": "c89a823557f660711723f6c3ff7d7d54328e7cb6",
+  "source_test": "tests/test_paid_fulfillment_process_recovery_r149.py",
+  "verified_claim": "same-version local SQLite survives process exit and supports lease-bound recovery without duplicate claim while lease is valid",
+  "verified_on": {
+    "DESKTOP-2G1SSMT": {
+      "fail": 0,
+      "pass": 1
+    },
+    "DESKTOP-SHA9IHL": {
+      "fail": 0,
+      "pass": 1
+    },
+    "LAPTOP-AIU36QN6": {
+      "fail": 0,
+      "pass": 1
+    }
+  }
+}
