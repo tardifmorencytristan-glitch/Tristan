@@ -13,10 +13,16 @@ from fastapi.testclient import TestClient
 from app import app
 from core import QUICKCHECK_PAYMENT_LINK_ID, load_result
 from fulfillment_queue import process_one
+from result_access import issue_result_access_token
 from worker import main as worker_main
 
 
 SECRET = "whsec_r149_fixture_not_live"
+ACCESS_SECRET = "r149_test_access_secret_only_ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+
+def access_headers(session_id="cs_test_r149"):
+    return {"Authorization": "Bearer " + issue_result_access_token(session_id, ACCESS_SECRET)}
 
 
 def paid(session_id="cs_test_r149", project="https://github.com/example/repo",
@@ -49,6 +55,7 @@ def post(client, event, **overrides):
 def configure(monkeypatch, tmp_path):
     dest = str(tmp_path / "store.sqlite3")
     monkeypatch.setenv("STRIPE_WEBHOOK_SECRET", SECRET)
+    monkeypatch.setenv("JARVIS_RESULT_ACCESS_SECRET", ACCESS_SECRET)
     monkeypatch.setenv("JARVIS_AUTOFULFILLMENT_ENABLED", "true")
     monkeypatch.setenv("JARVIS_RESULT_DB", dest)
     return dest
@@ -63,8 +70,8 @@ def test_signed_paid_event_is_queued_without_running_analysis(monkeypatch, tmp_p
         again = post(client, paid(event_id="evt_r149_duplicate"))
         assert again.status_code == 200
         assert again.json()["action"] == "DUPLICATE_QUEUED"
-        queued = client.get("/receipt/cs_test_r149")
-        progress = client.get("/result?session_id=cs_test_r149")
+        queued = client.get("/receipt/cs_test_r149", headers=access_headers())
+        progress = client.get("/result?session_id=cs_test_r149", headers=access_headers())
     assert queued.status_code == 202
     assert queued.json()["status"] == "QUEUED"
     assert "private-buyer" not in queued.text
@@ -134,8 +141,8 @@ def test_worker_result_is_generated_not_delivered(monkeypatch, tmp_path):
         }
     assert process_one(dest, audit_fn=fake_audit) == "READY_NOT_DELIVERED"
     with TestClient(app) as client:
-        ready = client.get("/receipt/cs_test_r149")
-        page = client.get("/result?session_id=cs_test_r149")
+        ready = client.get("/receipt/cs_test_r149", headers=access_headers())
+        page = client.get("/result?session_id=cs_test_r149", headers=access_headers())
     assert ready.status_code == 200
     assert ready.json()["status"] == "READY"
     assert ready.json()["delivery_verified"] is False
@@ -158,8 +165,8 @@ def test_failed_order_receipt_discloses_only_status(monkeypatch, tmp_path):
     configure(monkeypatch, tmp_path)
     with TestClient(app) as client:
         assert post(client, paid(project="invalid-private-url?secret=XYZ")).json()["action"] == "HOLD"
-        hold = client.get("/receipt/cs_test_r149")
-        rendered = client.get("/result?session_id=cs_test_r149")
+        hold = client.get("/receipt/cs_test_r149", headers=access_headers())
+        rendered = client.get("/result?session_id=cs_test_r149", headers=access_headers())
     assert hold.status_code == 200
     assert hold.json()["status"] == "HOLD"
     assert "XYZ" not in hold.text
