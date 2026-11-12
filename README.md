@@ -1,18 +1,20 @@
 # Tristan
 
+**R152 — Prix pilote provisoire des services : 1,99 $ CA**, abonnement selon la périodicité indiquée. Offres en validation et livraison soumise au périmètre réellement autorisé. Les contributions volontaires ne sont pas des services.
+
 **Note personnelle / Personal update (2026-11-11)** — Ma santé va mal et s'est dégradée récemment. J'accélère la réalisation et la transmission de mes projets pour qu'ils puissent servir les autres. / My health has worsened recently; I am prioritizing delivery and continuity for others. [Déclaration complète / Full statement](https://github.com/tardifmorencytristan-glitch/tristan-public/blob/main/HEALTH_AND_CONTINUITY.md).
 
 ## Buy Jarvis Repo QuickCheck
 
 Focused product page: https://rawcdn.githack.com/tardifmorencytristan-glitch/Tristan/f26c368aeecfb7830e834b5eb2cea0d9b826e1a9/quickcheck.html
 
-First-customer launch: **5 CAD one-time**. Public GitHub repository only, read-only, bounded, evidence-oriented. See [service terms](QUICKCHECK_TERMS.md), a [real sample receipt](examples/REPO_QUICKCHECK_SAMPLE.md), and the [public-route receipt](receipts/QUICKCHECK_PUBLIC_ROUTE_R1_20260922.json).\n\nLatest-development mirror: https://raw.githack.com/tardifmorencytristan-glitch/Tristan/main/quickcheck.html
+Temporary pilot price: **1.99 CAD one-time**. Public GitHub repository only, read-only, bounded, evidence-oriented. See [service terms](QUICKCHECK_TERMS.md), a [real sample receipt](examples/REPO_QUICKCHECK_SAMPLE.md), and the [public-route receipt](receipts/QUICKCHECK_PUBLIC_ROUTE_R1_20260922.json).\n\nLatest-development mirror: https://raw.githack.com/tardifmorencytristan-glitch/Tristan/main/quickcheck.html
 
 ## Start here: Jarvis Repo QuickCheck
 
 Need a fast bounded review of a public GitHub repository?
 
-**First external customer: 5 CAD one-time**  
+**Temporary validation pilot: 1.99 CAD one-time**  
 [Open the focused QuickCheck product page](quickcheck.html)
 
 You can also [see a real sample receipt](examples/REPO_QUICKCHECK_SAMPLE.md) and review the [QuickCheck service terms](QUICKCHECK_TERMS.md).
@@ -24,7 +26,7 @@ The service is read-only and bounded. No credentials, no untrusted-code executio
 **Jarvis Repo QuickCheck** is the current primary paid front door: a bounded read-only advisory review of one public GitHub repository.
 
 - Product page: https://rawcdn.githack.com/tardifmorencytristan-glitch/Tristan/f26c368aeecfb7830e834b5eb2cea0d9b826e1a9/quickcheck.html
-- First-customer checkout: 5 CAD one-time
+- Pilot checkout: 1.99 CAD one-time
 - Sample receipt: [examples/REPO_QUICKCHECK_SAMPLE.md](examples/REPO_QUICKCHECK_SAMPLE.md)
 - Terms and refund boundary: [QUICKCHECK_TERMS.md](QUICKCHECK_TERMS.md)
 
@@ -52,14 +54,14 @@ Contributions do not purchase a specific service, promise financial returns, gua
 
 For users who want increased service limits, priority analysis, advanced project intake, and verified subscription management:
 
-- **49 CAD/month**: https://buy.stripe.com/00wcN57KIbRgfEHaXu83C02
-- **490 CAD/year**: https://buy.stripe.com/14AeVdfda6wW2RV9Tq83C03
+- **1.99 CAD/month**: https://buy.stripe.com/fZu8wP3us7B0akn9Tq83C0E
+- **1.99 CAD/year**: https://buy.stripe.com/00waEXe962gG2RVaXu83C0D
 
 AI-worker capabilities are available only when actually provisioned and verified server-side. Payment does not alter scientific, evidence, or GitHub authority gates. See [`PRO.md`](PRO.md).
 
 ## Professional technical services
 
-### Jarvis Repo QuickCheck — first customer 5 CAD, then 9 CAD
+### Jarvis Repo QuickCheck — temporary 1.99 CAD pilot
 
 Fastest self-serve Jarvis offer: submit **one public GitHub repository URL** and receive a bounded advisory receipt after verified payment. Delivery is marked complete only when an external delivery receipt exists.
 
@@ -70,15 +72,15 @@ Fastest self-serve Jarvis offer: submit **one public GitHub repository URL** and
 - secret-like values are never reproduced in the receipt;
 - unsupported/private/non-GitHub inputs are held instead of guessed.
 
-**First-customer QuickCheck — 5 CAD (single-use promotion):**  
-https://buy.stripe.com/5kQaEX2qobRg1NR8Pm83C0g
+**QuickCheck pilot — 1.99 CAD (temporary validation price):**  
+https://buy.stripe.com/8x26oHd52g7w9gj4z683C0t
 
-**Standard QuickCheck — 9 CAD:**  
-https://buy.stripe.com/4gM9AT2qodZoaknghO83C0f
+**QuickCheck — 1.99 CAD:**  
+https://buy.stripe.com/3cI9ATfdabRg8cfd5C83C0u
 
 **See a real sample receipt:** [`examples/REPO_QUICKCHECK_SAMPLE.md`](examples/REPO_QUICKCHECK_SAMPLE.md)
 
-### Audit Express — 99 CAD one-time
+### Audit Express — 1.99 CAD one-time
 
 Jarvis can automatically fulfill a bounded advisory audit for a **public GitHub repository**.
 
@@ -88,8 +90,8 @@ Jarvis can automatically fulfill a bounded advisory audit for a **public GitHub 
 - unsupported/private/non-GitHub inputs are held rather than guessed;
 - findings are advisory signals only: **Audit != Certification**, **StaticPattern != Exploitability**, **NoFlag != Safe**.
 
-**Buy Audit Express — 99 CAD:**  
-https://buy.stripe.com/5kQ3cvfda08yfEH6He83C04
+**Buy Audit Express — 1.99 CAD:**  
+https://buy.stripe.com/aFaeVdaWU6wWdwzfdK83C0C
 
 Other bounded technical audits and performance work are available through the live services page:
 
@@ -115,9 +117,9 @@ Properties:
 
 The bounded synthetic benchmark R0.2 reports **120/120 classified correctly** on 60 generated equivalence cases and 60 controlled mismatches across six simple scalar-expression families. This is a synthetic engineering court only; it is not evidence of real-world scientific-paper/code accuracy, and numerical sampling is not formal proof. See `receipts/SCIENTIFIC_CONSISTENCY_BENCH_R0_2.json`.
 
-Dedicated attributed paid experiment: **29 CAD one-time**
+Dedicated attributed paid experiment: **1.99 CAD one-time**
 
-https://buy.stripe.com/3cIfZhc0Y1cC78b0iQ83C06
+https://buy.stripe.com/14AaEX8OMf3s6472qY83C0B
 
 Each future Checkout Session from this link carries Scientific Consistency-specific metadata so intent can be separated from legacy OAK audit traffic. The economic experiment remains unvalidated until attributable external usage and payment evidence exist.
 
