@@ -14,12 +14,27 @@ from core import (
     verify_stripe_signature,
 )
 from fulfillment_queue import enqueue_paid_checkout
+from result_access import access_secret_valid, verify_result_access
 
 
 app = FastAPI(title="Jarvis Paid Fulfillment R1.3", version="1.3")
 def result_db_path() -> str:
     """Single source of truth for storage used by readiness, workers, and reads."""
     return os.environ.get("JARVIS_RESULT_DB", "/tmp/jarvis_paid_fulfillment_r1.sqlite3")
+
+
+def require_result_access(session_id: str, request: Request) -> None:
+    """Fail closed; authentication must precede even looking up an order."""
+    secret = os.environ.get("JARVIS_RESULT_ACCESS_SECRET", "")
+    header = request.headers.get("authorization", "")
+    if (
+        secret == os.environ.get("STRIPE_WEBHOOK_SECRET", "")
+        or not verify_result_access(session_id, header, secret)
+    ):
+        raise HTTPException(
+            status_code=401, detail="report access denied",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
 
 
 def fulfillment_prerequisites() -> dict[str, bool]:
@@ -41,6 +56,11 @@ def fulfillment_prerequisites() -> dict[str, bool]:
         "durable_storage_verified": False,
         "external_webhook_destination_verified": False,
         "independent_delivery_verified": False,
+        "result_access_secret_configured": (
+            access_secret_valid(os.environ.get("JARVIS_RESULT_ACCESS_SECRET", ""))
+            and os.environ.get("JARVIS_RESULT_ACCESS_SECRET", "")
+            != os.environ.get("STRIPE_WEBHOOK_SECRET", "")
+        ),
     }
 
 
@@ -116,9 +136,10 @@ async def stripe_webhook(request: Request):
 
 
 @app.get("/result", response_class=HTMLResponse)
-def result(session_id: str):
+def result(session_id: str, request: Request):
     if not session_id.startswith("cs_") or len(session_id) > 200:
         raise HTTPException(400, "invalid session_id")
+    require_result_access(session_id, request)
     record = load_result(result_db_path(), session_id)
     if record is None:
         return HTMLResponse(
@@ -146,9 +167,10 @@ def result(session_id: str):
 
 
 @app.get("/receipt/{session_id}")
-def receipt(session_id: str):
+def receipt(session_id: str, request: Request):
     if not session_id.startswith("cs_") or len(session_id) > 200:
         raise HTTPException(400, "invalid session_id")
+    require_result_access(session_id, request)
     record = load_result(result_db_path(), session_id)
     if record is None:
         raise HTTPException(404, "receipt not ready")
