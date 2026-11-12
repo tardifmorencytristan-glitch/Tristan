@@ -1,11 +1,13 @@
 # TRISTAN Pro — Pilot Subscription
 
+**Temporary validation pricing (R152): CAD 1.99 per month OR CAD 1.99 per year**, depending on the selected billing link. Not a verified service-level guarantee.
+
 TRISTAN Pro is a paid software/service pilot for users who want higher service limits, priority analysis, and a more advanced project-intake path around the Tristan ecosystem.
 
 ## Pricing
 
-- **49 CAD / month**: https://buy.stripe.com/00wcN57KIbRgfEHaXu83C02
-- **490 CAD / year**: https://buy.stripe.com/14AeVdfda6wW2RV9Tq83C03
+- **1.99 CAD / month**: https://buy.stripe.com/fZu8wP3us7B0akn9Tq83C0E
+- **1.99 CAD / year**: https://buy.stripe.com/00waEXe962gG2RVaXu83C0D
 
 ## Current product scope
 
