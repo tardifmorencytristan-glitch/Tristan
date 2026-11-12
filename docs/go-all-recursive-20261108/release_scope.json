@@ -1,0 +1,68 @@
+{
+  "schema_version": "go-all-recursive-release-scope/1",
+  "status": "SPECIFICATION_CANDIDATE",
+  "authored_local_date": "2026-11-08",
+  "authored_timezone": "America/Toronto",
+  "repository": "tardifmorencytristan-glitch/Tristan",
+  "intended_path": "docs/go-all-recursive-20261108/",
+  "source_base_commit": "f0eff43be8cf819ec68cc7f4d641f408446c8a59",
+  "release_kind": "ORIGINAL_DOCUMENTATION_ONLY",
+  "files": [
+    "README.md",
+    "human_work_ledger.example.json",
+    "release_scope.json",
+    "LICENSE"
+  ],
+  "license": {
+    "license_file": "LICENSE",
+    "scope": "ONLY_THE_NEW_FILES_LISTED_IN_THIS_RELEASE",
+    "repository_relicensed": false,
+    "referenced_material_relicensed": false,
+    "third_party_rights_unchanged": true,
+    "spdx_identifier": "MIT"
+  },
+  "provenance": {
+    "prose": "Original candidate formalization of the user's requested recursive synthesis and human-work accounting.",
+    "public_source_refs": [
+      "docs/JARVIS_R9_ULTRA_CLOSURE.md",
+      "docs/JARVIS_R12_INTENT_REALITY_DELTA.md",
+      "docs/JARVIS_R8_FINAL_FUSION.md",
+      "src/tristan/prediction_ledger.py",
+      "src/tristan/causal_credit.py"
+    ],
+    "source_reference_base_commit": "f0eff43be8cf819ec68cc7f4d641f408446c8a59",
+    "private_source_payload_included": false,
+    "illustrative_data": "Invented arithmetic fixture; not observations."
+  },
+  "retained_semantics": {
+    "synthesis_lanes": [
+      "GENERAL",
+      "TOP"
+    ],
+    "all_selected_members_must_contribute": true,
+    "top_axes": {
+      "definition_status": "NOT_RECONSTRUCTED_HERE",
+      "preservation": "OPAQUE_VALUE_WITH_SCHEMA_PROVENANCE_AND_VERSION",
+      "silent_truncation_allowed": false
+    },
+    "generation_order_distinct_from_graph_depth": true,
+    "n_T_and_MetaN": "CANDIDATE_TYPING_ONLY_NOT_HISTORICAL_DEFINITION",
+    "forecast_distinct_from_observation": true
+  },
+  "nonclaims": {
+    "runtime_deployed": false,
+    "autonomous_continuous_service_created": false,
+    "real_human_hours_saved_proven": false,
+    "theoretical_novelty_proven": false,
+    "repository_wide_open_source_license_established": false,
+    "existing_repository_licenses_changed": false
+  },
+  "validation_expected": [
+    "JSON parsing",
+    "Illustrative arithmetic recomputation",
+    "Relative public source link resolution",
+    "Independent review of privacy, scope and claims",
+    "LICENSE present and limited to this folder before publication"
+  ],
+  "publication_receipt": "EXTERNAL_TO_THIS_DOCUMENT"
+}

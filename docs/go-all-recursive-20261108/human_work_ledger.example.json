@@ -1,0 +1,94 @@
+{
+  "schema_version": "go-all-human-work-example/1",
+  "status": "SPECIFICATION_CANDIDATE",
+  "example_only": true,
+  "dataset_origin": "INVENTED_ILLUSTRATION",
+  "real_measurements_present": false,
+  "claimed_real_savings_hours": null,
+  "unit": "human_active_seconds",
+  "accounting_scope": "ONE_ILLUSTRATIVE_EPISODE_WITH_ONE_INITIAL_INVESTMENT",
+  "episode": {
+    "episode_id": "DEMO-EPISODE-001",
+    "work_unit_id": "DEMO-WORK-001",
+    "deduplication_family": "DEMO-SAME-OUTCOME-001",
+    "capability_version": "DEMO-CANDIDATE-1",
+    "quality": {
+      "target": "Same specified outcome on both routes",
+      "comparability_status": "ASSUMED_FOR_EXAMPLE_NOT_TESTED",
+      "evidence_refs": []
+    },
+    "baseline": {
+      "status": "INVENTED_NOT_OBSERVED",
+      "active_seconds": {
+        "preparation": 600,
+        "execution": 5400,
+        "review": 1200,
+        "rework": 0,
+        "recovery": 0,
+        "maintenance": 0
+      },
+      "total_active_seconds": 7200,
+      "measured_at": null,
+      "evidence_refs": []
+    },
+    "assisted": {
+      "status": "INVENTED_NOT_OBSERVED",
+      "active_seconds": {
+        "preparation": 300,
+        "execution": 600,
+        "review": 900,
+        "rework": 0,
+        "recovery": 300,
+        "maintenance": 0
+      },
+      "total_active_seconds": 2100,
+      "measured_at": null,
+      "evidence_refs": []
+    },
+    "operational_difference_seconds": 5100,
+    "interpretation": "Illustrative comparison only; no real savings claim"
+  },
+  "investments": [
+    {
+      "investment_id": "DEMO-INVEST-001",
+      "status": "INVENTED_NOT_OBSERVED",
+      "active_seconds": 3600,
+      "counted_once_in_scope": true,
+      "evidence_refs": []
+    }
+  ],
+  "arithmetic_example": {
+    "operational_difference_seconds": 5100,
+    "unique_investment_seconds": 3600,
+    "cumulative_net_seconds": 1500,
+    "cumulative_net_minutes": 25,
+    "cumulative_net_hours_fraction": "5/12",
+    "formula": "7200 - 2100 - 3600 - 0 = 1500",
+    "reporting_status": "ILLUSTRATIVE_ARITHMETIC_ONLY",
+    "residual_unallocated_human_seconds": 0
+  },
+  "forecast": {
+    "future_episode_count": null,
+    "expected_future_savings_hours": null,
+    "registered_prediction_ref": null,
+    "included_in_realized_total": false
+  },
+  "anti_double_counting": {
+    "outcome_is_counted_once": true,
+    "component_credit_is_additional_savings": false,
+    "parent_chain_total_and_child_totals_may_both_be_added": false,
+    "duplicate_episode_policy": "REJECT_OR_LINK_WITHOUT_ADDITIONAL_CREDIT",
+    "investment_allocation_policy": "COUNT_ONCE_PER_DECLARED_SCOPE",
+    "cost_event_partition": "DISJOINT_EPISODE_INVESTMENT_OR_RESIDUAL"
+  },
+  "limitations": [
+    "All numeric values are invented.",
+    "No task was run to obtain these values.",
+    "No quality equivalence was tested.",
+    "No uncertainty estimate is supplied because this is not a measured sample.",
+    "The example must never be ingested as observed savings.",
+    "Failed or abandoned attempts and cross-cutting human costs must be included once as allocated episode costs or residual costs in real ledgers."
+  ],
+  "residual_unallocated_human_seconds": 0,
+  "residual_cost_status": "INVENTED_ZERO_FOR_EXAMPLE_NOT_OBSERVED"
+}
