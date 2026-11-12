@@ -1,24 +1,22 @@
 from __future__ import annotations
 
 import os
-import time
+import json
+import sqlite3
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 
 from core import (
-    claim_result_slot,
     intake_from_checkout_session,
-    QUICKCHECK_MAX_FILES,
-    QUICKCHECK_MAX_TOTAL_BYTES,
     load_result,
     render_report_html,
-    run_public_github_audit,
-    store_result,
     verify_stripe_signature,
 )
+from fulfillment_queue import enqueue_paid_checkout
 
-app = FastAPI(title="Jarvis Paid Fulfillment R1.1", version="1.1")
+
+app = FastAPI(title="Jarvis Paid Fulfillment R1.3", version="1.3")
 def result_db_path() -> str:
     """Single source of truth for storage used by readiness, workers, and reads."""
     return os.environ.get("JARVIS_RESULT_DB", "/tmp/jarvis_paid_fulfillment_r1.sqlite3")
@@ -62,7 +60,7 @@ def health():
     config = fulfillment_prerequisites()
     return {
         "status": "alive",
-        "service": "jarvis-paid-fulfillment-r1.1",
+        "service": "jarvis-paid-fulfillment-r1.3",
         "storage": "sqlite-path-unverified" if config["sqlite_non_temp_path_configured"] else "sqlite-ephemeral",
         "commercial_fulfillment_authority_granted": False,
         "scientific_authority_granted": False,
@@ -81,72 +79,40 @@ def ready():
 @app.post("/stripe/webhook")
 async def stripe_webhook(request: Request):
     payload = await request.body()
+    if len(payload) > 262_144:
+        raise HTTPException(413, "webhook payload exceeds limit")
     secret = os.environ.get("STRIPE_WEBHOOK_SECRET", "")
     signature = request.headers.get("stripe-signature", "")
     if not verify_stripe_signature(payload, signature, secret):
         raise HTTPException(400, "invalid Stripe signature")
-    import json
-    event = json.loads(payload.decode("utf-8"))
+    try:
+        event = json.loads(payload)
+    except (ValueError, UnicodeDecodeError):
+        raise HTTPException(400, "invalid webhook JSON") from None
+    if not isinstance(event, dict) or not isinstance(event.get("data"), dict):
+        raise HTTPException(400, "invalid webhook event")
     if event.get("type") not in {
         "checkout.session.completed",
         "checkout.session.async_payment_succeeded",
     }:
         return {"received": True, "action": "NO_ACTION"}
     if not fulfillment_prerequisites()["configuration_ready"]:
-        # Return a retryable failure: never ACK a paid order while intake cannot persist.
         raise HTTPException(503, "fulfillment disabled or persistent result store not configured")
-    session = (event.get("data") or {}).get("object") or {}
+    session = event["data"].get("object")
+    if not isinstance(session, dict):
+        raise HTTPException(400, "invalid Checkout Session object")
     try:
         intake = intake_from_checkout_session(session)
     except ValueError:
-        return {"received": True, "action": "HOLD_NOT_AUDIT_OFFER"}
-
-    claimed = claim_result_slot(
-        result_db_path(),
-        intake.session_id,
-        {"status": "PROCESSING", "intake_digest": intake.digest},
-    )
-    if not claimed:
-        return {"received": True, "action": "IDEMPOTENT_ALREADY_CLAIMED"}
-
+        return {"received": True, "action": "HOLD_NOT_PAID_OR_SUPPORTED"}
     try:
-        limits = (
-            {"max_files": QUICKCHECK_MAX_FILES, "max_total_bytes": QUICKCHECK_MAX_TOTAL_BYTES}
-            if intake.offer in {"repo_quickcheck_first_5", "repo_quickcheck_9"}
-            else {}
-        )
-        report = run_public_github_audit(
-            intake.project,
-            intake.problem,
-            intake.scope,
-            **limits,
-        )
-        record = {
-            "status": "READY",
-            "created_at": int(time.time()),
-            "session_id": intake.session_id,
-            "intake_digest": intake.digest,
-            "customer_email_present": bool(intake.customer_email),
-            "report": report,
-        }
-    except Exception as exc:
-        record = {
-            "status": "HOLD",
-            "created_at": int(time.time()),
-            "session_id": intake.session_id,
-            "intake_digest": intake.digest,
-            "reason": type(exc).__name__ + ": " + str(exc)[:300],
-            "boundaries": [
-                "UnsupportedOrFailed != FabricatedReport",
-                "Payment != SecurityCertification",
-            ],
-        }
-    store_result(result_db_path(), intake.session_id, record)
-    return {
-        "received": True,
-        "action": record["status"],
-        "session_id": intake.session_id,
-    }
+        outcome = enqueue_paid_checkout(result_db_path(), intake)
+    except sqlite3.Error:
+        # Stripe retries when a signed event cannot be committed to storage.
+        raise HTTPException(503, "checkout queue unavailable") from None
+    except ValueError:
+        raise HTTPException(409, "conflicting Checkout intake; manual reconciliation required") from None
+    return {"received": True, "action": outcome, "session_id": intake.session_id}
 
 
 @app.get("/result", response_class=HTMLResponse)
@@ -158,15 +124,15 @@ def result(session_id: str):
         return HTMLResponse(
             "<html><meta http-equiv='refresh' content='3'>"
             "<body><h1>Preparing your Jarvis audit...</h1>"
-            "<p>This page refreshes automatically. R1.1 storage is ephemeral; "
-            "if the service was redeployed after purchase, support may need to replay the Stripe event.</p>"
+            "<p>Status is not yet available. Storage and delivery require operational verification; "
+            "if processing is interrupted, support must reconcile the order.</p>"
             "</body></html>",
             status_code=202,
         )
-    if record.get("status") == "PROCESSING":
+    if record.get("status") in {"QUEUED", "PROCESSING", "RETRY"}:
         return HTMLResponse(
             "<html><meta http-equiv='refresh' content='3'>"
-            "<body><h1>Audit in progress...</h1></body></html>",
+            "<body><h1>Audit queued, in progress, or awaiting safe retry.</h1></body></html>",
             status_code=202,
         )
     if record.get("status") == "HOLD":
@@ -187,5 +153,9 @@ def receipt(session_id: str):
     if record is None:
         raise HTTPException(404, "receipt not ready")
     if record.get("status") != "READY":
-        return JSONResponse(record, status_code=202)
+        return JSONResponse(
+            {"status": record.get("status"), "session_id": session_id,
+             "delivery_verified": False},
+            status_code=200 if record.get("status") == "HOLD" else 202,
+        )
     return record
