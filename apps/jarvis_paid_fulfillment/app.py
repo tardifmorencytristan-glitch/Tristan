@@ -31,7 +31,15 @@ def health():
         "status": "ok",
         "service": "jarvis-paid-fulfillment-r1.1",
         "storage": "sqlite-ephemeral",
-        "commercial_fulfillment_authority_granted": True,
+        # Liveness does not confer payment or fulfillment authority.
+        # A fresh external end-to-end readiness receipt is required.
+        "commercial_fulfillment_authority_granted": False,
+        "operational_readiness": "HOLD_UNVERIFIED_FULFILLMENT",
+        "readiness_requirements": [
+            "live_webhook_delivery_verified",
+            "durable_receipt_storage_verified",
+            "paid_order_to_customer_delivery_verified",
+        ],
         "authority_scope": ["verified paid bounded repository offers"],
         "scientific_authority_granted": False,
     }
