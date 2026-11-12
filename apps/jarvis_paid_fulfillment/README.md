@@ -122,3 +122,38 @@ configuration; it does not imply private report delivery is configured.
 **Security claims limited to:** isolated tests of signed capability verification
 and rejection of unauthenticated report reads. This does not verify the host,
 customer identity, backups, revocation, or real production delivery.
+
+## R151: account catalog reconciliation and evidence completeness
+
+`catalog_audit.py` is a **read-only, standard-library, offline reconciler**:
+it consumes private, pre-sanitized Stripe product/price/payment-link snapshots
+and checked payment-link line items. It makes **no authenticated Stripe API
+calls itself** and never changes products, prices, billing, customer data, links,
+tax registrations, payment methods, or webhook settings. Its `--report` output
+is redacted by design (aggregate counts and codes only). Private source
+snapshots must stay outside public repositories; no customer data is ingested.
+
+The Stripe list endpoints may report `has_more=false` even when direct
+`GET /prices/{id}` / `GET /products/{id}` and search confirm additional linked
+resources. R151 therefore distinguishes *listed* from *identified-at-least*
+counts, and will **never** assert complete catalog coverage from a single list.
+
+Run locally, with an already-authorized private snapshot:
+
+```powershell
+python apps/jarvis_paid_fulfillment/catalog_audit.py --snapshot PRIVATE.json --report REDACTED.json
+python apps/jarvis_paid_fulfillment/catalog_audit.py --snapshot PRIVATE.json --report GATE.json --gate
+```
+
+The optional `--gate` returns exit code 2 if promotion remains blocked. A
+successful audit run is **not** a commercial/go-live PASS. The reconciler
+detects incomplete references, product/price mismatches, active links pointing
+to HOLD products, missing webhook destinations, tax configuration review,
+active offers without default prices or links, and unsupported claims of
+exhaustiveness. Missing default prices and no active links are potential
+business choices, not proof of errors.
+
+A catalog fix that can affect customer charges, tax, links or existing
+subscriptions must be evaluated separately against real obligations, affected
+customers, explicit authority, independent Jarvis committee reviews, OAK and
+rollback before any Stripe mutation. NO_ACTION is a valid decision.
